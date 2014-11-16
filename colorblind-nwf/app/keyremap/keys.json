@@ -1,0 +1,29 @@
+{
+    "remote0":
+    {
+        "UP"               : "Up",
+        "LEFT"             : "Left",
+        "DOWN"             : "Down",
+        "RIGHT"            : "Right", 
+        "PLUS"             : "Enter",
+        "MINUS"            : "Esc",
+        "A"                : "Z",
+        "B"                : "X"
+    },
+
+    "gp":
+    {
+        "UP"               : "Up",
+        "LEFT"             : "Left",
+        "DOWN"             : "Down",
+        "RIGHT"            : "Right", 
+        "PLUS"             : "Enter",
+        "MINUS"            : "Esc",
+        "A"                : "Z",
+        "B"                : "X",
+        "X"                : "A",
+        "Y"                : "S",
+        "L"                : "C",
+        "R"                : "V"
+    }
+}
