@@ -7,10 +7,6 @@
     Main content to be loaded to GamePad or a Shared WebView.
     Note: Relative path from "file:///vol/content/app/" is assumed.
   -->
-  <content nwf:display="shared" src="/index.html">
-    <nwf:width/>
-    <nwf:height/>
-  </content>
   <!--
     List of required features.
     Loads the nwf extensions (rpl) or enables the feature.
@@ -62,11 +58,13 @@
      <access origin="*"/>
     More information: http://www.w3.org/TR/widgets-access/
   -->
-  <access origin="*"/>
+  <access origin="*" subdomains="false"/>
   <!-- List of supported resolutions. -->
   <nwf:supportedRenderModes>
+    <nwf:tvRenderMode>1080</nwf:tvRenderMode>
     <nwf:tvRenderMode>720</nwf:tvRenderMode>
     <nwf:tvRenderMode>480_WIDE</nwf:tvRenderMode>
+    <nwf:tvRenderMode>480_NARROW</nwf:tvRenderMode>
   </nwf:supportedRenderModes>
   <!-- List of media plugins to load -->
   <mediaPlugin name="libMIPluginDecoderOggVorbis_rpl"/>
@@ -111,18 +109,23 @@
       -->
       <!-- general (non context) image buffers -->
       <nwf:heap name="webkit-image">
+        <param name="heapSize" value=""/>
       </nwf:heap>
       <!-- All color/depth/texture buffers for canvas -->
       <nwf:heap name="webkit-canvas">
+        <param name="heapSize" value=""/>
       </nwf:heap>
       <!-- Main memory for javascript runtime -->
       <nwf:heap name="javascript-object">
+        <param name="heapSize" value=""/>
       </nwf:heap>
       <!-- Memory for Miiverse Feature -->
       <nwf:heap name="ext-miiverse">
+        <param name="heapSize" value=""/>
       </nwf:heap>
       <!-- Memory for NEX Game Server feature -->
       <nwf:heap name="ext-datastore">
+        <param name="heapSize" value=""/>
       </nwf:heap>
     </nwf:memory>
     <!-- How many remotes are allowed for this application? -->
@@ -228,13 +231,13 @@
     <nwf:useSaveAccount>1</nwf:useSaveAccount>
     <nwf:touchScrolling nwf:display="tv">
       <param name="scrollingEnabled" value="false"/>
-      <param name="scrollbarsEnabled" value="false"/>
+      <param name="scrollbarsEnabled" value="true"/>
       <param name="touchEmulated" value="false"/>
     </nwf:touchScrolling>
     <nwf:touchScrolling nwf:display="gp">
       <param name="scrollingEnabled" value="false"/>
-      <param name="scrollbarsEnabled" value="false"/>
-      <param name="touchEmulated" value="true"/>
+      <param name="scrollbarsEnabled" value="true"/>
+      <param name="touchEmulated" value="false"/>
     </nwf:touchScrolling>
   </nwf:options>
   <!--========================================================================== 
@@ -259,9 +262,9 @@
     <nwf:frontEndURL/>
   </nwf:inspector>
   <nwf:dashboard>
-    <nwf:contentHistory nwf:display="tv" src=""/>
-    <nwf:contentHistory nwf:display="gp" src=""/>
-    <nwf:contentHistory nwf:display="shared" src="">
+    <nwf:contentHistory nwf:display="tv" src="/index_tv.html"/>
+    <nwf:contentHistory nwf:display="gp" src="/index_gp.html"/>
+    <nwf:contentHistory nwf:display="shared" src="/index.html">
       <nwf:width/>
       <nwf:height/>
     </nwf:contentHistory>
@@ -278,4 +281,6 @@
     <nwf:deleteTempMasteringDir visible="false">1</nwf:deleteTempMasteringDir>
     <nwf:version>18</nwf:version>
   </nwf:dashboard>
+  <content nwf:display="tv" src="/index_tv.html"/>
+  <content nwf:display="gp" src="/index_gp.html"/>
 </widget>
