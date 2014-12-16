@@ -4,11 +4,13 @@ function Stage(id) {
 	this.offset = 0;
 	this.farScroller = new Scroller(0, id, 'f', 0.25);
 	this.midScroller = new Scroller(200, id, 'm', 0.25);
+	this.level = new Level();
 
 	this.init = function() {
 
 		this.farScroller.init();
 		this.midScroller.init();
+		this.level.init("levels/2.json");
 
 	}
 
