@@ -2,15 +2,15 @@ function Stage(id) {
 
 	this.id = id;
 	this.offset = 0;
-	this.farScroller = new Scroller(0, id, 'f', 0.25);
-	this.midScroller = new Scroller(200, id, 'm', 0.25);
+	this.farScroller = new Scroller(0, id, 'f', 10);
+	this.midScroller = new Scroller(200, id, 'm', 12);
 	this.level = new Level();
 
 	this.init = function() {
 
 		this.farScroller.init();
 		this.midScroller.init();
-		this.level.init("levels/2.json");
+		this.level.init("levels/4.json");
 
 	}
 
@@ -29,6 +29,7 @@ function Stage(id) {
 
 		this.farScroller.draw(ctx);
 		this.midScroller.draw(ctx);
+		this.level.draw(ctx);
 
 	}
 

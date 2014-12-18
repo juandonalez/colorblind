@@ -9,13 +9,22 @@ function Level() {
 
 	this.init = function(url) {
 
-		var level;
-		$.getJSON("levels/2.json", this.readData);
+		var level = this;
+		var request = new XMLHttpRequest();
+		request.overrideMimeType("application/json");
+		request.open("GET", url, false);
+		request.onreadystatechange = function() {
+			if (request.readyState == 4) {
+				level.readData(request.response);
+			}
+		}
+		request.send();
 
 	}
 
 	this.readData = function(data) {
 
+		data = JSON.parse(data);
 		this.width = data.width;
 		this.height = data.height;
 		var layers = data.layers;
@@ -32,6 +41,22 @@ function Level() {
 			}
 			else if (layer.name === "colliders") {
 				this.colliders = layer.objects;
+			}
+		}
+
+	}
+
+	this.draw = function(ctx) {
+
+		var y = 37 - this.height;
+		var tile = 0;
+		ctx.fillStyle = 'black';
+		for (var i = y; i < 37; i++) {
+			for (var j = 0; j < this.width; j++) {
+				if (this.main[tile] != '0' && this.main[tile] != null) {
+					ctx.fillRect(j*30, i*30, 30, 30);
+				}
+				tile++;
 			}
 		}
 

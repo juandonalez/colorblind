@@ -31,18 +31,18 @@ function Scroller(y, stage, type, speed) {
 
 		for (var i = 0; i < 3; i++) {
 			var bg = this.bgs[i];
-			bg.x = bg.x-20;
+			bg.x = bg.x - this.speed;
 		}
 
 		var first = this.bgs[0];
 
-		/*if (first.x + first.width < 0) {
+		if (first.x + first.width < 0) {
 			this.pool.push(this.bgs.shift());
 			var rand = Math.floor(Math.random()*this.pool.length);
 			var bg = this.pool.splice(rand, 1).pop();
 			bg.x = this.bgs[1].x + bg.width;
 			this.bgs.push(bg);
-		}*/
+		}
 
 	}
 
@@ -50,7 +50,7 @@ function Scroller(y, stage, type, speed) {
 
 		for (var i = 0; i < this.bgs.length; i++) {
 			var bg = this.bgs[i];
-			ctx.drawImage(bg.image, Math.round(bg.x), y);
+			ctx.drawImage(bg.image, Math.round(bg.x) - 30, y - 30);
 		}
 
 	}

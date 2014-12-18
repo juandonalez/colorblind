@@ -2,15 +2,17 @@
 
 	"use strict";
 
-	var GP_BUFFER_WIDTH = 854;
-	var GP_BUFFER_HEIGHT = 480;
+	//var GP_BUFFER_WIDTH = 854;
+	//var GP_BUFFER_HEIGHT = 480;
+	var GP_BUFFER_WIDTH = 1920;
+	var GP_BUFFER_HEIGHT = 1080;
 	var gpBuffer = document.createElement("canvas");
 	gpBuffer.width = GP_BUFFER_WIDTH;
 	gpBuffer.height = GP_BUFFER_HEIGHT;
 	var gpBufferCTX = gpBuffer.getContext("2d");
 
-	var TV_BUFFER_HEIGHT = 1920;
-	var TV_BUFFER_WIDTH = 1080;
+	var TV_BUFFER_WIDTH = 1920;
+	var TV_BUFFER_HEIGHT = 1080;
 	var tvBuffer = document.createElement("canvas");
 	tvBuffer.width = TV_BUFFER_WIDTH;
 	tvBuffer.height = TV_BUFFER_HEIGHT;
@@ -30,7 +32,7 @@
 		scenes.push(new Stage(2));
 		scenes.push(new Stage(3));
 
-		currentScene = 1;
+		currentScene = 2;
 		scenes[currentScene].init();
 		scenes[currentScene].begin();	//possibly see about how to wait for loading here
 
