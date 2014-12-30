@@ -25,9 +25,15 @@
 		nwft.initialize(480, 270, init);
 	});
 
+	/*function load() {
+
+		
+
+	}*/
+var fm = new FileManager();
 	function init() {
 
-		scenes.push(new Stage(0));
+		/*scenes.push(new Stage(0));
 		scenes.push(new Stage(1));
 		scenes.push(new Stage(2));
 		scenes.push(new Stage(3));
@@ -36,13 +42,18 @@
 		scenes[currentScene].init();
 		scenes[currentScene].begin();	//possibly see about how to wait for loading here
 
-		window.requestAnimationFrame(loop);
+		window.requestAnimationFrame(loop);*/
+		fm.loadLevels(0, 4);
+		fm.loadTileset(1, 13);
+		console.log(fm.isLoading());
+		loop();
 
 	}
 
 	function update() {
 
-		scenes[currentScene].update();
+		//scenes[currentScene].update();
+		//if (fm.isLoading()) {console.log("yes");}
 
 	}
 
@@ -68,8 +79,8 @@
 	function loop() {
 
 		update();
-		drawGP(0);
-		drawTV();
+		//drawGP(0);
+		//drawTV();
 		window.requestAnimationFrame(loop);
 
 	}
