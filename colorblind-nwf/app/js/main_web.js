@@ -43,9 +43,7 @@ var fm = new FileManager();
 		scenes[currentScene].begin();	//possibly see about how to wait for loading here
 
 		window.requestAnimationFrame(loop);*/
-		fm.loadLevels(0, 4);
-		fm.loadTileset(1, 13);
-		console.log(fm.isLoading());
+		fm.loadScene(1);
 		loop();
 
 	}
