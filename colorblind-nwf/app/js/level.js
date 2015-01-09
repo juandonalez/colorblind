@@ -7,24 +7,8 @@ function Level() {
 	this.color2 = [];
 	this.colliders = [];
 
-	this.init = function(url) {
+	this.init = function(data) {
 
-		var level = this;
-		var request = new XMLHttpRequest();
-		request.overrideMimeType("application/json");
-		request.open("GET", url, false);
-		request.onreadystatechange = function() {
-			if (request.readyState == 4) {
-				level.readData(request.response);
-			}
-		}
-		request.send();
-
-	}
-
-	this.readData = function(data) {
-
-		data = JSON.parse(data);
 		this.width = data.width;
 		this.height = data.height;
 		var layers = data.layers;

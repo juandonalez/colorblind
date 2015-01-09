@@ -1,3 +1,5 @@
+var fileManager = new FileManager();
+
 (function () {
 
 	"use strict";
@@ -30,28 +32,35 @@
 		
 
 	}*/
-var fm = new FileManager();
+
 	function init() {
 
-		/*scenes.push(new Stage(0));
+		scenes.push(new Stage(0));
 		scenes.push(new Stage(1));
 		scenes.push(new Stage(2));
 		scenes.push(new Stage(3));
 
-		currentScene = 2;
-		scenes[currentScene].init();
-		scenes[currentScene].begin();	//possibly see about how to wait for loading here
+		currentScene = 1;
+		fileManager.loadScene(currentScene);
+		load();
 
-		window.requestAnimationFrame(loop);*/
-		fm.loadScene(1);
-		loop();
+	}
+
+	function load() {
+
+		if (fileManager.isLoading()) {
+			window.requestAnimationFrame(load);
+		}
+		else {
+			scenes[currentScene].init();
+			gameLoop();
+		}
 
 	}
 
 	function update() {
 
-		//scenes[currentScene].update();
-		//if (fm.isLoading()) {console.log("yes");}
+		scenes[currentScene].update();
 
 	}
 
@@ -74,12 +83,12 @@ var fm = new FileManager();
 		ctx.drawImage(tvBuffer, 0, 0, nwft.TV_WIDTH, nwft.TV_HEIGHT);*/
 	}
 
-	function loop() {
+	function gameLoop() {
 
 		update();
-		//drawGP(0);
+		drawGP(0);
 		//drawTV();
-		window.requestAnimationFrame(loop);
+		window.requestAnimationFrame(gameLoop);
 
 	}
 

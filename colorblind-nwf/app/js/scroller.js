@@ -1,22 +1,12 @@
-function Scroller(y, stage, type, speed) {
+function Scroller(y, pool, speed) {
 
 	this.y = 0;
-	this.stage = stage;
-	this.type = type;
 	this.speed = speed;
 
-	this.pool = [];
+	this.pool = pool;
 	this.bgs = [];
 
 	this.init = function() {
-
-		for (var i = 0; i < 4; i++) {
-			var img  = new Image();
-			img.src  = 'images/backgrounds/' + this.stage + '/' + this.type + i + '.png';
-			//img.src  = 'images/backgrounds/1/m0.png';
-			var bg = new Background(img);
-			this.pool.push(bg);
-		}
 
 		for (var i = 0; i < 3; i++) {
 			var rand = Math.floor(Math.random()*this.pool.length);
@@ -50,7 +40,7 @@ function Scroller(y, stage, type, speed) {
 
 		for (var i = 0; i < this.bgs.length; i++) {
 			var bg = this.bgs[i];
-			ctx.drawImage(bg.image, Math.round(bg.x) - 30, y - 30);
+			ctx.drawImage(bg, Math.round(bg.x) - 30, y - 30);
 		}
 
 	}
