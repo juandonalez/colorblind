@@ -1,5 +1,3 @@
-var fileManager = new FileManager();
-
 (function () {
 
 	"use strict";
@@ -27,12 +25,6 @@ var fileManager = new FileManager();
 		nwft.initialize(480, 270, init);
 	});
 
-	/*function load() {
-
-		
-
-	}*/
-
 	function init() {
 
 		scenes.push(new Stage(0));
@@ -49,9 +41,11 @@ var fileManager = new FileManager();
 	function load() {
 
 		if (fileManager.isLoading()) {
+		console.log("loading");
 			window.requestAnimationFrame(load);
 		}
 		else {
+		console.log("loaded");
 			scenes[currentScene].init();
 			gameLoop();
 		}
