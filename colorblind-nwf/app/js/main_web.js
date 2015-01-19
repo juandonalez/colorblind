@@ -2,27 +2,18 @@
 
 	"use strict";
 
-	//var GP_BUFFER_WIDTH = 854;
-	//var GP_BUFFER_HEIGHT = 480;
-	var GP_BUFFER_WIDTH = 1920;
-	var GP_BUFFER_HEIGHT = 1080;
-	var gpBuffer = document.createElement("canvas");
-	gpBuffer.width = GP_BUFFER_WIDTH;
-	gpBuffer.height = GP_BUFFER_HEIGHT;
-	var gpBufferCTX = gpBuffer.getContext("2d");
-
-	var TV_BUFFER_WIDTH = 1920;
-	var TV_BUFFER_HEIGHT = 1080;
-	var tvBuffer = document.createElement("canvas");
-	tvBuffer.width = TV_BUFFER_WIDTH;
-	tvBuffer.height = TV_BUFFER_HEIGHT;
-	var tvBufferCTX = tvBuffer.getContext("2d");
+	var BUFFER_WIDTH = 1280;
+	var BUFFER_HEIGHT = 720;
+	var buffer = document.createElement("canvas");
+	buffer.width = BUFFER_WIDTH;
+	buffer.height = BUFFER_HEIGHT;
+	var bufferCTX = buffer.getContext("2d");
 
 	var scenes = [];
 	var currentScene = 0;
 
 	window.addEventListener("load", function () {
-		nwft.initialize(480, 270, init);
+		nwft.initialize(427, 240, init);
 	});
 
 	function init() {
@@ -41,11 +32,9 @@
 	function load() {
 
 		if (fileManager.isLoading()) {
-		console.log("loading");
 			window.requestAnimationFrame(load);
 		}
 		else {
-		console.log("loaded");
 			scenes[currentScene].init();
 			gameLoop();
 		}
@@ -61,27 +50,31 @@
 	function drawGP(layer) {
 		var ctx = nwft.gpContext;
 		ctx.clearRect(0, 0, nwft.GP_WIDTH, nwft.GP_HEIGHT);
-		gpBufferCTX.clearRect(0, 0, GP_BUFFER_WIDTH, GP_BUFFER_HEIGHT);
+		bufferCTX.clearRect(0, 0, BUFFER_WIDTH, BUFFER_HEIGHT);
 
-		scenes[currentScene].draw(layer, gpBufferCTX);
+		scenes[currentScene].draw(layer, bufferCTX);
 
-		ctx.drawImage(gpBuffer, 0, 0, nwft.GP_WIDTH, nwft.GP_HEIGHT);
+		ctx.imageSmoothingEnabled = false;
+		ctx.drawImage(buffer, 0, 0, nwft.GP_WIDTH, nwft.GP_HEIGHT);
 	}
 
 
-	function drawTV() {
-		/*var ctx = nwft.tvContext;
+	function drawTV(layer) {
+		var ctx = nwft.tvContext;
 		ctx.clearRect(0, 0, nwft.TV_WIDTH, nwft.TV_HEIGHT);
-		tvBufferCTX.clearRect(0, 0, TV_BUFFER_WIDTH, TV_BUFFER_HEIGHT);
+		bufferCTX.clearRect(0, 0, BUFFER_WIDTH, BUFFER_HEIGHT);
 
-		ctx.drawImage(tvBuffer, 0, 0, nwft.TV_WIDTH, nwft.TV_HEIGHT);*/
+		scenes[currentScene].draw(layer, bufferCTX);
+
+		ctx.imageSmoothingEnabled = false;
+		ctx.drawImage(buffer, 0, 0, nwft.TV_WIDTH, nwft.TV_HEIGHT);
 	}
 
 	function gameLoop() {
 
 		update();
 		drawGP(0);
-		//drawTV();
+		drawTV(0);
 		window.requestAnimationFrame(gameLoop);
 
 	}

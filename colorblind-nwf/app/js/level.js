@@ -32,13 +32,16 @@ function Level() {
 
 	this.draw = function(ctx) {
 
-		var y = 37 - this.height;
+		var y = 35 - this.height;
+		var tileset = fileManager.tileset;
 		var tile = 0;
 		ctx.fillStyle = 'black';
-		for (var i = y; i < 37; i++) {
+		for (var i = y; i < 35; i++) {
 			for (var j = 0; j < this.width; j++) {
-				if (this.main[tile] != '0' && this.main[tile] != null) {
-					ctx.fillRect(j*30, i*30, 30, 30);
+				if (this.main[tile] !== 0 && this.main[tile] !== null) {
+					//ctx.fillRect(j*30, i*30, 30, 30);
+					var img = tileset[this.main[tile]];
+					ctx.drawImage(img, j*20, i*20, 20, 20);
 				}
 				tile++;
 			}

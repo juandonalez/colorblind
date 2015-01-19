@@ -34,10 +34,10 @@ function Stage(id) {
 
 		this.farScroller.draw(ctx);
 		this.midScroller.draw(ctx);
-
-		for (var i = 0; i < this.levels.length; i++) {
+this.levels[3].draw(ctx);
+		/*for (var i = 0; i < this.levels.length; i++) {
 			this.levels[i].draw(ctx);
-		}
+		}*/
 
 	}
 

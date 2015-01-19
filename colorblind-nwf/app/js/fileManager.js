@@ -123,7 +123,7 @@ var fileManager = fileManager || {};
 			},
 			{
 				"levelNumber": 4,
-				"tilesetNumber": 13,
+				"tilesetNumber": 14,
 				"bgFarNumber": 4,
 				"bgMidNumber": 4,
 				"images": []
