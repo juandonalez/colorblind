@@ -12,6 +12,8 @@
 	var scenes = [];
 	var currentScene = 0;
 
+	var player = new Player(20, 20);
+
 	window.addEventListener("load", function () {
 		nwft.initialize(427, 240, init);
 	});
@@ -44,6 +46,7 @@
 	function update() {
 
 		scenes[currentScene].update();
+		player.update();
 
 	}
 
@@ -53,6 +56,7 @@
 		bufferCTX.clearRect(0, 0, BUFFER_WIDTH, BUFFER_HEIGHT);
 
 		scenes[currentScene].draw(layer, bufferCTX);
+		player.draw(bufferCTX);
 
 		ctx.imageSmoothingEnabled = false;
 		ctx.drawImage(buffer, 0, 0, nwft.GP_WIDTH, nwft.GP_HEIGHT);

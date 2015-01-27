@@ -2,6 +2,7 @@ function Level() {
 
 	this.width = 0;
 	this.height = 0;
+	this.y = 0;
 	this.main = [];
 	this.color1 = [];
 	this.color2 = [];
@@ -11,6 +12,8 @@ function Level() {
 
 		this.width = data.width;
 		this.height = data.height;
+		this.y = globals.numTilesVert - this.height;
+
 		var layers = data.layers;
 		for (var i = 0; i < layers.length; i++) {
 			var layer = layers[i];
@@ -25,6 +28,10 @@ function Level() {
 			}
 			else if (layer.name === "colliders") {
 				this.colliders = layer.objects;
+				for (var j = 0; j < this.colliders.length; j++) {
+					var col = this.colliders[j];
+					col.y = globals.internalHeight - col.height;
+				}
 			}
 		}
 
@@ -32,19 +39,24 @@ function Level() {
 
 	this.draw = function(ctx) {
 
-		var y = 35 - this.height;
 		var tileset = fileManager.tileset;
 		var tile = 0;
-		ctx.fillStyle = 'black';
-		for (var i = y; i < 35; i++) {
+
+		for (var i = this.y; i < globals.numTilesVert; i++) {
+			var tileSize = globals.tileSize;
 			for (var j = 0; j < this.width; j++) {
 				if (this.main[tile] !== 0 && this.main[tile] !== null) {
-					//ctx.fillRect(j*30, i*30, 30, 30);
 					var img = tileset[this.main[tile]];
-					ctx.drawImage(img, j*20, i*20, 20, 20);
+					ctx.drawImage(img, j*tileSize, i*tileSize, tileSize, tileSize);
 				}
 				tile++;
 			}
+		}
+
+		ctx.fillStyle = "black";
+		for (var i = 0; i < this.colliders.length; i++) {
+			var col = this.colliders[i];
+			ctx.fillRect(col.x, col.y, col.width, col.height);
 		}
 
 	}
