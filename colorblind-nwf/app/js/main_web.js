@@ -46,7 +46,7 @@
 	function update() {
 
 		scenes[currentScene].update();
-		player.update();
+		player.update(scenes[currentScene].levels[0].colliders);
 
 	}
 
