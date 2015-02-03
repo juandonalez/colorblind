@@ -1,4 +1,4 @@
-function Scroller(y, pool, speed) {
+function BackgroundScroller(y, pool, speed) {
 
 	this.y = 0;
 	this.speed = speed;

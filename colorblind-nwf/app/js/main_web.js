@@ -12,18 +12,17 @@
 	var scenes = [];
 	var currentScene = 0;
 
-	var player = new Player(20, 20);
-
 	window.addEventListener("load", function () {
 		nwft.initialize(427, 240, init);
 	});
 
 	function init() {
 
-		scenes.push(new Stage(0));
-		scenes.push(new Stage(1));
-		scenes.push(new Stage(2));
-		scenes.push(new Stage(3));
+		scenes.push(new StageScene(0));
+		//change to menu scene later
+		scenes.push(new StageScene(1));
+		scenes.push(new StageScene(2));
+		scenes.push(new StageScene(3));
 
 		currentScene = 1;
 		fileManager.loadScene(currentScene);
@@ -46,7 +45,6 @@
 	function update() {
 
 		scenes[currentScene].update();
-		player.update(scenes[currentScene].levels[0].colliders);
 
 	}
 
@@ -56,7 +54,6 @@
 		bufferCTX.clearRect(0, 0, BUFFER_WIDTH, BUFFER_HEIGHT);
 
 		scenes[currentScene].draw(layer, bufferCTX);
-		player.draw(bufferCTX);
 
 		ctx.imageSmoothingEnabled = false;
 		ctx.drawImage(buffer, 0, 0, nwft.GP_WIDTH, nwft.GP_HEIGHT);

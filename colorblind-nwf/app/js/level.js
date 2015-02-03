@@ -2,6 +2,7 @@ function Level() {
 
 	this.width = 0;
 	this.height = 0;
+	this.x = 0;
 	this.y = 0;
 	this.main = [];
 	this.color1 = [];
@@ -10,9 +11,9 @@ function Level() {
 
 	this.init = function(data) {
 
-		this.width = data.width;
-		this.height = data.height;
-		this.y = globals.numTilesVert - this.height;
+		this.width = data.width * globals.tileSize;
+		this.height = data.height * globals.tileSize;
+		this.y = globals.internalHeight - this.height;
 
 		var layers = data.layers;
 		for (var i = 0; i < layers.length; i++) {
@@ -37,6 +38,12 @@ function Level() {
 
 	}
 
+	this.update = function() {
+
+		
+
+	}
+
 	this.draw = function(ctx) {
 
 		var tileset = fileManager.tileset;
@@ -44,7 +51,7 @@ function Level() {
 
 		for (var i = this.y; i < globals.numTilesVert; i++) {
 			var tileSize = globals.tileSize;
-			for (var j = 0; j < this.width; j++) {
+			for (var j = 0; j < this.width/tileSize; j++) {
 				if (this.main[tile] !== 0 && this.main[tile] !== null) {
 					var img = tileset[this.main[tile]];
 					ctx.drawImage(img, j*tileSize, i*tileSize, tileSize, tileSize);

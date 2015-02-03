@@ -46,7 +46,10 @@ var fileManager = fileManager || {};
 	
 	function parseLevel(data) {
 
-		fileManager.levels.push(JSON.parse(data));
+		var level = new Level();
+		level.init(JSON.parse(data));
+		fileManager.levels.push(level);
+		//fileManager.levels.push(JSON.parse(data));
 
 	}
 

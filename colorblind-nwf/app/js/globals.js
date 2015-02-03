@@ -10,4 +10,7 @@ var globals = globals || {};
 	globals.numTilesVert = 38;
 	globals.numTilesHori = 66;
 
+	globals.playerWidth = 80;
+	globals.playerHeight = 140;
+
 })();

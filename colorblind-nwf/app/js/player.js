@@ -1,17 +1,23 @@
-function Player(x, y) {
+function Player(scene, x, y) {
+
+	this.scene = scene;
+	this.components = [];
 
 	this.x = x;
 	this.y = y;
-	this.width = 80;
-	this.height = 140;
+	this.width = globals.playerWidth;
+	this.height = globals.playerHeight;
 
-	this.gravity = 30;
+	this.init = function() {
 
-	this.update = function(colliders) {
-	
-	
+		this.addComponent(new RigidBody(this.scene, this));
 
-		var newY = this.y + this.gravity;
+	}
+
+	this.update = function() {
+
+
+		/*var newY = this.y + this.scene.gravity;
 
 		for (var i = 0; i < colliders.length; i++) {
 
@@ -23,11 +29,15 @@ function Player(x, y) {
 
 		}
 
-		this.y = newY;
+		this.y = newY;*/
+
+		for (var i = 0; i < this.components.length; i++) {
+			this.components[i].update();
+		}
 
 	}
 
-	this.checkVertical = function(objectY, objectHeight, playerY) {
+	/*this.checkVertical = function(objectY, objectHeight, playerY) {
 
 		if (playerY > objectY && playerY <= (objectY+objectHeight)) {
 			return true;
@@ -42,12 +52,18 @@ function Player(x, y) {
 			return false;
 		}
 
-	}
+	}*/
 
 	this.draw = function(ctx) {
 
 		ctx.fillStyle = "black";
 		ctx.fillRect(this.x, this.y, this.width, this.height);
+
+	}
+
+	this.addComponent = function(component) {
+
+		this.components.push(component);
 
 	}
 
