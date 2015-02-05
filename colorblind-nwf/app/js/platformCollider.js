@@ -1,38 +1,31 @@
-function PlatformCollider(gameObject, x, y, width, height) {
+function PlatformCollider(entity, x, y, width, height) {
 
-	this.tag = "collider";
-	this.gameObject = gameObject;
+	this.tag = 'PlatformCollider';
+	this.entity = entity;
 
 	this.x = x;
 	this.y = y;
 	this.width = width;
 	this.height = height;
 
-	this.init = function() {
+	this.onHorizontalCollision = function(obj) {
 
 		
 
 	}
 
-	this.update = function() {
+	this.onVerticalCollision = function(obj) {
 
-		
-
-	}
-
-	this.draw = function(ctx) {
-
-		
-
-	}
-
-	this.onCollide = function(obj) {
-
-		// stop object's vertical velocity if above or below
-		// stop object's horizontal velocity if to left or right
-		// set object to idle if landing on top
-		if (obj.state) {
-			obj.state = 'idle';
+		if (obj.y < this.y) {
+			if (obj.state) {
+				if (obj.state === 'jumping') {
+					obj.state = 'grounded';
+				}
+			}
+			obj.y = this.y - obj.height;
+		}
+		else {
+			
 		}
 
 	}

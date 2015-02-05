@@ -28,10 +28,13 @@ function Level() {
 				this.color2 = layer.data;
 			}
 			else if (layer.name === "colliders") {
-				this.colliders = layer.objects;
-				for (var j = 0; j < this.colliders.length; j++) {
-					var col = this.colliders[j];
+				//this.colliders = layer.objects;
+				//for (var j = 0; j < this.colliders.length; j++) {
+				for (var j = 0; j < layer.objects.length; j++) {
+					//var col = this.colliders[j];
+					var col = layer.objects[j];
 					col.y = globals.internalHeight - col.height;
+					this.colliders.push(new PlatformCollider(this, col.x, col.y, col.width, col.height));
 				}
 			}
 		}
@@ -47,10 +50,10 @@ function Level() {
 	this.draw = function(ctx) {
 
 		var tileset = fileManager.tileset;
+		var tileSize = globals.tileSize;
 		var tile = 0;
 
-		for (var i = this.y; i < globals.numTilesVert; i++) {
-			var tileSize = globals.tileSize;
+		for (var i = this.y/tileSize; i < globals.numTilesVert; i++) {
 			for (var j = 0; j < this.width/tileSize; j++) {
 				if (this.main[tile] !== 0 && this.main[tile] !== null) {
 					var img = tileset[this.main[tile]];
@@ -58,12 +61,6 @@ function Level() {
 				}
 				tile++;
 			}
-		}
-
-		ctx.fillStyle = "black";
-		for (var i = 0; i < this.colliders.length; i++) {
-			var col = this.colliders[i];
-			ctx.fillRect(col.x, col.y, col.width, col.height);
 		}
 
 	}

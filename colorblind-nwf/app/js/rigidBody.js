@@ -3,51 +3,37 @@ function RigidBody(scene, gameObject) {
 	this.scene = scene;
 	this.gameObject = gameObject;
 
-	this.init = function() {
-
-		
-
-	}
-
 	this.update = function() {
 
-		var newY = this.gameObject.y + this.scene.gravity;
+		this.gameObject.y += this.scene.gravity;
 
 		var colliders = this.scene.colliders;
 
 		for (var i = 0; i < colliders.length; i++) {
 
 			var col = colliders[i];
-			var vertical = this.checkVertical(col.y, col.height, newY);
+			var vertical = this.checkVertical(col.y, col.height);
 			if (vertical) {
-				newY = this.gameObject.y;
+				col.onVerticalCollision(this.gameObject);
+				//this.scene.gravity = 0;
+				//console.log("true");
+				//this.gameObject.y -= this.scene.gravity;
 			}
 
 		}
 
-		this.gameObject.y = newY;
-
 	}
 
-	this.draw = function(ctx) {
+	this.checkVertical = function(objectY, objectHeight) {
 
-		
-
-	}
-
-	this.checkVertical = function(objectY, objectHeight, playerY) {
-
-		if (playerY > objectY && playerY <= (objectY+objectHeight)) {
-			return true;
+		if (this.gameObject.y > (objectY + objectHeight)) {
+			return false;
 		}
-		else if ((playerY+this.height) > objectY && (playerY+this.height) < (objectY+objectHeight)) {
-			return true;
-		}
-		else if (objectY > playerY && objectY < playerY+this.height) {
-			return true;
+		else if ((this.gameObject.y + this.gameObject.height) < objectY) {
+			return false;
 		}
 		else {
-			return false;
+			return true;
 		}
 
 	}
