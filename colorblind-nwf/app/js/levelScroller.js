@@ -18,7 +18,7 @@ function LevelScroller(scene) {
 			this.levels.push(level);
 		}
 
-		this.scene.colliders = this.getCurrentColliders();
+		this.scene.currentColliders = this.getCurrentColliders();
 
 	}
 
@@ -39,7 +39,11 @@ function LevelScroller(scene) {
 			this.bgs.push(bg);
 		}*/
 
-		this.scene.colliders = this.getCurrentColliders();
+		/*
+		when putting a new level on to end, update x coordinate and those of colliders
+		*/
+
+		this.scene.currentColliders = this.getCurrentColliders();
 
 	}
 

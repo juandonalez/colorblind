@@ -10,7 +10,7 @@ function Player(scene, x, y) {
 
 	this.init = function() {
 
-		this.addComponent(new RigidBody(this.scene, this));
+		this.components.push(new RigidBody(this.scene, this));
 
 	}
 
@@ -26,12 +26,6 @@ function Player(scene, x, y) {
 
 		ctx.fillStyle = "blue";
 		ctx.fillRect(this.x, this.y, this.width, this.height);
-
-	}
-
-	this.addComponent = function(component) {
-
-		this.components.push(component);
 
 	}
 

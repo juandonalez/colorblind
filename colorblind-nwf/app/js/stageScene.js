@@ -6,7 +6,7 @@ function StageScene(id) {
 	this.midScroller;
 	this.levelScroller;
 	//this.levels;
-	this.colliders;
+	this.currentColliders;
 
 	this.gravity = 30;
 

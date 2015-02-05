@@ -10,7 +10,12 @@ function PlatformCollider(entity, x, y, width, height) {
 
 	this.onHorizontalCollision = function(obj) {
 
-		
+		if (obj.x < this.x) {
+			obj.x = this.x - obj.width;
+		}
+		else {
+			obj.x = this.x + this.width;
+		}
 
 	}
 
@@ -25,7 +30,7 @@ function PlatformCollider(entity, x, y, width, height) {
 			obj.y = this.y - obj.height;
 		}
 		else {
-			
+			obj.y = this.y + this.height;
 		}
 
 	}
