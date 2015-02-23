@@ -10,6 +10,8 @@ var globals = globals || {};
 	globals.numTilesHori = 66;
 	globals.numTilesVert = 38;
 
+	globals.delta = 0;
+
 	globals.playerWidth = 80;
 	globals.playerHeight = 140;
 

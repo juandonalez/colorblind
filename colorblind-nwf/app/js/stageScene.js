@@ -41,7 +41,7 @@ function StageScene(id) {
 
 	}
 
-	this.draw = function(layer, ctx) {
+	this.draw = function(ctx) {
 
 		this.farScroller.draw(ctx);
 		this.midScroller.draw(ctx);

@@ -57,7 +57,7 @@ function Level() {
 			for (var j = 0; j < this.width/tileSize; j++) {
 				if (this.main[tile] !== 0 && this.main[tile] !== null) {
 					var img = tileset[this.main[tile]];
-					ctx.drawImage(img, j*tileSize, i*tileSize, tileSize, tileSize);
+					ctx.drawImage(img, j*tileSize - 15, i*tileSize - 15, tileSize, tileSize);
 				}
 				tile++;
 			}

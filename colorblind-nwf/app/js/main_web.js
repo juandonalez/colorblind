@@ -2,6 +2,9 @@
 
 	"use strict";
 
+	var then = Date.now( );
+	var now;
+
 	var BUFFER_WIDTH = 1280;
 	var BUFFER_HEIGHT = 720;
 	var buffer = document.createElement("canvas");
@@ -44,38 +47,34 @@
 
 	function update() {
 
+		frames++;
+		now = Date.now();
+		globals.delta = (now - then)/1000;
+		then = now;
+
 		scenes[currentScene].update();
 
 	}
 
-	function drawGP(layer) {
+	function draw() {
+
 		var ctx = nwft.gpContext;
 		ctx.clearRect(0, 0, nwft.GP_WIDTH, nwft.GP_HEIGHT);
 		bufferCTX.clearRect(0, 0, BUFFER_WIDTH, BUFFER_HEIGHT);
 
-		scenes[currentScene].draw(layer, bufferCTX);
+		scenes[currentScene].draw(bufferCTX);
 
 		ctx.imageSmoothingEnabled = false;
 		ctx.drawImage(buffer, 0, 0, nwft.GP_WIDTH, nwft.GP_HEIGHT);
-	}
-
-
-	function drawTV(layer) {
-		var ctx = nwft.tvContext;
-		ctx.clearRect(0, 0, nwft.TV_WIDTH, nwft.TV_HEIGHT);
-		bufferCTX.clearRect(0, 0, BUFFER_WIDTH, BUFFER_HEIGHT);
-
-		scenes[currentScene].draw(layer, bufferCTX);
-
-		ctx.imageSmoothingEnabled = false;
+		ctx = nwft.tvContext;
 		ctx.drawImage(buffer, 0, 0, nwft.TV_WIDTH, nwft.TV_HEIGHT);
+
 	}
 
 	function gameLoop() {
 
 		update();
-		drawGP(0);
-		drawTV(0);
+		draw();
 		window.requestAnimationFrame(gameLoop);
 
 	}
