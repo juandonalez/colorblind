@@ -25,7 +25,7 @@ function Player(scene, x, y) {
 	this.draw = function(ctx) {
 
 		ctx.fillStyle = "blue";
-		ctx.fillRect(this.x - 15, this.y - 15, this.width, this.height);
+		ctx.fillRect(this.x - 20, this.y - 20, this.width, this.height);
 
 	}
 

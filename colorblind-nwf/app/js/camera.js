@@ -2,9 +2,9 @@ var camera = camera || {};
 
 (function() {
 
-	this.x = 30;
-	this.y = 30;
-	this.width = 1280;
-	this.height = 720;
+	camera.x = 20;
+	camera.y = 20;
+	camera.width = 1280;
+	camera.height = 720;
 
 })();
