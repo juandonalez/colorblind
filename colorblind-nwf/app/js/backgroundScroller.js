@@ -1,6 +1,6 @@
 function BackgroundScroller(y, pool, speed) {
 
-	this.y = 0;
+	this.y = y;
 	this.speed = speed;
 
 	this.pool = pool;
@@ -40,7 +40,7 @@ function BackgroundScroller(y, pool, speed) {
 
 		for (var i = 0; i < this.bgs.length; i++) {
 			var bg = this.bgs[i];
-			ctx.drawImage(bg, Math.round(bg.x) - 30, y - 30);
+			ctx.drawImage(bg, Math.round(bg.x), this.y);
 		}
 
 	}

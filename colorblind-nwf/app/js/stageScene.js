@@ -41,16 +41,31 @@ function StageScene(id) {
 
 	}
 
-	this.draw = function(ctx) {
+	/*this.draw = function(ctx) {
 
 		this.farScroller.draw(ctx);
 		this.midScroller.draw(ctx);
 		this.levelScroller.draw(ctx);
-//this.levels[3].draw(ctx);
-		/*for (var i = 0; i < this.levels.length; i++) {
-			this.levels[i].draw(ctx);
-		}*/
 		this.player.draw(ctx);
+
+	}*/
+
+	this.draw = function(numScreens, numPlayers, isSplit, ctx, buffer) {
+
+		if (isSplit) {
+			this.farScroller.draw(ctx);
+			this.midScroller.draw(ctx);
+			this.levelScroller.draw(ctx, 1);
+			this.player.draw(ctx);
+			nwft.gpContext.drawImage(buffer, 0, 0, nwft.GP_WIDTH, nwft.GP_HEIGHT);
+			nwft.tvContext.drawImage(buffer, 0, 0, nwft.TV_WIDTH, nwft.TV_HEIGHT);
+			ctx.clearRect(0, 0, 1280, 720);
+			this.levelScroller.draw(ctx, 2);
+			nwft.gpContext.drawImage(buffer, 0, 0, nwft.GP_WIDTH, nwft.GP_HEIGHT);
+			ctx.clearRect(0, 0, 1280, 720);
+			this.levelScroller.draw(ctx, 3);
+			nwft.tvContext.drawImage(buffer, 0, 0, nwft.TV_WIDTH, nwft.TV_HEIGHT);
+		}
 
 	}
 

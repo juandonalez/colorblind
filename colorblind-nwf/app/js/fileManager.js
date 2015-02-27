@@ -119,21 +119,21 @@ var fileManager = fileManager || {};
 			},
 			{
 				"levelNumber": 4,
-				"tilesetNumber": 13,
+				"tilesetNumber": 53,
 				"bgFarNumber": 4,
 				"bgMidNumber": 4,
 				"images": []
 			},
 			{
 				"levelNumber": 4,
-				"tilesetNumber": 14,
+				"tilesetNumber": 53,
 				"bgFarNumber": 4,
 				"bgMidNumber": 4,
 				"images": []
 			},
 			{
 				"levelNumber": 4,
-				"tilesetNumber": 13,
+				"tilesetNumber": 53,
 				"bgFarNumber": 4,
 				"bgMidNumber": 4,
 				"images": []

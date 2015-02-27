@@ -47,10 +47,10 @@ function LevelScroller(scene) {
 
 	}
 
-	this.draw = function(ctx) {
+	this.draw = function(ctx, layer) {
 
 		for (var i = 0; i < this.levels.length; i++) {
-			this.levels[i].draw(ctx);
+			this.levels[i].draw(ctx, layer);
 		}
 
 	}

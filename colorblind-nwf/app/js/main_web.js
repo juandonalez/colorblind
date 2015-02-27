@@ -62,12 +62,13 @@
 		ctx.clearRect(0, 0, nwft.GP_WIDTH, nwft.GP_HEIGHT);
 		bufferCTX.clearRect(0, 0, BUFFER_WIDTH, BUFFER_HEIGHT);
 
-		scenes[currentScene].draw(bufferCTX);
+		//scenes[currentScene].draw(bufferCTX);
+		scenes[currentScene].draw(2, 1, true, bufferCTX, buffer);
 
-		ctx.imageSmoothingEnabled = false;
+		/*ctx.imageSmoothingEnabled = false;
 		ctx.drawImage(buffer, 0, 0, nwft.GP_WIDTH, nwft.GP_HEIGHT);
 		ctx = nwft.tvContext;
-		ctx.drawImage(buffer, 0, 0, nwft.TV_WIDTH, nwft.TV_HEIGHT);
+		ctx.drawImage(buffer, 0, 0, nwft.TV_WIDTH, nwft.TV_HEIGHT);*/
 
 	}
 
