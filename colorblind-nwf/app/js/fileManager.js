@@ -75,13 +75,15 @@ var fileManager = fileManager || {};
 		for (var i = 0; i < fileManager.data.bgFarNumber; i++) {
 			var img  = new Image();
 			img.src  = 'images/backgrounds/' + fileManager.scene + '/f' + i + '.png';
-			fileManager.bgsFar[i] = img;
+			var bg = new Background(img);
+			fileManager.bgsFar[i] = bg;
 		}
 
 		for (var i = 0; i < fileManager.data.bgMidNumber; i++) {
 			var img  = new Image();
 			img.src  = 'images/backgrounds/' + fileManager.scene + '/m' + i + '.png';
-			fileManager.bgsMid[i] = img;
+			var bg = new Background(img);
+			fileManager.bgsMid[i] = bg;
 		}
 
 	}
@@ -95,13 +97,13 @@ var fileManager = fileManager || {};
 		}
 
 		for (var i = 0; i < fileManager.bgsFar.length; i++) {
-			if (!fileManager.bgsFar[i].complete) {
+			if (!fileManager.bgsFar[i].image.complete) {
 				return true;
 			}
 		}
 
 		for (var i = 0; i < fileManager.bgsMid.length; i++) {
-			if (!fileManager.bgsMid[i].complete) {
+			if (!fileManager.bgsMid[i].image.complete) {
 				return true;
 			}
 		}
