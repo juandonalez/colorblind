@@ -1,5 +1,6 @@
 function BackgroundScroller(y, pool, speed) {
 
+	this.x = 0;
 	this.y = y;
 	this.speed = speed;
 
@@ -10,38 +11,36 @@ function BackgroundScroller(y, pool, speed) {
 
 		for (var i = 0; i < 3; i++) {
 			var rand = Math.floor(Math.random()*this.pool.length);
-			var bg = this.pool.splice(rand, 1).pop();
-			bg.x = i*bg.width;
-			this.bgs.push(bg);
+			this.bgs.push(rand);
 		}
 
 	}
 
 	this.update = function() {
 
-		for (var i = 0; i < 3; i++) {
-			var bg = this.bgs[i];
-			bg.x = bg.x - this.speed;
-		}
+		this.x = this.x - (this.speed * globals.delta);
 
-		var first = this.bgs[0];
+		var first = this.pool[this.bgs[0]];
 
-		if (first.x + first.width < 0) {
-			this.pool.push(this.bgs.shift());
+		if (this.x + first.width < 0) {
+			this.x = 0;
+			this.bgs.shift();
 			var rand = Math.floor(Math.random()*this.pool.length);
-			var bg = this.pool.splice(rand, 1).pop();
-			bg.x = this.bgs[1].x + bg.width;
-			this.bgs.push(bg);
+			this.bgs.push(rand);
 		}
 
 	}
 
 	this.draw = function(ctx) {
 
-		for (var i = 0; i < this.bgs.length; i++) {
-			var bg = this.bgs[i];
-			ctx.drawImage(bg, Math.round(bg.x), this.y);
-		}
+		var first = this.pool[this.bgs[0]];
+		var second = this.pool[this.bgs[1]];
+		var third = this.pool[this.bgs[2]];
+		var rounded = Math.round(this.x);
+
+		ctx.drawImage(first, rounded, this.y);
+		ctx.drawImage(second, rounded + first.width, this.y);
+		ctx.drawImage(third, rounded + first.width + second.width, this.y);
 
 	}
 

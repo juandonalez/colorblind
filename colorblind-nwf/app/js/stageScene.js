@@ -14,8 +14,8 @@ function StageScene(id) {
 
 	this.init = function() {
 
-		this.farScroller = new BackgroundScroller(0, fileManager.bgsFar, 10);
-		this.midScroller = new BackgroundScroller(200, fileManager.bgsMid, 12);
+		this.farScroller = new BackgroundScroller(0, fileManager.bgsFar, 200);
+		this.midScroller = new BackgroundScroller(200, fileManager.bgsMid, 220);
 		this.levelScroller = new LevelScroller(this);
 		this.farScroller.init();
 		this.midScroller.init();
