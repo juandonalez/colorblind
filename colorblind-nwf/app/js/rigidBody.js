@@ -3,9 +3,16 @@ function RigidBody(scene, entity) {
 	this.scene = scene;
 	this.entity = entity;
 
+	this.velX = 0;
+	this.velY = 0;
+
+	this.targetX = 0;
+	this.targetY = 0;
+
 	this.update = function() {
 
-		this.entity.y += this.scene.gravity;
+		//this.targetX = (this.entity.x + this.velX) * globals.delta;
+		this.targetY = this.entity.y + ((this.velY + this.scene.gravity) * 1);
 
 		var colliders = this.scene.currentColliders;
 
@@ -20,10 +27,13 @@ function RigidBody(scene, entity) {
 
 			var vert = this.checkVertical(col.y, col.height);
 			if (vert) {
-				col.onVerticalCollision(this.entity);
+				col.onVerticalCollision(this);
 			}
 
 		}
+
+		//this.entity.x = this.targetX;
+		this.entity.y = this.targetY;
 
 	}
 
@@ -43,10 +53,10 @@ function RigidBody(scene, entity) {
 
 	this.checkVertical = function(objY, objHeight) {
 
-		if (this.entity.y > (objY + objHeight)) {
+		if (this.targetY > (objY + objHeight)) {
 			return false;
 		}
-		else if ((this.entity.y + this.entity.height) < objY) {
+		else if ((this.targetY + this.entity.height) < objY) {
 			return false;
 		}
 		else {

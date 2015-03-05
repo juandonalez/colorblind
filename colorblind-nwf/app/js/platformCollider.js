@@ -21,17 +21,19 @@ function PlatformCollider(entity, x, y, width, height) {
 
 	this.onVerticalCollision = function(obj) {
 
-		if (obj.y < this.y) {
+		if (obj.targetY < this.y) {
 			if (obj.state) {
 				if (obj.state === 'jumping') {
 					obj.state = 'grounded';
 				}
 			}
-			obj.y = this.y - obj.height;
+			obj.targetY = this.y - obj.entity.height;
 		}
 		else {
-			obj.y = this.y + this.height;
+			obj.targetY = this.y + this.height;
 		}
+
+		obj.velY = 0;
 
 	}
 
