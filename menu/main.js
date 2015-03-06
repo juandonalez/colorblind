@@ -22,7 +22,10 @@
 
 	function draw() {
 
+		globals.bufferCtx.clearRect(0, 0, globals.buffer.width, globals.buffer.height);
+		globals.tvCtx.clearRect(0, 0, globals.tv.width, globals.tv.height);
 		scene.draw();
+		globals.tvCtx.drawImage(globals.buffer, 0, 0, globals.tv.width, globals.tv.height);
 
 	}
 
