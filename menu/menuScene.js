@@ -2,8 +2,8 @@ function MenuScene() {
 
 	var img = new Image();
 	img.src = "blue.png";
-	this.test = new MenuImage(new Point(300, 300), img);
-	this.test.scaleTarget = 0.5;
+	this.test = new MenuImage(new Point(100, 300), img);
+	this.test.easer.ease(this.test.center.x, 500, 1);
 
 	this.update = function() {
 

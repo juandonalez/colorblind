@@ -12,6 +12,8 @@ function MenuImage(center, image) {
 	this.scaleTarget = 1;
 	this.scaleVel = 1;
 
+	this.easer = new Easer();
+
 	this.update = function() {
 
 		if (this.scale !== this.scaleTarget) {
@@ -27,6 +29,12 @@ function MenuImage(center, image) {
 					this.scale = this.scaleTarget;
 				}
 			}
+		}
+
+		if (this.easer.isEasing) {
+
+			this.center.x = this.easer.value();
+
 		}
 
 		this.calculateDimensions();
@@ -47,6 +55,13 @@ function MenuImage(center, image) {
 		this.height = image.height * this.scale;
 		this.origin.x = Math.round(this.center.x - (this.width/2));
 		this.origin.y = Math.round(this.center.y - (this.height/2));
+
+	}
+	
+	this.moveTo = function(target, duration) {
+
+		this.target = target;
+		this.duration = duration;
 
 	}
 
