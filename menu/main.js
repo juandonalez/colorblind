@@ -8,7 +8,30 @@
 	globals.tv = document.getElementById("canvas");
 	globals.tvCtx = globals.tv.getContext("2d");
 
-	var scene = new MenuScene();
+	globals.currentScene = new MenuScene();
+
+	window.addEventListener("keyup", keyUp, false);
+
+	// listener for keys pressed on keyboard
+	// enter = 13
+	// spacebar = 32
+	// shift = 16
+	// ctrl = 17
+	// a - z = 65 - 90
+	// 0 - 9 = 48 - 57
+	// left, up, right, down = 37 - 40
+	function keyUp(e) {
+
+		var code;
+		if (!e) var e = window.event;
+		if (e.keyCode) code = e.keyCode;
+		else if (e.which) code = e.which;
+
+		if (code === 13) {
+			globals.letsdothis = true;
+		}
+
+	}
 
 	function update() {
 
@@ -16,7 +39,7 @@
 		globals.delta = (now - then)/1000;
 		then = now;
 
-		scene.update();
+		globals.currentScene.update();
 
 	}
 
@@ -24,7 +47,7 @@
 
 		globals.bufferCtx.clearRect(0, 0, globals.buffer.width, globals.buffer.height);
 		globals.tvCtx.clearRect(0, 0, globals.tv.width, globals.tv.height);
-		scene.draw();
+		globals.currentScene.draw();
 		globals.tvCtx.drawImage(globals.buffer, 0, 0, globals.tv.width, globals.tv.height);
 
 	}

@@ -111,33 +111,33 @@ var fileManager = fileManager || {};
 	}
 
 	fileManager.sceneData = [
-			{
-				"levelNumber": 0,
-				"tilesetNumber": 0,
-				"bgNumber": 0,
-				"images": []
-			},
-			{
-				"levelNumber": 4,
-				"tilesetNumber": 53,
-				"bgFarNumber": 4,
-				"bgMidNumber": 4,
-				"images": []
-			},
-			{
-				"levelNumber": 4,
-				"tilesetNumber": 53,
-				"bgFarNumber": 4,
-				"bgMidNumber": 4,
-				"images": []
-			},
-			{
-				"levelNumber": 4,
-				"tilesetNumber": 53,
-				"bgFarNumber": 4,
-				"bgMidNumber": 4,
-				"images": []
-			}
-	]
+		{
+			"levelNumber": 0,
+			"tilesetNumber": 0,
+			"bgNumber": 0,
+			"images": []
+		},
+		{
+			"levelNumber": 4,
+			"tilesetNumber": 53,
+			"bgFarNumber": 4,
+			"bgMidNumber": 4,
+			"images": []
+		},
+		{
+			"levelNumber": 4,
+			"tilesetNumber": 53,
+			"bgFarNumber": 4,
+			"bgMidNumber": 4,
+			"images": []
+		},
+		{
+			"levelNumber": 4,
+			"tilesetNumber": 53,
+			"bgFarNumber": 4,
+			"bgMidNumber": 4,
+			"images": []
+		}
+	];
 
 })();

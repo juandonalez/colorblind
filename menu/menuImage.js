@@ -3,6 +3,11 @@ function MenuImage(center, image) {
 	this.origin = new Point(0,0);
 	this.center = center;
 
+	this.up;
+	this.right;
+	this.down;
+	this.left;
+
 	this.image = image;
 
 	this.width = image.width;
@@ -33,7 +38,7 @@ function MenuImage(center, image) {
 
 		if (this.easer.isEasing) {
 
-			this.center.x = this.easer.value();
+			this.center.y = this.easer.value();
 
 		}
 

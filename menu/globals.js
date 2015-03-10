@@ -15,4 +15,10 @@ var globals = globals || {};
 
 	globals.font = "Sans-serif";
 
+	globals.numPlayers = 1;
+
+	globals.currentScene;
+
+	globals.letsdothis = false;
+
 })();
