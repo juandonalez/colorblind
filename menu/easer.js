@@ -7,7 +7,6 @@ function Easer(parent) {
 	this.end;
 	this.d; //duration (total)
 	this.t;	//elapsed
-	this.percent;
 
 	this.ease = function(end, total) {
 
@@ -16,19 +15,16 @@ function Easer(parent) {
 		this.end = end;
 		this.d = total;
 		this.t = 0;
-		this.percent = 0;
 
 	}
 
 	this.update = function() {
 
 		this.t += globals.delta;
-		this.percent = this.t / this.d;
-		var x = this.end.x - this.b.x;
-		var y = this.end.y - this.b.y;
+
+		var target = this.end.subtract(this.b);
 
 		if (this.t >= this.d) {
-			this.percent = 1;
 			this.isEasing = false;
 		}
 		
@@ -37,12 +33,12 @@ function Easer(parent) {
 		var b = this.b;
 
 		//return c * t/d + b;	//linear
-		var s = 5;
-		var stuff = ((t=t/d-1)*t*((s+1)*t + s) + 1);
-		x = x*stuff + b.x;
-		y = y*stuff + b.y;
-		console.log(x + ", " + y);
-		this.parent.boundingBox.setCenter(new Point(x, y));
+		var s = 2;
+		var eq = ((t=t/d-1)*t*((s+1)*t + s) + 1);
+		target.x = Math.round(target.x*eq + b.x);
+		target.y = Math.round(target.y*eq + b.y);
+
+		this.parent.boundingBox.setCenter(target);
 
 	}
 

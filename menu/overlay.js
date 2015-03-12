@@ -1,20 +1,19 @@
-function Overlay(activePos, inactivePos, width, height, images, texts, active) {
+function Overlay(activePos, inactivePos, width, height, active) {
 
 	if (active) {
 		this.origin = activePos;
-		this.boundingBox = new BoundingBox(this.origin, width, height);
+		this.boundingBox = new BoundingBox(activePos, width, height);
 	}
 	else {
 		this.origin = inactivePos;
-		this.boundingBox = new BoundingBox(this.origin, width, height);
+		this.boundingBox = new BoundingBox(inactivePos, width, height);
 	}
 
 	this.activePos = activePos;
 	this.inactivePos = inactivePos;
-	this.vel = new Point(0, 0);
 
-	this.images = images;
-	this.texts = texts;
+	this.images;
+	this.texts;
 
 	this.active = active;
 
@@ -24,8 +23,11 @@ function Overlay(activePos, inactivePos, width, height, images, texts, active) {
 
 		if (this.easer.isEasing) {
 			this.easer.update();
-			//this.boundingBox.setCenter(this.easer.value());
 		}
+
+//console.log("bounding box: " + this.boundingBox.origin.x + ", " + this.boundingBox.origin.y + " overlay: " + this.origin.x + ", " + this.origin.y);
+//console.log("bounding box: " + this.boundingBox.center.x + ", " + this.boundingBox.center.y + " overlay: " + this.origin.x + ", " + this.origin.y);
+//console.log(this.boundingBox.width/2 + ", " + this.boundingBox.height/2);
 
 	}
 
@@ -33,6 +35,18 @@ function Overlay(activePos, inactivePos, width, height, images, texts, active) {
 
 		globals.bufferCtx.fillStyle = "blue";
 		globals.bufferCtx.fillRect(this.origin.x, this.origin.y, this.boundingBox.width, this.boundingBox.height);
+
+		if (this.images) {
+			for (var i = 0; i < this.images.length; i++) {
+				this.images[i].draw();
+			}
+		}
+
+		if (this.texts) {
+			for (var i = 0; i < this.texts.length; i++) {
+				this.texts[i].draw();
+			}
+		}
 
 	}
 

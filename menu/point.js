@@ -3,12 +3,15 @@ function Point(x, y) {
 	this.x = x;
 	this.y = y;
 
-	this.add = function(point) {
+	this.add = function(p) {
 
-		var res = new Point(0, 0);
-		res.x = this.x + point.x;
-		res.y = this.y + point.y;
-		return res;
+		return new Point(this.x + p.x, this.y + p.y);
+
+	}
+
+	this.subtract = function(p) {
+
+		return new Point(this.x - p.x, this.y - p.y);
 
 	}
 
