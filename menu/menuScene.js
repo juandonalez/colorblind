@@ -8,11 +8,13 @@ function MenuScene() {
 	this.menus = [new Menu()];
 	this.currentMenu = 0;
 
-	//this.menus[0].overlays.push(new Overlay(new Point(300, -300), new Point(400, 200), 200, 200, null, null, true));
-
 	for (var i = 0; i < sceneData.mainMenu.overlays.length; i++) {
 		var o = sceneData.mainMenu.overlays[i];
-		this.menus[0].overlays.push(new Overlay(o.activePos, o.inactivePos, o.width, o.height, o.active));
+		var activePos = camera.pctToPoint(o.activePos);
+		var inactivePos = camera.pctToPoint(o.inactivePos);
+		var width = camera.pctToWidth(o.width);
+		var height = camera.pctToHeight(o.height);
+		this.menus[0].overlays.push(new Overlay(activePos, inactivePos, width, height, o.active));
 	}
 
 	this.update = function() {

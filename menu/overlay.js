@@ -1,11 +1,11 @@
 function Overlay(activePos, inactivePos, width, height, active) {
 
 	if (active) {
-		this.origin = activePos;
+		//this.origin = activePos;
 		this.boundingBox = new BoundingBox(activePos, width, height);
 	}
 	else {
-		this.origin = inactivePos;
+		//this.origin = inactivePos;
 		this.boundingBox = new BoundingBox(inactivePos, width, height);
 	}
 
@@ -33,8 +33,10 @@ function Overlay(activePos, inactivePos, width, height, active) {
 
 	this.draw = function() {
 
+		globals.bufferCtx.strokeStyle = "black";
+		globals.bufferCtx.strokeRect(this.boundingBox.origin.x, this.boundingBox.origin.y, this.boundingBox.width, this.boundingBox.height);
 		globals.bufferCtx.fillStyle = "blue";
-		globals.bufferCtx.fillRect(this.origin.x, this.origin.y, this.boundingBox.width, this.boundingBox.height);
+		globals.bufferCtx.fillRect(this.boundingBox.origin.x, this.boundingBox.origin.y, this.boundingBox.width, this.boundingBox.height);
 
 		if (this.images) {
 			for (var i = 0; i < this.images.length; i++) {
