@@ -6,7 +6,7 @@ function BoundingBox(center, width, height) {
 	this.origin = new Point(center.x - (width/2), center.y - (height/2));
 	this.width = width;
 	this.height = height;
-console.log(this.origin);
+
 	this.setCenter = function(point) {
 
 		this.center = point;

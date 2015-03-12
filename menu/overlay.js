@@ -54,13 +54,13 @@ function Overlay(activePos, inactivePos, width, height, active) {
 
 	this.activate = function () {
 
-		
+		this.easer.ease("easeOutBack", this.activePos, 1);
 
 	}
 
 	this.deactivate = function () {
 
-		this.easer.ease(this.inactivePos, 1);
+		this.easer.ease("easeInBack", this.inactivePos, 1);
 
 	}
 
