@@ -36,7 +36,18 @@ var sceneData = sceneData || {};
 
 		"texts": [
 
-			
+			[
+				{
+					"center": new Point(50, 50),
+					"text": "test",
+					"fontSize": 100,
+					"lineWidth": 1,
+					"strokeStyle": "#000000",
+					"fillStyle": "#ffffff"
+				}
+			],
+			false,
+			false
 
 		]
 

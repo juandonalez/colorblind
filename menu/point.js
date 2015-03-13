@@ -15,4 +15,16 @@ function Point(x, y) {
 
 	}
 
+	this.equals = function(p) {
+
+		return (this.x === p.x && this.y == p.y);
+
+	}
+
+	this.copy = function() {
+
+		return new Point(this.x, this.y);
+
+	}
+
 }

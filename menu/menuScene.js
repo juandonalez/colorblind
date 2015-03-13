@@ -8,13 +8,32 @@ function MenuScene() {
 	this.menus = [new Menu()];
 	this.currentMenu = 0;
 
-	for (var i = 0; i < sceneData.mainMenu.overlays.length; i++) {
-		var o = sceneData.mainMenu.overlays[i];
-		var activePos = camera.pctToPoint(o.activePos);
-		var inactivePos = camera.pctToPoint(o.inactivePos);
-		var width = camera.pctToWidth(o.width);
-		var height = camera.pctToHeight(o.height);
-		this.menus[0].overlays.push(new Overlay(activePos, inactivePos, width, height, o.active));
+	var overlays = sceneData.mainMenu.overlays;
+	var images = sceneData.mainMenu.images;
+	var texts = sceneData.mainMenu.texts;
+
+	for (var i = 0; i < overlays.length; i++) {
+
+		var oData = overlays[i];
+		var iData = images[i];
+		var tData = texts[i];
+
+		var activePos = camera.pctToPoint(oData.activePos);
+		var inactivePos = camera.pctToPoint(oData.inactivePos);
+		var width = camera.pctToWidth(oData.width);
+		var height = camera.pctToHeight(oData.height);
+
+		var o = new Overlay(activePos, inactivePos, width, height, oData.active)
+
+		for (var j = 0; j < tData.length; j++) {
+			var t = tData[j];
+			if (t) {
+				o.addText(new MenuText(t.center, t.text, t.fontSize, t.lineWidth, t.strokeStyle, t.fillStyle));
+			}
+		}
+
+		this.menus[0].overlays.push(o);
+
 	}
 
 	this.update = function() {

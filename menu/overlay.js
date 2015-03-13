@@ -13,7 +13,7 @@ function Overlay(activePos, inactivePos, width, height, active) {
 	this.inactivePos = inactivePos;
 
 	this.images;
-	this.texts;
+	this.texts = [];
 
 	this.active = active;
 
@@ -22,12 +22,23 @@ function Overlay(activePos, inactivePos, width, height, active) {
 	this.update = function() {
 
 		if (this.easer.isEasing) {
+			var prevPos = this.boundingBox.center.copy();
 			this.easer.update();
+			if (!prevPos.equals(this.boundingBox.center)) {
+				var diff = this.boundingBox.center.subtract(prevPos);
+				if (this.images) {
+					for (var i = 0; i < this.images.length; i++) {
+						// maybe should use move center instead so that origin is also updated
+						this.images[i].boundingBox.center.add(diff);
+					}
+				}
+				if (this.texts) {
+					for (var i = 0; i < this.texts.length; i++) {
+						this.texts[i].boundingBox.moveCenter(diff);
+					}
+				}
+			}
 		}
-
-//console.log("bounding box: " + this.boundingBox.origin.x + ", " + this.boundingBox.origin.y + " overlay: " + this.origin.x + ", " + this.origin.y);
-//console.log("bounding box: " + this.boundingBox.center.x + ", " + this.boundingBox.center.y + " overlay: " + this.origin.x + ", " + this.origin.y);
-//console.log(this.boundingBox.width/2 + ", " + this.boundingBox.height/2);
 
 	}
 
@@ -61,6 +72,14 @@ function Overlay(activePos, inactivePos, width, height, active) {
 	this.deactivate = function () {
 
 		this.easer.ease("easeInBack", this.inactivePos, 1);
+
+	}
+
+	this.addText = function(t) {
+
+		var relative = this.boundingBox.pctToPoint(t.center);
+		t.boundingBox.setCenter(relative);
+		this.texts.push(t);
 
 	}
 
