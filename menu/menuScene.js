@@ -28,7 +28,8 @@ function MenuScene() {
 		for (var j = 0; j < tData.length; j++) {
 			var t = tData[j];
 			if (t) {
-				o.addText(new MenuText(t.center, t.text, t.fontSize, t.lineWidth, t.strokeStyle, t.fillStyle));
+				o.addText(new MenuText(t.center, t.text, t.fontSize, t.lineWidth, t.strokeStyle, 
+					t.fillStyle, t.type, t.target, t.links));
 			}
 		}
 

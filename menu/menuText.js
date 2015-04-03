@@ -1,4 +1,4 @@
-function MenuText(center, text, fontSize, lineWidth, strokeStyle, fillStyle) {
+function MenuText(center, text, fontSize, lineWidth, strokeStyle, fillStyle, type, target, links) {
 
 	this.center = center;
 	this.scale = 1;
