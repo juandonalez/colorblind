@@ -34,7 +34,7 @@ function Overlay(activePos, inactivePos, width, height, active) {
 				}
 				if (this.texts) {
 					for (var i = 0; i < this.texts.length; i++) {
-						this.texts[i].boundingBox.moveCenter(diff);
+						this.texts[i].moveCenter(diff);
 					}
 				}
 			}
@@ -78,7 +78,7 @@ function Overlay(activePos, inactivePos, width, height, active) {
 	this.addText = function(t) {
 
 		var relative = this.boundingBox.pctToPoint(t.center);
-		t.boundingBox.setCenter(relative);
+		t.setCenter(relative);
 		this.texts.push(t);
 
 	}
