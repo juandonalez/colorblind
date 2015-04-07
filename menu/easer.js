@@ -14,7 +14,7 @@ function Easer(parent) {
 
 		this.isEasing = true;
 		this.type = type;
-		this.b = this.parent.boundingBox.center;
+		this.b = this.parent.center;
 		this.end = end;
 		this.d = total;
 		this.t = 0;
@@ -47,7 +47,7 @@ function Easer(parent) {
 		target.x = Math.round(target.x*func + b.x);
 		target.y = Math.round(target.y*func + b.y);
 
-		this.parent.boundingBox.setCenter(target);
+		this.parent.setCenter(target);
 
 	}
 
