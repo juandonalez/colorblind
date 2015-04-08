@@ -9,21 +9,21 @@ function Box(x, y, width, height) {
 	this.width = width;
 	this.height = height;
 
-	this.moveTo = function(x, y) {
+}
 
-		this.minX = x;
-		this.minY = y;
-		this.recalculate();
+Box.prototype.moveTo = function(x, y) {
 
-	}
+	this.minX = x;
+	this.minY = y;
+	this.recalculate();
 
-	this.recalculate = function() {
+}
 
-		this.maxX = x + width;
-		this.maxY = y + height;
-		this.centerX = x + (width/2);
-		this.centerY = y + (height/2);
+Box.prototype.recalculate = function() {
 
-	}
+	this.maxX = x + width;
+	this.maxY = y + height;
+	this.centerX = x + (width/2);
+	this.centerY = y + (height/2);
 
 }

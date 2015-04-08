@@ -10,64 +10,60 @@ function Level() {
 	this.colliders = [];
 	this.entities = [];
 
-	this.init = function(data) {
+}
 
-		this.width = data.width;
-		this.height = data.height;
-		this.y = globals.internalHeight - this.height;
-		this.layer1 = data.layer1;
-		this.layer2 = data.layer2;
-		this.layer3 = data.layer3;
+Level.prototype.init = function(data) {
 
-		for (var i = 0; i < data.colliders.length; i++) {
-			var col = data.colliders[i];
-			col.y += this.y;	// collider y pos is relative to level top left corner
-			this.colliders.push(new PlatformCollider(this, col.x, col.y, col.width, col.height));
-		}
+	this.width = data.width;
+	this.height = data.height;
+	this.y = globals.internalHeight - this.height;
+	this.layer1 = data.layer1;
+	this.layer2 = data.layer2;
+	this.layer3 = data.layer3;
 
-		for (var i = 0; i < data.entities.length; i++) {
-			var ent = data.entities[i];
-			// check class of entity and push new object to this.entities
-		}
-
+	for (var i = 0; i < data.colliders.length; i++) {
+		var col = data.colliders[i];
+		col.y += this.y;	// collider y pos is relative to level top left corner
+		this.colliders.push(new PlatformCollider(this, col.x, col.y, col.width, col.height));
 	}
 
-	this.update = function() {
-
-		
-
+	for (var i = 0; i < data.entities.length; i++) {
+		var ent = data.entities[i];
+		// check class of entity and push new object to this.entities
 	}
 
-	this.draw = function(ctx, layer) {
+}
 
-		var tileset = fileManager.tileset;
-		var tileSize = globals.tileSize;
-		var tile = 0;
+Level.prototype.update = function() {}
 
-		for (var i = this.y/tileSize; i < globals.numTilesVert; i++) {
-			for (var j = 0; j < this.width/tileSize; j++) {
-				if (layer === 1) {
-				if (this.layer1[tile] !== 0 && this.layer1[tile] !== null) {
-					var img = tileset[this.layer1[tile]];
-					ctx.drawImage(img, j*tileSize - camera.x, i*tileSize - camera.y, tileSize, tileSize);
-				}
-				}
-				else if (layer === 2) {
-				if (this.layer2[tile] !== 0 && this.layer2[tile] !== null) {
-					var img = tileset[this.layer2[tile]];
-					ctx.drawImage(img, j*tileSize - camera.x, i*tileSize - camera.y, tileSize, tileSize);
-				}
-				}
-				else {
-				if (this.layer3[tile] !== 0 && this.layer3[tile] !== null) {
-					var img = tileset[this.layer3[tile]];
-					ctx.drawImage(img, j*tileSize - camera.x, i*tileSize - camera.y, tileSize, tileSize);
-				}
-				}
-				tile++;
+Level.prototype.draw = function(ctx, layer) {
+
+	var tileset = fileManager.tileset;
+	var tileSize = globals.tileSize;
+	var tile = 0;
+
+	for (var i = this.y/tileSize; i < globals.numTilesVert; i++) {
+		for (var j = 0; j < this.width/tileSize; j++) {
+			if (layer === 1) {
+			if (this.layer1[tile] !== 0 && this.layer1[tile] !== null) {
+				var img = tileset[this.layer1[tile]];
+				ctx.drawImage(img, j*tileSize - camera.x, i*tileSize - camera.y, tileSize, tileSize);
 			}
 		}
-
+		else if (layer === 2) {
+			if (this.layer2[tile] !== 0 && this.layer2[tile] !== null) {
+				var img = tileset[this.layer2[tile]];
+				ctx.drawImage(img, j*tileSize - camera.x, i*tileSize - camera.y, tileSize, tileSize);
+			}
+		}
+		else {
+			if (this.layer3[tile] !== 0 && this.layer3[tile] !== null) {
+				var img = tileset[this.layer3[tile]];
+				ctx.drawImage(img, j*tileSize - camera.x, i*tileSize - camera.y, tileSize, tileSize);
+			}
+		}
+			tile++;
+		}
 	}
 
 }

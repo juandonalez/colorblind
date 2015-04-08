@@ -9,60 +9,60 @@ function RigidBody(scene, entity) {
 	this.targetX = 0;
 	this.targetY = 0;
 
-	this.update = function() {
+}
 
-		//this.targetX = (this.entity.x + this.velX) * globals.delta;
-		this.targetY = this.entity.y + ((this.velY + this.scene.gravity) * 1);
+RigidBody.prototype.update = function() {
 
-		var colliders = this.scene.currentColliders;
+	//this.targetX = (this.entity.x + this.velX) * globals.delta;
+	this.targetY = this.entity.y + ((this.velY + this.scene.gravity) * 1);
 
-		for (var i = 0; i < colliders.length; i++) {
+	var colliders = this.scene.currentColliders;
 
-			var col = colliders[i];
+	for (var i = 0; i < colliders.length; i++) {
 
-			/*var hori = this.checkHorizontal(col.x, col.width);
-			if (hori) {
-				col.onHorizontalCollision(this.entity);
-			}*/
+		var col = colliders[i];
 
-			var vert = this.checkVertical(col.y, col.height);
-			if (vert) {
-				col.onVerticalCollision(this);
-			}
+		/*var hori = this.checkHorizontal(col.x, col.width);
+		if (hori) {
+			col.onHorizontalCollision(this.entity);
+		}*/
 
-		}
-
-		//this.entity.x = this.targetX;
-		this.entity.y = this.targetY;
-
-	}
-
-	this.checkHorizontal = function(objX, objWidth) {
-
-		if (this.entity.x > (objX + objWidth)) {
-			return false;
-		}
-		else if ((this.entity.x + this.entity.width) < objX) {
-			return false;
-		}
-		else {
-			return true;
+		var vert = this.checkVertical(col.y, col.height);
+		if (vert) {
+			col.onVerticalCollision(this);
 		}
 
 	}
 
-	this.checkVertical = function(objY, objHeight) {
+	//this.entity.x = this.targetX;
+	this.entity.y = this.targetY;
 
-		if (this.targetY > (objY + objHeight)) {
-			return false;
-		}
-		else if ((this.targetY + this.entity.height) < objY) {
-			return false;
-		}
-		else {
-			return true;
-		}
+}
 
+RigidBody.prototype.checkHorizontal = function(objX, objWidth) {
+
+	if (this.entity.x > (objX + objWidth)) {
+		return false;
+	}
+	else if ((this.entity.x + this.entity.width) < objX) {
+		return false;
+	}
+	else {
+		return true;
+	}
+
+}
+
+RigidBody.prototype.checkVertical = function(objY, objHeight) {
+
+	if (this.targetY > (objY + objHeight)) {
+		return false;
+	}
+	else if ((this.targetY + this.entity.height) < objY) {
+		return false;
+	}
+	else {
+		return true;
 	}
 
 }

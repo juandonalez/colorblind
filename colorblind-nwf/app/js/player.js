@@ -8,25 +8,25 @@ function Player(scene, x, y) {
 	this.width = globals.playerWidth;
 	this.height = globals.playerHeight;
 
-	this.init = function() {
+}
 
-		this.components.push(new RigidBody(this.scene, this));
+Player.prototype.init = function() {
 
+	this.components.push(new RigidBody(this.scene, this));
+
+}
+
+Player.prototype.update = function() {
+
+	for (var i = 0; i < this.components.length; i++) {
+		this.components[i].update();
 	}
 
-	this.update = function() {
+}
 
-		for (var i = 0; i < this.components.length; i++) {
-			this.components[i].update();
-		}
+Player.prototype.draw = function(ctx) {
 
-	}
-
-	this.draw = function(ctx) {
-
-		ctx.fillStyle = "blue";
-		ctx.fillRect(this.x - 20, this.y - 20, this.width, this.height);
-
-	}
+	ctx.fillStyle = "blue";
+	ctx.fillRect(this.x - 20, this.y - 20, this.width, this.height);
 
 }
