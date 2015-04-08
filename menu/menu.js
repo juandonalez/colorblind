@@ -2,27 +2,27 @@ function Menu() {
 
 	this.overlays = [];
 
-	this.update = function() {
+}
 
-		if (globals.letsdothis) {
-			for (var i = 0; i < this.overlays.length; i++) {
-				this.overlays[i].deactivate();
-			}
-			globals.letsdothis = false;
-		}
-	
+Menu.prototype.update = function() {
+
+	if (globals.letsdothis) {
 		for (var i = 0; i < this.overlays.length; i++) {
-			this.overlays[i].update();
+			this.overlays[i].deactivate();
 		}
-
+		globals.letsdothis = false;
 	}
 
-	this.draw = function() {
+	for (var i = 0; i < this.overlays.length; i++) {
+		this.overlays[i].update();
+	}
 
-		for (var i = 0; i < this.overlays.length; i++) {
-			this.overlays[i].draw();
-		}
+}
 
+Menu.prototype.draw = function() {
+
+	for (var i = 0; i < this.overlays.length; i++) {
+		this.overlays[i].draw();
 	}
 
 }

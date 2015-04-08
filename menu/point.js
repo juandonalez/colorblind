@@ -3,28 +3,28 @@ function Point(x, y) {
 	this.x = x;
 	this.y = y;
 
-	this.add = function(p) {
+}
 
-		return new Point(this.x + p.x, this.y + p.y);
+Point.prototype.add = function(p) {
 
-	}
+	return new Point(this.x + p.x, this.y + p.y);
 
-	this.subtract = function(p) {
+}
 
-		return new Point(this.x - p.x, this.y - p.y);
+Point.prototype.copy = function() {
 
-	}
+	return new Point(this.x, this.y);
 
-	this.equals = function(p) {
+}
 
-		return (this.x === p.x && this.y == p.y);
+Point.prototype.equals = function(p) {
 
-	}
+	return (this.x === p.x && this.y == p.y);
 
-	this.copy = function() {
+}
 
-		return new Point(this.x, this.y);
+Point.prototype.subtract = function(p) {
 
-	}
+	return new Point(this.x - p.x, this.y - p.y);
 
 }

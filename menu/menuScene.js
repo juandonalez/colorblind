@@ -37,20 +37,20 @@ function MenuScene() {
 
 	}
 
-	this.update = function() {
+}
 
-		for (var i = 0; i < this.menus.length; i++) {
-			this.menus[i].update();
-		}
+MenuScene.prototype.update = function() {
 
+	for (var i = 0; i < this.menus.length; i++) {
+		this.menus[i].update();
 	}
 
-	this.draw = function() {
+}
 
-		for (var i = 0; i < this.menus.length; i++) {
-			this.menus[i].draw();
-		}
+MenuScene.prototype.draw = function() {
 
+	for (var i = 0; i < this.menus.length; i++) {
+		this.menus[i].draw();
 	}
 
 }
