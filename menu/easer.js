@@ -1,6 +1,6 @@
-function Easer(parent) {
+function Easer(entity) {
 
-	this.parent = parent;
+	this.entity = entity;
 
 	this.isEasing = false;
 	this.type;
@@ -14,39 +14,52 @@ function Easer(parent) {
 
 Easer.prototype.update = function() {
 
-	this.t += globals.delta;
+	if (this.isEasing) {
 
-	var target = this.end.subtract(this.b);
+		this.t += globals.delta;
 
-	if (this.t >= this.d) {
-		this.t = this.d;
-		this.isEasing = false;
+		var target = this.end.subtract(this.b);
+
+		if (this.t >= this.d) {
+			this.t = this.d;
+			this.isEasing = false;
+		}
+
+		var t = this.t;
+		var d = this.d;
+		var b = this.b;
+		var s = 1.5;
+
+		if (this.type === "easeOutBack") {
+			var func = (t=t/d-1)*t*((s+1)*t + s) + 1
+		}
+		else {
+			var func = (t/=d)*t*((s+1)*t - s);
+		}
+
+		target.x = Math.round(target.x*func + b.x);
+		target.y = Math.round(target.y*func + b.y);
+
+		var transform = target.subtract(this.entity.center);
+
+		this.entity.moveCenter(transform);
+
+		if (this.entity.entities) {
+			var entities = this.entity.entities;
+			for (var i = 0; i < entities.length; i++) {
+				entities[i].moveCenter(transform);
+			}
+		}
+
 	}
-		
-	var t = this.t;
-	var d = this.d;
-	var b = this.b;
-	var s = 1.5;
-
-	if (this.type === "easeOutBack") {
-		var func = (t=t/d-1)*t*((s+1)*t + s) + 1
-	}
-	else {
-		var func = (t/=d)*t*((s+1)*t - s);
-	}
-
-	target.x = Math.round(target.x*func + b.x);
-	target.y = Math.round(target.y*func + b.y);
-
-	this.parent.setCenter(target);
 
 }
 
-Easer.prototype.ease = function(type, end, total) {
+Easer.prototype.startEasing = function(type, end, total) {
 
 	this.isEasing = true;
 	this.type = type;
-	this.b = this.parent.center;
+	this.b = this.entity.center;
 	this.end = end;
 	this.d = total;
 	this.t = 0;

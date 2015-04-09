@@ -15,8 +15,7 @@ function Overlay(activePos, inactivePos, width, height, active) {
 
 	this.origin = this.calculateOrigin();
 
-	this.images;
-	this.texts = [];
+	this.entities = [];
 
 	this.active = active;
 
@@ -24,44 +23,22 @@ function Overlay(activePos, inactivePos, width, height, active) {
 
 }
 
-Overlay.prototype.calculateOrigin = GameObject.prototype.calculateOrigin;
-Overlay.prototype.pctToPoint = GameObject.prototype.pctToPoint;
-Overlay.prototype.setCenter = GameObject.prototype.setCenter;
+Overlay.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
+Overlay.prototype.moveCenter = Entity.prototype.moveCenter;
+Overlay.prototype.pctToPoint = Entity.prototype.pctToPoint;
+Overlay.prototype.setCenter = Entity.prototype.setCenter;
 
 Overlay.prototype.update = function() {
 
-	if (this.easer.isEasing) {
-		var prevPos = this.center.copy();
-		this.easer.update();
-		if (!prevPos.equals(this.center)) {
-			var diff = this.center.subtract(prevPos);
-			if (this.images) {
-				for (var i = 0; i < this.images.length; i++) {
-					// maybe should use move center instead so that origin is also updated
-					this.images[i].center.add(diff);
-				}
-			}
-			if (this.texts) {
-				for (var i = 0; i < this.texts.length; i++) {
-					this.texts[i].moveCenter(diff);
-				}
-			}
-		}
-	}
+	this.easer.update();
 
 }
 
 Overlay.prototype.draw = function() {
 
-	if (this.images) {
-		for (var i = 0; i < this.images.length; i++) {
-			this.images[i].draw();
-		}
-	}
-
-	if (this.texts) {
-		for (var i = 0; i < this.texts.length; i++) {
-			this.texts[i].draw();
+	if (this.entities) {
+		for (var i = 0; i < this.entities.length; i++) {
+			this.entities[i].draw();
 		}
 	}
 
@@ -69,20 +46,20 @@ Overlay.prototype.draw = function() {
 
 Overlay.prototype.activate = function () {
 
-	this.easer.ease("easeOutBack", this.activePos, 1);
+	this.easer.startEasing("easeOutBack", this.activePos, 1);
 
 }
 
-Overlay.prototype.addText = function(t) {
+Overlay.prototype.addEntity = function(e) {
 
-	var relative = this.pctToPoint(t.center);
-	t.setCenter(relative);
-	this.texts.push(t);
+	var relative = this.pctToPoint(e.center);
+	e.setCenter(relative);
+	this.entities.push(e);
 
 }
 
 Overlay.prototype.deactivate = function () {
 
-	this.easer.ease("easeInBack", this.inactivePos, 1);
+	this.easer.startEasing("easeInBack", this.inactivePos, 1);
 
 }

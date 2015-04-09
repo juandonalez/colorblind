@@ -12,9 +12,9 @@ function MenuText(center, text, height, lineWidth, strokeStyle, fillStyle, type,
 
 }
 
-MenuText.prototype.calculateOrigin = GameObject.prototype.calculateOrigin;
-MenuText.prototype.moveCenter = GameObject.prototype.moveCenter;
-MenuText.prototype.setCenter = GameObject.prototype.setCenter;
+MenuText.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
+MenuText.prototype.moveCenter = Entity.prototype.moveCenter;
+MenuText.prototype.setCenter = Entity.prototype.setCenter;
 
 MenuText.prototype.draw = function() {
 
