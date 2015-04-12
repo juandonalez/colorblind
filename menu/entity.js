@@ -6,13 +6,13 @@ Entity.prototype.calculateOrigin = function() {
 
 }
 
-Entity.prototype.intersects = function(box) {
+Entity.prototype.intersects = function(e) {
 
 	return (
-		this.origin.x <= box.origin.x + box.width &&
-		box.x <= this.origin.x + this.width &&
-		this.origin.y <= box.origin.y + box.height &&
-		box.y <= this.origin.y + this.height
+		this.origin.x <= e.origin.x + e.width &&
+		e.x <= this.origin.x + this.width &&
+		this.origin.y <= e.origin.y + e.height &&
+		e.y <= this.origin.y + this.height
 	);
 
 }
@@ -30,10 +30,10 @@ Entity.prototype.pctToPoint = function(p) {
 
 }
 
-Entity.prototype.resize = function(t) {
+Entity.prototype.resize = function(scale) {
 
-	this.width += t.x;
-	this.height += t.y;
+	this.width *= scale;
+	this.height *= scale;
 	this.origin = this.calculateOrigin();
 
 }

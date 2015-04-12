@@ -20,12 +20,14 @@ function Overlay(activePos, inactivePos, width, height, active) {
 	this.active = active;
 
 	this.easer = new Easer(this);
+	this.scaler = new Scaler(this);
 
 }
 
 Overlay.prototype.update = function() {
 
 	this.easer.update();
+	this.scaler.update();
 
 }
 
@@ -57,12 +59,14 @@ Overlay.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
 
 Overlay.prototype.deactivate = function () {
 
-	this.easer.start("easeInBack", this.inactivePos, 1);
+	this.scaler.start("easeInBack", 1.5, 1);
 
 }
 
 Overlay.prototype.moveCenter = Entity.prototype.moveCenter;
 
 Overlay.prototype.pctToPoint = Entity.prototype.pctToPoint;
+
+Overlay.prototype.resize = Entity.prototype.resize;
 
 Overlay.prototype.setCenter = Entity.prototype.setCenter;
