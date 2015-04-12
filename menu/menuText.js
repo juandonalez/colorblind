@@ -12,10 +12,6 @@ function MenuText(center, text, height, lineWidth, strokeStyle, fillStyle, type,
 
 }
 
-MenuText.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
-MenuText.prototype.moveCenter = Entity.prototype.moveCenter;
-MenuText.prototype.setCenter = Entity.prototype.setCenter;
-
 MenuText.prototype.draw = function() {
 
 	if (this.text) {
@@ -31,6 +27,8 @@ MenuText.prototype.draw = function() {
 
 }
 
+MenuText.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
+
 MenuText.prototype.calculateWidth = function() {
 
 	globals.bufferCtx.font = (this.height * this.scale) + "px " + globals.font;
@@ -38,3 +36,15 @@ MenuText.prototype.calculateWidth = function() {
 	return globals.bufferCtx.measureText(this.text).width;
 
 }
+
+MenuText.prototype.moveCenter = Entity.prototype.moveCenter;
+
+MenuText.prototype.resize = function(transform) {
+
+	this.height += transform.y;
+	this.width = this.calculateWidth();
+	this.origin = this.calculateOrigin();
+
+}
+
+MenuText.prototype.setCenter = Entity.prototype.setCenter;

@@ -17,9 +17,9 @@ Entity.prototype.intersects = function(box) {
 
 }
 
-Entity.prototype.moveCenter = function(c) {
+Entity.prototype.moveCenter = function(p) {
 
-	this.center = this.center.add(c);
+	this.center = this.center.add(p);
 	this.origin = this.calculateOrigin();
 
 }
@@ -27,6 +27,14 @@ Entity.prototype.moveCenter = function(c) {
 Entity.prototype.pctToPoint = function(p) {
 
 	return new Point((this.width/100) * p.x + this.origin.x, (this.height/100) * p.y + this.origin.y);
+
+}
+
+Entity.prototype.resize = function(t) {
+
+	this.width += t.x;
+	this.height += t.y;
+	this.origin = this.calculateOrigin();
 
 }
 

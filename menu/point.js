@@ -23,6 +23,12 @@ Point.prototype.equals = function(p) {
 
 }
 
+Point.prototype.multiplyByNum = function(n) {
+
+	return new Point(this.x*n, this.y*n);
+
+}
+
 Point.prototype.subtract = function(p) {
 
 	return new Point(this.x - p.x, this.y - p.y);

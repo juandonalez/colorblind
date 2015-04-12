@@ -23,11 +23,6 @@ function Overlay(activePos, inactivePos, width, height, active) {
 
 }
 
-Overlay.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
-Overlay.prototype.moveCenter = Entity.prototype.moveCenter;
-Overlay.prototype.pctToPoint = Entity.prototype.pctToPoint;
-Overlay.prototype.setCenter = Entity.prototype.setCenter;
-
 Overlay.prototype.update = function() {
 
 	this.easer.update();
@@ -46,7 +41,7 @@ Overlay.prototype.draw = function() {
 
 Overlay.prototype.activate = function () {
 
-	this.easer.startEasing("easeOutBack", this.activePos, 1);
+	this.easer.start("easeOutBack", this.activePos, 1);
 
 }
 
@@ -58,8 +53,16 @@ Overlay.prototype.addEntity = function(e) {
 
 }
 
+Overlay.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
+
 Overlay.prototype.deactivate = function () {
 
-	this.easer.startEasing("easeInBack", this.inactivePos, 1);
+	this.easer.start("easeInBack", this.inactivePos, 1);
 
 }
+
+Overlay.prototype.moveCenter = Entity.prototype.moveCenter;
+
+Overlay.prototype.pctToPoint = Entity.prototype.pctToPoint;
+
+Overlay.prototype.setCenter = Entity.prototype.setCenter;

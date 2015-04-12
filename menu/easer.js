@@ -2,7 +2,7 @@ function Easer(entity) {
 
 	this.entity = entity;
 
-	this.isEasing = false;
+	this.active = false;
 	this.type;
 
 	this.b;	//start
@@ -14,15 +14,15 @@ function Easer(entity) {
 
 Easer.prototype.update = function() {
 
-	if (this.isEasing) {
+	if (this.active) {
 
 		this.t += globals.delta;
 
-		var target = this.end.subtract(this.b);
+		var res = this.end.subtract(this.b);
 
 		if (this.t >= this.d) {
 			this.t = this.d;
-			this.isEasing = false;
+			this.active = false;
 		}
 
 		var t = this.t;
@@ -37,10 +37,10 @@ Easer.prototype.update = function() {
 			var func = (t/=d)*t*((s+1)*t - s);
 		}
 
-		target.x = Math.round(target.x*func + b.x);
-		target.y = Math.round(target.y*func + b.y);
+		res.x = Math.round(res.x*func + b.x);
+		res.y = Math.round(res.y*func + b.y);
 
-		var transform = target.subtract(this.entity.center);
+		var transform = res.subtract(this.entity.center);
 
 		this.entity.moveCenter(transform);
 
@@ -55,9 +55,9 @@ Easer.prototype.update = function() {
 
 }
 
-Easer.prototype.startEasing = function(type, end, total) {
+Easer.prototype.start = function(type, end, total) {
 
-	this.isEasing = true;
+	this.active = true;
 	this.type = type;
 	this.b = this.entity.center;
 	this.end = end;
