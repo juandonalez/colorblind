@@ -19,8 +19,11 @@ function Overlay(activePos, inactivePos, width, height, active) {
 
 	this.active = active;
 
+	this.alpha = 1;
+
 	this.easer = new Easer(this);
 	this.scaler = new Scaler(this);
+	this.fader = new Fader(this);
 
 }
 
@@ -28,6 +31,7 @@ Overlay.prototype.update = function() {
 
 	this.easer.update();
 	this.scaler.update();
+	this.fader.update();
 
 }
 
@@ -59,7 +63,7 @@ Overlay.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
 
 Overlay.prototype.deactivate = function () {
 
-	this.scaler.start("easeInBack", 1.5, 1);
+	this.fader.start(0.1, 1);
 
 }
 

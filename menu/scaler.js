@@ -31,7 +31,7 @@ Scaler.prototype.update = function() {
 		var s = 1.5;
 
 		if (this.type === "easeOutBack") {
-			var func = (t=t/d-1)*t*((s+1)*t + s) + 1
+			var func = (t=t/d-1)*t*((s+1)*t + s) + 1;
 		}
 		else {
 			var func = (t/=d)*t*((s+1)*t - s);

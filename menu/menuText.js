@@ -8,12 +8,14 @@ function MenuText(center, text, height, lineWidth, strokeStyle, fillStyle, type,
 	this.fillStyle = fillStyle;
 	this.width = this.calculateWidth();
 	this.origin = this.calculateOrigin();
+	this.alpha = 1;
 
 }
 
 MenuText.prototype.draw = function() {
 
 	if (this.text) {
+		globals.bufferCtx.globalAlpha = this.alpha;
 		globals.bufferCtx.textBaseline = "top";
 		globals.bufferCtx.textAlign = "start";
 		globals.bufferCtx.font = this.height + "px " + globals.font;
@@ -41,6 +43,7 @@ MenuText.prototype.moveCenter = Entity.prototype.moveCenter;
 MenuText.prototype.resize = function(scale) {
 
 	this.height *= scale;
+	this.lineWidth *= scale;
 	this.width = this.calculateWidth();
 	this.origin = this.calculateOrigin();
 
