@@ -29,6 +29,12 @@ Point.prototype.multiplyByNum = function(n) {
 
 }
 
+Point.prototype.multiplyByPnt = function(p) {
+
+	return new Point(this.x*p.x, this.y*p.y);
+
+}
+
 Point.prototype.subtract = function(p) {
 
 	return new Point(this.x - p.x, this.y - p.y);

@@ -5,10 +5,11 @@ function Scaler(entity) {
 	this.active = false;
 	this.type;
 
-	this.b;	//start
-	this.end;
-	this.d; //duration (total)
-	this.t;	//elapsed
+	this.initial;
+	this.target;
+	this.duration;
+	this.elapsed;
+	this.difference;
 
 }
 
@@ -16,18 +17,16 @@ Scaler.prototype.update = function() {
 
 	if (this.active) {
 
-		this.t += globals.delta;
+		this.elapsed += globals.delta;
 
-		var res = this.end - this.b;
-
-		if (this.t >= this.d) {
-			this.t = this.d;
+		if (this.elapsed >= this.duration) {
+			this.elapsed = this.duration;
 			this.active = false;
 		}
 
-		var t = this.t;
-		var d = this.d;
-		var b = this.b;
+		var t = this.elapsed;
+		var d = this.duration;
+		var b = this.initial;
 		var s = 1.5;
 
 		if (this.type === "easeOutBack") {
@@ -37,30 +36,22 @@ Scaler.prototype.update = function() {
 			var func = (t/=d)*t*((s+1)*t - s);
 		}
 
-		res = Math.round(res*func + b);
-
-		var transform = res/this.entity.width;
-
+		var transform = this.difference*func + b;
+		transform /=this.entity.width;
 		this.entity.resize(transform);
-
-		if (this.entity.entities) {
-			var entities = this.entity.entities;
-			for (var i = 0; i < entities.length; i++) {
-				entities[i].resize(transform);
-			}
-		}
 
 	}
 
 }
 
-Scaler.prototype.start = function(type, scale, total) {
+Scaler.prototype.start = function(type, scale, duration) {
 
 	this.active = true;
 	this.type = type;
-	this.b = this.entity.width;
-	this.end = this.entity.width * scale;
-	this.d = total;
-	this.t = 0;
+	this.initial = this.entity.width;
+	this.target = this.entity.width * scale;
+	this.duration = duration;
+	this.difference = this.target - this.initial;
+	this.elapsed = 0;
 
 }

@@ -4,10 +4,11 @@ function Fader(entity) {
 
 	this.active = false;
 
-	this.b;	//start
-	this.end;
-	this.d; //duration (total)
-	this.t;	//elapsed
+	this.initial;
+	this.target;
+	this.duration;
+	this.elapsed;
+	this.difference;
 
 }
 
@@ -15,40 +16,27 @@ Fader.prototype.update = function() {
 
 	if (this.active) {
 
-		this.t += globals.delta;
+		this.elapsed += globals.delta;
 
-		var res = this.end - this.b;
-
-		if (this.t >= this.d) {
-			this.t = this.d;
+		if (this.elapsed >= this.duration) {
+			this.elapsed = this.duration;
 			this.active = false;
 		}
 
-		var t = this.t;
-		var d = this.d;
-		var b = this.b;
-
-		var func = t/d;
-
-		res = res*func + b;
-
-		if (this.entity.entities) {
-			var entities = this.entity.entities;
-			for (var i = 0; i < entities.length; i++) {
-				entities[i].alpha = res;
-			}
-		}
+		var transform = this.difference*(this.elapsed/this.duration) + this.initial;
+		this.entity.setAlpha(transform);
 
 	}
 
 }
 
-Fader.prototype.start = function(target, time) {
+Fader.prototype.start = function(target, duration) {
 
 	this.active = true;
-	this.b = this.entity.alpha;
-	this.end = target;
-	this.d = time;
-	this.t = 0;
+	this.initial = this.entity.alpha;
+	this.target = target;
+	this.duration = duration;
+	this.difference = this.target - this.initial;
+	this.elapsed = 0;
 
 }

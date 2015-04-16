@@ -5,10 +5,11 @@ function Easer(entity) {
 	this.active = false;
 	this.type;
 
-	this.b;	//start
-	this.end;
-	this.d; //duration (total)
-	this.t;	//elapsed
+	this.beginPos;
+	this.target;
+	this.duration;
+	this.elapsed;
+	this.difference;
 
 }
 
@@ -16,18 +17,18 @@ Easer.prototype.update = function() {
 
 	if (this.active) {
 
-		this.t += globals.delta;
+		this.elapsed += globals.delta;
 
-		var res = this.end.subtract(this.b);
-
-		if (this.t >= this.d) {
-			this.t = this.d;
+		if (this.elapsed >= this.duration) {
+			this.elapsed = this.duration;
 			this.active = false;
 		}
 
-		var t = this.t;
-		var d = this.d;
-		var b = this.b;
+		// the whole easing function is "difference(c) * func + b" but we'll get func first
+
+		var t = this.elapsed;
+		var d = this.duration;
+		var b = this.beginPos;
 		var s = 1.5;
 
 		if (this.type === "easeOutBack") {
@@ -37,31 +38,27 @@ Easer.prototype.update = function() {
 			var func = (t/=d)*t*((s+1)*t - s);
 		}
 
-		res.x = Math.round(res.x*func + b.x);
-		res.y = Math.round(res.y*func + b.y);
+		var transform = this.difference.multiplyByNum(func);
+		transform = transform.add(b);
 
-		var transform = res.subtract(this.entity.center);
-
+		/* get the difference between the new pos the current pos.
+		we could just set the entity to the new pos, but by getting
+		the difference we can then apply the same tranform to other entities */
+		transform = transform.subtract(this.entity.center);
 		this.entity.moveCenter(transform);
-
-		if (this.entity.entities) {
-			var entities = this.entity.entities;
-			for (var i = 0; i < entities.length; i++) {
-				entities[i].moveCenter(transform);
-			}
-		}
 
 	}
 
 }
 
-Easer.prototype.start = function(type, end, total) {
+Easer.prototype.start = function(type, target, duration) {
 
 	this.active = true;
 	this.type = type;
-	this.b = this.entity.center;
-	this.end = end;
-	this.d = total;
-	this.t = 0;
+	this.beginPos = this.entity.center;
+	this.target = target;
+	this.duration = duration;
+	this.difference = this.target.subtract(this.beginPos);
+	this.elapsed = 0;
 
 }

@@ -38,6 +38,14 @@ Entity.prototype.resize = function(scale) {
 
 }
 
+Entity.prototype.setAlpha = function(a) {
+
+	if (this.alpha) {
+		this.alpha = a;
+	}
+
+}
+
 Entity.prototype.setCenter = function(c) {
 
 	this.center = c;

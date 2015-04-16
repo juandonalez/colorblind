@@ -36,7 +36,9 @@ Overlay.prototype.update = function() {
 }
 
 Overlay.prototype.draw = function() {
-
+globals.bufferCtx.globalAlpha = this.alpha;
+globals.bufferCtx.fillStyle = "blue";
+globals.bufferCtx.fillRect(this.origin.x, this.origin.y, this.width, this.height);
 	if (this.entities) {
 		for (var i = 0; i < this.entities.length; i++) {
 			this.entities[i].draw();
@@ -63,14 +65,55 @@ Overlay.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
 
 Overlay.prototype.deactivate = function () {
 
-	this.fader.start(0.1, 1);
+	//this.easer.start("easeInBack", this.inactivePos, 1);
+	//this.fader.start(0.1, 1);
+	this.scaler.start("easeInBack", 0.5, 1);
 
 }
 
-Overlay.prototype.moveCenter = Entity.prototype.moveCenter;
+Overlay.prototype.moveCenter = function(p) {
+
+	this.center = this.center.add(p);
+	this.origin = this.calculateOrigin();
+
+	if (this.entities) {
+		for (var i = 0; i < this.entities.length; i++) {
+			this.entities[i].moveCenter(p);
+		}
+	}
+
+}
 
 Overlay.prototype.pctToPoint = Entity.prototype.pctToPoint;
 
-Overlay.prototype.resize = Entity.prototype.resize;
+Overlay.prototype.resize = function(scale) {
+
+	this.width *= scale;
+	this.height *= scale;
+	this.origin = this.calculateOrigin();
+
+	if (this.entities) {
+		for (var i = 0; i < this.entities.length; i++) {
+			this.entities[i].resize(scale);
+		}
+	}
+
+}
+
+Overlay.prototype.setAlpha = function(a) {
+
+	if (this.alpha) {
+		this.alpha = a;
+	}
+
+	if (this.entities) {
+		for (var i = 0; i < this.entities.length; i++) {
+			if (this.entities[i].alpha) {
+				this.entities[i].alpha = a;
+			}
+		}
+	}
+
+}
 
 Overlay.prototype.setCenter = Entity.prototype.setCenter;
