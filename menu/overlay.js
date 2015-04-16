@@ -67,7 +67,8 @@ Overlay.prototype.deactivate = function () {
 
 	//this.easer.start("easeInBack", this.inactivePos, 1);
 	//this.fader.start(0.1, 1);
-	this.scaler.start("easeInBack", 0.5, 1);
+	//this.scaler.start("easeInBack", 0.5, 1);
+	camera.fadeOut();
 
 }
 

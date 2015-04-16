@@ -40,6 +40,7 @@ BackgroundScroller.prototype.draw = function(ctx) {
 	var third = this.pool[this.bgs[2]];
 	var rounded = Math.round(this.x);
 
+	// *****figure out camera pos stuff ***
 	ctx.drawImage(first, rounded, this.y);
 	ctx.drawImage(second, rounded + first.width, this.y);
 	ctx.drawImage(third, rounded + first.width + second.width, this.y);

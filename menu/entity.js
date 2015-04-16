@@ -40,9 +40,7 @@ Entity.prototype.resize = function(scale) {
 
 Entity.prototype.setAlpha = function(a) {
 
-	if (this.alpha) {
-		this.alpha = a;
-	}
+	this.alpha = a;
 
 }
 
