@@ -2,17 +2,11 @@ var camera = camera || {};
 
 (function() {
 
-	camera.x = 20;
-	camera.y = 20;
+	camera.origin = new Point(20, 20);
 	camera.width = 1280;
 	camera.height = 720;
 	camera.center = new Point(camera.width/2, camera.height/2);
-
-	camera.pctToWidth = function(w) {
-
-		return (camera.width/100) * w;
-
-	}
+	camera.center = camera.center.add(camera.origin);
 
 	camera.pctToHeight = function(h) {
 
@@ -20,11 +14,11 @@ var camera = camera || {};
 
 	}
 
-	camera.pctToPoint = function(p) {
+	camera.pctToPoint = Entity.prototype.pctToPoint;
 
-		var x = (camera.width/100) * p.x;
-		var y = (camera.height/100) * p.y;
-		return new Point(x, y);
+	camera.pctToWidth = function(w) {
+
+		return (camera.width/100) * w;
 
 	}
 

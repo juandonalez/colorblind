@@ -19,7 +19,10 @@ function MenuScene() {
 		var tData = texts[i];
 
 		var activePos = camera.pctToPoint(oData.activePos);
+		//subtract camera origin because overlay pos is independant of camera pos
+		activePos = activePos.subtract(camera.origin);
 		var inactivePos = camera.pctToPoint(oData.inactivePos);
+		inactivePos = inactivePos.subtract(camera.origin);
 		var width = camera.pctToWidth(oData.width);
 		var height = camera.pctToHeight(oData.height);
 
