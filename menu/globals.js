@@ -19,6 +19,4 @@ var globals = globals || {};
 
 	globals.currentScene;
 
-	globals.letsdothis = false;
-
 })();
