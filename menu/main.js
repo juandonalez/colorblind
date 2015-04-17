@@ -17,6 +17,7 @@
 		then = now;
 
 		globals.currentScene.update();
+		camera.update();
 
 	}
 
@@ -26,6 +27,7 @@
 		globals.tvCtx.clearRect(0, 0, globals.tv.width, globals.tv.height);
 		globals.currentScene.draw();
 		globals.tvCtx.drawImage(globals.buffer, 0, 0, globals.tv.width, globals.tv.height);
+		camera.draw();
 
 	}
 

@@ -48,8 +48,6 @@ MenuScene.prototype.update = function() {
 		this.menus[i].update();
 	}
 
-	camera.update();
-
 }
 
 MenuScene.prototype.draw = function() {
@@ -57,7 +55,5 @@ MenuScene.prototype.draw = function() {
 	for (var i = 0; i < this.menus.length; i++) {
 		this.menus[i].draw();
 	}
-
-	camera.draw();
 
 }

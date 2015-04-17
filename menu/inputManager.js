@@ -53,7 +53,6 @@ var inputManager = inputManager || {};
 
 		if (code === 37) {
 			inputManager.left = false;
-			console.log("left up");
 		}
 
 		if (code === 38) {
