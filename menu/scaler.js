@@ -37,19 +37,19 @@ Scaler.prototype.update = function() {
 		}
 
 		var transform = this.difference*func + b;
-		transform /=this.entity.width;
+		transform /=this.entity.height;
 		this.entity.resize(transform);
 
 	}
 
 }
 
-Scaler.prototype.start = function(type, scale, duration) {
+Scaler.prototype.start = function(type, target, duration) {
 
 	this.active = true;
 	this.type = type;
-	this.initial = this.entity.width;
-	this.target = this.entity.width * scale;
+	this.initial = this.entity.height;
+	this.target = target;
 	this.duration = duration;
 	this.difference = this.target - this.initial;
 	this.elapsed = 0;

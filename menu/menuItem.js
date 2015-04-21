@@ -31,6 +31,8 @@ MenuItem.prototype.update = function() {
 
 	}
 
+	this.scaler.update();
+
 }
 
 MenuItem.prototype.select = function() {

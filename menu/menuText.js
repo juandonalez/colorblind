@@ -27,6 +27,8 @@ function MenuText(o) {
 	this.width = this.calculateWidth();
 	this.origin = this.calculateOrigin();
 
+	this.scaler = new Scaler(this);
+
 }
 
 MenuText.prototype.update = MenuItem.prototype.update;
@@ -66,6 +68,8 @@ MenuText.prototype.calculateWidth = function() {
 
 }
 
+MenuText.prototype.deselect = MenuItem.prototype.deselect;
+
 MenuText.prototype.moveCenter = Entity.prototype.moveCenter;
 
 MenuText.prototype.resize = function(scale) {
@@ -76,5 +80,7 @@ MenuText.prototype.resize = function(scale) {
 	this.origin = this.calculateOrigin();
 
 }
+
+MenuText.prototype.select = MenuItem.prototype.select;
 
 MenuText.prototype.setCenter = Entity.prototype.setCenter;
