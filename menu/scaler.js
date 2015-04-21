@@ -32,12 +32,15 @@ Scaler.prototype.update = function() {
 		if (this.type === "easeOutBack") {
 			var func = (t=t/d-1)*t*((s+1)*t + s) + 1;
 		}
-		else {
+		else if (this.type === "easeInBack") {
 			var func = (t/=d)*t*((s+1)*t - s);
+		}
+		else if (this.type === "pulse") {
+			var func = t/d - Math.floor(t/d);
 		}
 
 		var transform = this.difference*func + b;
-		transform /=this.entity.height;
+		transform /= this.entity.height;
 		this.entity.resize(transform);
 
 	}

@@ -74,7 +74,7 @@ MenuText.prototype.moveCenter = Entity.prototype.moveCenter;
 
 MenuText.prototype.resize = function(scale) {
 
-	this.height *= scale;
+	this.height = Math.round(this.height*scale);
 	this.lineWidth *= scale;
 	this.width = this.calculateWidth();
 	this.origin = this.calculateOrigin();
