@@ -8,12 +8,12 @@ function MenuScene() {
 	this.menus = [new Menu()];
 	this.currentMenu = 0;
 
-	globals.currentStyle = sceneData.mainMenu.style;
-
 	var overlays = sceneData.mainMenu.overlays;
 	for (var i = 0; i < overlays.length; i++) {
 		this.menus[0].overlays.push(new Overlay(overlays[i]));
 	}
+
+	this.currentItems = this.menus[this.currentMenu].menuItems;
 
 }
 

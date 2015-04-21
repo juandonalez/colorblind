@@ -5,28 +5,34 @@ function Overlay(o) {
 	this.activePos = this.activePos.subtract(camera.origin);
 	this.inactivePos = camera.pctToPoint(o.inactivePos);
 	this.inactivePos = this.inactivePos.subtract(camera.origin);
+	this.activeHeight = camera.pctToHeight(o.activeHeight);
+	this.inactiveHeight = camera.pctToHeight(o.inactiveHeight);
+	this.activeAlpha = o.activeAlpha;
+	this.inactiveAlpha = o.inactiveAlpha;
 
 	if (this.active) {
-		this.center = this.activePos;
+		this.center = this.activePos.copy();
+		this.height = this.activeHeight;
+		this.alpha = this.activeAlpha;
 	}
 	else {
-		this.center = this.inactivePos;
+		this.center = this.inactivePos.copy();
+		this.height = this.inactiveHeight;
+		this.alpha = this.inactiveAlpha;
 	}
 
 	this.width = camera.pctToWidth(o.width);
-	this.height = camera.pctToHeight(o.height);
 	this.origin = this.calculateOrigin();
-	this.alpha = 1;
 	this.menuItems = [];
 
 	for (var i = 0; i < o.menuItems.length; i++) {
 		var m = o.menuItems[i];
 		m.center = this.pctToPoint(m.center);
-		if (m.type === "image") {
-			this.menuItems.push(new MenuImage(m));
+		if (m.text) {
+			this.menuItems.push(new MenuText(m));
 		}
 		else {
-			this.menuItems.push(new MenuText(m));
+			this.menuItems.push(new MenuImage(m));
 		}
 	}
 
@@ -41,6 +47,10 @@ Overlay.prototype.update = function() {
 	this.easer.update();
 	this.scaler.update();
 	this.fader.update();
+
+	for (var i = 0; i < this.menuItems.length; i++) {
+		this.menuItems[i].update();
+	}
 
 }
 

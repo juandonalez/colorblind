@@ -18,6 +18,5 @@ var globals = globals || {};
 	globals.numPlayers = 1;
 
 	globals.currentScene;
-	globals.currentStyle;
 
 })();

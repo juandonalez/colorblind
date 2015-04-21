@@ -2,41 +2,45 @@ function MenuItem() {}
 
 MenuItem.prototype.update = function() {
 
-	if (inputManger.left) {
-		if (this.left) {
-			this.left.hover();
-			this.unhover();
+	if (this.selected) {
+
+		if (inputManager.left) {
+			if (this.left) {
+				this.left.select();
+				this.deselect();
+			}
 		}
-	}
-	else if (inputManger.up) {
-		if (this.up) {
-			this.up.hover();
-			this.unhover();
+		else if (inputManager.up) {
+			if (this.up) {
+				this.up.select();
+				this.deselect();
+			}
 		}
-	}
-	else if (inputManger.right) {
-		if (this.right) {
-			this.right.hover();
-			this.unhover();
+		else if (inputManager.right) {
+			if (this.right) {
+				this.right.select();
+				this.deselect();
+			}
 		}
-	}
-	else if (inputManger.down) {
-		if (this.down) {
-			this.down.hover();
-			this.unhover();
+		else if (inputManager.down) {
+			if (this.down) {
+				this.down.select();
+				this.deselect();
+			}
 		}
+
 	}
 
 }
 
-MenuItem.prototype.hover = function() {
+MenuItem.prototype.select = function() {
 
-	this.scaler.start("easeInBack", 1.1, 0.5);
+	this.selected = true;
 
 }
 
-MenuItem.prototype.unhover = function() {
+MenuItem.prototype.deselect = function() {
 
-	this.scaler.start("easeInBack", 0.9, 0.5);
+	this.selected = false;
 
 }

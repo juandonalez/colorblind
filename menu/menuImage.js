@@ -23,7 +23,9 @@ function MenuImage(center, image) {
 
 }
 
-MenuImage.prototype.update = function() {
+MenuImage.prototype.update = MenuItem.prototype.update;
+
+/*MenuImage.prototype.update = function() {
 
 	if (this.scale !== this.scaleTarget) {
 		if (this.scale > this.scaleTarget) {
@@ -48,7 +50,7 @@ MenuImage.prototype.update = function() {
 
 	this.calculateDimensions();
 
-}
+}*/
 
 MenuImage.prototype.draw = function() {
 
