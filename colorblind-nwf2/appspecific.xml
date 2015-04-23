@@ -129,7 +129,7 @@
         <Traditional_Chinese/>
       </Title_Name_Publisher>
       <Add-On_Content>
-        <Use_Downloadable_Content/>
+        <Use_Downloadable_Content>0</Use_Downloadable_Content>
         <Unique_ID_of_Downloadable_Content_to_Access>
           <ID0/>
           <ID1/>
