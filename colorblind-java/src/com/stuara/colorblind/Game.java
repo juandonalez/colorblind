@@ -9,6 +9,9 @@ public class Game extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 
+	private Thread thread;
+	private boolean running = false;
+
 	public static void main(String[] args) {
 
 		Game game = new Game();
@@ -23,8 +26,71 @@ public class Game extends Canvas implements Runnable {
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 
+		game.start();
+
 	}
 
-	public void run() {}
+	public synchronized void start() {
+		thread = new Thread(this);
+		running = true;
+		thread.start();
+	}
+
+	public synchronized void stop() {
+		try {
+			thread.join();
+			running = false;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void run() {
+
+		long lastLoopTime = System.nanoTime();
+		final int TARGET_FPS = 60;
+		final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;
+		long lastFpsTime = 0;
+		int fps = 0;
+
+		while (running) {
+			long now = System.nanoTime();
+			long updateLength = now - lastLoopTime;
+			lastLoopTime = now;
+			double delta = updateLength / ((double)OPTIMAL_TIME);
+			lastFpsTime += updateLength;
+			fps++;
+
+			if (lastFpsTime >= 1000000000) {
+				System.out.println("(FPS: "+fps+")");
+				lastFpsTime = 0;
+				fps = 0;
+			}
+
+			update(delta);
+			draw();
+
+			try {
+				Thread.sleep((lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	public void update(double delta) {
+
+		
+
+	}
+
+	public void draw() {
+
+		
+
+	}
 
 }
