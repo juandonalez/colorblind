@@ -1,7 +1,10 @@
 package com.stuara.colorblind;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
@@ -71,11 +74,15 @@ public class Game extends Canvas implements Runnable {
 			update(delta);
 			draw();
 
-			try {
-				Thread.sleep((lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000);
-			}
-			catch (Exception e) {
-				e.printStackTrace();
+			long timeout = (lastLoopTime-System.nanoTime() + OPTIMAL_TIME)/1000000;
+
+			if (timeout > 0) {
+				try {
+					Thread.sleep(timeout);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -89,7 +96,18 @@ public class Game extends Canvas implements Runnable {
 
 	public void draw() {
 
-		
+		BufferStrategy bs = this.getBufferStrategy();
+
+		if (bs == null) {
+			this.createBufferStrategy(2);
+			return;
+		}
+
+		Graphics g = bs.getDrawGraphics();
+		g.setColor(Color.blue);
+		g.fillRect(0, 0, 400, 400);
+		g.dispose();
+		bs.show();
 
 	}
 
