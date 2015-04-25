@@ -4,6 +4,8 @@
 
 	var then = Date.now( );
 	var now;
+	var frames = 0;
+	var frameTimer = 0;
 
 	var BUFFER_WIDTH = 1280;
 	var BUFFER_HEIGHT = 720;
@@ -51,10 +53,17 @@
 
 	function update() {
 
-		frames++;
 		now = Date.now();
 		globals.delta = (now - then)/1000;
 		then = now;
+		frames++;
+		frameTimer += globals.delta;
+
+		if (frameTimer >= 1) {
+			console.log(frames);
+			frames = 0;
+			frameTimer = 0;
+		}
 
 		scenes[currentScene].update();
 
