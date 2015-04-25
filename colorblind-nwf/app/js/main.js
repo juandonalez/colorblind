@@ -2,21 +2,6 @@
 
 	"use strict";
 
-	var displayManager = nwf.display.DisplayManager.getInstance();
-		
-	var gpDisplay = displayManager.getGamePadDisplay();
-	var tvDisplay = displayManager.getTVDisplay();
-	
-	var gpCanvas = document.getElementById('gpCanvas');
-	gpCanvas.width = 854;
-	gpCanvas.height = 480;
-	var gpCtx = gpCanvas.getContext('2d');
-
-	var tvCanvas = tvDisplay.window.document.getElementById('tvCanvas');
-	tvCanvas.height = 720;
-	tvCanvas.width = (720/9)*16;
-	var tvCtx = tvCanvas.getContext('2d');
-
 	var then = Date.now( );
 	var now;
 
@@ -77,16 +62,16 @@
 
 	function draw() {
 
-		var ctx = gpCtx;
+		/*var ctx = gpCtx;
 		ctx.clearRect(0, 0, gpCanvas.width, gpCanvas.height);
-		bufferCTX.clearRect(0, 0, BUFFER_WIDTH, BUFFER_HEIGHT);
+		bufferCTX.clearRect(0, 0, BUFFER_WIDTH, BUFFER_HEIGHT);*/
 
-		scenes[currentScene].draw(2, 1, true, bufferCTX, buffer);
+		scenes[currentScene].draw(2, 1, true);
 
-		ctx.imageSmoothingEnabled = false;
+		/*ctx.imageSmoothingEnabled = false;
 		ctx.drawImage(buffer, 0, 0, gpCanvas.width, gpCanvas.height);
 		ctx = tvCtx;
-		ctx.drawImage(buffer, 0, 0, tvCanvas.width, tvCanvas.height);
+		ctx.drawImage(buffer, 0, 0, tvCanvas.width, tvCanvas.height);*/
 
 	}
 

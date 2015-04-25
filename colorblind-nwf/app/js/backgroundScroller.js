@@ -33,7 +33,9 @@ BackgroundScroller.prototype.update = function() {
 
 }
 
-BackgroundScroller.prototype.draw = function(ctx) {
+BackgroundScroller.prototype.draw = function() {
+
+	var ctx = globals.bufferCtx;
 
 	var first = this.pool[this.bgs[0]];
 	var second = this.pool[this.bgs[1]];

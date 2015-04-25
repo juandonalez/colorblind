@@ -49,10 +49,10 @@ LevelScroller.prototype.update = function() {
 
 }
 
-LevelScroller.prototype.draw = function(ctx, layer) {
+LevelScroller.prototype.draw = function(layer) {
 
 	for (var i = 0; i < this.levels.length; i++) {
-		this.levels[i].draw(ctx, layer);
+		this.levels[i].draw(layer);
 	}
 
 }

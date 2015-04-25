@@ -36,8 +36,9 @@ Level.prototype.init = function(data) {
 
 Level.prototype.update = function() {}
 
-Level.prototype.draw = function(ctx, layer) {
+Level.prototype.draw = function(layer) {
 
+	var ctx = globals.bufferCtx;
 	var tileset = fileManager.tileset;
 	var tileSize = globals.tileSize;
 	var tile = 0;

@@ -24,9 +24,9 @@ Player.prototype.update = function() {
 
 }
 
-Player.prototype.draw = function(ctx) {
+Player.prototype.draw = function() {
 
-	ctx.fillStyle = "blue";
-	ctx.fillRect(this.x - 20, this.y - 20, this.width, this.height);
+	globals.bufferCtx.fillStyle = "blue";
+	globals.bufferCtx.fillRect(this.x - 20, this.y - 20, this.width, this.height);
 
 }

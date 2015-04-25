@@ -43,21 +43,26 @@ StageScene.prototype.update = function() {
 
 }
 
-StageScene.prototype.draw = function(numScreens, numPlayers, isSplit, ctx, buffer) {
+StageScene.prototype.draw = function(numScreens, numPlayers, isSplit) {
+
+	var gp = globals.gpCtx;
+	var tv = globals.tvCtx;
+	var buffer = globals.buffer;
+	var ctx = globals.bufferCtx;
 
 	if (isSplit) {
-		/*this.farScroller.draw(ctx);
-		this.midScroller.draw(ctx);
-		this.levelScroller.draw(ctx, 1);*/
-		this.player.draw(ctx);
-		/*nwft.gpContext.drawImage(buffer, 0, 0, nwft.GP_WIDTH, nwft.GP_HEIGHT);
-		nwft.tvContext.drawImage(buffer, 0, 0, nwft.TV_WIDTH, nwft.TV_HEIGHT);
+		this.farScroller.draw();
+		this.midScroller.draw();
+		this.levelScroller.draw(1);
+		this.player.draw();
+		gp.drawImage(buffer, 0, 0, globals.gpWidth, globals.gpHeight);
+		tv.drawImage(buffer, 0, 0, globals.tvWidth, globals.tvHeight);
 		ctx.clearRect(0, 0, 1280, 720);
-		this.levelScroller.draw(ctx, 2);
-		nwft.gpContext.drawImage(buffer, 0, 0, nwft.GP_WIDTH, nwft.GP_HEIGHT);
+		this.levelScroller.draw(2);
+		gp.drawImage(buffer, 0, 0, globals.gpWidth, globals.gpHeight);
 		ctx.clearRect(0, 0, 1280, 720);
-		this.levelScroller.draw(ctx, 3);
-		nwft.tvContext.drawImage(buffer, 0, 0, nwft.TV_WIDTH, nwft.TV_HEIGHT);*/
+		this.levelScroller.draw(3);
+		tv.drawImage(buffer, 0, 0, globals.tvWidth, globals.tvHeight);
 	}
 
 }
