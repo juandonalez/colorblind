@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+/* This code sets the margin to 0 so that there is no extra space around the canvas.*/
+body {
+	margin: 0;
+}
+
+/* This code shows the canvas.*/
+/* Set the scroll bar display to "block."*/
+canvas.show {
+	display: block;
+}
+
+/* This code hides the canvas.*/
+canvas.hide {
+	display: none;
+}

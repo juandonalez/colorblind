@@ -63,6 +63,7 @@
   <nwf:supportedRenderModes>
     <nwf:tvRenderMode>720</nwf:tvRenderMode>
     <nwf:tvRenderMode>480_WIDE</nwf:tvRenderMode>
+    <nwf:tvRenderMode>480_NARROW</nwf:tvRenderMode>
   </nwf:supportedRenderModes>
   <!-- List of media plugins to load -->
   <mediaPlugin name="libMIPluginDecoderOggVorbis_rpl"/>
@@ -260,8 +261,8 @@
     <nwf:frontEndURL/>
   </nwf:inspector>
   <nwf:dashboard>
-    <nwf:contentHistory nwf:display="tv" src="/index_tv.html"/>
-    <nwf:contentHistory nwf:display="gp" src="/index_gp.html"/>
+    <nwf:contentHistory nwf:display="tv" src="/TV.html"/>
+    <nwf:contentHistory nwf:display="gp" src="/index.html"/>
     <nwf:contentHistory nwf:display="shared" src="/index.html">
       <nwf:width/>
       <nwf:height/>
@@ -280,6 +281,6 @@
     <nwf:version>18</nwf:version>
     <nwf:serviceTokenNotRequired>1</nwf:serviceTokenNotRequired>
   </nwf:dashboard>
-  <content nwf:display="tv" src="/index_tv.html"/>
-  <content nwf:display="gp" src="/index_gp.html"/>
+  <content nwf:display="tv" src="/TV.html"/>
+  <content nwf:display="gp" src="/index.html"/>
 </widget>
