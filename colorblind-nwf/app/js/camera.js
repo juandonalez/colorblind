@@ -7,7 +7,7 @@ var camera = camera || {};
 	camera.height = 720;
 	camera.center = new Point(camera.width/2, camera.height/2);
 	camera.center = camera.center.add(camera.origin);
-	camera.alpha = 0;
+	camera.alpha = 1;
 
 	camera.fader = new Fader(camera);
 
@@ -19,7 +19,7 @@ var camera = camera || {};
 
 	camera.draw = function() {
 
-		if (camera.alpha !== 0) {
+		if (camera.alpha !== 1) {
 			globals.bufferCtx.globalAlpha = camera.alpha;
 			globals.bufferCtx.fillStyle = "black";
 			globals.bufferCtx.fillRect(0, 0, camera.width, camera.height);
@@ -29,13 +29,13 @@ var camera = camera || {};
 
 	camera.fadeIn = function() {
 
-		camera.fader.start(0, 0.5);
+		camera.fader.start(0, 1);
 
 	}
 
 	camera.fadeOut = function() {
 
-		camera.fader.start(1, 0.5);
+		camera.fader.start(1, 1);
 
 	}
 

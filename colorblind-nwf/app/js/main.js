@@ -7,48 +7,27 @@
 	var frames = 0;
 	var frameTimer = 0;
 
-	/*var BUFFER_WIDTH = 1280;
-	var BUFFER_HEIGHT = 720;
-	var buffer = document.createElement("canvas");
-	buffer.width = BUFFER_WIDTH;
-	buffer.height = BUFFER_HEIGHT;
-	var bufferCTX = buffer.getContext("2d");*/
+	var scenes = [
+			new StageScene(),
+			new StageScene(),
+			new StageScene(),
+			new StageScene()
+	];
 
-	var scenes = [];
-	var currentScene = 0;
+	var currentScene = 1;
+	var splashScreen;
 
-	function init() {
+	window.onload = function() {
 
-		/*scenes.push(new StageScene(0));
-		//change to menu scene later
-		scenes.push(new StageScene(1));
-		scenes.push(new StageScene(2));
-		scenes.push(new StageScene(3));
-
-		currentScene = 1;
-		fileManager.loadScene(currentScene);*/
-		load();
-
+		splashScreen = new Image();
+		splashScreen.onload = splashLoaded;
+		splashScreen.src = "images/splashScreen.png";
 	}
 
-	function load() {
+	function splashLoaded() {
 
-		/*if (fileManager.isLoading()) {
-			window.webkitRequestAnimationFrame(load);
-		}
-		else {
-			scenes[currentScene].init();
-			gameLoop();
-		}*/
-console.log("start");
-		if (fm.isLoaded()) {
-			console.log(fm.tilesets);
-			console.log(fm.levels);
-		}
-		else {
-		console.log("...");
-			window.webkitRequestAnimationFrame(load);
-		}
+		camera.fadeIn();
+		gameLoop();
 
 	}
 
@@ -65,7 +44,7 @@ console.log("start");
 		now = Date.now();
 		globals.delta = (now - then)/1000;
 		then = now;
-		frames++;
+		/*frames++;
 		frameTimer += globals.delta;
 
 		if (frameTimer >= 1) {
@@ -74,25 +53,31 @@ console.log("start");
 			frameTimer = 0;
 		}
 
-		scenes[currentScene].update();
+		scenes[currentScene].update();*/
+
+		camera.update();
 
 	}
 
 	function draw() {
 
-		/*var ctx = gpCtx;
-		ctx.clearRect(0, 0, gpCanvas.width, gpCanvas.height);
-		bufferCTX.clearRect(0, 0, BUFFER_WIDTH, BUFFER_HEIGHT);*/
+		globals.gpCtx.clearRect(0, 0, globals.gpWidth, globals.gpHeight);
+		globals.tvCtx.clearRect(0, 0, globals.tvWidth, globals.tvHeight);
+		globals.bufferCtx.clearRect(0, 0, globals.bufferWidth, globals.bufferHeight);
 
-		scenes[currentScene].draw(2, 1, true);
+		//scenes[currentScene].draw(2, 1, true);
 
 		/*ctx.imageSmoothingEnabled = false;
 		ctx.drawImage(buffer, 0, 0, gpCanvas.width, gpCanvas.height);
 		ctx = tvCtx;
 		ctx.drawImage(buffer, 0, 0, tvCanvas.width, tvCanvas.height);*/
 
-	}
+		globals.bufferCtx.globalAlpha = 1;
+		globals.bufferCtx.drawImage(splashScreen, 0, 0, globals.bufferWidth, globals.bufferHeight);
+		camera.draw();
+		globals.gpCtx.drawImage(globals.buffer, 0, 0, globals.gpWidth, globals.gpHeight);
+		globals.tvCtx.drawImage(globals.buffer, 0, 0, globals.tvWidth, globals.tvHeight);
 
-	init();
+	}
 
 })();

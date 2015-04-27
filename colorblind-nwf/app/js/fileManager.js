@@ -26,14 +26,13 @@ var fm = fm || {};
 	/* 
 	storage arrays for all of the data
 	*/
-	fm.tilesets = new Array(4);
-	fm.levels = new Array(4);
+	fm.currentTileset;
+	fm.currentLevels;
 
-	// create empty arrays for each scene
-	for (var i = 0; i < 4; i++) {
-		fm.tilesets[i] = new Array(fm.data.tilesetSize);
-		fm.levels[i] = new Array(fm.data.scenes[i].numLevels);
-	}
+	fm.images = new Array(1);
+
+	fm.images["splashScreen"] = new Image();
+	fm.images["splashScreen"].src = "images/splashScreen.png";
 
 	/* 
 	functions for loading files of different types, and to check if loading is finished
@@ -52,14 +51,8 @@ var fm = fm || {};
 
 	fm.isLoaded = function() {
 
-		return fm.isComplete(fm.tilesets[0]) &&
-			fm.isComplete(fm.tilesets[1]) &&
-			fm.isComplete(fm.tilesets[2]) &&
-			fm.isComplete(fm.tilesets[3]) &&
-			fm.isComplete(fm.levels[0]) &&
-			fm.isComplete(fm.levels[1]) &&
-			fm.isComplete(fm.levels[2]) &&
-			fm.isComplete(fm.levels[3]);
+		return fm.isComplete(fm.currentTileset) &&
+			fm.isComplete(fm.currentLevels);
 
 	}
 
@@ -78,10 +71,10 @@ var fm = fm || {};
 			var url = urls[i];
 			var request = new XMLHttpRequest();
 			request.overrideMimeType("application/json");
-			request.open("GET", url, false);
+			request.open("GET", url, true);
 			request.onreadystatechange = function() {
 				if (request.readyState == 4) {
-					target[i] = JSON.parse(request.response);
+					//target[i] = JSON.parse(request.response);
 				}
 			}
 			request.send();
@@ -89,52 +82,30 @@ var fm = fm || {};
 
 	}
 
-	fm.loadTileset = function(scene) {
+	fm.loadScene = function(scene) {
 
 		var tilesetSize = fm.data.tilesetSize;
 		var urls = new Array(tilesetSize);
-		fm.tilesets[scene] = new Array(tilesetSize);
+		fm.currentTileset = new Array(tilesetSize);
 
 		for (var i = 0; i < tilesetSize; i++) {
 			var url = "images/tilesets/" + scene + "/" + i + ".png";
 			urls[i] = url;
 		}
 
-		fm.loadImages(urls, fm.tilesets[scene]);
-
-	}
-
-	fm.loadLevels = function(scene) {
+		fm.loadImages(urls, fm.currentTileset);
 
 		var numLevels = fm.data.scenes[scene].numLevels;
-		var urls = new Array(numLevels);
-		fm.levels[scene] = new Array(numLevels);
+		urls = new Array(numLevels);
+		fm.currentLevels = new Array(numLevels);
 
 		for (var i = 0; i < numLevels; i++) {
 			var url = "levels/" + scene + "/" + i + ".json";
 			urls[i] = url;
 		}
 
-		fm.loadJSON(urls, fm.levels[scene]);
+		fm.loadJSON(urls, fm.currentLevels);
 
 	}
-
-	/*
-	actual loading is done here
-	*/
-
-	// load tilesets for 3 stages
-	fm.loadTileset(1);
-	fm.loadTileset(2);
-	fm.loadTileset(3);
-
-	// main menu just uses the 1st stage tileset
-	fm.tilesets[0] = fm.tilesets[1];
-
-	// load levels for main menu and stages
-	fm.loadLevels(0);
-	fm.loadLevels(1);
-	fm.loadLevels(2);
-	fm.loadLevels(3);
 
 })();

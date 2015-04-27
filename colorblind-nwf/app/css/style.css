@@ -3,6 +3,7 @@
 /* This code sets the margin to 0 so that there is no extra space around the canvas.*/
 body {
 	margin: 0;
+	background-color: #000000;
 }
 
 /* This code shows the canvas.*/

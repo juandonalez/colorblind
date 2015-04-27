@@ -1,4 +1,4 @@
-function StageScene() {
+function MenuScene() {
 
 	this.offset = 0;
 	this.farScroller;
@@ -13,7 +13,7 @@ function StageScene() {
 
 }
 
-StageScene.prototype.init = function() {
+MenuScene.prototype.init = function() {
 
 	this.farScroller = new BackgroundScroller(0, fileManager.bgsFar, 200);
 	this.midScroller = new BackgroundScroller(200, fileManager.bgsMid, 220);
@@ -33,7 +33,7 @@ StageScene.prototype.init = function() {
 
 }
 
-StageScene.prototype.update = function() {
+MenuScene.prototype.update = function() {
 
 	this.farScroller.update();
 	this.midScroller.update();
@@ -42,7 +42,7 @@ StageScene.prototype.update = function() {
 
 }
 
-StageScene.prototype.draw = function(numScreens, numPlayers, isSplit) {
+MenuScene.prototype.draw = function(numScreens, numPlayers, isSplit) {
 
 	var gp = globals.gpCtx;
 	var tv = globals.tvCtx;
