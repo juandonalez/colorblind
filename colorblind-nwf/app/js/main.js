@@ -1,3 +1,5 @@
+var main = main || {};
+
 (function () {
 
 	"use strict";
@@ -8,28 +10,14 @@
 	var frameTimer = 0;
 
 	var scenes = [
+			new MenuScene(),
 			new StageScene(),
 			new StageScene(),
 			new StageScene(),
-			new StageScene()
+			new MenuScene()
 	];
 
-	var currentScene = 1;
-	var splashScreen;
-
-	window.onload = function() {
-
-		splashScreen = new Image();
-		splashScreen.onload = splashLoaded;
-		splashScreen.src = "images/splashScreen.png";
-	}
-
-	function splashLoaded() {
-
-		camera.fadeIn();
-		gameLoop();
-
-	}
+	var currScene = 4;
 
 	function gameLoop() {
 
@@ -51,10 +39,9 @@
 			console.log(frames);
 			frames = 0;
 			frameTimer = 0;
-		}
+		}*/
 
-		scenes[currentScene].update();*/
-
+		scenes[currScene].update();
 		camera.update();
 
 	}
@@ -72,11 +59,32 @@
 		ctx = tvCtx;
 		ctx.drawImage(buffer, 0, 0, tvCanvas.width, tvCanvas.height);*/
 
-		globals.bufferCtx.globalAlpha = 1;
-		globals.bufferCtx.drawImage(splashScreen, 0, 0, globals.bufferWidth, globals.bufferHeight);
+		scenes[currScene].draw(2, 1, true);
 		camera.draw();
+
 		globals.gpCtx.drawImage(globals.buffer, 0, 0, globals.gpWidth, globals.gpHeight);
 		globals.tvCtx.drawImage(globals.buffer, 0, 0, globals.tvWidth, globals.tvHeight);
+
+	}
+
+	function startGame() {
+
+		camera.fadeIn();
+		gameLoop();
+		setTimeout(function() {main.changeScene(0)}, 3000);
+
+	}
+
+	main.changeScene = function(scene) {
+
+		console.log("change");
+
+	}
+
+	window.onload = function() {
+
+		window.addEventListener('loaded', startGame, false);
+		fm.loadScene(currScene);
 
 	}
 
