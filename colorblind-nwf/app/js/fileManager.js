@@ -1,71 +1,46 @@
-var fm = fm || {};
+var fileManager = fileManager || {};
 
 (function() {
 
-	/* 
-	info file for all of the data that will be loaded
-	*/
-	fm.data = {
-		"scenes": [
-			{
-				"numLevels": 4,
-				"tilesetSize": 53
-			},
-			{
-				"numLevels": 4,
-				"tilesetSize": 53
-			},
-			{
-				"numLevels": 4,
-				"tilesetSize": 53
-			},
-			{
-				"numLevels": 4,
-				"tilesetSize": 53
-			},
-			{
-				"numLevels": 0,
-				"tilesetSize": 0
-			}
-		]
-	};
-
-	fm.loadCounter = 0;
-	fm.loadEvent = new Event("loaded");
+	fileManager.loadCounter = 0;
+	fileManager.loadEvent = new Event("loaded");
 
 	/* 
 	storage arrays for all of the data
 	*/
-	fm.currTileset;
-	fm.currLevels;
+
+	fileManager.currTileset;
+	fileManager.currLevels;
+	fileManager.currImages;
 
 	/* 
 	functions for loading files of different types, and to check if loading is finished
 	*/
-	fm.fileLoaded = function() {
 
-		fm.loadCounter--;
+	fileManager.fileLoaded = function() {
 
-		if (fm.loadCounter <= 0) {
-			fm.loadCounter = 0;
-			window.dispatchEvent(fm.loadEvent);
+		fileManager.loadCounter--;
+
+		if (fileManager.loadCounter <= 0) {
+			fileManager.loadCounter = 0;
+			window.dispatchEvent(fileManager.loadEvent);
 		}
 
 	}
 
-	fm.loadImages = function(urls, target) {
+	fileManager.loadImages = function(urls, target) {
 
-		fm.loadCounter += urls.length;
+		fileManager.loadCounter += urls.length;
 
 		for (var i = 0; i < urls.length; i++) {
 			target[i] = new Image();
-			target[i].onload = fm.fileLoaded;
+			target[i].onload = fileManager.fileLoaded;
 			target[i].src = urls[i];
 		}
 
 	}
 
-	fm.loadJSON = function(urls, target) {
+	fileManager.loadJSON = function(urls, target) {
 
 		for (var i = 0; i < urls.length; i++) {
 			var url = urls[i];
@@ -83,39 +58,61 @@ var fm = fm || {};
 
 	}
 
-	fm.loadScene = function(scene) {
+	fileManager.loadScene = function(scene) {
 
-		var numLevels = fm.data.scenes[scene].numLevels;
+		var numLevels = sceneData[scene].numLevels;
 
 		if (numLevels !== 0) {
 			var urls = new Array(numLevels);
-			fm.currLevels = null;
-			fm.currLevels = new Array(numLevels);
+			fileManager.currLevels = null;
+			fileManager.currLevels = new Array(numLevels);
 
 			for (var i = 0; i < numLevels; i++) {
 				var url = "levels/" + scene + "/" + i + ".json";
 				urls[i] = url;
 			}
 
-			fm.loadJSON(urls, fm.currLevels);
+			fileManager.loadJSON(urls, fileManager.currLevels);
 		}
 
-		var tilesetSize = fm.data.scenes[scene].tilesetSize;
+		var tilesetSize = sceneData[scene].tilesetSize;
 
 		if (tilesetSize !== 0) {
 			urls = new Array(tilesetSize);
-			fm.currTileset = null;
-			fm.currTileset = new Array(tilesetSize);
+			fileManager.currTileset = null;
+			fileManager.currTileset = new Array(tilesetSize);
 
 			for (var i = 0; i < tilesetSize; i++) {
-				var url = "images/tilesets/" + scene + "/" + i + ".png";
+				var url = "images/" + scene + "/tilesets/" + i + ".png";
 				urls[i] = url;
 			}
 
-			fm.loadImages(urls, fm.currTileset);
+			fileManager.loadImages(urls, fileManager.currTileset);
 		}
-		else {
-			window.dispatchEvent(fm.loadEvent);
+
+		var images = sceneData[scene].images;
+
+		if (sceneData[scene].images) {
+			var images = sceneData[scene].images;
+			var numImages = images.length;
+		}
+
+		if (numImages !== 0) {
+			urls = new Array(numImages);
+			fileManager.currImages = null;
+			fileManager.currImages = new Array(numImages);
+
+			for (var i = 0; i < numImages; i++) {
+				var url = "images/" + scene + "/" + images[i] + ".png";
+				urls[i] = url;
+			}
+
+			fileManager.loadImages(urls, fileManager.currImages);
+		}
+
+		// if there are no images to load, finish loading
+		if (tilesetSize === 0 && numImages === 0) {
+			fileManager.fileLoaded();
 		}
 
 	}

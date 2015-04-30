@@ -1,19 +1,16 @@
-function MenuScene() {
+function MenuScene(name) {
 
-	/*var img = new Image();
-	img.src = "blue.png";
-	this.test = new MenuImage(new Point(300, 100), img);
-	this.test.easer.ease(this.test.center.y, 500, 1);*/
-
+	this.name = name;
 	this.menus = [new Menu()];
-	this.currentMenu = 0;
+	this.currMenu = 0;
 
-	var overlays = sceneData.mainMenu.overlays;
+	var overlays = sceneData[this.name].overlays;
+console.log(overlays);
 	for (var i = 0; i < overlays.length; i++) {
 		this.menus[0].overlays.push(new Overlay(overlays[i]));
 	}
 
-	this.currentItems = this.menus[this.currentMenu].menuItems;
+	//this.currentItems = this.menus[this.currMenu].menuItems;
 
 }
 
