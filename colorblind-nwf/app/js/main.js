@@ -9,25 +9,7 @@ var main = main || {};
 	var frames = 0;
 	var frameTimer = 0;
 
-	var scenes = {
-		//"splashScreen": new MenuScene("splashScreen"),
-		//"mainMenu": new MenuScene("mainMenu")//,
-		//"stage1": new StageScene("stage1"),
-		//"stage2": new StageScene("stage2"),
-		//"stage3": new StageScene("stage3")
-	};
-
-	var currScene = "splashScreen";
 	var running = false;
-
-	function gameLoop() {
-
-		update();
-		draw();
-		//window.webkitRequestAnimationFrame(gameLoop);
-		window.requestAnimationFrame(gameLoop);
-
-	}
 
 	function update() {
 
@@ -44,7 +26,7 @@ var main = main || {};
 		}*/
 
 		if (running) {
-			//globals.scenes[currScene].update();
+			globals.scenes[globals.currScene].update();
 		}
 
 		camera.update();
@@ -64,11 +46,20 @@ var main = main || {};
 		ctx = tvCtx;
 		ctx.drawImage(buffer, 0, 0, tvCanvas.width, tvCanvas.height);*/
 
-		globals.scenes[currScene].draw(2, 1, true);
+		globals.scenes[globals.currScene].draw(2, 1, true);
 		camera.draw();
 
 		globals.gpCtx.drawImage(globals.buffer, 0, 0, globals.gpWidth, globals.gpHeight);
 		//globals.tvCtx.drawImage(globals.buffer, 0, 0, globals.tvWidth, globals.tvHeight);
+
+	}
+
+	function gameLoop() {
+
+		update();
+		draw();
+		//window.webkitRequestAnimationFrame(gameLoop);
+		window.requestAnimationFrame(gameLoop);
 
 	}
 
@@ -84,21 +75,21 @@ var main = main || {};
 			//"stage3": new StageScene("stage3")
 		};
 
-		camera.fadeIn();
 		gameLoop();
-		setTimeout(function() {main.changeScene("mainMenu")}, 3000);
-		console.log(fileManager.levels);
-		console.log(fileManager.tilesets);
-		console.log(fileManager.images);
+		camera.fadeIn();
+		setTimeout(function() {main.changeScene("mainMenu");}, 2000);
 
 	}
 
 	main.changeScene = function(scene) {
 
-		//running = false;
+		running = false;
 		camera.fadeOut();
-		setTimeout(function() {currScene = "mainMenu"; camera.fadeIn();}, 5000);
-		// maybe have fader event listener to tell us that it's finished. could also be used to signal end of animation, say when a character dies
+		setTimeout(function() {
+			globals.currScene = scene;
+			running = true;
+			camera.fadeIn();
+		}, 1000);
 
 	}
 

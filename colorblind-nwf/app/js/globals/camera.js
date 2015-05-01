@@ -19,7 +19,7 @@ var camera = camera || {};
 
 	camera.draw = function() {
 
-		if (camera.alpha !== 1) {
+		if (camera.alpha !== 0) {
 			globals.bufferCtx.globalAlpha = camera.alpha;
 			globals.bufferCtx.fillStyle = "black";
 			globals.bufferCtx.fillRect(0, 0, camera.width, camera.height);

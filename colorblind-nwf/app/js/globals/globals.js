@@ -34,6 +34,7 @@ var globals = globals || {};
 	globals.numTilesVert = 38;
 
 	globals.scenes = {};
+	globals.currScene = "splashScreen";
 
 	globals.delta = 0;
 

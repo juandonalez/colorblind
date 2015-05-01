@@ -8,27 +8,39 @@ var fileManager = fileManager || {};
 	fileManager.tilesets = {};
 	fileManager.images = {};
 
-	fileManager.loadCounter = sceneData.totalNumImages;
-	fileManager.loadEvent = new Event("loaded");
-
 	/* 
-	functions for loading files of different types, and to check if loading is finished
+		gets called each time an image is loaded, and dispatches an event to say when loading is done
 	*/
 
-	fileManager.fileLoaded = function() {
+	var loadCounter = sceneData.totalNumImages;
 
-		fileManager.loadCounter--;
+	function fileLoaded() {
 
-		if (fileManager.loadCounter <= 0) {
-			window.dispatchEvent(fileManager.loadEvent);
+		loadCounter--;
+
+		if (loadCounter <= 0) {
+			window.dispatchEvent(new Event("loaded"));
 		}
 
 	}
 
-	fileManager.loadJSON = function(urls, target) {
+	/* 
+		functions for loading files of different types
+	*/
 
-		for (var i = 0; i < urls.length; i++) {
-			var url = urls[i];
+	function loadImages() {
+
+		for (name of sceneData.imageNames) {
+			fileManager.images[name] = new Image();
+			fileManager.images[name].onload = fileLoaded;
+			fileManager.images[name].src = "images/" + name + ".png";
+		}
+
+	}
+
+	function loadJSON(urls, target) {
+
+		for (url of urls) {
 			var request = new XMLHttpRequest();
 			request.overrideMimeType("application/json");
 			request.open("GET", url, false);
@@ -43,40 +55,25 @@ var fileManager = fileManager || {};
 
 	}
 
-	fileManager.loadImages = function() {
-
-		var names = sceneData.imageNames;
-
-		for (var i = 0; i < names.length; i++) {
-			var name = names[i];
-			fileManager.images[name] = new Image();
-			fileManager.images[name].onload = fileManager.fileLoaded;
-			fileManager.images[name].src = "images/" + name + ".png";
-		}
-
-	}
-
-	fileManager.loadLevels = function(scene) {
+	function loadLevels(scene) {
 
 		var numLevels = sceneData[scene].numLevels;
 		fileManager.levels[scene] = new Array(numLevels);
 
 		if (numLevels !== 0) {
 			var urls = new Array(numLevels);
-			fileManager.currLevels = null;
-			fileManager.currLevels = new Array(numLevels);
 
 			for (var i = 0; i < numLevels; i++) {
 				var url = "levels/" + scene + "/" + i + ".json";
 				urls[i] = url;
 			}
 
-			fileManager.loadJSON(urls, fileManager.levels[scene]);
+			loadJSON(urls, fileManager.levels[scene]);
 		}
 
 	}
 
-	fileManager.loadTileset = function(scene) {
+	function loadTileset(scene) {
 
 		var tilesetSize = sceneData[scene].tilesetSize;
 
@@ -86,21 +83,25 @@ var fileManager = fileManager || {};
 
 			for (var i = 0; i < tilesetSize; i++) {
 				tileset[i] = new Image();
-				tileset[i].onload = fileManager.fileLoaded;
+				tileset[i].onload = fileLoaded;
 				tileset[i].src = "images/" + scene + "/tilesets/" + i + ".png";
 			}
 		}
 
 	}
 
+	/* 
+		function that starts all the loading
+	*/
+
 	fileManager.loadFiles = function() {
 
-		fileManager.loadImages();
+		loadImages();
 
-		for (var i = 0; i < sceneNames.length; i++) {
+		for (name of sceneNames) {
 
-			fileManager.loadLevels(sceneNames[i]);
-			fileManager.loadTileset(sceneNames[i]);
+			loadLevels(name);
+			loadTileset(name);
 
 		}
 
