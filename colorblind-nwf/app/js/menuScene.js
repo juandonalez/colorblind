@@ -5,7 +5,7 @@ function MenuScene(name) {
 	this.currMenu = 0;
 
 	var overlays = sceneData[this.name].overlays;
-console.log(overlays);
+
 	for (var i = 0; i < overlays.length; i++) {
 		this.menus[0].overlays.push(new Overlay(overlays[i]));
 	}

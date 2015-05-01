@@ -4,13 +4,16 @@ var sceneData = sceneData || {};
 
 	sceneData = {
 
+		"totalNumImages": 213,
+
+		"imageNames": [
+			"splashScreen"
+		],
+
 		"splashScreen": {
 
 			"numLevels": 0,
 			"tilesetSize": 0,
-			"images": [
-				"splashScreen"
-			],
 			"overlays": [
 				{
 					"activePos": new Point(50, 50),
@@ -37,9 +40,6 @@ var sceneData = sceneData || {};
 
 			"numLevels": 4,
 			"tilesetSize": 53,
-			//"images": [
-				
-			//],
 			"overlays": [
 				{
 					"activePos": new Point(30, 50),
@@ -152,6 +152,27 @@ var sceneData = sceneData || {};
 					]
 				}
 			]
+		},
+
+		"stage1": {
+
+			"numLevels": 4,
+			"tilesetSize": 53
+
+		},
+
+		"stage2": {
+
+			"numLevels": 4,
+			"tilesetSize": 53
+
+		},
+
+		"stage3": {
+
+			"numLevels": 4,
+			"tilesetSize": 53
+
 		}
 
 	};

@@ -2,7 +2,7 @@ function MenuImage(o) {
 
 	MenuItem.call(this, o);
 
-	this.image = fileManager.currImages[0];
+	this.image = fileManager.images[o.image];
 	this.width = this.image.width;
 	this.height = this.image.height;
 	//this.origin = this.calculateOrigin();

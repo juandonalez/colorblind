@@ -33,6 +33,8 @@ var globals = globals || {};
 	globals.numTilesHori = 66;
 	globals.numTilesVert = 38;
 
+	globals.scenes = {};
+
 	globals.delta = 0;
 
 	globals.playerWidth = 80;
