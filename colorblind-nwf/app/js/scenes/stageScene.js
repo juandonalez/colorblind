@@ -1,5 +1,6 @@
-function StageScene() {
+function StageScene(name) {
 
+	this.name = name;
 	this.offset = 0;
 	this.farScroller;
 	this.midScroller;

@@ -6,6 +6,9 @@ var fileManager = fileManager || {};
 
 	fileManager.levels = {};
 	fileManager.tilesets = {};
+	fileManager.topBgs = {};
+	fileManager.middleBgs = {};
+	fileManager.bottomBgs = {};
 	fileManager.images = {};
 
 	/* 
@@ -27,6 +30,47 @@ var fileManager = fileManager || {};
 	/* 
 		functions for loading files of different types
 	*/
+
+	function loadBackgrounds(scene) {
+
+		var numTop = sceneData[scene].numTop;
+		var numMiddle = sceneData[scene].numMiddle;
+		var numBottom = sceneData[scene].numBottom;
+
+		if (numTop !== 0) {
+			fileManager.topBgs[scene] = new Array(numTop);
+			var topBgs = fileManager.topBgs[scene];
+
+			for (var i = 0; i < numTop; i++) {
+				topBgs[i] = new Image();
+				topBgs[i].onload = fileLoaded;
+				topBgs[i].src = "images/" + scene + "/backgrounds/top/" + i + ".png";
+			}
+		}
+
+		if (numMiddle !== 0) {
+			fileManager.middleBgs[scene] = new Array(numMiddle);
+			var middleBgs = fileManager.middleBgs[scene];
+
+			for (var i = 0; i < numMiddle; i++) {
+				middleBgs[i] = new Image();
+				middleBgs[i].onload = fileLoaded;
+				middleBgs[i].src = "images/" + scene + "/backgrounds/middle/" + i + ".png";
+			}
+		}
+
+		if (numBottom !== 0) {
+			fileManager.bottomBgs[scene] = new Array(numTop);
+			var bottomBgs = fileManager.bottomBgs[scene];
+
+			for (var i = 0; i < numTop; i++) {
+				bottomBgs[i] = new Image();
+				bottomBgs[i].onload = fileLoaded;
+				bottomBgs[i].src = "images/" + scene + "/backgrounds/bottom/" + i + ".png";
+			}
+		}
+
+	}
 
 	function loadImages() {
 
@@ -102,6 +146,7 @@ var fileManager = fileManager || {};
 
 			loadLevels(name);
 			loadTileset(name);
+			loadBackgrounds(name);
 
 		}
 
