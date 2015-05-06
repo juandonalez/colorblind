@@ -69,15 +69,16 @@ var main = main || {};
 
 		globals.scenes = {
 			"splashScreen": new MenuScene("splashScreen"),
-			"mainMenu": new MenuScene("mainMenu")//,
-			//"stage1": new StageScene("stage1"),
+			"mainMenu": new MenuScene("mainMenu"),
+			"stage1": new StageScene("stage1")//,
 			//"stage2": new StageScene("stage2"),
 			//"stage3": new StageScene("stage3")
 		};
 
 		gameLoop();
 		camera.fadeIn();
-		setTimeout(function() {main.changeScene("mainMenu");}, 2000);
+		//setTimeout(function() {main.changeScene("mainMenu");}, 2000);
+		setTimeout(function() {main.changeScene("stage1");}, 2000);
 
 	}
 

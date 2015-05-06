@@ -7,10 +7,6 @@ function BackgroundScroller(y, pool, speed) {
 	this.pool = pool;
 	this.bgs = [];
 
-}
-
-BackgroundScroller.prototype.init = function() {
-
 	for (var i = 0; i < 3; i++) {
 		var rand = Math.floor(Math.random()*this.pool.length);
 		this.bgs.push(rand);
@@ -36,6 +32,7 @@ BackgroundScroller.prototype.update = function() {
 BackgroundScroller.prototype.draw = function() {
 
 	var ctx = globals.bufferCtx;
+	globals.bufferCtx.globalAlpha = 1;
 
 	var first = this.pool[this.bgs[0]];
 	var second = this.pool[this.bgs[1]];
