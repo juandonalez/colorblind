@@ -5,26 +5,27 @@ function BackgroundScroller(y, pool, speed) {
 	this.speed = speed;
 
 	this.pool = pool;
-	this.bgs = [];
+	this.indexes = new Array(3);
 
 	for (var i = 0; i < 3; i++) {
 		var rand = Math.floor(Math.random()*this.pool.length);
-		this.bgs.push(rand);
+		this.indexes[i] = rand;
 	}
 
 }
 
 BackgroundScroller.prototype.update = function() {
 
-	this.x = this.x - (this.speed * globals.delta);
+	this.x = Math.floor(this.x - (this.speed * globals.delta));
 
-	var first = this.pool[this.bgs[0]];
+	var first = this.pool[this.indexes[0]];
 
 	if (this.x + first.width < 0) {
-		this.x = 0;
-		this.bgs.shift();
+		this.x += first.width;
 		var rand = Math.floor(Math.random()*this.pool.length);
-		this.bgs.push(rand);
+		this.indexes[0] = this.indexes[1];
+		this.indexes[1] = this.indexes[2];
+		this.indexes[2] = rand;
 	}
 
 }
@@ -32,16 +33,16 @@ BackgroundScroller.prototype.update = function() {
 BackgroundScroller.prototype.draw = function() {
 
 	var ctx = globals.bufferCtx;
-	globals.bufferCtx.globalAlpha = 1;
+	ctx.globalAlpha = 1;
 
-	var first = this.pool[this.bgs[0]];
-	var second = this.pool[this.bgs[1]];
-	var third = this.pool[this.bgs[2]];
-	var rounded = Math.round(this.x);
+	var first = this.pool[this.indexes[0]];
+	var second = this.pool[this.indexes[1]];
+	var third = this.pool[this.indexes[2]];
+	var rounded = this.x - camera.origin.x;
 
 	// *****figure out camera pos stuff ***
-	ctx.drawImage(first, rounded, this.y);
-	ctx.drawImage(second, rounded + first.width, this.y);
-	ctx.drawImage(third, rounded + first.width + second.width, this.y);
+	ctx.drawImage(first, rounded, this.y - camera.origin.y);
+	ctx.drawImage(second, rounded + first.width, this.y - camera.origin.y);
+	ctx.drawImage(third, rounded + first.width + second.width, this.y - camera.origin.y);
 
 }

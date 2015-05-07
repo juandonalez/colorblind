@@ -16,9 +16,9 @@ function StageScene(name) {
 
 StageScene.prototype.update = function() {
 
-	this.topScroller.update();
-	this.middleScroller.update();
-	this.bottomScroller.update();
+	//this.topScroller.update();
+	//this.middleScroller.update();
+	//this.bottomScroller.update();
 	//this.levelScroller.update();
 	//this.player.update();
 

@@ -16,6 +16,7 @@ var main = main || {};
 		now = Date.now();
 		globals.delta = (now - then)/1000;
 		then = now;
+
 		/*frames++;
 		frameTimer += globals.delta;
 

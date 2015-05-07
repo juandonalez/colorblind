@@ -74,7 +74,8 @@ var fileManager = fileManager || {};
 
 	function loadImages() {
 
-		for (name of sceneData.imageNames) {
+		for (var i = 0; i < sceneData.imageNames.length; i++) {
+			var name = sceneData.imageNames[i];
 			fileManager.images[name] = new Image();
 			fileManager.images[name].onload = fileLoaded;
 			fileManager.images[name].src = "images/" + name + ".png";
@@ -84,7 +85,8 @@ var fileManager = fileManager || {};
 
 	function loadJSON(urls, target) {
 
-		for (url of urls) {
+		for (var i = 0; i < urls.length; i++) {
+			var url = urls[i];
 			var request = new XMLHttpRequest();
 			request.overrideMimeType("application/json");
 			request.open("GET", url, false);
@@ -142,8 +144,9 @@ var fileManager = fileManager || {};
 
 		loadImages();
 
-		for (name of sceneNames) {
+		for (var i = 0; i < sceneNames.length; i++) {
 
+			var name = sceneNames[i];
 			loadLevels(name);
 			loadTileset(name);
 			loadBackgrounds(name);
