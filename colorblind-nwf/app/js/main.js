@@ -4,7 +4,7 @@ var main = main || {};
 
 	"use strict";
 
-	var then = Date.now( );
+	var then;
 	var now;
 	var frames = 0;
 	var frameTimer = 0;
@@ -17,14 +17,16 @@ var main = main || {};
 		globals.delta = (now - then)/1000;
 		then = now;
 
-		/*frames++;
-		frameTimer += globals.delta;
+		if (globals.debugMode && globals.debug.fpsCounter) {
+			frames++;
+			frameTimer += globals.delta;
 
-		if (frameTimer >= 1) {
-			console.log(frames);
-			frames = 0;
-			frameTimer = 0;
-		}*/
+			if (frameTimer >= 1) {
+				console.log(frames);
+				frames = 0;
+				frameTimer = 0;
+			}
+		}
 
 		if (running) {
 			globals.scenes[globals.currScene].update();
@@ -59,7 +61,6 @@ var main = main || {};
 
 		update();
 		draw();
-		//window.webkitRequestAnimationFrame(gameLoop);
 		window.requestAnimationFrame(gameLoop);
 
 	}
@@ -69,17 +70,24 @@ var main = main || {};
 		window.removeEventListener('loaded', startGame, false);
 
 		globals.scenes = {
-			"splashScreen": new MenuScene("splashScreen"),
-			"mainMenu": new MenuScene("mainMenu"),
-			"stage1": new StageScene("stage1")//,
-			//"stage2": new StageScene("stage2"),
-			//"stage3": new StageScene("stage3")
+			splashScreen: new MenuScene("splashScreen"),
+			mainMenu: new MenuScene("mainMenu"),
+			stage1: new StageScene("stage1")//,
+			//stage2: new StageScene("stage2"),
+			//stage3: new StageScene("stage3")
 		};
 
+		if (globals.debugMode) {
+			globals.currScene = globals.debug.startScene;
+			running = true;
+		}
+		else {
+			setTimeout(function() {main.changeScene("mainMenu");}, 2000);
+		}
+
+		then = Date.now();
 		gameLoop();
 		camera.fadeIn();
-		//setTimeout(function() {main.changeScene("mainMenu");}, 2000);
-		setTimeout(function() {main.changeScene("stage1");}, 2000);
 
 	}
 

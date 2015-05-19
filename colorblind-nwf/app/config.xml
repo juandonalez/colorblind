@@ -61,6 +61,7 @@
   <access origin="*" subdomains="false"/>
   <!-- List of supported resolutions. -->
   <nwf:supportedRenderModes>
+    <nwf:tvRenderMode>1080</nwf:tvRenderMode>
     <nwf:tvRenderMode>720</nwf:tvRenderMode>
     <nwf:tvRenderMode>480_WIDE</nwf:tvRenderMode>
     <nwf:tvRenderMode>480_NARROW</nwf:tvRenderMode>

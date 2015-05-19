@@ -17,7 +17,7 @@ function MenuScene(name) {
 MenuScene.prototype.update = function() {
 
 	for (var i = 0; i < this.menus.length; i++) {
-		this.menus[i].update();
+		//this.menus[i].update();
 	}
 
 }
