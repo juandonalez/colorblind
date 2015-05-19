@@ -1,14 +1,8 @@
 function MenuText(o) {
 
 	this.center = o.center;
+
 	this.text = o.text;
-	this.target = o.target;
-
-	/*this.left = o.links[0];
-	this.up = o.links[1];
-	this.right = o.links[2];
-	this.down = o.links[3];*/
-
 	this.height = o.fontSize;
 	this.defaultHeight = o.fontSize;
 	this.lineWidth = o.lineWidth;
@@ -19,6 +13,11 @@ function MenuText(o) {
 
 	if (o.selectable) {
 		this.selected = o.selected;
+		this.target = o.target;
+		this.left = o.links[0];
+		this.up = o.links[1];
+		this.right = o.links[2];
+		this.down = o.links[3];
 		this.selectStroke = o.selectStroke;
 		this.selectFill = o.selectFill;
 		this.selectHeight = this.height*1.25;
@@ -56,7 +55,9 @@ MenuText.prototype.draw = function() {
 
 }
 
-MenuText.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
+MenuText.prototype.calculateCenter = GameObject.prototype.calculateCenter;
+
+MenuText.prototype.calculateOrigin = GameObject.prototype.calculateOrigin;
 
 MenuText.prototype.calculateWidth = function() {
 
@@ -70,7 +71,9 @@ MenuText.prototype.calculateWidth = function() {
 
 MenuText.prototype.deselect = MenuItem.prototype.deselect;
 
-MenuText.prototype.moveCenter = Entity.prototype.moveCenter;
+MenuText.prototype.intersects = GameObject.prototype.intersects;
+
+MenuText.prototype.pctToPoint = GameObject.prototype.pctToPoint;
 
 MenuText.prototype.resize = function(scale) {
 
@@ -83,4 +86,8 @@ MenuText.prototype.resize = function(scale) {
 
 MenuText.prototype.select = MenuItem.prototype.select;
 
-MenuText.prototype.setCenter = Entity.prototype.setCenter;
+MenuText.prototype.setAlpha = GameObject.prototype.setAlpha;
+
+MenuText.prototype.setCenter = GameObject.prototype.setCenter;
+
+MenuText.prototype.translate = GameObject.prototype.translate;

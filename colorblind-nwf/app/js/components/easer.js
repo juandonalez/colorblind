@@ -45,7 +45,7 @@ Easer.prototype.update = function() {
 		we could just set the entity to the new pos, but by getting
 		the difference we can then apply the same tranform to other entities */
 		transform = transform.subtract(this.entity.center);
-		this.entity.moveCenter(transform);
+		this.entity.translate(transform);
 
 	}
 

@@ -39,15 +39,13 @@ var camera = camera || {};
 
 	}
 
-	camera.moveCenter = Entity.prototype.moveCenter;
-
 	camera.pctToHeight = function(h) {
 
 		return (camera.height/100) * h;
 
 	}
 
-	camera.pctToPoint = Entity.prototype.pctToPoint;
+	camera.pctToPoint = GameObject.prototype.pctToPoint;
 
 	camera.pctToWidth = function(w) {
 
@@ -55,6 +53,8 @@ var camera = camera || {};
 
 	}
 
-	camera.setAlpha = Entity.prototype.setAlpha;
+	camera.setAlpha = GameObject.prototype.setAlpha;
+
+	camera.translate = GameObject.prototype.translate;
 
 })();

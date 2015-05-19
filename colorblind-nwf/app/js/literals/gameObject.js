@@ -1,12 +1,4 @@
-function GameObject(center, origin) {
-
-	this.center = center;
-	this.vel = new Point(0, 0);
-	this.active = false;
-	this.visible = true;
-	this.alpha = 1;
-
-}
+function GameObject() {}
 
 GameObject.prototype.calculateCenter = function() {
 
@@ -28,13 +20,6 @@ GameObject.prototype.intersects = function(e) {
 		this.origin.y <= e.origin.y + e.height &&
 		e.y <= this.origin.y + this.height
 	);
-
-}
-
-GameObject.prototype.moveCenter = function(p) {
-
-	this.center = this.center.add(p);
-	this.origin = this.calculateOrigin();
 
 }
 
@@ -61,6 +46,13 @@ GameObject.prototype.setAlpha = function(a) {
 GameObject.prototype.setCenter = function(c) {
 
 	this.center = c;
+	this.origin = this.calculateOrigin();
+
+}
+
+GameObject.prototype.translate = function(p) {
+
+	this.center = this.center.add(p);
 	this.origin = this.calculateOrigin();
 
 }

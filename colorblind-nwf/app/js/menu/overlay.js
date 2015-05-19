@@ -72,7 +72,7 @@ Overlay.prototype.activate = function () {
 
 }
 
-Overlay.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
+Overlay.prototype.calculateOrigin = GameObject.prototype.calculateOrigin;
 
 Overlay.prototype.deactivate = function () {
 
@@ -83,20 +83,7 @@ Overlay.prototype.deactivate = function () {
 
 }
 
-Overlay.prototype.moveCenter = function(p) {
-
-	this.center = this.center.add(p);
-	this.origin = this.calculateOrigin();
-
-	if (this.menuItems) {
-		for (var i = 0; i < this.menuItems.length; i++) {
-			this.menuItems[i].moveCenter(p);
-		}
-	}
-
-}
-
-Overlay.prototype.pctToPoint = Entity.prototype.pctToPoint;
+Overlay.prototype.pctToPoint = GameObject.prototype.pctToPoint;
 
 Overlay.prototype.resize = function(scale) {
 
@@ -128,4 +115,17 @@ Overlay.prototype.setAlpha = function(a) {
 
 }
 
-Overlay.prototype.setCenter = Entity.prototype.setCenter;
+Overlay.prototype.setCenter = GameObject.prototype.setCenter;
+
+Overlay.prototype.translate = function(p) {
+
+	this.center = this.center.add(p);
+	this.origin = this.calculateOrigin();
+
+	if (this.menuItems) {
+		for (var i = 0; i < this.menuItems.length; i++) {
+			this.menuItems[i].translate(p);
+		}
+	}
+
+}
