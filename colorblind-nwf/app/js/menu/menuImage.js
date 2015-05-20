@@ -1,19 +1,20 @@
-function MenuImage(o) {
+function MenuImage(d) {
 
-	this.center = o.center;
+	this.name = d.name;
 
-	this.image = fileManager.images[o.image];
+	this.center = d.center;
+	this.image = fileManager.images[d.image];
 	this.width = this.image.width;
 	this.height = this.image.height;
 	this.origin = this.calculateOrigin();
 
-	if (o.selectable) {
-		this.selected = o.selected;
-		this.target = o.target;
-		this.left = o.links[0];
-		this.up = o.links[1];
-		this.right = o.links[2];
-		this.down = o.links[3];
+	if (d.selectable) {
+		this.selected = d.selected;
+		this.target = d.target;
+		this.left = d.links[0];
+		this.up = d.links[1];
+		this.right = d.links[2];
+		this.down = d.links[3];
 		this.selectHeight = this.height*1.25;
 	}
 

@@ -1,31 +1,30 @@
 function MenuScene(name) {
 
 	this.name = name;
-	this.menus = [new Menu()];
-	this.currMenu = 0;
+	this.menus = {};
 
-	var overlays = sceneData[this.name].overlays;
+	var data = sceneData[this.name].menus;
 
-	for (var i = 0; i < overlays.length; i++) {
-		this.menus[0].overlays.push(new Overlay(overlays[i]));
+	for (var i = 0; i < data.length; i++) {
+		this.menus[data[i].name] = new Menu(data[i]);
 	}
 
-	//this.currentItems = this.menus[this.currMenu].menuItems;
+	data = null;
 
 }
 
 MenuScene.prototype.update = function() {
 
-	for (var i = 0; i < this.menus.length; i++) {
-		//this.menus[i].update();
+	for (var m in this.menus) {
+		//this.menus[m].update();
 	}
 
 }
 
 MenuScene.prototype.draw = function() {
 
-	for (var i = 0; i < this.menus.length; i++) {
-		this.menus[i].draw();
+	for (var m in this.menus) {
+		this.menus[m].draw();
 	}
 
 }

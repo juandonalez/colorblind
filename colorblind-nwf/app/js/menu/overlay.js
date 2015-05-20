@@ -1,14 +1,17 @@
-function Overlay(o) {
+function Overlay(menu, d) {
 
-	this.active = o.active;
-	this.activePos = camera.pctToPoint(o.activePos);
+	this.menu = menu;
+	this.menuItems = {};
+
+	this.active = d.active;
+	this.activePos = camera.pctToPoint(d.activePos);
 	this.activePos = this.activePos.subtract(camera.origin);
-	this.inactivePos = camera.pctToPoint(o.inactivePos);
+	this.inactivePos = camera.pctToPoint(d.inactivePos);
 	this.inactivePos = this.inactivePos.subtract(camera.origin);
-	this.activeHeight = camera.pctToHeight(o.activeHeight);
-	this.inactiveHeight = camera.pctToHeight(o.inactiveHeight);
-	this.activeAlpha = o.activeAlpha;
-	this.inactiveAlpha = o.inactiveAlpha;
+	this.activeHeight = camera.pctToHeight(d.activeHeight);
+	this.inactiveHeight = camera.pctToHeight(d.inactiveHeight);
+	this.activeAlpha = d.activeAlpha;
+	this.inactiveAlpha = d.inactiveAlpha;
 
 	if (this.active) {
 		this.center = this.activePos.copy();
@@ -21,19 +24,25 @@ function Overlay(o) {
 		this.alpha = this.inactiveAlpha;
 	}
 
-	this.width = camera.pctToWidth(o.width);
+	this.width = camera.pctToWidth(d.width);
 	this.origin = this.calculateOrigin();
 	this.menuItems = [];
 
-	for (var i = 0; i < o.menuItems.length; i++) {
-		var m = o.menuItems[i];
-		m.center = this.pctToPoint(m.center);
-		if (m.text) {
-			this.menuItems.push(new MenuText(m));
+	for (var i = 0; i < d.menuItems.length; i++) {
+		// use pctToPoint to get the pos of menu item relative to this overlay
+		var itemData = d.menuItems[i];
+		itemData.center = this.pctToPoint(itemData.center);
+		var m;
+		if (itemData.text) {
+			m = new MenuText(itemData);
 		}
 		else {
-			this.menuItems.push(new MenuImage(m));
+			m = new MenuImage(itemData);
 		}
+		// push to this overlay so they will be part of it's update/draw loop
+		this.menuItems[m.name] = m;
+		// push to the menu so menu item can reference items on other overlays
+		this.menu.menuItems[m.name] = m;
 	}
 
 	this.easer = new Easer(this);
@@ -48,20 +57,20 @@ Overlay.prototype.update = function() {
 	this.scaler.update();
 	this.fader.update();
 
-	for (var i = 0; i < this.menuItems.length; i++) {
-		this.menuItems[i].update();
+	for (var m in this.menuItems) {
+		this.menuItems[m].update();
 	}
 
 }
 
 Overlay.prototype.draw = function() {
-globals.bufferCtx.globalAlpha = this.alpha;
-globals.bufferCtx.fillStyle = "blue";
-globals.bufferCtx.fillRect(this.origin.x, this.origin.y, this.width, this.height);
-	if (this.menuItems) {
-		for (var i = 0; i < this.menuItems.length; i++) {
-			this.menuItems[i].draw();
-		}
+
+	globals.bufferCtx.globalAlpha = this.alpha;
+	globals.bufferCtx.fillStyle = "blue";
+	globals.bufferCtx.fillRect(this.origin.x, this.origin.y, this.width, this.height);
+
+	for (var m in this.menuItems) {
+		this.menuItems[m].draw();
 	}
 
 }
@@ -91,10 +100,8 @@ Overlay.prototype.resize = function(scale) {
 	this.height *= scale;
 	this.origin = this.calculateOrigin();
 
-	if (this.menuItems) {
-		for (var i = 0; i < this.menuItems.length; i++) {
-			this.menuItems[i].resize(scale);
-		}
+	for (var m in this.menuItems) {
+		this.menuItems[m].resize(scale);
 	}
 
 }
@@ -105,11 +112,9 @@ Overlay.prototype.setAlpha = function(a) {
 		this.alpha = a;
 	}
 
-	if (this.menuItems) {
-		for (var i = 0; i < this.menuItems.length; i++) {
-			if (this.menuItems[i].alpha) {
-				this.menuItems[i].alpha = a;
-			}
+	for (var m in this.menuItems) {
+		if (this.menuItems[m].alpha) {
+			this.menuItems[m].alpha = a;
 		}
 	}
 
@@ -122,10 +127,8 @@ Overlay.prototype.translate = function(p) {
 	this.center = this.center.add(p);
 	this.origin = this.calculateOrigin();
 
-	if (this.menuItems) {
-		for (var i = 0; i < this.menuItems.length; i++) {
-			this.menuItems[i].translate(p);
-		}
+	for (var m in this.menuItems) {
+		this.menuItems[m].translate(p);
 	}
 
 }

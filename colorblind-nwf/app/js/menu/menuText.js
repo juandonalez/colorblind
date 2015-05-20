@@ -1,25 +1,26 @@
-function MenuText(o) {
+function MenuText(d) {
 
-	this.center = o.center;
+	this.name = d.name;
 
-	this.text = o.text;
-	this.height = o.fontSize;
-	this.defaultHeight = o.fontSize;
-	this.lineWidth = o.lineWidth;
-	this.defaultLineWidth = o.lineWidth;
-	this.strokeStyle = o.strokeStyle;
-	this.fillStyle = o.fillStyle;
+	this.center = d.center;
+	this.text = d.text;
+	this.height = d.fontSize;
+	this.defaultHeight = d.fontSize;
+	this.lineWidth = d.lineWidth;
+	this.defaultLineWidth = d.lineWidth;
+	this.strokeStyle = d.strokeStyle;
+	this.fillStyle = d.fillStyle;
 	this.alpha = 1;
 
-	if (o.selectable) {
-		this.selected = o.selected;
-		this.target = o.target;
-		this.left = o.links[0];
-		this.up = o.links[1];
-		this.right = o.links[2];
-		this.down = o.links[3];
-		this.selectStroke = o.selectStroke;
-		this.selectFill = o.selectFill;
+	if (d.selectable) {
+		this.selected = d.selected;
+		this.target = d.target;
+		this.left = d.links[0];
+		this.up = d.links[1];
+		this.right = d.links[2];
+		this.down = d.links[3];
+		this.selectStroke = d.selectStroke;
+		this.selectFill = d.selectFill;
 		this.selectHeight = this.height*1.25;
 	}
 
