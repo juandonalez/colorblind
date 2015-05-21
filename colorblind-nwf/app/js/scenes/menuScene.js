@@ -16,7 +16,7 @@ function MenuScene(name) {
 MenuScene.prototype.update = function() {
 
 	for (var m in this.menus) {
-		//this.menus[m].update();
+		this.menus[m].update();
 	}
 
 }

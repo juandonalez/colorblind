@@ -34,10 +34,10 @@ function Overlay(menu, d) {
 		itemData.center = this.pctToPoint(itemData.center);
 		var m;
 		if (itemData.text) {
-			m = new MenuText(itemData);
+			m = new MenuText(itemData, menu);
 		}
 		else {
-			m = new MenuImage(itemData);
+			m = new MenuImage(itemData, menu);
 		}
 		// push to this overlay so they will be part of it's update/draw loop
 		this.menuItems[m.name] = m;

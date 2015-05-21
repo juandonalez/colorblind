@@ -2,32 +2,32 @@ function MenuItem() {}
 
 MenuItem.prototype.update = function() {
 
-	if (this.selected) {
+	if (this.selected && inputManager.active) {
 
-		/*if (inputManager.left) {
+		if (inputManager.left) {
 			if (this.left) {
-				this.left.select();
+				this.menu.changeItem(this.left);
 				this.deselect();
 			}
 		}
 		else if (inputManager.up) {
 			if (this.up) {
-				this.up.select();
+				this.menu.changeItem(this.up);
 				this.deselect();
 			}
 		}
 		else if (inputManager.right) {
 			if (this.right) {
-				this.right.select();
+				this.menu.changeItem(this.right);
 				this.deselect();
 			}
 		}
 		else if (inputManager.down) {
 			if (this.down) {
-				this.down.select();
+				this.menu.changeItem(this.down);
 				this.deselect();
 			}
-		}*/
+		}
 
 	}
 
@@ -38,6 +38,8 @@ MenuItem.prototype.update = function() {
 MenuItem.prototype.select = function() {
 
 	this.selected = true;
+	inputManager.active = false;
+	setTimeout(function() {inputManager.active = true;}, 100);
 
 }
 

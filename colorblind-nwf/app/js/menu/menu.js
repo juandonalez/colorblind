@@ -27,3 +27,9 @@ Menu.prototype.draw = function() {
 	}
 
 }
+
+Menu.prototype.changeItem = function(i) {
+
+	this.menuItems[i].select();
+
+}

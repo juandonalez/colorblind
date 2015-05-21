@@ -1,6 +1,7 @@
-function MenuImage(d) {
+function MenuImage(d, menu) {
 
 	this.name = d.name;
+	this.menu = menu;
 
 	this.center = d.center;
 	this.image = fileManager.images[d.image];

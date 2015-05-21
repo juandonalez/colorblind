@@ -1,6 +1,7 @@
-function MenuText(d) {
+function MenuText(d, menu) {
 
 	this.name = d.name;
+	this.menu = menu;
 
 	this.center = d.center;
 	this.text = d.text;
