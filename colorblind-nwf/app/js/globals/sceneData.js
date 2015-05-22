@@ -124,7 +124,6 @@ var sceneData = sceneData || {};
 									selected: true,
 									selectStroke: "#ffffff",
 									selectFill: "#00ff00",
-									target: 1,
 									links: [false, "quit", false, "twoPlayers"]
 								},
 								{
@@ -139,7 +138,6 @@ var sceneData = sceneData || {};
 									selected: false,
 									selectStroke: "#ffffff",
 									selectFill: "#00ff00",
-									target: 1,
 									links: [false, "onePlayer", false, "leaderboards"]
 								},
 								{
@@ -154,7 +152,6 @@ var sceneData = sceneData || {};
 									selected: false,
 									selectStroke: "#ffffff",
 									selectFill: "#00ff00",
-									target: 1,
 									links: [false, "twoPlayers", false, "quit"]
 								},
 								{
@@ -169,7 +166,6 @@ var sceneData = sceneData || {};
 									selected: false,
 									selectStroke: "#ffffff",
 									selectFill: "#00ff00",
-									target: 1,
 									links: [false, "leaderboards", false, "onePlayer"]
 								}
 							]

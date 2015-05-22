@@ -2,6 +2,7 @@ function MenuImage(d, menu) {
 
 	this.name = d.name;
 	this.menu = menu;
+	this.components = [];
 
 	this.center = d.center;
 	this.image = fileManager.images[d.image];
@@ -11,7 +12,6 @@ function MenuImage(d, menu) {
 
 	if (d.selectable) {
 		this.selected = d.selected;
-		this.target = d.target;
 		this.left = d.links[0];
 		this.up = d.links[1];
 		this.right = d.links[2];
@@ -20,6 +20,7 @@ function MenuImage(d, menu) {
 	}
 
 	this.scaler = new Scaler(this);
+	this.components.push(this.scaler);
 
 }
 
@@ -36,6 +37,8 @@ MenuImage.prototype.draw = function() {
 MenuImage.prototype.calculateCenter = GameObject.prototype.calculateCenter;
 
 MenuImage.prototype.calculateOrigin = GameObject.prototype.calculateOrigin;
+
+MenuImage.prototype.confirm = MenuItem.prototype.confirm;
 
 MenuImage.prototype.deselect = MenuItem.prototype.deselect;
 

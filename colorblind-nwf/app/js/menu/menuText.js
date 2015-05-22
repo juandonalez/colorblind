@@ -2,6 +2,7 @@ function MenuText(d, menu) {
 
 	this.name = d.name;
 	this.menu = menu;
+	this.components = [];
 
 	this.center = d.center;
 	this.text = d.text;
@@ -15,7 +16,6 @@ function MenuText(d, menu) {
 
 	if (d.selectable) {
 		this.selected = d.selected;
-		this.target = d.target;
 		this.left = d.links[0];
 		this.up = d.links[1];
 		this.right = d.links[2];
@@ -29,6 +29,7 @@ function MenuText(d, menu) {
 	this.origin = this.calculateOrigin();
 
 	this.scaler = new Scaler(this);
+	this.components.push(this.scaler);
 
 }
 
@@ -70,6 +71,8 @@ MenuText.prototype.calculateWidth = function() {
 	return ctx.measureText(this.text).width;
 
 }
+
+MenuText.prototype.confirm = MenuItem.prototype.confirm;
 
 MenuText.prototype.deselect = MenuItem.prototype.deselect;
 
