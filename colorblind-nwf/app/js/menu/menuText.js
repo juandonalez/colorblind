@@ -23,6 +23,11 @@ function MenuText(d, menu) {
 		this.selectStroke = d.selectStroke;
 		this.selectFill = d.selectFill;
 		this.selectHeight = this.height*1.25;
+
+		if (this.selected) {
+			this.height = this.selectHeight;
+			this.lineWidth *= 1.25;
+		}
 	}
 
 	this.width = this.calculateWidth();

@@ -53,12 +53,14 @@ function Overlay(menu, d) {
 
 Overlay.prototype.update = function() {
 
-	this.easer.update();
-	this.scaler.update();
-	this.fader.update();
+	if (this.active) {
+		this.easer.update();
+		this.scaler.update();
+		this.fader.update();
 
-	for (var m in this.menuItems) {
-		this.menuItems[m].update();
+		for (var m in this.menuItems) {
+			this.menuItems[m].update();
+		}
 	}
 
 }
@@ -69,8 +71,10 @@ Overlay.prototype.draw = function() {
 	globals.bufferCtx.fillStyle = "blue";
 	globals.bufferCtx.fillRect(this.origin.x, this.origin.y, this.width, this.height);
 
-	for (var m in this.menuItems) {
-		this.menuItems[m].draw();
+	if (this.active) {
+		for (var m in this.menuItems) {
+			this.menuItems[m].draw();
+		}
 	}
 
 }
@@ -85,10 +89,8 @@ Overlay.prototype.calculateOrigin = GameObject.prototype.calculateOrigin;
 
 Overlay.prototype.deactivate = function () {
 
-	//this.easer.start("easeInBack", this.inactivePos, 1);
-	//this.fader.start(0.1, 1);
-	//this.scaler.start("easeInBack", 0.5, 1);
-	camera.fadeOut();
+	this.easer.start("easeInBack", this.inactivePos, 0.5);
+	setTimeout(function() {this.active = false;}, 500);
 
 }
 

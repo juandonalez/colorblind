@@ -47,7 +47,7 @@ MenuItem.prototype.confirm = function() {
 			console.log(this.name);
 			break;
 		case "onePlayer":
-			console.log(this.name);
+			globals.scenes[globals.currScene].changeMenu("");
 			break;
 		case "twoPlayers":
 			console.log(this.name);

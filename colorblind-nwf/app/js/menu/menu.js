@@ -33,3 +33,11 @@ Menu.prototype.changeItem = function(i) {
 	this.menuItems[i].select();
 
 }
+
+Menu.prototype.deactivate = function() {
+
+	for (var i = 0; i < this.overlays.length; i++) {
+		this.overlays[i].deactivate();
+	}
+
+}

@@ -23,7 +23,7 @@ var globals = globals || {};
 		var displayManager = nwf.display.DisplayManager.getInstance();
 
 		globals.gpDisplay = displayManager.getGamePadDisplay();
-		globals.gpHeight = gpDisplay.height;
+		globals.gpHeight = globals.gpDisplay.height;
 		globals.gpWidth = Math.ceil((globals.gpHeight/9)*16);
 		globals.gpCanvas = globals.gpDisplay.window.document.getElementById('gpCanvas');
 		globals.gpCanvas.height = globals.gpHeight;
@@ -31,8 +31,17 @@ var globals = globals || {};
 		globals.gpCtx = globals.gpCanvas.getContext('2d');
 
 		globals.tvDisplay = displayManager.getTVDisplay();
-		globals.tvHeight = tvDisplay.height;
-		globals.tvWidth = Math.ceil((globals.gpHeight/9)*16);
+		globals.tvHeight = globals.tvDisplay.height;
+		globals.tvWidth = globals.tvDisplay.width;
+
+		// if tv is 4:3 aspect ratio we shift everything to the left
+		if (globals.tvDisplay.height === 480) {
+			globals.tvOffset = -107;
+		}
+		else {
+			globals.tvOffset = 0;
+		}
+
 		globals.tvCanvas = globals.tvDisplay.window.document.getElementById('tvCanvas');
 		globals.tvCanvas.height = globals.tvHeight;
 		globals.tvCanvas.width = globals.tvWidth;

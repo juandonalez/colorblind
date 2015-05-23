@@ -53,7 +53,10 @@ var main = main || {};
 		camera.draw();
 
 		globals.gpCtx.drawImage(globals.buffer, 0, 0, globals.gpWidth, globals.gpHeight);
-		//globals.tvCtx.drawImage(globals.buffer, 0, 0, globals.tvWidth, globals.tvHeight);
+
+		if (globals.isWiiU) {
+			globals.tvCtx.drawImage(globals.buffer, globals.tvOffset, 0, Math.ceil((globals.tvHeight/9)*16), globals.tvHeight);
+		}
 
 	}
 
