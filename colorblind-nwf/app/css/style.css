@@ -1,9 +1,15 @@
 @charset "UTF-8";
 
+@font-face {
+    font-family: sovietBoxBold;
+    src: url(sovietBoxBold.ttf);
+}
+
 /* This code sets the margin to 0 so that there is no extra space around the canvas.*/
 body {
 	margin: 0;
 	background-color: #000000;
+	font-family: sovietBoxBold;
 }
 
 /* This code shows the canvas.*/

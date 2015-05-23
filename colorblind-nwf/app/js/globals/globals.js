@@ -63,6 +63,8 @@ var globals = globals || {};
 	globals.buffer.width = globals.bufferWidth;
 	globals.buffer.height = globals.bufferHeight;
 
+	globals.font = "sovietBoxBold";
+
 	globals.internalHeight = 760;
 	globals.tileSize = 20;
 	globals.numTilesHori = 66;

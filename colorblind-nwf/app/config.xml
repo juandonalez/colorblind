@@ -175,6 +175,7 @@
     <!-- Note: Relative path from "file:///vol/content/app/" is assumed -->
     <nwf:customFonts>
       <!-- example <nwf:font>fonts/arial.ttf</nwf:font> -->
+      <nwf:font>css/sovietBoxBold.ttf</nwf:font>
     </nwf:customFonts>
     <!-- Cookie config options -->
     <!-- maxSize refers to the number of bytes the cookie file can take up -->
