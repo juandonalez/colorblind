@@ -33,11 +33,11 @@ var sceneData = sceneData || {};
 						{
 							activePos: new Point(50, 50),
 							inactivePos: new Point(50, 50),
-							activeHeight: 100,
-							inactiveHeight: 100,
+							height: 100,
+							width: 100,
+							inactiveScale: 1,
 							activeAlpha: 1,
 							inactiveAlpha: 1,
-							width: 100,
 							color: false,
 							active: true,
 							menuItems: [
@@ -71,22 +71,22 @@ var sceneData = sceneData || {};
 						{
 							activePos: new Point(50, 50),
 							inactivePos: new Point(50, 50),
-							activeHeight: 100,
-							inactiveHeight: 100,
+							height: 100,
+							width: 100,
+							inactiveScale: 1,
 							activeAlpha: 0.5,
 							inactiveAlpha: 0.5,
-							width: 100,
 							color: "#999999",
 							menuItems: false
 						},
 						{
 							activePos: new Point(50, 20),
 							inactivePos: new Point(50, -25),
-							activeHeight: 40,
-							inactiveHeight: 40,
+							height: 40,
+							width: 75,
+							inactiveScale: 1,
 							activeAlpha: 1,
 							inactiveAlpha: 1,
-							width: 75,
 							color: false,
 							menuItems: [
 								{
@@ -104,11 +104,11 @@ var sceneData = sceneData || {};
 						{
 							activePos: new Point(50, 70),
 							inactivePos: new Point(140, 70),
-							activeHeight: 60,
-							inactiveHeight: 60,
+							height: 60,
+							width: 60,
+							inactiveScale: 1,
 							activeAlpha: 1,
 							inactiveAlpha: 1,
-							width: 75,
 							color: false,
 							menuItems: [
 								{
@@ -122,7 +122,7 @@ var sceneData = sceneData || {};
 									selectable: true,
 									selected: true,
 									selectStroke: "#ffffff",
-									selectFill: "#00ff00",
+									selectFill: "#000000",
 									links: [false, "quit", false, "twoPlayers"]
 								},
 								{
@@ -136,7 +136,7 @@ var sceneData = sceneData || {};
 									selectable: true,
 									selected: false,
 									selectStroke: "#ffffff",
-									selectFill: "#00ff00",
+									selectFill: "#000000",
 									links: [false, "onePlayer", false, "leaderboards"]
 								},
 								{
@@ -150,7 +150,7 @@ var sceneData = sceneData || {};
 									selectable: true,
 									selected: false,
 									selectStroke: "#ffffff",
-									selectFill: "#00ff00",
+									selectFill: "#000000",
 									links: [false, "twoPlayers", false, "quit"]
 								},
 								{
@@ -164,7 +164,7 @@ var sceneData = sceneData || {};
 									selectable: true,
 									selected: false,
 									selectStroke: "#ffffff",
-									selectFill: "#00ff00",
+									selectFill: "#000000",
 									links: [false, "leaderboards", false, "onePlayer"]
 								}
 							]
@@ -176,40 +176,83 @@ var sceneData = sceneData || {};
 					active: false,
 					overlays: [
 						{
-							activePos: new Point(50, 47),
-							inactivePos: new Point(50, 135),
-							activeHeight: 35,
-							inactiveHeight: 35,
+							activePos: new Point(20, 7.5),
+							inactivePos: new Point(20, 7.5),
+							height: 15,
+							width: 15,
+							inactiveScale: 0.5,
+							activeAlpha: 1,
+							inactiveAlpha: 0.1,
+							color: "blue",
+							menuItems: []
+						},
+						{
+							activePos: new Point(50, 15),
+							inactivePos: new Point(50, 115),
+							height: 30,
+							width: 75,
+							inactiveScale: 1,
 							activeAlpha: 1,
 							inactiveAlpha: 1,
+							color: false,
+							menuItems: [
+								{
+									name: "title",
+									center: new Point(50, 50),
+									text: "Select Mode",
+									fontSize: 60,
+									lineWidth: 6,
+									strokeStyle: "#000000",
+									fillStyle: "yellow",
+									selectable: false
+								}
+							]
+						},
+						{
+							activePos: new Point(50, 65),
+							inactivePos: new Point(50, 135),
+							height: 70,
 							width: 75,
+							inactiveScale: 1,
+							activeAlpha: 1,
+							inactiveAlpha: 1,
 							color: false,
 							menuItems: [
 								{
 									name: "duplicate",
-									center: new Point(30, 50),
+									center: new Point(30, 25),
 									image: "/menus/duplicate",
 									selectable: true,
 									selected: true,
 									links: ["split", false, "split", false],
 									menuText: {
 										name: "duplicateText",
-										center: new Point(10, 10),
-										text: "Color Blind",
-										fontSize: 120,
-										lineWidth: 20,
+										center: new Point(50, 75),
+										text: "duplicate",
+										fontSize: 40,
+										lineWidth: 4,
 										strokeStyle: "#000000",
-										fillStyle: "yellow",
+										fillStyle: "#ffffff",
 										selectable: false
 									}
 								},
 								{
 									name: "split",
-									center: new Point(70, 50),
+									center: new Point(70, 25),
 									image: "/menus/split",
 									selectable: true,
 									selected: false,
-									links: ["duplicate", false, "duplicate", false]
+									links: ["duplicate", false, "duplicate", false],
+									menuText: {
+										name: "splitText",
+										center: new Point(50, 75),
+										text: "split",
+										fontSize: 40,
+										lineWidth: 4,
+										strokeStyle: "#000000",
+										fillStyle: "#ffffff",
+										selectable: false
+									}
 								}
 							]
 						}

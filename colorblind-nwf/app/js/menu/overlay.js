@@ -8,8 +8,9 @@ function Overlay(menu, d) {
 	this.activePos = this.activePos.subtract(camera.origin);
 	this.inactivePos = camera.pctToPoint(d.inactivePos);
 	this.inactivePos = this.inactivePos.subtract(camera.origin);
-	this.activeHeight = camera.pctToHeight(d.activeHeight);
-	this.inactiveHeight = camera.pctToHeight(d.inactiveHeight);
+	this.activeHeight = camera.pctToHeight(d.height);
+	this.inactiveHeight = this.activeHeight*d.inactiveScale;
+	this.width = camera.pctToWidth(d.width);
 	this.activeAlpha = d.activeAlpha;
 	this.inactiveAlpha = d.inactiveAlpha;
 
@@ -25,10 +26,10 @@ function Overlay(menu, d) {
 	else {
 		this.center = this.inactivePos.copy();
 		this.height = this.inactiveHeight;
+		this.width *= d.inactiveScale;
 		this.alpha = this.inactiveAlpha;
 	}
 
-	this.width = camera.pctToWidth(d.width);
 	this.origin = this.calculateOrigin();
 	this.menuItems = [];
 
