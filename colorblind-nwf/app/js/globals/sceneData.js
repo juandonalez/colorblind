@@ -4,10 +4,17 @@ var sceneData = sceneData || {};
 
 	sceneData = {
 
-		totalNumImages: 257,
+		totalNumImages: 264,
 
 		imageNames: [
-			"splashScreen"
+			"splashScreen",
+			"/menus/coop",
+			"/menus/duplicate",
+			"/menus/split",
+			"/menus/stage1",
+			"/menus/stage2",
+			"/menus/stage3",
+			"/menus/versus"
 		],
 
 		splashScreen: {
@@ -21,6 +28,7 @@ var sceneData = sceneData || {};
 			menus: [
 				{
 					name: "splashScreen",
+					active: true,
 					overlays: [
 						{
 							activePos: new Point(50, 50),
@@ -30,6 +38,7 @@ var sceneData = sceneData || {};
 							activeAlpha: 1,
 							inactiveAlpha: 1,
 							width: 100,
+							color: false,
 							active: true,
 							menuItems: [
 								{
@@ -57,67 +66,57 @@ var sceneData = sceneData || {};
 			menus: [
 				{
 					name: "main",
+					active: true,
 					overlays: [
 						{
-							activePos: new Point(30, 50),
-							inactivePos: new Point(-30, 50),
+							activePos: new Point(50, 50),
+							inactivePos: new Point(50, 50),
 							activeHeight: 100,
 							inactiveHeight: 100,
-							activeAlpha: 1,
-							inactiveAlpha: 1,
-							width: 40,
-							active: true,
-							menuItems: [
-								{
-									name: "placeholderTitle",
-									center: new Point(50, 50),
-									text: "Color Blind",
-									fontSize: 100,
-									lineWidth: 2,
-									strokeStyle: "#ffffff",
-									fillStyle: "#000000",
-									selectable: false
-								}
-							]
+							activeAlpha: 0.5,
+							inactiveAlpha: 0.5,
+							width: 100,
+							color: "#999999",
+							menuItems: false
 						},
 						{
-							activePos: new Point(65, 15),
-							inactivePos: new Point(65, -25),
-							activeHeight: 30,
-							inactiveHeight: 30,
+							activePos: new Point(50, 20),
+							inactivePos: new Point(50, -25),
+							activeHeight: 40,
+							inactiveHeight: 40,
 							activeAlpha: 1,
 							inactiveAlpha: 1,
-							width: 50,
-							active: true,
+							width: 75,
+							color: false,
 							menuItems: [
 								{
 									name: "title",
 									center: new Point(50, 50),
 									text: "Color Blind",
-									fontSize: 100,
-									lineWidth: 2,
-									strokeStyle: "#ffffff",
-									fillStyle: "#000000",
+									fontSize: 120,
+									lineWidth: 20,
+									strokeStyle: "#000000",
+									fillStyle: "yellow",
 									selectable: false
 								}
 							]
 						},
 						{
-							activePos: new Point(65, 65),
-							inactivePos: new Point(135, 65),
-							activeHeight: 70,
-							inactiveHeight: 70,
+							activePos: new Point(50, 70),
+							inactivePos: new Point(140, 70),
+							activeHeight: 60,
+							inactiveHeight: 60,
 							activeAlpha: 1,
 							inactiveAlpha: 1,
-							width: 50,
-							active: true,
+							width: 75,
+							color: false,
 							menuItems: [
 								{
 									name: "onePlayer",
 									center: new Point(50, 10),
 									text: "One Player",
-									fontSize: 50,
-									lineWidth: 1,
+									fontSize: 40,
+									lineWidth: 4,
 									strokeStyle: "#000000",
 									fillStyle: "#ffffff",
 									selectable: true,
@@ -130,8 +129,8 @@ var sceneData = sceneData || {};
 									name: "twoPlayers",
 									center: new Point(50, 30),
 									text: "Two Players",
-									fontSize: 50,
-									lineWidth: 1,
+									fontSize: 40,
+									lineWidth: 4,
 									strokeStyle: "#000000",
 									fillStyle: "#ffffff",
 									selectable: true,
@@ -144,8 +143,8 @@ var sceneData = sceneData || {};
 									name: "leaderboards",
 									center: new Point(50, 50),
 									text: "Leaderboards",
-									fontSize: 50,
-									lineWidth: 1,
+									fontSize: 40,
+									lineWidth: 4,
 									strokeStyle: "#000000",
 									fillStyle: "#ffffff",
 									selectable: true,
@@ -158,8 +157,8 @@ var sceneData = sceneData || {};
 									name: "quit",
 									center: new Point(50, 70),
 									text: "Quit",
-									fontSize: 50,
-									lineWidth: 1,
+									fontSize: 40,
+									lineWidth: 4,
 									strokeStyle: "#000000",
 									fillStyle: "#ffffff",
 									selectable: true,
@@ -167,6 +166,50 @@ var sceneData = sceneData || {};
 									selectStroke: "#ffffff",
 									selectFill: "#00ff00",
 									links: [false, "leaderboards", false, "onePlayer"]
+								}
+							]
+						}
+					]
+				},
+				{
+					name: "onePlayerModes",
+					active: false,
+					overlays: [
+						{
+							activePos: new Point(50, 47),
+							inactivePos: new Point(50, 135),
+							activeHeight: 35,
+							inactiveHeight: 35,
+							activeAlpha: 1,
+							inactiveAlpha: 1,
+							width: 75,
+							color: false,
+							menuItems: [
+								{
+									name: "duplicate",
+									center: new Point(30, 50),
+									image: "/menus/duplicate",
+									selectable: true,
+									selected: true,
+									links: ["split", false, "split", false],
+									menuText: {
+										name: "duplicateText",
+										center: new Point(10, 10),
+										text: "Color Blind",
+										fontSize: 120,
+										lineWidth: 20,
+										strokeStyle: "#000000",
+										fillStyle: "yellow",
+										selectable: false
+									}
+								},
+								{
+									name: "split",
+									center: new Point(70, 50),
+									image: "/menus/split",
+									selectable: true,
+									selected: false,
+									links: ["duplicate", false, "duplicate", false]
 								}
 							]
 						}

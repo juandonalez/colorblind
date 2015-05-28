@@ -40,9 +40,9 @@ MenuItem.prototype.update = function() {
 
 }
 
-MenuItem.prototype.confirm = function() {
+MenuItem.prototype.cancel = function() {
 
-	switch (this.name) {
+	switch (this.menu.name) {
 		case "quit":
 			console.log(this.name);
 			break;
@@ -78,6 +78,52 @@ MenuItem.prototype.confirm = function() {
 			break;
 	}
 
+	inputManager.active = false;
+	setTimeout(function() {inputManager.active = true;}, 100);
+
+}
+
+MenuItem.prototype.confirm = function() {
+
+	switch (this.name) {
+		case "quit":
+			console.log(this.name);
+			break;
+		case "onePlayer":
+			globals.scenes[globals.currScene].changeMenu(this.menu.name, "onePlayerModes");
+			break;
+		case "twoPlayers":
+			console.log(this.name);
+			break;
+		case "duplicate":
+			console.log(this.name);
+			break;
+		case "split":
+			console.log(this.name);
+			break;
+		case "coop":
+			console.log(this.name);
+			break;
+		case "versus":
+			console.log(this.name);
+			break;
+		case "stage1":
+			console.log(this.name);
+			break;
+		case "stage2":
+			console.log(this.name);
+			break;
+		case "stage3":
+			console.log(this.name);
+			break;
+		case "leaderboards":
+			console.log(this.name);
+			break;
+	}
+
+	inputManager.active = false;
+	setTimeout(function() {inputManager.active = true;}, 100);
+
 }
 
 MenuItem.prototype.select = function() {
@@ -86,7 +132,7 @@ MenuItem.prototype.select = function() {
 	this.scaler.start("easeInBack", this.selectHeight, 0.25);
 
 	inputManager.active = false;
-	setTimeout(function() {inputManager.active = true;}, 100);
+	setTimeout(function() {inputManager.active = true;}, 150);
 
 }
 

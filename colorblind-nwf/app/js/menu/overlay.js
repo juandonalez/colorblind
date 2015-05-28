@@ -1,9 +1,9 @@
 function Overlay(menu, d) {
 
 	this.menu = menu;
+	this.components = [];
 	this.menuItems = {};
 
-	this.active = d.active;
 	this.activePos = camera.pctToPoint(d.activePos);
 	this.activePos = this.activePos.subtract(camera.origin);
 	this.inactivePos = camera.pctToPoint(d.inactivePos);
@@ -13,7 +13,11 @@ function Overlay(menu, d) {
 	this.activeAlpha = d.activeAlpha;
 	this.inactiveAlpha = d.inactiveAlpha;
 
-	if (this.active) {
+	if (d.color) {
+		this.color = d.color;
+	}
+
+	if (this.menu.active) {
 		this.center = this.activePos.copy();
 		this.height = this.activeHeight;
 		this.alpha = this.activeAlpha;
@@ -37,8 +41,9 @@ function Overlay(menu, d) {
 			m = new MenuText(itemData, menu);
 		}
 		else {
-			m = new MenuImage(itemData, menu);
+			m = new MenuImage(itemData, this, menu);
 		}
+
 		// push to this overlay so they will be part of it's update/draw loop
 		this.menuItems[m.name] = m;
 		// push to the menu so menu item can reference items on other overlays
@@ -46,35 +51,36 @@ function Overlay(menu, d) {
 	}
 
 	this.easer = new Easer(this);
-	this.scaler = new Scaler(this);
+	this.components.push(this.easer);
 	this.fader = new Fader(this);
+	this.components.push(this.fader);
+	this.scaler = new Scaler(this);
+	this.components.push(this.scaler);
 
 }
 
 Overlay.prototype.update = function() {
 
-	if (this.active) {
-		this.easer.update();
-		this.scaler.update();
-		this.fader.update();
+	for (var i = 0; i < this.components.length; i++) {
+		this.components[i].update();
+	}
 
-		for (var m in this.menuItems) {
-			this.menuItems[m].update();
-		}
+	for (var m in this.menuItems) {
+		this.menuItems[m].update();
 	}
 
 }
 
 Overlay.prototype.draw = function() {
 
-	globals.bufferCtx.globalAlpha = this.alpha;
-	globals.bufferCtx.fillStyle = "blue";
-	globals.bufferCtx.fillRect(this.origin.x, this.origin.y, this.width, this.height);
+	if (this.color) {
+		globals.bufferCtx.globalAlpha = this.alpha;
+		globals.bufferCtx.fillStyle = this.color;
+		globals.bufferCtx.fillRect(this.origin.x, this.origin.y, this.width, this.height);
+	}
 
-	if (this.active) {
-		for (var m in this.menuItems) {
-			this.menuItems[m].draw();
-		}
+	for (var m in this.menuItems) {
+		this.menuItems[m].draw();
 	}
 
 }
@@ -82,6 +88,8 @@ Overlay.prototype.draw = function() {
 Overlay.prototype.activate = function () {
 
 	this.easer.start("easeOutBack", this.activePos, 1);
+	this.fader.start(this.activeAlpha, 1);
+	this.scaler.start("easeOutBack", this.activeHeight, 1);
 
 }
 
@@ -89,8 +97,9 @@ Overlay.prototype.calculateOrigin = GameObject.prototype.calculateOrigin;
 
 Overlay.prototype.deactivate = function () {
 
-	this.easer.start("easeInBack", this.inactivePos, 0.5);
-	setTimeout(function() {this.active = false;}, 500);
+	this.easer.start("easeInBack", this.inactivePos, 1);
+	this.fader.start(this.inactiveAlpha, 1);
+	this.scaler.start("easeInBack", this.inactiveHeight, 1);
 
 }
 

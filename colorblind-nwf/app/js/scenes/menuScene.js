@@ -29,8 +29,9 @@ MenuScene.prototype.draw = function() {
 
 }
 
-MenuScene.prototype.changeMenu = function(m) {
+MenuScene.prototype.changeMenu = function(curr, next) {
 
-	this.menus["main"].deactivate();
+	this.menus[curr].deactivate();
+	this.menus[next].activate();
 
 }
