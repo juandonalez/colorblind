@@ -58,6 +58,8 @@ function Overlay(menu, d) {
 	this.scaler = new Scaler(this);
 	this.components.push(this.scaler);
 
+	d = null;
+
 }
 
 Overlay.prototype.update = function() {

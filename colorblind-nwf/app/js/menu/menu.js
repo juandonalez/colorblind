@@ -11,6 +11,8 @@ function Menu(d) {
 		this.overlays.push(new Overlay(this, o));
 	}
 
+	d = null;
+
 }
 
 Menu.prototype.update = function() {

@@ -36,6 +36,8 @@ function MenuText(d, menu) {
 	this.scaler = new Scaler(this);
 	this.components.push(this.scaler);
 
+	d = null;
+
 }
 
 MenuText.prototype.update = MenuItem.prototype.update;

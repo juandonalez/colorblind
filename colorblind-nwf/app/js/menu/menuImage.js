@@ -39,6 +39,8 @@ function MenuImage(d, overlay, menu) {
 	this.scaler = new Scaler(this);
 	this.components.push(this.scaler);
 
+	d = null;
+
 }
 
 MenuImage.prototype.update = MenuItem.prototype.update;

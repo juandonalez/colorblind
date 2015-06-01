@@ -47,7 +47,7 @@ MenuItem.prototype.cancel = function() {
 			console.log(this.name);
 			break;
 		case "onePlayer":
-			globals.scenes[globals.currScene].changeMenu("");
+			globals.currScene.changeMenu("");
 			break;
 		case "twoPlayers":
 			console.log(this.name);
@@ -90,7 +90,7 @@ MenuItem.prototype.confirm = function() {
 			console.log(this.name);
 			break;
 		case "onePlayer":
-			globals.scenes[globals.currScene].changeMenu(this.menu.name, "onePlayerModes");
+			globals.currScene.changeMenu(this.menu.name, "onePlayerModes");
 			break;
 		case "twoPlayers":
 			console.log(this.name);

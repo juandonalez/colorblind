@@ -29,7 +29,7 @@ var main = main || {};
 		}
 
 		if (running) {
-			globals.scenes[globals.currScene].update();
+			globals.currScene.update();
 		}
 
 		camera.update();
@@ -49,7 +49,7 @@ var main = main || {};
 		ctx = tvCtx;
 		ctx.drawImage(buffer, 0, 0, tvCanvas.width, tvCanvas.height);*/
 
-		globals.scenes[globals.currScene].draw(2, 1, true);
+		globals.currScene.draw(2, 1, true);
 		camera.draw();
 
 		globals.gpCtx.drawImage(globals.buffer, 0, 0, globals.gpWidth, globals.gpHeight);
@@ -73,18 +73,19 @@ var main = main || {};
 		window.removeEventListener('loaded', startGame, false);
 
 		globals.scenes = {
-			splashScreen: new MenuScene("splashScreen"),
-			mainMenu: new MenuScene("mainMenu"),
-			stage1: new StageScene("stage1")//,
-			//stage2: new StageScene("stage2"),
-			//stage3: new StageScene("stage3")
+			splashScreen: new Scene("splashScreen"),
+			mainMenu: new Scene("mainMenu"),
+			stage1: new Scene("stage1")//,
+			//stage2: new Scene("stage2"),
+			//stage3: new Scene("stage3")
 		};
 
 		if (globals.debugMode) {
-			globals.currScene = globals.debug.startScene;
+			globals.currScene = globals.scenes[globals.debug.startScene];
 			running = true;
 		}
 		else {
+			globals.currScene = globals.scenes["splashScreen"];
 			setTimeout(function() {main.changeScene("mainMenu");}, 2000);
 		}
 
@@ -99,7 +100,7 @@ var main = main || {};
 		running = false;
 		camera.fadeOut();
 		setTimeout(function() {
-			globals.currScene = scene;
+			globals.currScene = globals.scenes[scene];
 			running = true;
 			camera.fadeIn();
 		}, 1000);

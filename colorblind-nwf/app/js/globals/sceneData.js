@@ -19,39 +19,12 @@ var sceneData = sceneData || {};
 
 		splashScreen: {
 
+			background: "splashScreen",
 			numLevels: 0,
 			tilesetSize: 0,
 			numTop: 0,
 			numMiddle: 0,
-			numBottom: 0,
-
-			menus: [
-				{
-					name: "splashScreen",
-					active: true,
-					overlays: [
-						{
-							activePos: new Point(50, 50),
-							inactivePos: new Point(50, 50),
-							height: 100,
-							width: 100,
-							inactiveScale: 1,
-							activeAlpha: 1,
-							inactiveAlpha: 1,
-							color: false,
-							active: true,
-							menuItems: [
-								{
-									name: "splashScreen",
-									center: new Point(50, 50),
-									image: "splashScreen",
-									selectable: false
-								}
-							]
-						}
-					]
-				}
-			]
+			numBottom: 0
 
 		},
 
@@ -62,6 +35,19 @@ var sceneData = sceneData || {};
 			numTop: 4,
 			numMiddle: 4,
 			numBottom: 0,
+
+			scrollers: [
+				{
+					name: "top",
+					y: 0,
+					speed: 100
+				},
+				{
+					name: "mid",
+					y: 360,
+					speed: 200
+				}
+			],
 
 			menus: [
 				{

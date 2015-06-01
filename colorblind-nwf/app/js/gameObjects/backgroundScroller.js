@@ -1,16 +1,27 @@
-function BackgroundScroller(y, pool, speed) {
+function BackgroundScroller(scene, d) {
 
 	this.x = 0;
-	this.y = y;
-	this.speed = speed;
+	this.y = d.y;
+	this.speed = d.speed;
 
-	this.pool = pool;
+	if (d.name === "top") {
+		this.pool = fileManager.topBgs[scene];
+	}
+	else if (d.name === "mid") {
+		this.pool = fileManager.middleBgs[scene];
+	}
+	else {
+		this.pool = fileManager.bottomBgs[scene];
+	}
+
 	this.indexes = new Array(3);
 
 	for (var i = 0; i < 3; i++) {
 		var rand = Math.floor(Math.random()*this.pool.length);
 		this.indexes[i] = rand;
 	}
+
+	d = null;
 
 }
 

@@ -17,7 +17,7 @@ var globals = globals || {};
 	globals.delta = 0;
 
 	globals.scenes = {};
-	globals.currScene = "splashScreen";
+	globals.currScene;
 
 	if (globals.isWiiU) {
 		var displayManager = nwf.display.DisplayManager.getInstance();
