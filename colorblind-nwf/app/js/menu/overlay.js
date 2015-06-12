@@ -5,9 +5,7 @@ function Overlay(menu, d) {
 	this.menuItems = {};
 
 	this.activePos = camera.pctToPoint(d.activePos);
-	this.activePos = this.activePos.subtract(camera.origin);
 	this.inactivePos = camera.pctToPoint(d.inactivePos);
-	this.inactivePos = this.inactivePos.subtract(camera.origin);
 	this.activeHeight = camera.pctToHeight(d.height);
 	this.inactiveHeight = this.activeHeight*d.inactiveScale;
 	this.width = camera.pctToWidth(d.width);

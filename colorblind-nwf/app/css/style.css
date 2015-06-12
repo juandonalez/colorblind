@@ -1,15 +1,14 @@
 @charset "UTF-8";
 
 @font-face {
-    font-family: sovietBoxBold;
-    src: url(sovietBoxBold.ttf);
+	font-family: sovietBoxBold;
+	src: url(sovietBoxBold.ttf);
 }
 
 /* This code sets the margin to 0 so that there is no extra space around the canvas.*/
 body {
 	margin: 0;
 	background-color: #000000;
-	font-family: sovietBoxBold;
 }
 
 /* This code shows the canvas.*/
@@ -21,4 +20,32 @@ canvas.show {
 /* This code hides the canvas.*/
 canvas.hide {
 	display: none;
+}
+
+#gpBackground {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 1;
+}
+
+#gpCanvas {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 2;
+}
+
+#tvBackground {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 1;
+}
+
+#tvCanvas {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 2;
 }

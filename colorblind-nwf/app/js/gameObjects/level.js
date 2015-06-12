@@ -46,23 +46,23 @@ Level.prototype.draw = function(layer) {
 	for (var i = this.y/tileSize; i < globals.numTilesVert; i++) {
 		for (var j = 0; j < this.width/tileSize; j++) {
 			if (layer === 1) {
-			if (this.layer1[tile] !== 0 && this.layer1[tile] !== null) {
-				var img = tileset[this.layer1[tile]];
-				ctx.drawImage(img, j*tileSize - camera.origin.x, i*tileSize - camera.origin.y, tileSize, tileSize);
+				if (this.layer1[tile] !== 0 && this.layer1[tile] !== null) {
+					var img = tileset[this.layer1[tile]];
+					ctx.drawImage(img, j*tileSize, i*tileSize, tileSize, tileSize);
+				}
 			}
-		}
-		else if (layer === 2) {
-			if (this.layer2[tile] !== 0 && this.layer2[tile] !== null) {
-				var img = tileset[this.layer2[tile]];
-				ctx.drawImage(img, j*tileSize - camera.origin.x, i*tileSize - camera.origin.y, tileSize, tileSize);
+			else if (layer === 2) {
+				if (this.layer2[tile] !== 0 && this.layer2[tile] !== null) {
+					var img = tileset[this.layer2[tile]];
+					ctx.drawImage(img, j*tileSize, i*tileSize, tileSize, tileSize);
+				}
 			}
-		}
-		else {
-			if (this.layer3[tile] !== 0 && this.layer3[tile] !== null) {
-				var img = tileset[this.layer3[tile]];
-				ctx.drawImage(img, j*tileSize - camera.origin.x, i*tileSize - camera.origin.y, tileSize, tileSize);
+			else {
+				if (this.layer3[tile] !== 0 && this.layer3[tile] !== null) {
+					var img = tileset[this.layer3[tile]];
+					ctx.drawImage(img, j*tileSize, i*tileSize, tileSize, tileSize);
+				}
 			}
-		}
 			tile++;
 		}
 	}

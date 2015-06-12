@@ -5,47 +5,58 @@ var globals = globals || {};
 	globals.isWiiU = window.nwf && nwf.system && nwf.system.isWiiU();
 	window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame;
 
-	globals.debugMode = false;
+	globals.numPlayers = 1;
+	globals.mode = "duplicate";
 
-	globals.debug = {
-		backgrounds: false,
-		fpsCounter: true,
-		hitboxes: false,
-		startScene: "mainMenu"
-	};
+	globals.gameWidth = 1320;
+	globals.gameHeight = 760;
+
+	globals.playerWidth = 80;
+	globals.playerHeight = 140;
+
+	globals.tileSize = 20;
+	globals.numTilesHori = 66;
+	globals.numTilesVert = 38;
+
+	globals.font = "Soviet";
 
 	globals.delta = 0;
 
 	globals.scenes = {};
 	globals.currScene;
 
+	globals.isWide = true;
+
 	if (globals.isWiiU) {
 		var displayManager = nwf.display.DisplayManager.getInstance();
 
 		globals.gpDisplay = displayManager.getGamePadDisplay();
 		globals.gpHeight = globals.gpDisplay.height;
-		globals.gpWidth = Math.ceil((globals.gpHeight/9)*16);
+		globals.gpWidth = globals.gpDisplay.width;
 		globals.gpCanvas = globals.gpDisplay.window.document.getElementById('gpCanvas');
 		globals.gpCanvas.height = globals.gpHeight;
 		globals.gpCanvas.width = globals.gpWidth;
 		globals.gpCtx = globals.gpCanvas.getContext('2d');
+		globals.gpBackground = globals.gpDisplay.window.document.getElementById('gpBackground');
 
 		globals.tvDisplay = displayManager.getTVDisplay();
 		globals.tvHeight = globals.tvDisplay.height;
 		globals.tvWidth = globals.tvDisplay.width;
 
-		// if tv is 4:3 aspect ratio we shift everything to the left
-		if (globals.tvDisplay.height === 480) {
-			globals.tvOffset = -107;
-		}
-		else {
-			globals.tvOffset = 0;
+		if (globals.tvHeight === 480) {
+			globals.isWide = false;
 		}
 
+		globals.tvWidth = globals.tvDisplay.width;
 		globals.tvCanvas = globals.tvDisplay.window.document.getElementById('tvCanvas');
 		globals.tvCanvas.height = globals.tvHeight;
 		globals.tvCanvas.width = globals.tvWidth;
 		globals.tvCtx = globals.tvCanvas.getContext('2d');
+
+		globals.tvBackground = globals.tvDisplay.window.document.getElementById('tvBackground');
+		globals.tvBackgroundCtx = globals.tvBackground.getContext("2d");
+		globals.tvBackground.width = globals.tvWidth;
+		globals.tvBackground.height = globals.tvHeight;
 	}
 	else {
 		globals.gpHeight = 480;
@@ -54,23 +65,33 @@ var globals = globals || {};
 		globals.gpCanvas.width = globals.gpWidth;
 		globals.gpCanvas.height = globals.gpHeight;
 		globals.gpCtx = globals.gpCanvas.getContext('2d');
+		globals.gpBackground = window.document.getElementById('gpBackground');
+
+		globals.tvCanvas = document.createElement("canvas");
+		globals.tvCtx = globals.tvCanvas.getContext("2d");
+		globals.tvBackground = document.createElement("canvas");
+		globals.tvBackgroundCtx = globals.tvBackground.getContext("2d");
 	}
 
-	globals.bufferHeight = 720;
-	globals.bufferWidth = (globals.bufferHeight/9)*16;
+	// canvas for background that only gets redrawn when scene changes
+	globals.gpBackgroundCtx = globals.gpBackground.getContext("2d");
+	globals.gpBackground.width = globals.gpWidth;
+	globals.gpBackground.height = globals.gpHeight;
+
+	// buffer canvas for drawing everything to first
+	// is 20x20 bigger than camera view to allow for screen shake
 	globals.buffer = document.createElement("canvas");
 	globals.bufferCtx = globals.buffer.getContext("2d");
-	globals.buffer.width = globals.bufferWidth;
-	globals.buffer.height = globals.bufferHeight;
+	globals.buffer.width = globals.gameWidth;
+	globals.buffer.height = globals.gameHeight;
 
-	globals.font = "sovietBoxBold";
+	globals.debugMode = false;
 
-	globals.internalHeight = 760;
-	globals.tileSize = 20;
-	globals.numTilesHori = 66;
-	globals.numTilesVert = 38;
-
-	globals.playerWidth = 80;
-	globals.playerHeight = 140;
+	globals.debug = {
+		backgrounds: false,
+		fpsCounter: true,
+		hitboxes: false,
+		startScene: "stage1"
+	};
 
 })();

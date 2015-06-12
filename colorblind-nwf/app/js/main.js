@@ -39,24 +39,11 @@ var main = main || {};
 	function draw() {
 
 		globals.gpCtx.clearRect(0, 0, globals.gpWidth, globals.gpHeight);
-		//globals.tvCtx.clearRect(0, 0, globals.tvWidth, globals.tvHeight);
-		globals.bufferCtx.clearRect(0, 0, globals.bufferWidth, globals.bufferHeight);
+		globals.tvCtx.clearRect(0, 0, globals.tvWidth, globals.tvHeight);
+		globals.bufferCtx.clearRect(0, 0, globals.gameWidth, globals.gameHeight);
 
-		//scenes[currentScene].draw(2, 1, true);
-
-		/*ctx.imageSmoothingEnabled = false;
-		ctx.drawImage(buffer, 0, 0, gpCanvas.width, gpCanvas.height);
-		ctx = tvCtx;
-		ctx.drawImage(buffer, 0, 0, tvCanvas.width, tvCanvas.height);*/
-
-		globals.currScene.draw(2, 1, true);
+		globals.currScene.draw();
 		camera.draw();
-
-		globals.gpCtx.drawImage(globals.buffer, 0, 0, globals.gpWidth, globals.gpHeight);
-
-		if (globals.isWiiU) {
-			globals.tvCtx.drawImage(globals.buffer, globals.tvOffset, 0, Math.ceil((globals.tvHeight/9)*16), globals.tvHeight);
-		}
 
 	}
 
@@ -86,6 +73,18 @@ var main = main || {};
 		}
 		else {
 			globals.currScene = globals.scenes["splashScreen"];
+
+			if (globals.currScene.background) {
+				globals.gpBackgroundCtx.drawImage(globals.currScene.background, 0, 0, globals.gpWidth, globals.gpHeight);
+
+				if (globals.isWide) {
+					globals.tvBackgroundCtx.drawImage(globals.currScene.background, 0, 0, globals.tvWidth, globals.tvHeight);
+				}
+				else {
+					globals.tvBackgroundCtx.drawImage(globals.currScene.background, 0, 0, globals.tvWidth, globals.tvHeight);
+				}
+			}
+
 			setTimeout(function() {main.changeScene("mainMenu");}, 2000);
 		}
 
@@ -101,9 +100,28 @@ var main = main || {};
 		camera.fadeOut();
 		setTimeout(function() {
 			globals.currScene = globals.scenes[scene];
+
+			if (globals.currScene.background) {
+				globals.gpBackgroundCtx.drawImage(globals.currScene.background, 0, 0, globals.gpWidth, globals.gpHeight);
+				if (globals.isWiiU) {
+					if (!globals.isWide) {
+						globals.tvBackgroundCtx.drawImage(globals.currScene.background, 0, 0, globals.tvWidth, globals.tvHeight);
+					}
+					else {
+						globals.tvBackgroundCtx.drawImage(globals.currScene.background, 0, 0, globals.tvWidth, globals.tvHeight);
+					}
+				}
+			}
+			else {
+				globals.gpBackgroundCtx.clearRect(0, 0, globals.gpWidth, globals.gpHeight);
+				if (globals.isWiiU) {
+					globals.tvBackgroundCtx.clearRect(0, 0, globals.tvWidth, globals.tvHeight);
+				}
+			}
+
 			running = true;
 			camera.fadeIn();
-		}, 1000);
+		}, 2000);
 
 	}
 

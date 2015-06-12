@@ -42,10 +42,11 @@ Scene.prototype.update = function() {
 
 Scene.prototype.draw = function() {
 
-	if (this.background) {
-		globals.bufferCtx.globalAlpha = 1;
-		globals.bufferCtx.drawImage(this.background, -20, -20);
-	}
+	// default canvas position is saved so it be reverted back to later
+	// context is translated to reflect camera pos
+	globals.bufferCtx.save();
+	globals.bufferCtx.translate(camera.offset.x, camera.offset.y);
+	globals.bufferCtx.globalAlpha = 1;
 
 	if (this.scrollers) {
 		for (var i = 0; i < this.scrollers.length; i++) {
@@ -53,9 +54,71 @@ Scene.prototype.draw = function() {
 		}
 	}
 
+	if (globals.mode === "duplicate" || globals.mode === "versus") {
+
+		if (this.levelScroller) {
+			this.levelScroller.draw(1);
+			this.levelScroller.draw(2);
+			this.levelScroller.draw(3);
+		}
+
+		globals.gpCtx.drawImage(globals.buffer, camera.origin.x, camera.origin.y, camera.gpWidth, camera.gpHeight, 
+			0, 0, globals.gpWidth, globals.gpHeight);
+		globals.tvCtx.drawImage(globals.buffer, camera.origin.x, camera.origin.y, camera.tvWidth, camera.tvHeight, 
+			0, 0, globals.tvWidth, globals.tvHeight);
+
+	}
+	else {
+
+		if (this.levelScroller) {
+
+			// draw layer that is visible to both players
+			this.levelScroller.draw(1);
+			globals.gpCtx.drawImage(globals.buffer, camera.origin.x, camera.origin.y, camera.gpWidth, camera.gpHeight, 
+				0, 0, globals.gpWidth, globals.gpHeight);
+			globals.tvCtx.drawImage(globals.buffer, camera.origin.x, camera.origin.y, camera.tvWidth, camera.tvHeight, 
+				0, 0, globals.tvWidth, globals.tvHeight);
+
+			// clear buffer and draw layer visible to gamepad screen
+			globals.bufferCtx.clearRect(0, 0, globals.gameWidth, globals.gameHeight);
+			this.levelScroller.draw(2);
+			globals.gpCtx.drawImage(globals.buffer, camera.origin.x, camera.origin.y, camera.gpWidth, camera.gpHeight, 
+				0, 0, globals.gpWidth, globals.gpHeight);
+
+			// clear buffer and draw layer visible to tv screen
+			globals.bufferCtx.clearRect(0, 0, globals.gameWidth, globals.gameHeight);
+			this.levelScroller.draw(3);
+			globals.tvCtx.drawImage(globals.buffer, camera.origin.x, camera.origin.y, camera.tvWidth, camera.tvHeight, 
+				0, 0, globals.tvWidth, globals.tvHeight);
+
+		}
+
+	}
+
+	// resets camera pos
+	globals.bufferCtx.restore();
+	globals.bufferCtx.clearRect(0, 0, globals.gameWidth, globals.gameHeight);
+
 	for (var m in this.menus) {
 		this.menus[m].draw();
 	}
+
+	globals.gpCtx.drawImage(globals.buffer, camera.origin.x, camera.origin.y, camera.width, camera.height, 
+				0, 0, globals.gpWidth, globals.gpHeight);
+
+	if (globals.isWide) {
+		globals.tvCtx.drawImage(globals.buffer, camera.origin.x, camera.origin.y, camera.width, camera.height, 
+				0, 0, globals.tvWidth, globals.tvHeight);
+	}
+	else {
+		globals.bufferCtx.save();
+		globals.bufferCtx.translate(160, 0);
+		globals.tvCtx.drawImage(globals.buffer, camera.origin.x, camera.origin.y, camera.tvWidth, camera.tvHeight, 
+				0, 0, globals.tvWidth, globals.tvHeight);
+	}
+
+	globals.bufferCtx.restore();
+	globals.bufferCtx.clearRect(0, 0, globals.gameWidth, globals.gameHeight);
 
 }
 

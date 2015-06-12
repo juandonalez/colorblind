@@ -12,41 +12,41 @@
     Loads the nwf extensions (rpl) or enables the feature.
   -->
   <feature name="ext-core">
-    <param name="homeButtonEnabled" value="true"/>
+    <param name="homeButtonEnabled" value="true"></param>
   </feature>
   <feature name="ext-input">
     <!-- Toggles pre-defined controls for WebKit. -->
-    <param name="mouseEnabledWiiRemote" value="false"/>
-    <param name="scrollEnabledWiiRemote" value="false"/>
-    <param name="mouseEnabledGamePad" value="true"/>
-    <param name="scrollEnabledGamePad" value="false"/>
+    <param name="mouseEnabledWiiRemote" value="false"></param>
+    <param name="scrollEnabledWiiRemote" value="false"></param>
+    <param name="mouseEnabledGamePad" value="true"></param>
+    <param name="scrollEnabledGamePad" value="false"></param>
   </feature>
-  <feature name="ext-accounts"/>
-  <feature name="ext-fileio"/>
-  <rpl name="libcrypto_rpl"/>
-  <rpl name="libcurl_rpl"/>
-  <rpl name="libefontconfig_rpl"/>
-  <rpl name="libffmpegfft_rpl"/>
-  <rpl name="libfreetype_rpl"/>
-  <rpl name="libicu_rpl"/>
-  <rpl name="libjpeg_rpl"/>
-  <rpl name="libpixman_rpl"/>
-  <rpl name="libplatform_rpl"/>
-  <rpl name="libpng15_rpl"/>
-  <rpl name="libshim_rpl"/>
-  <rpl name="libsqlite3_rpl"/>
-  <rpl name="libssl_rpl"/>
-  <rpl name="libwebkitwiiu_rpl"/>
-  <rpl name="libwksup_rpl"/>
-  <rpl name="libxml2_rpl"/>
-  <rpl name="libxslt_rpl"/>
-  <rpl name="libz_rpl"/>
-  <rpl name="mvplayer"/>
-  <rpl name="libMediaInterfaceCore_rpl"/>
-  <rpl name="libMediaInterfaceRenderer_rpl"/>
-  <rpl name="libMediaApiSupport_rpl"/>
-  <rpl name="libMIRegistry_rpl"/>
-  <rpl name="libwkaud_rpl"/>
+  <feature name="ext-accounts"></feature>
+  <feature name="ext-fileio"></feature>
+  <rpl name="libcrypto_rpl"></rpl>
+  <rpl name="libcurl_rpl"></rpl>
+  <rpl name="libefontconfig_rpl"></rpl>
+  <rpl name="libffmpegfft_rpl"></rpl>
+  <rpl name="libfreetype_rpl"></rpl>
+  <rpl name="libicu_rpl"></rpl>
+  <rpl name="libjpeg_rpl"></rpl>
+  <rpl name="libpixman_rpl"></rpl>
+  <rpl name="libplatform_rpl"></rpl>
+  <rpl name="libpng15_rpl"></rpl>
+  <rpl name="libshim_rpl"></rpl>
+  <rpl name="libsqlite3_rpl"></rpl>
+  <rpl name="libssl_rpl"></rpl>
+  <rpl name="libwebkitwiiu_rpl"></rpl>
+  <rpl name="libwksup_rpl"></rpl>
+  <rpl name="libxml2_rpl"></rpl>
+  <rpl name="libxslt_rpl"></rpl>
+  <rpl name="libz_rpl"></rpl>
+  <rpl name="mvplayer"></rpl>
+  <rpl name="libMediaInterfaceCore_rpl"></rpl>
+  <rpl name="libMediaInterfaceRenderer_rpl"></rpl>
+  <rpl name="libMediaApiSupport_rpl"></rpl>
+  <rpl name="libMIRegistry_rpl"></rpl>
+  <rpl name="libwkaud_rpl"></rpl>
   <!--
     Domain Whitelist. List of domains that Nintendo Web Framework is permitted to connect to.
     [origin] attribute description:
@@ -58,7 +58,7 @@
      <access origin="*"/>
     More information: http://www.w3.org/TR/widgets-access/
   -->
-  <access origin="*" subdomains="false"/>
+  <access origin="*" subdomains="false"></access>
   <!-- List of supported resolutions. -->
   <nwf:supportedRenderModes>
     <nwf:tvRenderMode>1080</nwf:tvRenderMode>
@@ -67,10 +67,10 @@
     <nwf:tvRenderMode>480_NARROW</nwf:tvRenderMode>
   </nwf:supportedRenderModes>
   <!-- List of media plugins to load -->
-  <mediaPlugin name="libMIPluginDecoderOggVorbis_rpl"/>
-  <mediaPlugin name="libMIPluginDecoderWAV_rpl"/>
-  <mediaPlugin name="libMIPluginTransport_rpl"/>
-  <mediaPlugin name="libMIPluginPlayerAudio_rpl"/>
+  <mediaPlugin name="libMIPluginDecoderOggVorbis_rpl"></mediaPlugin>
+  <mediaPlugin name="libMIPluginDecoderWAV_rpl"></mediaPlugin>
+  <mediaPlugin name="libMIPluginTransport_rpl"></mediaPlugin>
+  <mediaPlugin name="libMIPluginPlayerAudio_rpl"></mediaPlugin>
   <!--========================================================================== 
                       RUNTIME CONFIGURATION SETTINGS
   ===========================================================================-->
@@ -109,23 +109,23 @@
       -->
       <!-- general (non context) image buffers -->
       <nwf:heap name="webkit-image">
-        <param name="heapSize" value=""/>
+        <param name="heapSize" value=""></param>
       </nwf:heap>
       <!-- All color/depth/texture buffers for canvas -->
       <nwf:heap name="webkit-canvas">
-        <param name="heapSize" value=""/>
+        <param name="heapSize" value=""></param>
       </nwf:heap>
       <!-- Main memory for javascript runtime -->
       <nwf:heap name="javascript-object">
-        <param name="heapSize" value=""/>
+        <param name="heapSize" value=""></param>
       </nwf:heap>
       <!-- Memory for Miiverse Feature -->
       <nwf:heap name="ext-miiverse">
-        <param name="heapSize" value=""/>
+        <param name="heapSize" value=""></param>
       </nwf:heap>
       <!-- Memory for NEX Game Server feature -->
       <nwf:heap name="ext-datastore">
-        <param name="heapSize" value=""/>
+        <param name="heapSize" value=""></param>
       </nwf:heap>
     </nwf:memory>
     <!-- How many remotes are allowed for this application? -->
@@ -144,7 +144,7 @@
       <nwf:customHeader>Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.3</nwf:customHeader>
       <nwf:customHeader>Accept-Encoding: gzip</nwf:customHeader>
     </nwf:httpHeaders>
-    <nwf:clientID/>
+    <nwf:clientID></nwf:clientID>
     <!--
       The path to the SSL certificate bundle for SSL communication.
       Note: Relative path from "file:///vol/content/app/" is assumed
@@ -154,7 +154,7 @@
       The path to the SSL client certificate.
       Note: Relative path from "file:///vol/content/app/" is assumed
     -->
-    <nwf:sslClientCertificatePath/>
+    <nwf:sslClientCertificatePath></nwf:sslClientCertificatePath>
     <!-- Default anti-aliasing settings. 1 | 2 | 4 | 8 -->
     <nwf:antiAliasing>1</nwf:antiAliasing>
     <!--
@@ -175,7 +175,7 @@
     <!-- Note: Relative path from "file:///vol/content/app/" is assumed -->
     <nwf:customFonts>
       <!-- example <nwf:font>fonts/arial.ttf</nwf:font> -->
-      <nwf:font>css/sovietBoxBold.ttf</nwf:font>
+      <nwf:font>soviet.ttf</nwf:font>
     </nwf:customFonts>
     <!-- Cookie config options -->
     <!-- maxSize refers to the number of bytes the cookie file can take up -->
@@ -214,8 +214,8 @@
     </nwf:cacheConfig>
     <!-- Is the application a game(0) or a service(1) -->
     <nwf:isServiceApplication>0</nwf:isServiceApplication>
-    <nwf:NEXGameServerID/>
-    <nwf:NEXAccessKey/>
+    <nwf:NEXGameServerID></nwf:NEXGameServerID>
+    <nwf:NEXAccessKey></nwf:NEXAccessKey>
     <!--Allow the Wii Balance Board for this application? -->
     <nwf:wiiBalanceBoardSupported>0</nwf:wiiBalanceBoardSupported>
     <nwf:keyboardRemaps>keyremap/keys.json</nwf:keyboardRemaps>
@@ -227,18 +227,18 @@
     <!--configure the orientation of the GamePad screen-->
     <nwf:GamePadOrientation>landscape-primary</nwf:GamePadOrientation>
     <nwf:enableBC1Textures>0</nwf:enableBC1Textures>
-    <nwf:sslCrlPath/>
+    <nwf:sslCrlPath></nwf:sslCrlPath>
     <nwf:useSaveCommon>1</nwf:useSaveCommon>
     <nwf:useSaveAccount>1</nwf:useSaveAccount>
     <nwf:touchScrolling nwf:display="tv">
-      <param name="scrollingEnabled" value="false"/>
-      <param name="scrollbarsEnabled" value="true"/>
-      <param name="touchEmulated" value="false"/>
+      <param name="scrollingEnabled" value="false"></param>
+      <param name="scrollbarsEnabled" value="true"></param>
+      <param name="touchEmulated" value="false"></param>
     </nwf:touchScrolling>
     <nwf:touchScrolling nwf:display="gp">
-      <param name="scrollingEnabled" value="false"/>
-      <param name="scrollbarsEnabled" value="true"/>
-      <param name="touchEmulated" value="false"/>
+      <param name="scrollingEnabled" value="false"></param>
+      <param name="scrollbarsEnabled" value="true"></param>
+      <param name="touchEmulated" value="false"></param>
     </nwf:touchScrolling>
   </nwf:options>
   <!--========================================================================== 
@@ -260,14 +260,14 @@
       Set a remote URL to serve inspector front-end assets.
       If unset, the front-end will be served from the Wii U system.
     -->
-    <nwf:frontEndURL/>
+    <nwf:frontEndURL></nwf:frontEndURL>
   </nwf:inspector>
   <nwf:dashboard>
-    <nwf:contentHistory nwf:display="tv" src="/TV.html"/>
-    <nwf:contentHistory nwf:display="gp" src="/index.html"/>
+    <nwf:contentHistory nwf:display="tv" src="/TV.html"></nwf:contentHistory>
+    <nwf:contentHistory nwf:display="gp" src="/index.html"></nwf:contentHistory>
     <nwf:contentHistory nwf:display="shared" src="/index.html">
-      <nwf:width/>
-      <nwf:height/>
+      <nwf:width></nwf:width>
+      <nwf:height></nwf:height>
     </nwf:contentHistory>
     <!--
       This TCP port will be used for general-purpose communication with the 
@@ -283,6 +283,6 @@
     <nwf:version>18</nwf:version>
     <nwf:serviceTokenNotRequired>1</nwf:serviceTokenNotRequired>
   </nwf:dashboard>
-  <content nwf:display="tv" src="/TV.html"/>
-  <content nwf:display="gp" src="/index.html"/>
+  <content nwf:display="tv" src="/TV.html"></content>
+  <content nwf:display="gp" src="/index.html"></content>
 </widget>

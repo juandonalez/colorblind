@@ -80,7 +80,7 @@ var sceneData = sceneData || {};
 									center: new Point(50, 50),
 									text: "Color Blind",
 									fontSize: 120,
-									lineWidth: 20,
+									lineWidth: 10,
 									strokeStyle: "#000000",
 									fillStyle: "yellow",
 									selectable: false
@@ -183,7 +183,7 @@ var sceneData = sceneData || {};
 							color: false,
 							menuItems: [
 								{
-									name: "title",
+									name: "selectMode",
 									center: new Point(50, 50),
 									text: "Select Mode",
 									fontSize: 60,

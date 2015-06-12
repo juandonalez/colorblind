@@ -3,11 +3,24 @@ var camera = camera || {};
 (function() {
 
 	camera.origin = new Point(20, 20);
+	camera.offset = new Point(0, 0);
 	camera.width = 1280;
 	camera.height = 720;
 	camera.center = new Point(camera.width/2, camera.height/2);
 	camera.center = camera.center.add(camera.origin);
 	camera.alpha = 1;
+
+	camera.gpWidth = camera.width;
+	camera.gpHeight = camera.height;
+
+	if (globals.isWide) {
+		camera.tvWidth = camera.width;
+		camera.tvHeight = camera.height;
+	}
+	else {
+		camera.tvHeight = camera.height;
+		camera.tvWidth = (camera.tvHeight/3) * 4;
+	}
 
 	camera.fader = new Fader(camera);
 
@@ -22,7 +35,9 @@ var camera = camera || {};
 		if (camera.alpha !== 0) {
 			globals.bufferCtx.globalAlpha = camera.alpha;
 			globals.bufferCtx.fillStyle = "black";
-			globals.bufferCtx.fillRect(0, 0, camera.width, camera.height);
+			globals.bufferCtx.fillRect(0, 0, globals.gameWidth, globals.gameHeight);
+			globals.gpCtx.drawImage(globals.buffer, 0, 0, globals.gpWidth, globals.gpHeight);
+			globals.tvCtx.drawImage(globals.buffer, 0, 0, globals.tvWidth, globals.tvHeight);
 		}
 
 	}
@@ -54,7 +69,5 @@ var camera = camera || {};
 	}
 
 	camera.setAlpha = GameObject.prototype.setAlpha;
-
-	camera.translate = GameObject.prototype.translate;
 
 })();

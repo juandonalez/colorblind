@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <wup-master-specific-info tool-version="0.1" format-version="2014-03" framework="fw" fw-version="1.0" language="en" tool="mastereditor" mastereditor-guitag-version="1.5.4">
   <Submission_Information>
-    <article/>
+    <article></article>
     <release-date>
       <release-year>2015</release-year>
       <release-month>4</release-month>
@@ -12,138 +12,138 @@
       <submit-month>4</submit-month>
       <submit-day>23</submit-day>
     </submit-date>
-    <submit-version/>
+    <submit-version></submit-version>
     <submit-reason>initial</submit-reason>
-    <memo/>
-    <changed-content/>
-    <changed-content-detail/>
+    <memo></memo>
+    <changed-content></changed-content>
+    <changed-content-detail></changed-content-detail>
   </Submission_Information>
   <Company_Information>
     <customer-info enable="True">
       <customer-id1>
-        <company-name/>
-        <department-name/>
-        <user-name/>
-        <user-read-name/>
-        <tel/>
-        <fax/>
-        <e-mail/>
-        <ntsc-warioworld-user-id/>
+        <company-name></company-name>
+        <department-name></department-name>
+        <user-name></user-name>
+        <user-read-name></user-read-name>
+        <tel></tel>
+        <fax></fax>
+        <e-mail></e-mail>
+        <ntsc-warioworld-user-id></ntsc-warioworld-user-id>
       </customer-id1>
     </customer-info>
     <customer-info enable="False">
       <customer-id2>
-        <company-name/>
-        <department-name/>
-        <user-name/>
-        <user-read-name/>
-        <tel/>
-        <fax/>
-        <e-mail/>
-        <ntsc-warioworld-user-id/>
+        <company-name></company-name>
+        <department-name></department-name>
+        <user-name></user-name>
+        <user-read-name></user-read-name>
+        <tel></tel>
+        <fax></fax>
+        <e-mail></e-mail>
+        <ntsc-warioworld-user-id></ntsc-warioworld-user-id>
       </customer-id2>
     </customer-info>
   </Company_Information>
   <Application_Information>
     <Partition_Information name="p01">
       <Partition_Information>
-        <Footprint/>
+        <Footprint></Footprint>
       </Partition_Information>
       <Basic_Information>
-        <Remaster_Version/>
+        <Remaster_Version></Remaster_Version>
       </Basic_Information>
       <Rating_Information>
-        <CERO/>
-        <ESRB/>
-        <USK/>
-        <PEGI_General/>
-        <PEGI_Portugal/>
-        <PEGI-BBFC/>
-        <COB/>
-        <GRB/>
-        <CGSRR/>
-        <OFLC/>
+        <CERO></CERO>
+        <ESRB></ESRB>
+        <USK></USK>
+        <PEGI_General></PEGI_General>
+        <PEGI_Portugal></PEGI_Portugal>
+        <PEGI-BBFC></PEGI-BBFC>
+        <COB></COB>
+        <GRB></GRB>
+        <CGSRR></CGSRR>
+        <OFLC></OFLC>
       </Rating_Information>
       <Title_Name_Long_Name-1>
-        <Japanese_1st_Line/>
-        <Japanese_2nd_Line/>
-        <English_1st_Line/>
-        <English_2nd_Line/>
-        <French_1st_Line/>
-        <French_2nd_Line/>
-        <German_1st_Line/>
-        <German_2nd_Line/>
-        <Italian_1st_Line/>
-        <Italian_2nd_Line/>
-        <Spanish_1st_Line/>
-        <Spanish_2nd_Line/>
+        <Japanese_1st_Line></Japanese_1st_Line>
+        <Japanese_2nd_Line></Japanese_2nd_Line>
+        <English_1st_Line></English_1st_Line>
+        <English_2nd_Line></English_2nd_Line>
+        <French_1st_Line></French_1st_Line>
+        <French_2nd_Line></French_2nd_Line>
+        <German_1st_Line></German_1st_Line>
+        <German_2nd_Line></German_2nd_Line>
+        <Italian_1st_Line></Italian_1st_Line>
+        <Italian_2nd_Line></Italian_2nd_Line>
+        <Spanish_1st_Line></Spanish_1st_Line>
+        <Spanish_2nd_Line></Spanish_2nd_Line>
       </Title_Name_Long_Name-1>
       <Title_Name_Long_Name-2>
-        <Simplified_Chinese_1st_Line/>
-        <Simplified_Chinese_2nd_Line/>
-        <Korean_1st_Line/>
-        <Korean_2nd_Line/>
-        <Dutch_1st_Line/>
-        <Dutch_2nd_Line/>
-        <Portuguese_1st_Line/>
-        <Portuguese_2nd_Line/>
-        <Russian_1st_Line/>
-        <Russian_2nd_Line/>
-        <Traditional_Chinese_1st_Line/>
-        <Traditional_Chinese_2nd_Line/>
+        <Simplified_Chinese_1st_Line></Simplified_Chinese_1st_Line>
+        <Simplified_Chinese_2nd_Line></Simplified_Chinese_2nd_Line>
+        <Korean_1st_Line></Korean_1st_Line>
+        <Korean_2nd_Line></Korean_2nd_Line>
+        <Dutch_1st_Line></Dutch_1st_Line>
+        <Dutch_2nd_Line></Dutch_2nd_Line>
+        <Portuguese_1st_Line></Portuguese_1st_Line>
+        <Portuguese_2nd_Line></Portuguese_2nd_Line>
+        <Russian_1st_Line></Russian_1st_Line>
+        <Russian_2nd_Line></Russian_2nd_Line>
+        <Traditional_Chinese_1st_Line></Traditional_Chinese_1st_Line>
+        <Traditional_Chinese_2nd_Line></Traditional_Chinese_2nd_Line>
       </Title_Name_Long_Name-2>
       <Title_Name_Short_Name>
-        <Japanese/>
-        <English/>
-        <French/>
-        <German/>
-        <Italian/>
-        <Spanish/>
-        <Simplified_Chinese/>
-        <Korean/>
-        <Dutch/>
-        <Portuguese/>
-        <Russian/>
-        <Traditional_Chinese/>
+        <Japanese></Japanese>
+        <English></English>
+        <French></French>
+        <German></German>
+        <Italian></Italian>
+        <Spanish></Spanish>
+        <Simplified_Chinese></Simplified_Chinese>
+        <Korean></Korean>
+        <Dutch></Dutch>
+        <Portuguese></Portuguese>
+        <Russian></Russian>
+        <Traditional_Chinese></Traditional_Chinese>
       </Title_Name_Short_Name>
       <Title_Name_Publisher>
-        <Japanese/>
-        <English/>
-        <French/>
-        <German/>
-        <Italian/>
-        <Spanish/>
-        <Simplified_Chinese/>
-        <Korean/>
-        <Dutch/>
-        <Portuguese/>
-        <Russian/>
-        <Traditional_Chinese/>
+        <Japanese></Japanese>
+        <English></English>
+        <French></French>
+        <German></German>
+        <Italian></Italian>
+        <Spanish></Spanish>
+        <Simplified_Chinese></Simplified_Chinese>
+        <Korean></Korean>
+        <Dutch></Dutch>
+        <Portuguese></Portuguese>
+        <Russian></Russian>
+        <Traditional_Chinese></Traditional_Chinese>
       </Title_Name_Publisher>
       <MetaRating>
         <!-- プッシュ配信用レーティング画像を差し替えます。 -->
         <!-- 画像を差し替える場合は、画像のパスを指定してください。 -->
         <!-- 画像を削除する場合は、パスを空にしてください。 -->
         <!-- 画像を変更したくない場合は、タグを記述しないでください。 -->
-        <FileName_CERO_ja/>
-        <FileName_CGSRR_zh/>
-        <FileName_COB_en/>
-        <FileName_ESRB_fr/>
-        <FileName_ESRB_en/>
-        <FileName_GRB_ko/>
-        <FileName_OFLC_en/>
-        <FileName_PEGI_ru/>
-        <FileName_PEGI_BBFC_en/>
-        <FileName_PEGI_Portugal_pt/>
-        <FileName_PEGI_it/>
-        <FileName_PEGI_nl/>
-        <FileName_PEGI_es/>
-        <FileName_PEGI_de/>
-        <FileName_PEGI_fr/>
-        <FileName_PEGI_pt/>
-        <FileName_PEGI_en/>
-        <FileName_RAR_ru/>
-        <FileName_USK_de/>
+        <FileName_CERO_ja></FileName_CERO_ja>
+        <FileName_CGSRR_zh></FileName_CGSRR_zh>
+        <FileName_COB_en></FileName_COB_en>
+        <FileName_ESRB_fr></FileName_ESRB_fr>
+        <FileName_ESRB_en></FileName_ESRB_en>
+        <FileName_GRB_ko></FileName_GRB_ko>
+        <FileName_OFLC_en></FileName_OFLC_en>
+        <FileName_PEGI_ru></FileName_PEGI_ru>
+        <FileName_PEGI_BBFC_en></FileName_PEGI_BBFC_en>
+        <FileName_PEGI_Portugal_pt></FileName_PEGI_Portugal_pt>
+        <FileName_PEGI_it></FileName_PEGI_it>
+        <FileName_PEGI_nl></FileName_PEGI_nl>
+        <FileName_PEGI_es></FileName_PEGI_es>
+        <FileName_PEGI_de></FileName_PEGI_de>
+        <FileName_PEGI_fr></FileName_PEGI_fr>
+        <FileName_PEGI_pt></FileName_PEGI_pt>
+        <FileName_PEGI_en></FileName_PEGI_en>
+        <FileName_RAR_ru></FileName_RAR_ru>
+        <FileName_USK_de></FileName_USK_de>
       </MetaRating>
     </Partition_Information>
   </Application_Information>
