@@ -67,25 +67,27 @@ var main = main || {};
 			//stage3: new Scene("stage3")
 		};
 
+		globals.player1 = new Player(1);
+
 		if (globals.debugMode) {
 			globals.currScene = globals.scenes[globals.debug.startScene];
+			globals.currScene.start();
 			running = true;
 		}
 		else {
 			globals.currScene = globals.scenes["splashScreen"];
-
-			if (globals.currScene.background) {
-				globals.gpBackgroundCtx.drawImage(globals.currScene.background, 0, 0, globals.gpWidth, globals.gpHeight);
-
-				if (globals.isWide) {
-					globals.tvBackgroundCtx.drawImage(globals.currScene.background, 0, 0, globals.tvWidth, globals.tvHeight);
-				}
-				else {
-					globals.tvBackgroundCtx.drawImage(globals.currScene.background, 0, 0, globals.tvWidth, globals.tvHeight);
-				}
-			}
-
 			setTimeout(function() {main.changeScene("mainMenu");}, 2000);
+		}
+
+		if (globals.currScene.background) {
+			globals.gpBackgroundCtx.drawImage(globals.currScene.background, 0, 0, globals.gpWidth, globals.gpHeight);
+
+			if (globals.isWide) {
+				globals.tvBackgroundCtx.drawImage(globals.currScene.background, 0, 0, globals.tvWidth, globals.tvHeight);
+			}
+			else {
+				globals.tvBackgroundCtx.drawImage(globals.currScene.background, 0, 0, globals.tvWidth, globals.tvHeight);
+			}
 		}
 
 		then = Date.now();
@@ -100,6 +102,7 @@ var main = main || {};
 		camera.fadeOut();
 		setTimeout(function() {
 			globals.currScene = globals.scenes[scene];
+			globals.currScene.start();
 
 			if (globals.currScene.background) {
 				globals.gpBackgroundCtx.drawImage(globals.currScene.background, 0, 0, globals.gpWidth, globals.gpHeight);

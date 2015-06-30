@@ -13,6 +13,8 @@ var globals = globals || {};
 
 	globals.playerWidth = 80;
 	globals.playerHeight = 140;
+	globals.playerStates = ["idle"];
+	globals.player1;
 
 	globals.tileSize = 20;
 	globals.numTilesHori = 66;
@@ -85,11 +87,11 @@ var globals = globals || {};
 	globals.buffer.width = globals.gameWidth;
 	globals.buffer.height = globals.gameHeight;
 
-	globals.debugMode = false;
+	globals.debugMode = true;
 
 	globals.debug = {
 		backgrounds: false,
-		fpsCounter: true,
+		fpsCounter: false,
 		hitboxes: false,
 		startScene: "stage1"
 	};

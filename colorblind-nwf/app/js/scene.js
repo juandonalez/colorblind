@@ -5,6 +5,8 @@ function Scene(name) {
 
 	var data = sceneData[this.name];
 
+	this.startPos = data.startPos;
+
 	if (data.background) {
 		this.background = fileManager.images[data.background];
 	}
@@ -38,6 +40,8 @@ Scene.prototype.update = function() {
 		this.menus[m].update();
 	}
 
+	globals.player1.update();
+
 }
 
 Scene.prototype.draw = function() {
@@ -62,6 +66,11 @@ Scene.prototype.draw = function() {
 			this.levelScroller.draw(3);
 		}
 
+		globals.player1.draw();
+		if (globals.numPlayers === 2) {
+			globals.player2.draw();
+		}
+
 		globals.gpCtx.drawImage(globals.buffer, camera.origin.x, camera.origin.y, camera.gpWidth, camera.gpHeight, 
 			0, 0, globals.gpWidth, globals.gpHeight);
 		globals.tvCtx.drawImage(globals.buffer, camera.origin.x, camera.origin.y, camera.tvWidth, camera.tvHeight, 
@@ -74,6 +83,12 @@ Scene.prototype.draw = function() {
 
 			// draw layer that is visible to both players
 			this.levelScroller.draw(1);
+
+			globals.player1.draw();
+			if (globals.numPlayers === 2) {
+				globals.player2.draw();
+			}
+
 			globals.gpCtx.drawImage(globals.buffer, camera.origin.x, camera.origin.y, camera.gpWidth, camera.gpHeight, 
 				0, 0, globals.gpWidth, globals.gpHeight);
 			globals.tvCtx.drawImage(globals.buffer, camera.origin.x, camera.origin.y, camera.tvWidth, camera.tvHeight, 
@@ -126,5 +141,11 @@ Scene.prototype.changeMenu = function(curr, next) {
 
 	this.menus[curr].deactivate();
 	this.menus[next].activate();
+
+}
+
+Scene.prototype.start = function() {
+
+	globals.player1.setCenter(this.startPos);
 
 }

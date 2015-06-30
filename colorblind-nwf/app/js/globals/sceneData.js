@@ -4,7 +4,7 @@ var sceneData = sceneData || {};
 
 	sceneData = {
 
-		totalNumImages: 264,
+		totalNumImages: 288,
 
 		imageNames: [
 			"splashScreen",
@@ -24,7 +24,8 @@ var sceneData = sceneData || {};
 			tilesetSize: 0,
 			numTop: 0,
 			numMiddle: 0,
-			numBottom: 0
+			numBottom: 0,
+			startPos: new Point(-500, -500)
 
 		},
 
@@ -35,6 +36,7 @@ var sceneData = sceneData || {};
 			numTop: 4,
 			numMiddle: 4,
 			numBottom: 0,
+			startPos: new Point(-500, -500),
 
 			scrollers: [
 				{
@@ -253,7 +255,8 @@ var sceneData = sceneData || {};
 			tilesetSize: 53,
 			numTop: 4,
 			numMiddle: 4,
-			numBottom: 4
+			numBottom: 4,
+			startPos: new Point(200, 200)
 
 		},
 
@@ -263,7 +266,8 @@ var sceneData = sceneData || {};
 			tilesetSize: 53,
 			numTop: 4,
 			numMiddle: 4,
-			numBottom: 4
+			numBottom: 4,
+			startPos: new Point(200, 200)
 
 		},
 
@@ -273,7 +277,8 @@ var sceneData = sceneData || {};
 			tilesetSize: 53,
 			numTop: 4,
 			numMiddle: 4,
-			numBottom: 4
+			numBottom: 4,
+			startPos: new Point(200, 200)
 
 		}
 

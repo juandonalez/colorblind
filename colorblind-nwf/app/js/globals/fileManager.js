@@ -10,6 +10,7 @@ var fileManager = fileManager || {};
 	fileManager.middleBgs = {};
 	fileManager.bottomBgs = {};
 	fileManager.images = {};
+	fileManager.player1 = {};
 
 	/* 
 		gets called each time an image is loaded, and dispatches an event to say when loading is done
@@ -119,6 +120,22 @@ var fileManager = fileManager || {};
 
 	}
 
+	function loadPlayer1() {
+
+		var state = "idle";
+		var frames = 24;
+		fileManager.player1[state] = new Array(frames);
+
+		for (var i = 0; i < frames; i++) {
+
+			fileManager.player1[state][i] = new Image();
+			fileManager.player1[state][i].onload = fileLoaded;
+			fileManager.player1[state][i].src = "images/players/1/" + state + "/" + i + ".png";
+
+		}
+
+	}
+
 	function loadTileset(scene) {
 
 		var tilesetSize = sceneData[scene].tilesetSize;
@@ -152,6 +169,8 @@ var fileManager = fileManager || {};
 			loadBackgrounds(name);
 
 		}
+
+		loadPlayer1();
 
 	}
 
