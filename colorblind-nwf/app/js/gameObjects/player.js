@@ -8,11 +8,15 @@ function Player(no) {
 	this.origin = this.calculateOrigin();
 	this.alpha = 1;
 	this.vel = new Point(0, 0);
+	this.maxVel = 200;
+	this.isGrounded = true;
 
 	this.components = [];
 
 	if (no === 1) {
 		this.image = fileManager.player1["idle"][0];
+		this.components.push(new Player1Input(this));
+		this.components.push(new RigidBody(this));
 		this.components.push(new Animator(this, fileManager.player1, 24));
 	}
 	else {
@@ -23,6 +27,15 @@ function Player(no) {
 }
 
 Player.prototype.update = function() {
+
+	if (this.isGrounded) {
+		if (this.vel.x !== 0) {
+			this.state = "running";
+		}
+		else {
+			this.state = "idle";
+		}
+	}
 
 	for (var i = 0; i < this.components.length; i++) {
 		this.components[i].update();
@@ -42,6 +55,26 @@ Player.prototype.calculateCenter = GameObject.prototype.calculateCenter;
 Player.prototype.calculateOrigin = GameObject.prototype.calculateOrigin;
 
 Player.prototype.intersects = GameObject.prototype.intersects;
+
+Player.prototype.accelLeft = function() {
+
+	/*this.vel.x -= this.accel;
+	this.vel.x += globals.currScene.friction;
+
+	if (this.vel.x >= this.maxVel) {
+		this.vel.x = this.maxVel;
+	}
+	else if (this.vel.x < 0) {
+		this.vel.x = 0;
+	}*/
+
+}
+
+Player.prototype.accelRight = function() {
+
+	this.vel.x = this.maxVel;
+
+}
 
 Player.prototype.pctToPoint = GameObject.prototype.pctToPoint;
 

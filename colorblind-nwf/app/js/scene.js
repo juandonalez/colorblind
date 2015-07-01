@@ -1,6 +1,7 @@
 function Scene(name) {
 
 	this.name = name;
+	this.gravity = 10;
 	this.menus = {};
 
 	var data = sceneData[this.name];
@@ -16,6 +17,10 @@ function Scene(name) {
 		for (var i = 0; i < data.scrollers.length; i++) {
 			this.scrollers.push(new BackgroundScroller(this.name, data.scrollers[i]));
 		}
+	}
+
+	if (data.numLevels > 0) {
+		this.levelScroller = new LevelScroller(this.name);
 	}
 
 	if (data.menus) {

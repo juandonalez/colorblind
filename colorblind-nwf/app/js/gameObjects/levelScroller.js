@@ -2,14 +2,24 @@ function LevelScroller(scene) {
 
 	this.scene = scene;
 
-	this.pool;
+	this.pool = fileManager.levels[this.scene];
 	this.levels = [];
+
+	var prevWidth = 0;
+
+	for (var i = 0; i < 3; i++) {
+		var rand = Math.floor(Math.random()*this.pool.length);
+		var level = this.pool.splice(rand, 1).pop();
+		level.x = prevWidth;
+		prevWidth += level.width;
+		this.levels.push(level);
+	}
 
 }
 
 LevelScroller.prototype.init = function() {
 
-	this.pool = fileManager.levels;
+	
 	var prevWidth = 0;
 
 	for (var i = 0; i < 3; i++) {

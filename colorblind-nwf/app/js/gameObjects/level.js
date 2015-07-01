@@ -1,36 +1,26 @@
-function Level() {
+function Level(d) {
 
+	this.width = d.width;
+	this.height = d.height;
 	this.x = 0;
-	this.y = 0;
-	this.width = 0;
-	this.height = 0;
-	this.layer1 = [];
-	this.layer2 = [];
-	this.layer3 = [];
+	this.y = globals.gameHeight - this.height;
+	this.layer1 = d.layer1;
+	this.layer2 = d.layer2;
+	this.layer3 = d.layer3;
 	this.colliders = [];
-	this.entities = [];
 
-}
-
-Level.prototype.init = function(data) {
-
-	this.width = data.width;
-	this.height = data.height;
-	this.y = globals.internalHeight - this.height;
-	this.layer1 = data.layer1;
-	this.layer2 = data.layer2;
-	this.layer3 = data.layer3;
-
-	for (var i = 0; i < data.colliders.length; i++) {
-		var col = data.colliders[i];
+	for (var i = 0; i < d.colliders.length; i++) {
+		var col = d.colliders[i];
 		col.y += this.y;	// collider y pos is relative to level top left corner
 		this.colliders.push(new PlatformCollider(this, col.x, col.y, col.width, col.height));
 	}
 
-	for (var i = 0; i < data.entities.length; i++) {
-		var ent = data.entities[i];
+	for (var i = 0; i < d.entities.length; i++) {
+		var ent = d.entities[i];
 		// check class of entity and push new object to this.entities
 	}
+
+	d = null;
 
 }
 
@@ -39,7 +29,7 @@ Level.prototype.update = function() {}
 Level.prototype.draw = function(layer) {
 
 	var ctx = globals.bufferCtx;
-	var tileset = fileManager.tileset;
+	var tileset = fileManager.tilesets[globals.currScene.name];
 	var tileSize = globals.tileSize;
 	var tile = 0;
 

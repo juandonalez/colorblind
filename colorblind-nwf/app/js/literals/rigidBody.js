@@ -1,19 +1,20 @@
-function RigidBody(scene, entity) {
+function RigidBody(gameObject) {
 
-	this.scene = scene;
-	this.entity = entity;
-
-	this.velX = 0;
-	this.velY = 0;
-
-	this.targetX = 0;
-	this.targetY = 0;
+	this.gameObject = gameObject;
 
 }
 
 RigidBody.prototype.update = function() {
 
-	//this.targetX = (this.entity.x + this.velX) * globals.delta;
+	var go = this.gameObject;
+	var target = new Point(0, 0);
+
+	//target.x = Math.round((go.vel.x + globals.currScene.friction) * globals.delta);
+	//target.y = Math.round((go.vel.y + globals.currScene.gravity) * globals.delta);
+	target.x = Math.round(go.vel.x * globals.delta);
+	target.y = Math.round(go.vel.y);
+
+	/*this.targetX = (this.entity.x + this.velX) * globals.delta;
 	this.targetY = this.entity.y + ((this.velY + this.scene.gravity) * 1);
 
 	var colliders = this.scene.currentColliders;
@@ -22,10 +23,10 @@ RigidBody.prototype.update = function() {
 
 		var col = colliders[i];
 
-		/*var hori = this.checkHorizontal(col.x, col.width);
+		var hori = this.checkHorizontal(col.x, col.width);
 		if (hori) {
 			col.onHorizontalCollision(this.entity);
-		}*/
+		}
 
 		var vert = this.checkVertical(col.y, col.height);
 		if (vert) {
@@ -34,8 +35,11 @@ RigidBody.prototype.update = function() {
 
 	}
 
-	//this.entity.x = this.targetX;
-	this.entity.y = this.targetY;
+	this.entity.x = this.targetX;
+	this.entity.y = this.targetY;*/
+
+	//go.vel = target;
+	go.translate(target);
 
 }
 

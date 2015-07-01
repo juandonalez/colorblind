@@ -7,6 +7,10 @@ function Animator(gameObject, images, fps) {
 	this.accum = 0;
 	this.index = 0;
 
+	if (this.gameObject.state) {
+		this.currState = this.gameObject.state;
+	}
+
 }
 
 Animator.prototype.update = function() {
@@ -18,6 +22,11 @@ Animator.prototype.update = function() {
 		var images = this.images;
 
 		if (this.gameObject.state) {
+			if (this.gameObject.state !== this.currState) {
+				this.currState = this.gameObject.state;
+				this.index = 0;
+			}
+
 			images = this.images[this.gameObject.state];
 		}
 
