@@ -57,4 +57,10 @@ Level.prototype.draw = function(layer) {
 		}
 	}
 
+	if (globals.debugMode && globals.debug.hitboxes) {
+		for (var i = 0; i < this.colliders.length; i++) {
+			this.colliders[i].draw();
+		}
+	}
+
 }

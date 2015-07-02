@@ -48,6 +48,11 @@ Player.prototype.draw = function() {
 	globals.bufferCtx.globalAlpha = this.alpha;
 	globals.bufferCtx.drawImage(this.image, this.origin.x, this.origin.y, this.image.width, this.image.height);
 
+	if (globals.debugMode && globals.debug.hitboxes) {
+		globals.bufferCtx.strokeStyle = "blue";
+		globals.bufferCtx.strokeRect(this.origin.x, this.origin.y, this.width, this.height);
+	}
+
 }
 
 Player.prototype.calculateCenter = GameObject.prototype.calculateCenter;

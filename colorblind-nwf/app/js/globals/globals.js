@@ -92,7 +92,7 @@ var globals = globals || {};
 	globals.debug = {
 		backgrounds: false,
 		fpsCounter: false,
-		hitboxes: false,
+		hitboxes: true,
 		startScene: "stage1"
 	};
 

@@ -10,6 +10,14 @@ function PlatformCollider(entity, x, y, width, height) {
 
 }
 
+PlatformCollider.prototype.draw = function() {
+
+	globals.bufferCtx.globalAlpha = 1;
+	globals.bufferCtx.strokeStyle = "blue";
+	globals.bufferCtx.strokeRect(this.x, this.y, this.width, this.height);
+
+}
+
 PlatformCollider.prototype.onHorizontalCollision = function(obj) {
 
 	if (obj.x < this.x) {
