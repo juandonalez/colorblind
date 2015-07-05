@@ -6,15 +6,15 @@ function RigidBody(gameObject) {
 
 RigidBody.prototype.update = function() {
 
-	var go = this.gameObject;
+	/*var go = this.gameObject;
 	var target = new Point(0, 0);
 
-	//target.x = Math.round((go.vel.x + globals.currScene.friction) * globals.delta);
-	//target.y = Math.round((go.vel.y + globals.currScene.gravity) * globals.delta);
+	target.x = Math.round((go.vel.x + globals.currScene.friction) * globals.delta);
+	target.y = Math.round((go.vel.y + globals.currScene.gravity) * globals.delta);
 	target.x = Math.round(go.vel.x * globals.delta);
 	target.y = Math.round(go.vel.y);
 
-	/*this.targetX = (this.entity.x + this.velX) * globals.delta;
+	this.targetX = (this.entity.x + this.velX) * globals.delta;
 	this.targetY = this.entity.y + ((this.velY + this.scene.gravity) * 1);
 
 	var colliders = this.scene.currentColliders;
@@ -36,10 +36,10 @@ RigidBody.prototype.update = function() {
 	}
 
 	this.entity.x = this.targetX;
-	this.entity.y = this.targetY;*/
+	this.entity.y = this.targetY;
 
-	//go.vel = target;
-	go.translate(target);
+	go.vel = target;
+	go.translate(target);*/
 
 }
 

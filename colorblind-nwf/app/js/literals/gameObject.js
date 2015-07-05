@@ -2,7 +2,7 @@ function GameObject() {}
 
 GameObject.prototype.calculateCenter = function() {
 
-	return new Point(this.center.x - (this.width/2), this.center.y - (this.height/2));
+	return new Point(this.origin.x + (this.width/2), this.origin.y + (this.height/2));
 
 }
 
@@ -12,13 +12,13 @@ GameObject.prototype.calculateOrigin = function() {
 
 }
 
-GameObject.prototype.intersects = function(e) {
+GameObject.prototype.intersects = function(go) {
 
 	return (
-		this.origin.x <= e.origin.x + e.width &&
-		e.x <= this.origin.x + this.width &&
-		this.origin.y <= e.origin.y + e.height &&
-		e.y <= this.origin.y + this.height
+		this.origin.x <= go.origin.x + go.width &&
+		go.origin.x <= this.origin.x + this.width &&
+		this.origin.y <= go.origin.y + go.height &&
+		go.origin.y <= this.origin.y + this.height
 	);
 
 }
@@ -43,10 +43,17 @@ GameObject.prototype.setAlpha = function(a) {
 
 }
 
-GameObject.prototype.setCenter = function(c) {
+GameObject.prototype.setCenter = function(p) {
 
-	this.center = c;
+	this.center = p;
 	this.origin = this.calculateOrigin();
+
+}
+
+GameObject.prototype.setOrigin = function(p) {
+
+	this.origin = p;
+	this.center = this.calculateCenter();
 
 }
 

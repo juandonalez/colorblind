@@ -21,6 +21,7 @@ var sceneData = sceneData || {};
 
 			background: "splashScreen",
 			numLevels: 0,
+			numAllModes: 0,
 			tilesetSize: 0,
 			numTop: 0,
 			numMiddle: 0,
@@ -32,6 +33,7 @@ var sceneData = sceneData || {};
 		mainMenu: {
 
 			numLevels: 4,
+			numAllModes: 4,
 			tilesetSize: 53,
 			numTop: 4,
 			numMiddle: 4,
@@ -252,6 +254,7 @@ var sceneData = sceneData || {};
 		stage1: {
 
 			numLevels: 4,
+			numAllModes: 4,
 			tilesetSize: 53,
 			numTop: 4,
 			numMiddle: 4,
@@ -263,6 +266,7 @@ var sceneData = sceneData || {};
 		stage2: {
 
 			numLevels: 4,
+			numAllModes: 4,
 			tilesetSize: 53,
 			numTop: 4,
 			numMiddle: 4,
@@ -274,6 +278,7 @@ var sceneData = sceneData || {};
 		stage3: {
 
 			numLevels: 4,
+			numAllModes: 4,
 			tilesetSize: 53,
 			numTop: 4,
 			numMiddle: 4,

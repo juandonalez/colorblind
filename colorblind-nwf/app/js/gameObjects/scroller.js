@@ -1,4 +1,4 @@
-function BackgroundScroller(scene, d) {
+function Scroller(scene, d) {
 
 	this.x = 0;
 	this.y = d.y;
@@ -25,7 +25,7 @@ function BackgroundScroller(scene, d) {
 
 }
 
-BackgroundScroller.prototype.update = function() {
+Scroller.prototype.update = function() {
 
 	/*this.x = Math.floor(this.x - (this.speed * globals.delta));
 
@@ -41,7 +41,7 @@ BackgroundScroller.prototype.update = function() {
 
 }
 
-BackgroundScroller.prototype.draw = function() {
+Scroller.prototype.draw = function() {
 
 	var ctx = globals.bufferCtx;
 	ctx.globalAlpha = 1;

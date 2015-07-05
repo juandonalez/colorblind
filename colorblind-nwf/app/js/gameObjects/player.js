@@ -3,9 +3,6 @@ function Player(no) {
 	this.state = "idle";
 
 	this.center = new Point(-500, -500);
-	this.width = globals.playerWidth;
-	this.height = globals.playerHeight;
-	this.origin = this.calculateOrigin();
 	this.alpha = 1;
 	this.vel = new Point(0, 0);
 	this.maxVel = 200;
@@ -23,6 +20,10 @@ function Player(no) {
 		this.image = fileManager.player2["idle"][0];
 		this.components.push(new Animator(this, fileManager.player2, 24));
 	}
+
+	this.width = this.image.width;
+	this.height = this.image.height;
+	this.origin = this.calculateOrigin();
 
 }
 
