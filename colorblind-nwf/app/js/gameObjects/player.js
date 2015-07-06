@@ -5,20 +5,25 @@ function Player(no) {
 	this.center = new Point(-500, -500);
 	this.alpha = 1;
 	this.vel = new Point(0, 0);
-	this.maxVel = 200;
-	this.isGrounded = true;
+	this.maxVel = 600;
+	this.airVel = 20;
+	this.friction = 0;
+	this.maxJump = -900;
+	this.isGrounded = false;
 
-	this.components = [];
+	this.components = new Array(3);
 
 	if (no === 1) {
-		this.image = fileManager.player1["idle"][0];
-		this.components.push(new Player1Input(this));
-		this.components.push(new RigidBody(this));
-		this.components.push(new Animator(this, fileManager.player1, 24));
+		this.image = fileManager.player1["jumping"][0];
+		this.components[0] = new Player1Input(this);
+		this.components[1] = new Animator(this, fileManager.player1, 24);
+		this.components[2] = new RigidBody(this);
 	}
 	else {
 		this.image = fileManager.player2["idle"][0];
-		this.components.push(new Animator(this, fileManager.player2, 24));
+		this.components[0] = new Player1Input(this);
+		this.components[1] = new Animator(this, fileManager.player2, 24);
+		this.components[2] = new RigidBody(this);
 	}
 
 	this.width = this.image.width;
@@ -36,6 +41,9 @@ Player.prototype.update = function() {
 		else {
 			this.state = "idle";
 		}
+	}
+	else {
+		this.state = "jumping";
 	}
 
 	for (var i = 0; i < this.components.length; i++) {
@@ -56,6 +64,14 @@ Player.prototype.draw = function() {
 
 }
 
+Player.prototype.changeImage = function(i) {
+
+	this.width = i.width;
+	this.height = i.height;
+	this.origin = this.calculateOrigin();
+
+}
+
 Player.prototype.moveHori = function() {
 
 	this.center.x += Math.round(this.vel.x * globals.delta);
@@ -70,6 +86,16 @@ Player.prototype.moveVert = function() {
 
 }
 
+Player.prototype.jump = function() {
+
+	if (this.state !== "jumping") {
+		this.isGrounded = false;
+		this.vel.y += this.maxJump;
+		this.state = "jumping";
+	}
+
+}
+
 Player.prototype.calculateCenter = GameObject.prototype.calculateCenter;
 
 Player.prototype.calculateOrigin = GameObject.prototype.calculateOrigin;
@@ -78,21 +104,57 @@ Player.prototype.intersects = GameObject.prototype.intersects;
 
 Player.prototype.accelLeft = function() {
 
-	/*this.vel.x -= this.accel;
-	this.vel.x += globals.currScene.friction;
-
-	if (this.vel.x >= this.maxVel) {
-		this.vel.x = this.maxVel;
+	if (this.isGrounded) {
+		if (this.dir === "l") {
+			this.vel.x = this.maxVel * -1;
+		}
+		else {
+			this.vel.x -= this.friction;
+			if (this.vel.x < 0) {
+				this.vel.x = 0;
+			}
+		}
 	}
-	else if (this.vel.x < 0) {
-		this.vel.x = 0;
-	}*/
+	else {
+		this.vel.x -= this.airVel;
+		if (this.vel.x < (this.maxVel * -1)) {
+			this.vel.x = this.maxVel * -1;
+		}
+	}
 
 }
 
 Player.prototype.accelRight = function() {
 
-	this.vel.x = this.maxVel;
+	if (this.dir === "r") {
+		if (this.isGrounded) {
+			this.vel.x = this.maxVel;
+		}
+	}
+	else {
+		this.vel.x += this.friction;
+		if (this.vel.x > 0) {
+			this.vel.x = 0;
+		}
+	}
+
+	if (this.isGrounded) {
+		if (this.dir === "r") {
+			this.vel.x = this.maxVel;
+		}
+		else {
+			this.vel.x -= this.friction;
+			if (this.vel.x < 0) {
+				this.vel.x = 0;
+			}
+		}
+	}
+	else {
+		this.vel.x += this.airVel;
+		if (this.vel.x > this.maxVel) {
+			this.vel.x = this.maxVel;
+		}
+	}
 
 }
 

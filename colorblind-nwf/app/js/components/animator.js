@@ -24,6 +24,7 @@ Animator.prototype.update = function() {
 		if (this.gameObject.state) {
 			if (this.gameObject.state !== this.currState) {
 				this.currState = this.gameObject.state;
+				this.gameObject.changeImage(this.images[this.currState][0]);
 				this.index = 0;
 			}
 

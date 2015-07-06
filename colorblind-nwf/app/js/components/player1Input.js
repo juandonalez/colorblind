@@ -6,16 +6,24 @@ function Player1Input(gameObject) {
 
 Player1Input.prototype.update = function() {
 
-	if (inputManager.left1) {
-		this.gameObject.accelLeft();
-	}
+	var go = this.gameObject;
 
 	if (inputManager.right1) {
-		this.gameObject.accelRight();
+		if (!inputManager.left1) {
+			go.dir = "r";
+			go.accelRight();
+		}
+	}
+
+	if (inputManager.left1) {
+		if (!inputManager.right1) {
+			go.dir = "l";
+			go.accelLeft();
+		}
 	}
 
 	if (inputManager.confirm1) {
-		
+		go.jump();
 	}
 
 }
