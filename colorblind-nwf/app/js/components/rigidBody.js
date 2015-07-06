@@ -6,67 +6,32 @@ function RigidBody(gameObject) {
 
 RigidBody.prototype.update = function() {
 
-	/*var go = this.gameObject;
-	var target = new Point(0, 0);
+	var go = this.gameObject;
+	var colliders = globals.currScene.getColliders(go);
 
-	target.x = Math.round((go.vel.x + globals.currScene.friction) * globals.delta);
-	target.y = Math.round((go.vel.y + globals.currScene.gravity) * globals.delta);
-	target.x = Math.round(go.vel.x * globals.delta);
-	target.y = Math.round(go.vel.y);
-
-	this.targetX = (this.entity.x + this.velX) * globals.delta;
-	this.targetY = this.entity.y + ((this.velY + this.scene.gravity) * 1);
-
-	var colliders = this.scene.currentColliders;
+	if (go.moveHori) {
+		go.moveHori();
+	}
 
 	for (var i = 0; i < colliders.length; i++) {
 
-		var col = colliders[i];
-
-		var hori = this.checkHorizontal(col.x, col.width);
-		if (hori) {
-			col.onHorizontalCollision(this.entity);
-		}
-
-		var vert = this.checkVertical(col.y, col.height);
-		if (vert) {
-			col.onVerticalCollision(this);
+		if (go.intersects(colliders[i])) {
+			colliders[i].onHorizontalCollision(go);
 		}
 
 	}
 
-	this.entity.x = this.targetX;
-	this.entity.y = this.targetY;
-
-	go.vel = target;
-	go.translate(target);*/
-
-}
-
-RigidBody.prototype.checkHorizontal = function(objX, objWidth) {
-
-	if (this.entity.x > (objX + objWidth)) {
-		return false;
-	}
-	else if ((this.entity.x + this.entity.width) < objX) {
-		return false;
-	}
-	else {
-		return true;
+	go.vel.y += globals.currScene.gravity;
+	if (go.moveVert) {
+		go.moveVert();
 	}
 
-}
+	for (var i = 0; i < colliders.length; i++) {
 
-RigidBody.prototype.checkVertical = function(objY, objHeight) {
+		if (go.intersects(colliders[i])) {
+			colliders[i].onVerticalCollision(go);
+		}
 
-	if (this.targetY > (objY + objHeight)) {
-		return false;
-	}
-	else if ((this.targetY + this.entity.height) < objY) {
-		return false;
-	}
-	else {
-		return true;
 	}
 
 }

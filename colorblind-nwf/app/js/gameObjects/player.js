@@ -56,6 +56,20 @@ Player.prototype.draw = function() {
 
 }
 
+Player.prototype.moveHori = function() {
+
+	this.center.x += Math.round(this.vel.x * globals.delta);
+	this.origin = this.calculateOrigin();
+
+}
+
+Player.prototype.moveVert = function() {
+
+	this.center.y += Math.round(this.vel.y * globals.delta);
+	this.origin = this.calculateOrigin();
+
+}
+
 Player.prototype.calculateCenter = GameObject.prototype.calculateCenter;
 
 Player.prototype.calculateOrigin = GameObject.prototype.calculateOrigin;
@@ -89,5 +103,7 @@ Player.prototype.resize = GameObject.prototype.resize;
 Player.prototype.setAlpha = GameObject.prototype.setAlpha;
 
 Player.prototype.setCenter = GameObject.prototype.setCenter;
+
+Player.prototype.setOrigin = GameObject.prototype.setOrigin;
 
 Player.prototype.translate = GameObject.prototype.translate;

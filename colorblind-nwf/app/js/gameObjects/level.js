@@ -1,9 +1,9 @@
 function Level(data) {
 
 	this.width = data.width;
-	this.height = data.height;
+	this.height = globals.gameHeight;
 	this.origin = new Point(0, 0);
-	this.top = globals.gameHeight - this.height;
+	this.top = this.height - data.height;
 
 	this.layer1 = data.layer1;
 	this.layer2 = data.layer2;
@@ -48,7 +48,7 @@ Level.prototype.draw = function(layer) {
 		layer = this.layer3;
 	}
 
-	for (var i = this.top; i < globals.gameHeight; i += tileSize) {
+	for (var i = this.top; i < this.height; i += tileSize) {
 		for (var j = 0; j < this.width; j += tileSize) {
 			if (layer[tile] !== 0 && layer[tile] !== null) {
 				var img = tileset[layer[tile]];

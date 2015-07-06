@@ -14,4 +14,6 @@ Template.prototype.setAlpha = GameObject.prototype.setAlpha;
 
 Template.prototype.setCenter = GameObject.prototype.setCenter;
 
+Template.prototype.setOrigin = GameObject.prototype.setOrigin;
+
 Template.prototype.translate = GameObject.prototype.translate;
