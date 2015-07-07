@@ -9,9 +9,7 @@ RigidBody.prototype.update = function() {
 	var go = this.gameObject;
 	var colliders = globals.currScene.getColliders(go);
 
-	if (go.moveHori) {
-		go.moveHori();
-	}
+	go.translate(new Point(Math.round(go.vel.x * globals.delta), 0));
 
 	for (var i = 0; i < colliders.length; i++) {
 
@@ -22,9 +20,7 @@ RigidBody.prototype.update = function() {
 	}
 
 	go.vel.y += globals.currScene.gravity;
-	if (go.moveVert) {
-		go.moveVert();
-	}
+	go.translate(new Point(0, Math.round(go.vel.y * globals.delta)));
 
 	for (var i = 0; i < colliders.length; i++) {
 

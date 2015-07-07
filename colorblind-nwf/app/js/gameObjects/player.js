@@ -6,9 +6,8 @@ function Player(no) {
 	this.alpha = 1;
 	this.vel = new Point(0, 0);
 	this.maxVel = 600;
-	this.airVel = 20;
-	this.friction = 0;
-	this.maxJump = -900;
+	this.airVel = 80;
+	this.maxJump = -1200;
 	this.isGrounded = false;
 
 	this.components = new Array(3);
@@ -36,7 +35,13 @@ Player.prototype.update = function() {
 
 	if (this.isGrounded) {
 		if (this.vel.x !== 0) {
-			this.state = "running";
+			if (this.vel.y !== 0) {
+				this.state = "jumping";
+				this.isGrounded = false;
+			}
+			else {
+				this.state = "running";
+			}
 		}
 		else {
 			this.state = "idle";
@@ -72,26 +77,29 @@ Player.prototype.changeImage = function(i) {
 
 }
 
-Player.prototype.moveHori = function() {
-
-	this.center.x += Math.round(this.vel.x * globals.delta);
-	this.origin = this.calculateOrigin();
-
-}
-
-Player.prototype.moveVert = function() {
-
-	this.center.y += Math.round(this.vel.y * globals.delta);
-	this.origin = this.calculateOrigin();
-
-}
-
 Player.prototype.jump = function() {
 
 	if (this.state !== "jumping") {
 		this.isGrounded = false;
 		this.vel.y += this.maxJump;
 		this.state = "jumping";
+	}
+
+}
+
+Player.prototype.applyFriction = function(f) {
+
+	if (this.vel.x > 0) {
+		this.vel.x -= f;
+		if (this.vel.x < 0) {
+			this.vel.x = 0;
+		}
+	}
+	else if (this.vel.x < 0) {
+		this.vel.x += f;
+		if (this.vel.x > 0) {
+			this.vel.x = 0;
+		}
 	}
 
 }
@@ -108,12 +116,6 @@ Player.prototype.accelLeft = function() {
 		if (this.dir === "l") {
 			this.vel.x = this.maxVel * -1;
 		}
-		else {
-			this.vel.x -= this.friction;
-			if (this.vel.x < 0) {
-				this.vel.x = 0;
-			}
-		}
 	}
 	else {
 		this.vel.x -= this.airVel;
@@ -126,27 +128,9 @@ Player.prototype.accelLeft = function() {
 
 Player.prototype.accelRight = function() {
 
-	if (this.dir === "r") {
-		if (this.isGrounded) {
-			this.vel.x = this.maxVel;
-		}
-	}
-	else {
-		this.vel.x += this.friction;
-		if (this.vel.x > 0) {
-			this.vel.x = 0;
-		}
-	}
-
 	if (this.isGrounded) {
 		if (this.dir === "r") {
 			this.vel.x = this.maxVel;
-		}
-		else {
-			this.vel.x -= this.friction;
-			if (this.vel.x < 0) {
-				this.vel.x = 0;
-			}
 		}
 	}
 	else {

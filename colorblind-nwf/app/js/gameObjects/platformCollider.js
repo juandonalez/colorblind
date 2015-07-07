@@ -2,7 +2,7 @@ function PlatformCollider(entity, x, y, width, height) {
 
 	this.tag = 'PlatformCollider';
 	this.entity = entity;
-	this.friction = 100;
+	this.friction = 200;
 
 	this.origin = new Point(x, y);
 	this.width = width;
@@ -42,15 +42,12 @@ PlatformCollider.prototype.onVerticalCollision = function(go) {
 
 	if (go.vel.y > 0) {
 
-		go.friction = this.friction;
-		if (go.dir === "l") {
-			go.accelRight();
-		}
-		else {
-			go.accelLeft();
+		if (go.applyFriction) {
+			go.applyFriction(this.friction);
 		}
 
-		go.setOrigin(new Point(go.origin.x, this.origin.y - go.height -1));
+		go.setOrigin(new Point(go.origin.x, this.origin.y - go.height - 1));
+
 		if (go.isGrounded !== null) {
 			go.isGrounded = true;
 		}

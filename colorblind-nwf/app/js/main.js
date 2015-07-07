@@ -17,6 +17,10 @@ var main = main || {};
 		globals.delta = (now - then)/1000;
 		then = now;
 
+		if (globals.delta > 0.15) {
+			globals.delta = 0.15;
+		}
+
 		if (globals.debugMode && globals.debug.fpsCounter) {
 			frames++;
 			frameTimer += globals.delta;
