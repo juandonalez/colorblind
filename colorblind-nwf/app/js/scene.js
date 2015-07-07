@@ -58,7 +58,7 @@ Scene.prototype.draw = function() {
 	// default canvas position is saved so it be reverted back to later
 	// context is translated to reflect camera pos
 	globals.bufferCtx.save();
-	globals.bufferCtx.translate(camera.offset.x, camera.offset.y);
+	globals.bufferCtx.translate(camera.origin.x * -1, camera.origin.y * -1);
 	globals.bufferCtx.globalAlpha = 1;
 
 	if (this.scrollers) {
@@ -86,9 +86,9 @@ Scene.prototype.draw = function() {
 			globals.player2.draw();
 		}
 
-		globals.gpCtx.drawImage(globals.buffer, camera.origin.x, camera.origin.y, camera.gpWidth, camera.gpHeight, 
+		globals.gpCtx.drawImage(globals.buffer, 0, 0, camera.gpWidth, camera.gpHeight, 
 			0, 0, globals.gpWidth, globals.gpHeight);
-		globals.tvCtx.drawImage(globals.buffer, camera.origin.x, camera.origin.y, camera.tvWidth, camera.tvHeight, 
+		globals.tvCtx.drawImage(globals.buffer, 0, 0, camera.tvWidth, camera.tvHeight, 
 			0, 0, globals.tvWidth, globals.tvHeight);
 
 	}
@@ -106,9 +106,9 @@ Scene.prototype.draw = function() {
 				globals.player2.draw();
 			}
 
-			globals.gpCtx.drawImage(globals.buffer, camera.origin.x, camera.origin.y, camera.gpWidth, camera.gpHeight, 
+			globals.gpCtx.drawImage(globals.buffer, 0, 0, camera.gpWidth, camera.gpHeight, 
 				0, 0, globals.gpWidth, globals.gpHeight);
-			globals.tvCtx.drawImage(globals.buffer, camera.origin.x, camera.origin.y, camera.tvWidth, camera.tvHeight, 
+			globals.tvCtx.drawImage(globals.buffer, 0, 0, camera.tvWidth, camera.tvHeight, 
 				0, 0, globals.tvWidth, globals.tvHeight);
 
 			// clear buffer and draw layer visible to gamepad screen
@@ -118,7 +118,7 @@ Scene.prototype.draw = function() {
 			this.levels[1].draw(2);
 			this.levels[2].draw(2);
 
-			globals.gpCtx.drawImage(globals.buffer, camera.origin.x, camera.origin.y, camera.gpWidth, camera.gpHeight, 
+			globals.gpCtx.drawImage(globals.buffer, 0, 0, camera.gpWidth, camera.gpHeight, 
 				0, 0, globals.gpWidth, globals.gpHeight);
 
 			// clear buffer and draw layer visible to tv screen
@@ -128,7 +128,7 @@ Scene.prototype.draw = function() {
 			this.levels[1].draw(3);
 			this.levels[2].draw(3);
 
-			globals.tvCtx.drawImage(globals.buffer, camera.origin.x, camera.origin.y, camera.tvWidth, camera.tvHeight, 
+			globals.tvCtx.drawImage(globals.buffer, 0, 0, camera.tvWidth, camera.tvHeight, 
 				0, 0, globals.tvWidth, globals.tvHeight);
 
 		}
@@ -143,17 +143,17 @@ Scene.prototype.draw = function() {
 		this.menus[m].draw();
 	}
 
-	globals.gpCtx.drawImage(globals.buffer, camera.origin.x, camera.origin.y, camera.width, camera.height, 
+	globals.gpCtx.drawImage(globals.buffer, 0, 0, camera.width, camera.height, 
 				0, 0, globals.gpWidth, globals.gpHeight);
 
 	if (globals.isWide) {
-		globals.tvCtx.drawImage(globals.buffer, camera.origin.x, camera.origin.y, camera.width, camera.height, 
+		globals.tvCtx.drawImage(globals.buffer, 0, 0, camera.width, camera.height, 
 				0, 0, globals.tvWidth, globals.tvHeight);
 	}
 	else {
 		globals.bufferCtx.save();
 		globals.bufferCtx.translate(160, 0);
-		globals.tvCtx.drawImage(globals.buffer, camera.origin.x, camera.origin.y, camera.tvWidth, camera.tvHeight, 
+		globals.tvCtx.drawImage(globals.buffer, 0, 0, camera.tvWidth, camera.tvHeight, 
 				0, 0, globals.tvWidth, globals.tvHeight);
 	}
 
