@@ -66,6 +66,14 @@ Level.prototype.draw = function(layer) {
 
 }
 
+Level.prototype.updateColliders = function() {
+
+	for (var i = 0; i < this.colliders.length; i++) {
+		this.colliders[i].translate(new Point(this.origin.x, 0));
+	}
+
+}
+
 Level.prototype.calculateCenter = GameObject.prototype.calculateCenter;
 
 Level.prototype.calculateOrigin = GameObject.prototype.calculateOrigin;

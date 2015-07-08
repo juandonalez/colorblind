@@ -25,6 +25,8 @@ PlatformCollider.prototype.calculateOrigin = GameObject.prototype.calculateOrigi
 
 PlatformCollider.prototype.intersects = GameObject.prototype.intersects;
 
+PlatformCollider.prototype.translate = GameObject.prototype.translate;
+
 PlatformCollider.prototype.onHorizontalCollision = function(go) {
 
 	if (go.vel.x > 0) {

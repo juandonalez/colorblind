@@ -218,7 +218,9 @@ Scene.prototype.start = function() {
 		this.levels[1] = this.pool[this.getNewIndex()];
 		this.levels[2] = this.pool[this.getNewIndex()];
 		this.levels[1].setOrigin(new Point(this.levels[0].width, 0));
+		this.levels[1].updateColliders();
 		this.levels[2].setOrigin(new Point(this.levels[1].origin.x + this.levels[1].width, 0));
+		this.levels[2].updateColliders();
 	}
 
 }
