@@ -49,7 +49,7 @@ Level.prototype.draw = function(layer) {
 	}
 
 	for (var i = this.top; i < this.height; i += tileSize) {
-		for (var j = 0; j < this.width; j += tileSize) {
+		for (var j = this.origin.x; j < this.origin.x + this.width; j += tileSize) {
 			if (layer[tile] !== 0 && layer[tile] !== null) {
 				var img = tileset[layer[tile]];
 				ctx.drawImage(img, j, i, tileSize, tileSize);

@@ -61,6 +61,8 @@ var camera = camera || {};
 
 	camera.pctToPoint = GameObject.prototype.pctToPoint;
 
+	camera.intersects = GameObject.prototype.intersects;
+
 	camera.pctToWidth = function(w) {
 
 		return (camera.width/100) * w;

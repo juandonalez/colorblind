@@ -70,15 +70,13 @@ Scene.prototype.draw = function() {
 	if (globals.mode === "duplicate" || globals.mode === "versus") {
 
 		if (this.levels) {
-			this.levels[0].draw(1);
-			this.levels[1].draw(1);
-			this.levels[2].draw(1);
-			this.levels[0].draw(2);
-			this.levels[1].draw(2);
-			this.levels[2].draw(2);
-			this.levels[0].draw(3);
-			this.levels[1].draw(3);
-			this.levels[2].draw(3);
+			for (var i = 0; i < 3; i++) {
+				if (camera.intersects(this.levels[i])) {
+					this.levels[i].draw(1);
+					this.levels[i].draw(2);
+					this.levels[i].draw(3);
+				}
+			}
 		}
 
 		globals.player1.draw();
@@ -97,9 +95,11 @@ Scene.prototype.draw = function() {
 		if (this.levels) {
 
 			// draw layer that is visible to both players
-			this.levels[0].draw(1);
-			this.levels[1].draw(1);
-			this.levels[2].draw(1);
+			for (var i = 0; i < 3; i++) {
+				if (camera.intersects(this.levels[i])) {
+					this.levels[i].draw(1);
+				}
+			}
 
 			globals.player1.draw();
 			if (globals.numPlayers === 2) {
@@ -114,9 +114,11 @@ Scene.prototype.draw = function() {
 			// clear buffer and draw layer visible to gamepad screen
 			globals.bufferCtx.clearRect(0, 0, globals.gameWidth, globals.gameHeight);
 
-			this.levels[0].draw(2);
-			this.levels[1].draw(2);
-			this.levels[2].draw(2);
+			for (var i = 0; i < 3; i++) {
+				if (camera.intersects(this.levels[i])) {
+					this.levels[i].draw(2);
+				}
+			}
 
 			globals.gpCtx.drawImage(globals.buffer, 0, 0, camera.gpWidth, camera.gpHeight, 
 				0, 0, globals.gpWidth, globals.gpHeight);
@@ -124,9 +126,11 @@ Scene.prototype.draw = function() {
 			// clear buffer and draw layer visible to tv screen
 			globals.bufferCtx.clearRect(0, 0, globals.gameWidth, globals.gameHeight);
 
-			this.levels[0].draw(3);
-			this.levels[1].draw(3);
-			this.levels[2].draw(3);
+			for (var i = 0; i < 3; i++) {
+				if (camera.intersects(this.levels[i])) {
+					this.levels[i].draw(3);
+				}
+			}
 
 			globals.tvCtx.drawImage(globals.buffer, 0, 0, camera.tvWidth, camera.tvHeight, 
 				0, 0, globals.tvWidth, globals.tvHeight);
