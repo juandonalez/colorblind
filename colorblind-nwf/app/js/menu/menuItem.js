@@ -126,6 +126,13 @@ MenuItem.prototype.confirm = function() {
 
 }
 
+MenuItem.prototype.deselect = function() {
+
+	this.selected = false;
+	this.scaler.start("easeInBack", this.defaultHeight, 0.25);
+
+}
+
 MenuItem.prototype.select = function() {
 
 	this.selected = true;
@@ -133,12 +140,5 @@ MenuItem.prototype.select = function() {
 
 	inputManager.active = false;
 	setTimeout(function() {inputManager.active = true;}, 150);
-
-}
-
-MenuItem.prototype.deselect = function() {
-
-	this.selected = false;
-	this.scaler.start("easeInBack", this.defaultHeight, 0.25);
 
 }

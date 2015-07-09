@@ -1,31 +1,32 @@
-function RigidBody(gameObject) {
+function RigidBody(ent) {
 
-	this.gameObject = gameObject;
+	this.ent = ent;
 
 }
 
 RigidBody.prototype.update = function() {
 
-	var go = this.gameObject;
-	var colliders = globals.currScene.getColliders(go);
+	var colliders = globals.currScene.getColliders(this.ent);
 
-	go.translate(new Point(Math.round(go.vel.x * globals.delta), 0));
+	// check for horizontal collisions first
+	this.ent.translate(Math.round(this.ent.vel.x * globals.delta), 0);
 
 	for (var i = 0; i < colliders.length; i++) {
 
-		if (go.intersects(colliders[i])) {
-			colliders[i].onHorizontalCollision(go);
+		if (this.ent.intersects(colliders[i])) {
+			colliders[i].onHorizontalCollision(this.ent);
 		}
 
 	}
 
-	go.vel.y += globals.currScene.gravity;
-	go.translate(new Point(0, Math.round(go.vel.y * globals.delta)));
+	// add gravity and check for any vertical collisions
+	this.ent.vel.y += globals.currScene.gravity;
+	this.ent.translate(0, Math.round(this.ent.vel.y * globals.delta));
 
 	for (var i = 0; i < colliders.length; i++) {
 
-		if (go.intersects(colliders[i])) {
-			colliders[i].onVerticalCollision(go);
+		if (this.ent.intersects(colliders[i])) {
+			colliders[i].onVerticalCollision(this.ent);
 		}
 
 	}

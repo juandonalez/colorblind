@@ -1,8 +1,6 @@
 function Overlay(menu, d) {
 
 	this.menu = menu;
-	this.components = [];
-	this.menuItems = {};
 
 	this.activePos = camera.pctToPoint(d.activePos);
 	this.inactivePos = camera.pctToPoint(d.inactivePos);
@@ -29,7 +27,8 @@ function Overlay(menu, d) {
 	}
 
 	this.origin = this.calculateOrigin();
-	this.menuItems = [];
+
+	this.menuItems = {};
 
 	for (var i = 0; i < d.menuItems.length; i++) {
 		// use pctToPoint to get the pos of menu item relative to this overlay
@@ -50,11 +49,13 @@ function Overlay(menu, d) {
 	}
 
 	this.easer = new Easer(this);
-	this.components.push(this.easer);
 	this.fader = new Fader(this);
-	this.components.push(this.fader);
 	this.scaler = new Scaler(this);
-	this.components.push(this.scaler);
+
+	this.components = new Array(3);
+	this.components[0] = this.easer;
+	this.components[1] = this.fader;
+	this.components[2] = this.scaler;
 
 	d = null;
 
@@ -94,8 +95,6 @@ Overlay.prototype.activate = function () {
 
 }
 
-Overlay.prototype.calculateOrigin = GameObject.prototype.calculateOrigin;
-
 Overlay.prototype.deactivate = function () {
 
 	this.easer.start("easeInBack", this.inactivePos, 1);
@@ -103,8 +102,6 @@ Overlay.prototype.deactivate = function () {
 	this.scaler.start("easeInBack", this.inactiveHeight, 1);
 
 }
-
-Overlay.prototype.pctToPoint = GameObject.prototype.pctToPoint;
 
 Overlay.prototype.resize = function(scale) {
 
@@ -132,15 +129,26 @@ Overlay.prototype.setAlpha = function(a) {
 
 }
 
-Overlay.prototype.setCenter = GameObject.prototype.setCenter;
+Overlay.prototype.translate = function(x, y) {
 
-Overlay.prototype.translate = function(p) {
-
-	this.center = this.center.add(p);
+	this.center.x += x;
+	this.center.y += y;
 	this.origin = this.calculateOrigin();
 
 	for (var m in this.menuItems) {
-		this.menuItems[m].translate(p);
+		this.menuItems[m].translate(x, y);
 	}
 
 }
+
+Overlay.prototype.calculateCenter = Entity.prototype.calculateCenter;
+
+Overlay.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
+
+Overlay.prototype.intersects = Entity.prototype.intersects;
+
+Overlay.prototype.pctToPoint = Entity.prototype.pctToPoint;
+
+Overlay.prototype.setCenter = Entity.prototype.setCenter;
+
+Overlay.prototype.setOrigin = Entity.prototype.setOrigin;

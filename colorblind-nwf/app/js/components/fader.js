@@ -1,7 +1,6 @@
-function Fader(entity) {
+function Fader(ent) {
 
-	this.entity = entity;
-
+	this.ent = ent;
 	this.active = false;
 
 	this.initial;
@@ -24,7 +23,7 @@ Fader.prototype.update = function() {
 		}
 
 		var transform = this.difference*(this.elapsed/this.duration) + this.initial;
-		this.entity.setAlpha(transform);
+		this.ent.setAlpha(transform);
 
 	}
 
@@ -33,7 +32,7 @@ Fader.prototype.update = function() {
 Fader.prototype.start = function(target, duration) {
 
 	this.active = true;
-	this.initial = this.entity.alpha;
+	this.initial = this.ent.alpha;
 	this.target = target;
 	this.duration = duration;
 	this.difference = this.target - this.initial;

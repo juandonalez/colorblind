@@ -1,10 +1,9 @@
-function Scaler(entity) {
+function Scaler(ent) {
 
-	this.entity = entity;
-
+	this.ent = ent;
 	this.active = false;
-	this.type;
 
+	this.type;
 	this.initial;
 	this.target;
 	this.duration;
@@ -24,6 +23,7 @@ Scaler.prototype.update = function() {
 			this.active = false;
 		}
 
+		// the whole easing function is "difference(c) * func + b" but we'll get func first
 		var t = this.elapsed;
 		var d = this.duration;
 		var b = this.initial;
@@ -40,8 +40,10 @@ Scaler.prototype.update = function() {
 		}
 
 		var transform = this.difference*func + b;
-		transform /= this.entity.height;
-		this.entity.resize(transform);
+		// divide transform by height to get a proportion that can then be used
+		// on any entities attached to this one
+		transform /= this.ent.height;
+		this.ent.resize(transform);
 
 	}
 
@@ -51,7 +53,7 @@ Scaler.prototype.start = function(type, target, duration) {
 
 	this.active = true;
 	this.type = type;
-	this.initial = this.entity.height;
+	this.initial = this.ent.height;
 	this.target = target;
 	this.duration = duration;
 	this.difference = this.target - this.initial;

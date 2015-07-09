@@ -2,13 +2,15 @@ function Menu(d) {
 
 	this.name = d.name;
 	this.active = d.active;
-	this.overlays = [];
+
+	// object for all menu items
+	// is empty now but overlays will add them
 	this.menuItems = {};
 
-	var o;
+	this.overlays = new Array(d.overlays.length);
+
 	for (var i = 0; i < d.overlays.length; i++) {
-		o = d.overlays[i];
-		this.overlays.push(new Overlay(this, o));
+		this.overlays[i] = new Overlay(this, d.overlays[i]);
 	}
 
 	d = null;

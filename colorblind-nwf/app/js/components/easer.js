@@ -1,10 +1,9 @@
-function Easer(entity) {
+function Easer(ent) {
 
-	this.entity = entity;
-
+	this.ent = ent;
 	this.active = false;
+	
 	this.type;
-
 	this.beginPos;
 	this.target;
 	this.duration;
@@ -25,7 +24,6 @@ Easer.prototype.update = function() {
 		}
 
 		// the whole easing function is "difference(c) * func + b" but we'll get func first
-
 		var t = this.elapsed;
 		var d = this.duration;
 		var b = this.beginPos;
@@ -41,11 +39,11 @@ Easer.prototype.update = function() {
 		var transform = this.difference.multiplyByNum(func);
 		transform = transform.add(b);
 
-		/* get the difference between the new pos the current pos.
-		we could just set the entity to the new pos, but by getting
-		the difference we can then apply the same tranform to other entities */
-		transform = transform.subtract(this.entity.center);
-		this.entity.translate(transform);
+		// get the difference between the new pos the current pos.
+		// we could just set the entity to the new pos, but by getting
+		// the difference we can then apply the same tranform to other entities
+		// transform = transform.subtract(this.entity.center);
+		this.ent.translate(transform.x, tranform.y);
 
 	}
 

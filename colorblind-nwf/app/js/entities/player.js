@@ -1,9 +1,9 @@
 function Player(no) {
 
 	this.state = "idle";
-
 	this.center = new Point(-500, -500);
 	this.alpha = 1;
+
 	this.vel = new Point(0, 0);
 	this.maxVel = 600;
 	this.airVel = 80;
@@ -68,48 +68,6 @@ Player.prototype.draw = function() {
 	}
 
 }
-
-Player.prototype.changeImage = function(i) {
-
-	this.width = i.width;
-	this.height = i.height;
-	this.origin = this.calculateOrigin();
-
-}
-
-Player.prototype.jump = function() {
-
-	if (this.state !== "jumping") {
-		this.isGrounded = false;
-		this.vel.y += this.maxJump;
-		this.state = "jumping";
-	}
-
-}
-
-Player.prototype.applyFriction = function(f) {
-
-	if (this.vel.x > 0) {
-		this.vel.x -= f;
-		if (this.vel.x < 0) {
-			this.vel.x = 0;
-		}
-	}
-	else if (this.vel.x < 0) {
-		this.vel.x += f;
-		if (this.vel.x > 0) {
-			this.vel.x = 0;
-		}
-	}
-
-}
-
-Player.prototype.calculateCenter = GameObject.prototype.calculateCenter;
-
-Player.prototype.calculateOrigin = GameObject.prototype.calculateOrigin;
-
-Player.prototype.intersects = GameObject.prototype.intersects;
-
 Player.prototype.accelLeft = function() {
 
 	if (this.isGrounded) {
@@ -142,14 +100,60 @@ Player.prototype.accelRight = function() {
 
 }
 
-Player.prototype.pctToPoint = GameObject.prototype.pctToPoint;
+Player.prototype.applyFriction = function(f) {
 
-Player.prototype.resize = GameObject.prototype.resize;
+	if (this.vel.x > 0) {
+		this.vel.x -= f;
+		if (this.vel.x < 0) {
+			this.vel.x = 0;
+		}
+	}
+	else if (this.vel.x < 0) {
+		this.vel.x += f;
+		if (this.vel.x > 0) {
+			this.vel.x = 0;
+		}
+	}
 
-Player.prototype.setAlpha = GameObject.prototype.setAlpha;
+}
 
-Player.prototype.setCenter = GameObject.prototype.setCenter;
+Player.prototype.setImage = function(i) {
 
-Player.prototype.setOrigin = GameObject.prototype.setOrigin;
+	this.image = i;
+	this.width = i.width;
+	this.height = i.height;
+	this.origin = this.calculateOrigin();
 
-Player.prototype.translate = GameObject.prototype.translate;
+}
+
+Player.prototype.jump = function() {
+
+	if (this.state !== "jumping") {
+		this.isGrounded = false;
+		this.vel.y += this.maxJump;
+		this.state = "jumping";
+	}
+
+}
+
+Player.prototype.activate = Entity.prototype.activate;
+
+Player.prototype.calculateCenter = Entity.prototype.calculateCenter;
+
+Player.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
+
+Player.prototype.deactivate = Entity.prototype.deactivate;
+
+Player.prototype.intersects = Entity.prototype.intersects;
+
+Player.prototype.pctToPoint = Entity.prototype.pctToPoint;
+
+Player.prototype.resize = Entity.prototype.resize;
+
+Player.prototype.setAlpha = Entity.prototype.setAlpha;
+
+Player.prototype.setCenter = Entity.prototype.setCenter;
+
+Player.prototype.setOrigin = Entity.prototype.setOrigin;
+
+Player.prototype.translate = Entity.prototype.translate;

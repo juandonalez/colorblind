@@ -1,19 +1,23 @@
 function Template() {}
 
-Template.prototype.calculateCenter = GameObject.prototype.calculateCenter;
+Template.prototype.activate = Entity.prototype.activate;
 
-Template.prototype.calculateOrigin = GameObject.prototype.calculateOrigin;
+Template.prototype.calculateCenter = Entity.prototype.calculateCenter;
 
-Template.prototype.intersects = GameObject.prototype.intersects;
+Template.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
 
-Template.prototype.pctToPoint = GameObject.prototype.pctToPoint;
+Template.prototype.deactivate = Entity.prototype.deactivate;
 
-Template.prototype.resize = GameObject.prototype.resize;
+Template.prototype.intersects = Entity.prototype.intersects;
 
-Template.prototype.setAlpha = GameObject.prototype.setAlpha;
+Template.prototype.pctToPoint = Entity.prototype.pctToPoint;
 
-Template.prototype.setCenter = GameObject.prototype.setCenter;
+Template.prototype.resize = Entity.prototype.resize;
 
-Template.prototype.setOrigin = GameObject.prototype.setOrigin;
+Template.prototype.setAlpha = Entity.prototype.setAlpha;
 
-Template.prototype.translate = GameObject.prototype.translate;
+Template.prototype.setCenter = Entity.prototype.setCenter;
+
+Template.prototype.setOrigin = Entity.prototype.setOrigin;
+
+Template.prototype.translate = Entity.prototype.translate;

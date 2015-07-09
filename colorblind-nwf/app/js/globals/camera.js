@@ -2,7 +2,7 @@ var camera = camera || {};
 
 (function() {
 
-	camera.origin = new Point(20, 20);
+	camera.origin = new Point(100, 20);
 	camera.width = 1280;
 	camera.height = 720;
 	camera.center = new Point(camera.width/2, camera.height/2);
@@ -59,16 +59,32 @@ var camera = camera || {};
 
 	}
 
-	camera.pctToPoint = GameObject.prototype.pctToPoint;
-
-	camera.intersects = GameObject.prototype.intersects;
-
 	camera.pctToWidth = function(w) {
 
 		return (camera.width/100) * w;
 
 	}
 
-	camera.setAlpha = GameObject.prototype.setAlpha;
+	camera.activate = Entity.prototype.activate;
+
+	camera.calculateCenter = Entity.prototype.calculateCenter;
+
+	camera.calculateOrigin = Entity.prototype.calculateOrigin;
+
+	camera.deactivate = Entity.prototype.deactivate;
+
+	camera.intersects = Entity.prototype.intersects;
+
+	camera.pctToPoint = Entity.prototype.pctToPoint;
+
+	camera.resize = Entity.prototype.resize;
+
+	camera.setAlpha = Entity.prototype.setAlpha;
+
+	camera.setCenter = Entity.prototype.setCenter;
+
+	camera.setOrigin = Entity.prototype.setOrigin;
+
+	camera.translate = Entity.prototype.translate;
 
 })();

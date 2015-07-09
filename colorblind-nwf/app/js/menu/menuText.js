@@ -2,7 +2,6 @@ function MenuText(d, menu) {
 
 	this.name = d.name;
 	this.menu = menu;
-	this.components = [];
 
 	this.center = d.center;
 	this.text = d.text;
@@ -34,7 +33,8 @@ function MenuText(d, menu) {
 	this.origin = this.calculateOrigin();
 
 	this.scaler = new Scaler(this);
-	this.components.push(this.scaler);
+	this.components = new Array(1);
+	this.components[0] = this.scaler;
 
 	d = null;
 
@@ -65,10 +65,6 @@ MenuText.prototype.draw = function() {
 
 }
 
-MenuText.prototype.calculateCenter = GameObject.prototype.calculateCenter;
-
-MenuText.prototype.calculateOrigin = GameObject.prototype.calculateOrigin;
-
 MenuText.prototype.calculateWidth = function() {
 
 	var ctx = globals.bufferCtx;
@@ -79,14 +75,6 @@ MenuText.prototype.calculateWidth = function() {
 
 }
 
-MenuText.prototype.confirm = MenuItem.prototype.confirm;
-
-MenuText.prototype.deselect = MenuItem.prototype.deselect;
-
-MenuText.prototype.intersects = GameObject.prototype.intersects;
-
-MenuText.prototype.pctToPoint = GameObject.prototype.pctToPoint;
-
 MenuText.prototype.resize = function(scale) {
 
 	this.height = Math.round(this.height*scale);
@@ -96,10 +84,28 @@ MenuText.prototype.resize = function(scale) {
 
 }
 
+MenuText.prototype.confirm = MenuItem.prototype.confirm;
+
+MenuText.prototype.deselect = MenuItem.prototype.deselect;
+
 MenuText.prototype.select = MenuItem.prototype.select;
 
-MenuText.prototype.setAlpha = GameObject.prototype.setAlpha;
+MenuText.prototype.activate = Entity.prototype.activate;
 
-MenuText.prototype.setCenter = GameObject.prototype.setCenter;
+MenuText.prototype.calculateCenter = Entity.prototype.calculateCenter;
 
-MenuText.prototype.translate = GameObject.prototype.translate;
+MenuText.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
+
+MenuText.prototype.deactivate = Entity.prototype.deactivate;
+
+MenuText.prototype.intersects = Entity.prototype.intersects;
+
+MenuText.prototype.pctToPoint = Entity.prototype.pctToPoint;
+
+MenuText.prototype.setAlpha = Entity.prototype.setAlpha;
+
+MenuText.prototype.setCenter = Entity.prototype.setCenter;
+
+MenuText.prototype.setOrigin = Entity.prototype.setOrigin;
+
+MenuText.prototype.translate = Entity.prototype.translate;

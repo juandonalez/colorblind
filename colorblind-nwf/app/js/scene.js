@@ -201,7 +201,7 @@ Scene.prototype.getNewIndex = function() {
 
 	while (inArray) {
 		if (rand === 1) {
-			rand = this.upper;
+			rand = upper;
 		}
 		else {
 			rand--;
@@ -215,15 +215,17 @@ Scene.prototype.getNewIndex = function() {
 
 Scene.prototype.start = function() {
 
-	globals.player1.setCenter(this.startPos);
+	globals.player1.setCenter(this.startPos.x, this.startPos.y);
 
 	if (this.levels) {
 		this.levels[0] = this.pool[0];
-		this.levels[1] = this.pool[this.getNewIndex()];
-		this.levels[2] = this.pool[this.getNewIndex()];
-		this.levels[1].setOrigin(new Point(this.levels[0].width, 0));
+		this.indexes[1] = this.getNewIndex();
+		this.levels[1] = this.pool[this.indexes[1]];
+		this.indexes[2] = this.getNewIndex();
+		this.levels[2] = this.pool[this.indexes[2]];
+		this.levels[1].setOrigin(this.levels[0].width, 0);
 		this.levels[1].updateColliders();
-		this.levels[2].setOrigin(new Point(this.levels[1].origin.x + this.levels[1].width, 0));
+		this.levels[2].setOrigin(this.levels[1].origin.x + this.levels[1].width, 0);
 		this.levels[2].updateColliders();
 	}
 

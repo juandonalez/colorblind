@@ -37,7 +37,9 @@ function MenuImage(d, overlay, menu) {
 	this.origin = this.calculateOrigin();
 
 	this.scaler = new Scaler(this);
-	this.components.push(this.scaler);
+
+	this.components = new Array(1);
+	this.components[0] = this.scaler;
 
 	d = null;
 
@@ -58,26 +60,6 @@ MenuImage.prototype.draw = function() {
 
 }
 
-MenuImage.prototype.calculateCenter = GameObject.prototype.calculateCenter;
-
-MenuImage.prototype.calculateOrigin = GameObject.prototype.calculateOrigin;
-
-MenuImage.prototype.confirm = MenuItem.prototype.confirm;
-
-MenuImage.prototype.deselect = MenuItem.prototype.deselect;
-
-MenuImage.prototype.intersects = GameObject.prototype.intersects;
-
-MenuImage.prototype.pctToPoint = GameObject.prototype.pctToPoint;
-
-MenuImage.prototype.resize = GameObject.prototype.resize;
-
-MenuImage.prototype.select = MenuItem.prototype.select;
-
-MenuImage.prototype.setAlpha = GameObject.prototype.setAlpha;
-
-MenuImage.prototype.setCenter = GameObject.prototype.setCenter;
-
 MenuImage.prototype.translate = function(p) {
 
 	this.center = this.center.add(p);
@@ -88,3 +70,31 @@ MenuImage.prototype.translate = function(p) {
 	}
 
 }
+
+MenuImage.prototype.cancel = MenuItem.prototype.cancel;
+
+MenuImage.prototype.confirm = MenuItem.prototype.confirm;
+
+MenuImage.prototype.deselect = MenuItem.prototype.deselect;
+
+MenuImage.prototype.select = MenuItem.prototype.select;
+
+MenuImage.prototype.activate = Entity.prototype.activate;
+
+MenuImage.prototype.calculateCenter = Entity.prototype.calculateCenter;
+
+MenuImage.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
+
+MenuImage.prototype.deactivate = Entity.prototype.deactivate;
+
+MenuImage.prototype.intersects = Entity.prototype.intersects;
+
+MenuImage.prototype.pctToPoint = Entity.prototype.pctToPoint;
+
+MenuImage.prototype.resize = Entity.prototype.resize;
+
+MenuImage.prototype.setAlpha = Entity.prototype.setAlpha;
+
+MenuImage.prototype.setCenter = Entity.prototype.setCenter;
+
+MenuImage.prototype.setOrigin = Entity.prototype.setOrigin;
