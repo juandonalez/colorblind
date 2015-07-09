@@ -6,15 +6,22 @@ function RigidBody(ent) {
 
 RigidBody.prototype.update = function() {
 
-	var colliders = globals.currScene.getColliders(this.ent);
-
 	// check for horizontal collisions first
 	this.ent.translate(Math.round(this.ent.vel.x * globals.delta), 0);
 
-	for (var i = 0; i < colliders.length; i++) {
+	var colliders;
 
-		if (this.ent.intersects(colliders[i])) {
-			colliders[i].onHorizontalCollision(this.ent);
+	for (var i = 0; i < 3; i++) {
+
+		// get the colliders for each of the 3 levels
+		colliders = globals.currScene.getColliders(i, this.ent);
+
+		if (colliders) {
+			for (var j = 0; j < colliders.length; j++) {
+				if (this.ent.intersects(colliders[j])) {
+					colliders[j].onHorizontalCollision(this.ent);
+				}
+			}
 		}
 
 	}
@@ -23,10 +30,17 @@ RigidBody.prototype.update = function() {
 	this.ent.vel.y += globals.currScene.gravity;
 	this.ent.translate(0, Math.round(this.ent.vel.y * globals.delta));
 
-	for (var i = 0; i < colliders.length; i++) {
+	for (var i = 0; i < 3; i++) {
 
-		if (this.ent.intersects(colliders[i])) {
-			colliders[i].onVerticalCollision(this.ent);
+		// get the colliders for each of the 3 levels
+		colliders = globals.currScene.getColliders(i, this.ent);
+
+		if (colliders) {
+			for (var j = 0; j < colliders.length; j++) {
+				if (this.ent.intersects(colliders[j])) {
+					colliders[j].onVerticalCollision(this.ent);
+				}
+			}
 		}
 
 	}

@@ -173,15 +173,14 @@ Scene.prototype.changeMenu = function(curr, next) {
 
 }
 
-Scene.prototype.getColliders = function(go) {
+Scene.prototype.getColliders = function(index, go) {
 
-	for (var i = 0; i < 3; i++) {
-		if (this.levels[i].intersects(go)) {
-			return this.levels[i].colliders;
-		}
+	if (this.levels[index].intersects(go)) {
+		return this.levels[index].colliders;
 	}
-
-	return false;
+	else {
+		return false;
+	}
 
 }
 
