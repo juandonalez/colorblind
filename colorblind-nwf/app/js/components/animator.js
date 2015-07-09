@@ -21,6 +21,8 @@ Animator.prototype.update = function() {
 
 	if (this.accum >= this.frameTime) {
 
+		this.index++;
+
 		// if entity has states, checks to see if it has changed since last update
 		if (this.ent.state) {
 
