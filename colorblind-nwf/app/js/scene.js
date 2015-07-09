@@ -39,6 +39,17 @@ function Scene(name) {
 
 Scene.prototype.update = function() {
 
+	if (!camera.intersects(this.levels[0])) {
+		this.levels[0].deactivate();
+		this.indexes[0] = this.indexes[1];
+		this.indexes[1] = this.indexes[2];
+		this.indexes[2] = this.getNewIndex();
+		this.levels[0] = this.pool[this.indexes[0]];
+		this.levels[1] = this.pool[this.indexes[1]];
+		this.levels[2] = this.pool[this.indexes[2]];
+		this.levels[2].activate(this.levels[1].origin.x + this.levels[1].width);
+	}
+
 	if (this.scrollers) {
 		for (var i = 0; i < this.scrollers.length; i++) {
 			this.scrollers[i].update();
@@ -222,10 +233,8 @@ Scene.prototype.start = function() {
 		this.levels[1] = this.pool[this.indexes[1]];
 		this.indexes[2] = this.getNewIndex();
 		this.levels[2] = this.pool[this.indexes[2]];
-		this.levels[1].setOrigin(this.levels[0].width, 0);
-		this.levels[1].updateColliders();
-		this.levels[2].setOrigin(this.levels[1].origin.x + this.levels[1].width, 0);
-		this.levels[2].updateColliders();
+		this.levels[1].activate(this.levels[0].width);
+		this.levels[2].activate(this.levels[1].origin.x + this.levels[1].width);
 	}
 
 }

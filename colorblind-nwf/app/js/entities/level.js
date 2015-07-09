@@ -64,22 +64,34 @@ Level.prototype.draw = function(layer) {
 
 }
 
-Level.prototype.updateColliders = function() {
+Level.prototype.activate = function(x) {
 
-	// when a new level is added to the end, move its colliders
-	for (var i = 0; i < this.colliders.length; i++) {
-		this.colliders[i].translate(this.origin.x, 0);
+	if (x) {
+
+		// when a new level is added to the end, move its colliders
+		for (var i = 0; i < this.colliders.length; i++) {
+			this.colliders[i].translate(x, 0);
+		}
+
+		this.setOrigin(x, 0);
+
 	}
 
 }
 
-Level.prototype.activate = Entity.prototype.activate;
+Level.prototype.deactivate = function() {
+
+	for (var i = 0; i < this.colliders.length; i++) {
+		this.colliders[i].translate(this.origin.x * -1, 0);
+	}
+
+	this.setOrigin(0, 0);
+
+}
 
 Level.prototype.calculateCenter = Entity.prototype.calculateCenter;
 
 Level.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
-
-Level.prototype.deactivate = Entity.prototype.deactivate;
 
 Level.prototype.intersects = Entity.prototype.intersects;
 
