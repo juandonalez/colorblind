@@ -9,6 +9,9 @@ var camera = camera || {};
 	camera.center = camera.center.add(camera.origin);
 	camera.alpha = 1;
 
+	camera.isShaking = false;
+	camera.shakeTime = 0;
+
 	camera.gpWidth = camera.width;
 	camera.gpHeight = camera.height;
 
@@ -26,6 +29,10 @@ var camera = camera || {};
 	camera.update = function() {
 
 		camera.fader.update();
+
+		if (camera.isShaking) {
+			camera.shake();
+		}
 
 	}
 
@@ -62,6 +69,25 @@ var camera = camera || {};
 	camera.pctToWidth = function(w) {
 
 		return (camera.width/100) * w;
+
+	}
+
+	camera.shake = function() {
+
+		if (!camera.isShaking) {
+			camera.isShaking = true;
+			camera.shakeTime = 0;
+		}
+
+		camera.shakeTime += globals.delta;
+
+		if (camera.shakeTime >= 0.5) {
+			camera.isShaking = false;
+			camera.origin.y = 20;
+		}
+		else {
+			camera.origin.y = 20 + (Math.floor(Math.random() * 40) - 20);
+		}
 
 	}
 
