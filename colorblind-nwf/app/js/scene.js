@@ -9,6 +9,9 @@ function Scene(name) {
 	this.numLevels = data.numLevels;
 	this.numAllModes = data.numAllModes;
 
+	this.startSpeed = data.startSpeed;
+	this.maxSpeed = data.maxSpeed;
+
 	if (data.background) {
 		this.background = fileManager.images[data.background];
 	}
@@ -31,6 +34,10 @@ function Scene(name) {
 		this.pool = fileManager.levels[this.name];
 		this.indexes = [0, 0, 0];
 		this.levels = [this.pool[0], this.pool[0], this.pool[0]];
+	}
+
+	if (this.startSpeed > 0) {
+		this.timer = new Timer(this);
 	}
 
 	data = null;
@@ -61,6 +68,10 @@ Scene.prototype.update = function() {
 	}
 
 	globals.player1.update();
+
+	if (this.timer) {
+		this.timer.update();
+	}
 
 }
 
@@ -153,6 +164,11 @@ Scene.prototype.draw = function() {
 	// resets camera pos
 	globals.bufferCtx.restore();
 	globals.bufferCtx.clearRect(0, 0, globals.gameWidth, globals.gameHeight);
+
+	if (this.timer) {
+		globals.gpCtx.fillStyle = "white";
+		globals.gpCtx.fillText(this.timer.score, 50, 50);
+	}
 
 	for (var m in this.menus) {
 		this.menus[m].draw();

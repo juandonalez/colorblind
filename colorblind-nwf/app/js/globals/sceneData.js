@@ -255,11 +255,13 @@ var sceneData = sceneData || {};
 
 			numLevels: 4,
 			numAllModes: 4,
+			startSpeed: 1,
+			maxSpeed: 2,
 			tilesetSize: 53,
 			numTop: 4,
 			numMiddle: 4,
 			numBottom: 4,
-			startPos: new Point(200, 200)
+			startPos: new Point(200, 200),
 
 		},
 
