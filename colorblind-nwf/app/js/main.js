@@ -80,18 +80,8 @@ var main = main || {};
 		}
 		else {
 			globals.currScene = globals.scenes["splashScreen"];
+			globals.currScene.start();
 			setTimeout(function() {main.changeScene("mainMenu");}, 2000);
-		}
-
-		if (globals.currScene.background) {
-			globals.gpBackgroundCtx.drawImage(globals.currScene.background, 0, 0, globals.gpWidth, globals.gpHeight);
-
-			if (globals.isWide) {
-				globals.tvBackgroundCtx.drawImage(globals.currScene.background, 0, 0, globals.tvWidth, globals.tvHeight);
-			}
-			else {
-				globals.tvBackgroundCtx.drawImage(globals.currScene.background, 0, 0, globals.tvWidth, globals.tvHeight);
-			}
 		}
 
 		then = Date.now();
@@ -107,25 +97,6 @@ var main = main || {};
 		setTimeout(function() {
 			globals.currScene = globals.scenes[scene];
 			globals.currScene.start();
-
-			if (globals.currScene.background) {
-				globals.gpBackgroundCtx.drawImage(globals.currScene.background, 0, 0, globals.gpWidth, globals.gpHeight);
-				if (globals.isWiiU) {
-					if (!globals.isWide) {
-						globals.tvBackgroundCtx.drawImage(globals.currScene.background, 0, 0, globals.tvWidth, globals.tvHeight);
-					}
-					else {
-						globals.tvBackgroundCtx.drawImage(globals.currScene.background, 0, 0, globals.tvWidth, globals.tvHeight);
-					}
-				}
-			}
-			else {
-				globals.gpBackgroundCtx.clearRect(0, 0, globals.gpWidth, globals.gpHeight);
-				if (globals.isWiiU) {
-					globals.tvBackgroundCtx.clearRect(0, 0, globals.tvWidth, globals.tvHeight);
-				}
-			}
-
 			running = true;
 			camera.fadeIn();
 		}, 2000);

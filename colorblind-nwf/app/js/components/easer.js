@@ -42,8 +42,8 @@ Easer.prototype.update = function() {
 		// get the difference between the new pos the current pos.
 		// we could just set the entity to the new pos, but by getting
 		// the difference we can then apply the same tranform to other entities
-		// transform = transform.subtract(this.entity.center);
-		this.ent.translate(transform.x, tranform.y);
+		transform = transform.subtract(this.ent.center);
+		this.ent.translate(Math.round(transform.x), Math.round(transform.y));
 
 	}
 
@@ -53,7 +53,7 @@ Easer.prototype.start = function(type, target, duration) {
 
 	this.active = true;
 	this.type = type;
-	this.beginPos = this.entity.center;
+	this.beginPos = this.ent.center.copy();
 	this.target = target;
 	this.duration = duration;
 	this.difference = this.target.subtract(this.beginPos);

@@ -5,12 +5,19 @@ function Scene(name) {
 
 	var data = sceneData[this.name];
 
-	this.startPos = data.startPos;
 	this.numLevels = data.numLevels;
 	this.numAllModes = data.numAllModes;
 
-	this.startSpeed = data.startSpeed;
-	this.maxSpeed = data.maxSpeed;
+	this.hasPlayer = data.hasPlayer;
+
+	if (data.startPos) {
+		this.startPos = data.startPos;
+	}
+
+	if (data.startSpeed) {
+		this.startSpeed = data.startSpeed;
+		this.maxSpeed = data.maxSpeed;
+	}
 
 	if (data.background) {
 		this.background = fileManager.images[data.background];
@@ -21,6 +28,10 @@ function Scene(name) {
 		for (var i = 0; i < data.scrollers.length; i++) {
 			this.scrollers[i] = new Scroller(this.name, data.scrollers[i]);
 		}
+	}
+
+	if (data.hasTimer) {
+		this.timer = new Timer(this);
 	}
 
 	if (data.menus) {
@@ -34,10 +45,6 @@ function Scene(name) {
 		this.pool = fileManager.levels[this.name];
 		this.indexes = [0, 0, 0];
 		this.levels = [this.pool[0], this.pool[0], this.pool[0]];
-	}
-
-	if (this.startSpeed > 0) {
-		this.timer = new Timer(this);
 	}
 
 	data = null;
@@ -67,7 +74,12 @@ Scene.prototype.update = function() {
 		this.menus[m].update();
 	}
 
-	globals.player1.update();
+	if (this.hasPlayer) {
+		globals.player1.update();
+		if (globals.numPlayers === 2) {
+			globals.player2.draw();
+		}
+	}
 
 	if (this.timer) {
 		this.timer.update();
@@ -101,9 +113,11 @@ Scene.prototype.draw = function() {
 			}
 		}
 
-		globals.player1.draw();
-		if (globals.numPlayers === 2) {
-			globals.player2.draw();
+		if (this.hasPlayer) {
+			globals.player1.draw();
+			if (globals.numPlayers === 2) {
+				globals.player2.draw();
+			}
 		}
 
 		globals.gpCtx.drawImage(globals.buffer, 0, 0, camera.gpWidth, camera.gpHeight, 
@@ -123,9 +137,11 @@ Scene.prototype.draw = function() {
 				}
 			}
 
-			globals.player1.draw();
-			if (globals.numPlayers === 2) {
-				globals.player2.draw();
+			if (this.hasPlayer) {
+				globals.player1.draw();
+				if (globals.numPlayers === 2) {
+					globals.player2.draw();
+				}
 			}
 
 			globals.gpCtx.drawImage(globals.buffer, 0, 0, camera.gpWidth, camera.gpHeight, 
@@ -177,16 +193,8 @@ Scene.prototype.draw = function() {
 	globals.gpCtx.drawImage(globals.buffer, 0, 0, camera.width, camera.height, 
 				0, 0, globals.gpWidth, globals.gpHeight);
 
-	if (globals.isWide) {
-		globals.tvCtx.drawImage(globals.buffer, 0, 0, camera.width, camera.height, 
+	globals.tvCtx.drawImage(globals.buffer, 0, 0, camera.width, camera.height, 
 				0, 0, globals.tvWidth, globals.tvHeight);
-	}
-	else {
-		globals.bufferCtx.save();
-		globals.bufferCtx.translate(160, 0);
-		globals.tvCtx.drawImage(globals.buffer, 0, 0, camera.tvWidth, camera.tvHeight, 
-				0, 0, globals.tvWidth, globals.tvHeight);
-	}
 
 	globals.bufferCtx.restore();
 	globals.bufferCtx.clearRect(0, 0, globals.gameWidth, globals.gameHeight);
@@ -241,7 +249,21 @@ Scene.prototype.getNewIndex = function() {
 
 Scene.prototype.start = function() {
 
-	globals.player1.setCenter(this.startPos.x, this.startPos.y);
+	globals.gpBackgroundCtx.clearRect(0, 0, globals.gpWidth, globals.gpHeight);
+	globals.tvBackgroundCtx.clearRect(0, 0, globals.tvWidth, globals.tvHeight);
+
+	if (this.background) {
+		globals.gpBackgroundCtx.drawImage(this.background, 0, 0, globals.gpWidth, globals.gpHeight);
+		globals.tvBackgroundCtx.drawImage(this.background, 0, 0, globals.tvWidth, globals.tvHeight);
+	}
+
+	if (this.hasPlayer) {
+		globals.player1.setCenter(this.startPos.x, this.startPos.y);
+	}
+
+	if (this.timer) {
+		this.timer.reset();
+	}
 
 	if (this.levels) {
 		this.levels[0] = this.pool[0];

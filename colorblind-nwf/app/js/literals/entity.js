@@ -10,13 +10,13 @@ Entity.prototype.activate = function() {
 
 Entity.prototype.calculateCenter = function() {
 
-	return new Point(this.origin.x + (this.width/2), this.origin.y + (this.height/2));
+	return new Point(Math.round(this.origin.x + (this.width/2)), Math.round(this.origin.y + (this.height/2)));
 
 }
 
 Entity.prototype.calculateOrigin = function() {
 
-	return new Point(this.center.x - (this.width/2), this.center.y - (this.height/2));
+	return new Point(Math.round(this.center.x - (this.width/2)), Math.round(this.center.y - (this.height/2)));
 
 }
 
@@ -41,14 +41,14 @@ Entity.prototype.intersects = function(ent) {
 
 Entity.prototype.pctToPoint = function(p) {
 
-	return new Point((this.width/100) * p.x + this.origin.x, (this.height/100) * p.y + this.origin.y);
+	return new Point(Math.round((this.width/100) * p.x + this.origin.x), Math.round((this.height/100) * p.y + this.origin.y));
 
 }
 
 Entity.prototype.resize = function(s) {
 
-	this.width *= s;
-	this.height *= s;
+	this.width = Math.round(this.width*s);
+	this.height = Math.round(this.height*s);
 	this.origin = this.calculateOrigin();
 
 }

@@ -71,7 +71,7 @@ MenuText.prototype.calculateWidth = function() {
 
 	ctx.font = this.height + "px " + globals.font;
 	ctx.lineWidth = this.lineWidth + "px";
-	return ctx.measureText(this.text).width;
+	return Math.round(ctx.measureText(this.text).width);
 
 }
 

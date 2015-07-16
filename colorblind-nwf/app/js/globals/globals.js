@@ -49,7 +49,6 @@ var globals = globals || {};
 			globals.isWide = false;
 		}
 
-		globals.tvWidth = globals.tvDisplay.width;
 		globals.tvCanvas = globals.tvDisplay.window.document.getElementById('tvCanvas');
 		globals.tvCanvas.height = globals.tvHeight;
 		globals.tvCanvas.width = globals.tvWidth;
@@ -87,13 +86,13 @@ var globals = globals || {};
 	globals.buffer.width = globals.gameWidth;
 	globals.buffer.height = globals.gameHeight;
 
-	globals.debugMode = true;
+	globals.debugMode = false;
 
 	globals.debug = {
 		backgrounds: false,
 		fpsCounter: false,
 		hitboxes: true,
-		startScene: "stage1"
+		startScene: "mainMenu"
 	};
 
 })();

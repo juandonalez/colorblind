@@ -19,14 +19,14 @@ var sceneData = sceneData || {};
 
 		splashScreen: {
 
-			background: "splashScreen",
 			numLevels: 0,
 			numAllModes: 0,
 			tilesetSize: 0,
 			numTop: 0,
 			numMiddle: 0,
 			numBottom: 0,
-			startPos: new Point(-500, -500)
+			hasPlayer: false,
+			hasTimer: false
 
 		},
 
@@ -38,7 +38,10 @@ var sceneData = sceneData || {};
 			numTop: 4,
 			numMiddle: 4,
 			numBottom: 0,
-			startPos: new Point(-500, -500),
+			hasPlayer: false,
+			hasTimer: false,
+			startSpeed: 0,
+			maxSpeed: 0,
 
 			scrollers: [
 				{
@@ -255,13 +258,15 @@ var sceneData = sceneData || {};
 
 			numLevels: 4,
 			numAllModes: 4,
-			startSpeed: 1,
-			maxSpeed: 2,
 			tilesetSize: 53,
 			numTop: 4,
 			numMiddle: 4,
 			numBottom: 4,
+			hasPlayer: true,
 			startPos: new Point(200, 200),
+			hasTimer: true,
+			startSpeed: 1,
+			maxSpeed: 2
 
 		},
 
@@ -273,7 +278,11 @@ var sceneData = sceneData || {};
 			numTop: 4,
 			numMiddle: 4,
 			numBottom: 4,
-			startPos: new Point(200, 200)
+			hasPlayer: true,
+			startPos: new Point(200, 200),
+			hasTimer: true,
+			startSpeed: 1,
+			maxSpeed: 2
 
 		},
 
@@ -285,7 +294,11 @@ var sceneData = sceneData || {};
 			numTop: 4,
 			numMiddle: 4,
 			numBottom: 4,
-			startPos: new Point(200, 200)
+			hasPlayer: true,
+			startPos: new Point(200, 200),
+			hasTimer: true,
+			startSpeed: 1,
+			maxSpeed: 2
 
 		}
 

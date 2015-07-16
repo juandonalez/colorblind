@@ -62,13 +62,19 @@ var camera = camera || {};
 
 	camera.pctToHeight = function(h) {
 
-		return (camera.height/100) * h;
+		return Math.round((camera.height/100) * h);
+
+	}
+
+	camera.pctToPoint = function(p) {
+
+		return new Point(Math.round((this.width/100) * p.x), Math.round((this.height/100) * p.y));
 
 	}
 
 	camera.pctToWidth = function(w) {
 
-		return (camera.width/100) * w;
+		return Math.round((camera.width/100) * w);
 
 	}
 
@@ -100,8 +106,6 @@ var camera = camera || {};
 	camera.deactivate = Entity.prototype.deactivate;
 
 	camera.intersects = Entity.prototype.intersects;
-
-	camera.pctToPoint = Entity.prototype.pctToPoint;
 
 	camera.resize = Entity.prototype.resize;
 

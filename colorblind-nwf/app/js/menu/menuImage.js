@@ -60,13 +60,14 @@ MenuImage.prototype.draw = function() {
 
 }
 
-MenuImage.prototype.translate = function(p) {
+MenuImage.prototype.translate = function(x, y) {
 
-	this.center = this.center.add(p);
+	this.center.x += x;
+	this.center.y += y;
 	this.origin = this.calculateOrigin();
 
 	if (this.menuText) {
-		this.menuText.translate(p);
+		this.menuText.translate(x, y);
 	}
 
 }

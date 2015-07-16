@@ -18,3 +18,10 @@ Timer.prototype.update = function() {
 	}
 
 }
+
+Timer.prototype.reset = function() {
+
+	this.score = 0;
+	this.accum = 0;
+
+}
