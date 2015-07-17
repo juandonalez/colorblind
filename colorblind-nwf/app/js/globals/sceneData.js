@@ -4,7 +4,7 @@ var sceneData = sceneData || {};
 
 	sceneData = {
 
-		totalNumImages: 288,
+		totalNumImages: 332,
 
 		imageNames: [
 			"splashScreen",
@@ -34,7 +34,7 @@ var sceneData = sceneData || {};
 
 			numLevels: 4,
 			numAllModes: 4,
-			tilesetSize: 53,
+			tilesetSize: 52,
 			numTop: 4,
 			numMiddle: 4,
 			numBottom: 0,
@@ -258,7 +258,7 @@ var sceneData = sceneData || {};
 
 			numLevels: 4,
 			numAllModes: 4,
-			tilesetSize: 53,
+			tilesetSize: 52,
 			numTop: 4,
 			numMiddle: 4,
 			numBottom: 4,
@@ -274,7 +274,7 @@ var sceneData = sceneData || {};
 
 			numLevels: 4,
 			numAllModes: 4,
-			tilesetSize: 53,
+			tilesetSize: 52,
 			numTop: 4,
 			numMiddle: 4,
 			numBottom: 4,
@@ -290,7 +290,7 @@ var sceneData = sceneData || {};
 
 			numLevels: 4,
 			numAllModes: 4,
-			tilesetSize: 53,
+			tilesetSize: 52,
 			numTop: 4,
 			numMiddle: 4,
 			numBottom: 4,

@@ -92,12 +92,21 @@ var fileManager = fileManager || {};
 
 		if (numLevels !== 0) {
 
-			var urls = new Array(numLevels);
-
-			for (var i = 0; i < numLevels; i++) {
-				var url = "levels/" + scene + "/" + i + ".json";
-				urls[i] = url;
+			if (globals.debugMode && globals.debug.levelTest) {
+				var urls = ["levels/test.json"];
 			}
+			else {
+			
+				var urls = new Array(numLevels);
+
+				for (var i = 0; i < numLevels; i++) {
+					var url = "levels/" + scene + "/" + i + ".json";
+					urls[i] = url;
+				}
+
+			}
+
+			
 
 			for (var i = 0; i < urls.length; i++) {
 				var url = urls[i];
@@ -113,8 +122,20 @@ var fileManager = fileManager || {};
 				request.send();
 			}
 
-			for (var i = 0; i < levelData.length; i++) {
-				fileManager.levels[scene][i] = new Level(levelData[i]);
+			// if testing a test level, just add it to the scene levels
+			if (globals.debugMode && globals.debug.levelTest) {
+
+				for (var i = 0; i < levelData.length; i++) {
+					fileManager.levels[scene][i] = new Level(levelData[0]);
+				}
+
+			}
+			else {
+
+				for (var i = 0; i < levelData.length; i++) {
+					fileManager.levels[scene][i] = new Level(levelData[i]);
+				}
+
 			}
 
 			levelData = null;
@@ -171,7 +192,7 @@ var fileManager = fileManager || {};
 			fileManager.tilesets[scene] = new Array(tilesetSize);
 			var tileset = fileManager.tilesets[scene];
 
-			for (var i = 0; i < tilesetSize; i++) {
+			for (var i = 1; i < tilesetSize + 1; i++) {
 				tileset[i] = new Image();
 				tileset[i].onload = fileLoaded;
 				tileset[i].src = "images/" + scene + "/tilesets/" + i + ".png";

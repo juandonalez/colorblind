@@ -1,40 +1,44 @@
 function Level(d) {
 
-	this.width = d.width;
+	this.width = d.width * globals.tileSize;
 	this.height = globals.gameHeight;
 	this.origin = new Point(0, 0);
 
 	// the level covers the whole screen
 	// top is where the tiles first appear
-	this.top = this.height - d.height;
+	this.top = this.height - (d.height * globals.tileSize);
 
-	this.layer1 = d.layer1;
-	this.layer2 = d.layer2;
-	this.layer3 = d.layer3;
+	this.layer1 = d.layers[0].data;
+	this.layer2 = d.layers[1].data;
+	this.layer3 = d.layers[2].data;
 
-	this.colliders = [d.colliders.length];
+	var colliders = d.layers[3].objects;
+	this.colliders = new Array(colliders.length);
 
-	for (var i = 0; i < d.colliders.length; i++) {
-		var col = d.colliders[i];
+	var col;
+	for (var i = 0; i < colliders.length; i++) {
+		col = colliders[i];
 		// collider y pos is relative to level top left corner
 		col.y += this.top;	
 		this.colliders[i] = new Platform(this, col.x, col.y, col.width, col.height);
 	}
 
-	for (var i = 0; i < d.entities.length; i++) {
+	/*for (var i = 0; i < d.entities.length; i++) {
 		var ent = d.entities[i];
 		// check class of entity and push new object to this.entities
-	}
+	}*/
 
 	this.center = this.calculateCenter();
 
+	col = null;
+	colliders = null;
 	d = null;
 
 }
 
 Level.prototype.update = function() {}
 
-Level.prototype.draw = function(layer) {
+Level.prototype.draw = function(layerNum) {
 
 	var ctx = globals.bufferCtx;
 	var tileset = fileManager.tilesets[globals.currScene.name];
@@ -42,10 +46,10 @@ Level.prototype.draw = function(layer) {
 	var tile = 0;
 	var layer;
 
-	if (layer === 1) {
+	if (layerNum === 1) {
 		layer = this.layer1;
 	}
-	else if (layer === 2) {
+	else if (layerNum === 2) {
 		layer = this.layer2;
 	}
 	else {
