@@ -106,9 +106,9 @@ Scene.prototype.draw = function() {
 		if (this.levels) {
 			for (var i = 0; i < 3; i++) {
 				if (camera.intersects(this.levels[i])) {
+					this.levels[i].draw(0);
 					this.levels[i].draw(1);
 					this.levels[i].draw(2);
-					this.levels[i].draw(3);
 				}
 			}
 		}
@@ -133,7 +133,7 @@ Scene.prototype.draw = function() {
 			// draw layer that is visible to both players
 			for (var i = 0; i < 3; i++) {
 				if (camera.intersects(this.levels[i])) {
-					this.levels[i].draw(1);
+					this.levels[i].draw(0);
 				}
 			}
 
@@ -154,7 +154,7 @@ Scene.prototype.draw = function() {
 
 			for (var i = 0; i < 3; i++) {
 				if (camera.intersects(this.levels[i])) {
-					this.levels[i].draw(2);
+					this.levels[i].draw(1);
 				}
 			}
 
@@ -166,7 +166,7 @@ Scene.prototype.draw = function() {
 
 			for (var i = 0; i < 3; i++) {
 				if (camera.intersects(this.levels[i])) {
-					this.levels[i].draw(3);
+					this.levels[i].draw(2);
 				}
 			}
 
@@ -271,6 +271,7 @@ Scene.prototype.start = function() {
 		this.levels[1] = this.pool[this.indexes[1]];
 		this.indexes[2] = this.getNewIndex();
 		this.levels[2] = this.pool[this.indexes[2]];
+		this.levels[0].activate(0);
 		this.levels[1].activate(this.levels[0].width);
 		this.levels[2].activate(this.levels[1].origin.x + this.levels[1].width);
 	}

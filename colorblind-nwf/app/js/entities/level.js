@@ -8,9 +8,12 @@ function Level(d) {
 	// top is where the tiles first appear
 	this.top = this.height - (d.height * globals.tileSize);
 
-	this.layer1 = d.layers[0].data;
-	this.layer2 = d.layers[1].data;
-	this.layer3 = d.layers[2].data;
+	this.layer0 = d.layers[0].data;
+	this.layer1 = d.layers[1].data;
+	this.layer2 = d.layers[2].data;
+
+	// swap the red and green layers when drawing
+	this.swap = false;
 
 	var colliders = d.layers[3].objects;
 	this.colliders = new Array(colliders.length);
@@ -47,19 +50,32 @@ Level.prototype.draw = function(layerNum) {
 	var layer;
 
 	if (layerNum === 1) {
-		layer = this.layer1;
+		if (this.swap) {
+			layer = this.layer2;
+		}
+		else {
+			layer = this.layer1;
+		}
 	}
 	else if (layerNum === 2) {
-		layer = this.layer2;
+		if (this.swap) {
+			layer = this.layer1;
+		}
+		else {
+			layer = this.layer2;
+		}
 	}
 	else {
-		layer = this.layer3;
+		layer = this.layer0;
 	}
+
+	var color = 0;
 
 	for (var i = this.top; i < this.height; i += tileSize) {
 		for (var j = this.origin.x; j < this.origin.x + this.width; j += tileSize) {
 			if (layer[tile] !== 0 && layer[tile] !== null) {
-				var img = tileset[layer[tile]];
+				color = 13*layerNum;
+				var img = tileset[layer[tile] + color];
 				ctx.drawImage(img, j, i, tileSize, tileSize);
 			}
 			tile++;
@@ -80,6 +96,9 @@ Level.prototype.activate = function(x) {
 		this.setOrigin(x, 0);
 
 	}
+
+	// randomly assign color to each layer
+	this.swap = Math.floor(Math.random() * 2) === 0;
 
 }
 
