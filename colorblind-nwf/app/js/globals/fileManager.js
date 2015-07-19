@@ -87,6 +87,7 @@ var fileManager = fileManager || {};
 	function loadLevels(scene) {
 
 		var numLevels = sceneData[scene].numLevels;
+		var numAllModes = sceneData[scene].numAllModes;
 		fileManager.levels[scene] = new Array(numLevels);
 		var levelData = new Array(numLevels);
 
@@ -99,9 +100,14 @@ var fileManager = fileManager || {};
 			
 				var urls = new Array(numLevels);
 
-				for (var i = 0; i < numLevels; i++) {
+				for (var i = 0; i < numAllModes; i++) {
 					var url = "levels/" + scene + "/" + i + ".json";
 					urls[i] = url;
+				}
+
+				for (var i = 0; i < (numLevels - numAllModes); i++) {
+					var url = "levels/" + scene + "/s" + i + ".json";
+					urls[i + numAllModes] = url;
 				}
 
 			}

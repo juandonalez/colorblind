@@ -150,7 +150,7 @@ Scene.prototype.draw = function() {
 				0, 0, globals.tvWidth, globals.tvHeight);
 
 			// clear buffer and draw layer visible to gamepad screen
-			globals.bufferCtx.clearRect(0, 0, globals.gameWidth, globals.gameHeight);
+			globals.bufferCtx.clearRect(camera.origin.x, camera.origin.y, globals.gameWidth, globals.gameHeight);
 
 			for (var i = 0; i < 3; i++) {
 				if (camera.intersects(this.levels[i])) {
@@ -162,7 +162,7 @@ Scene.prototype.draw = function() {
 				0, 0, globals.gpWidth, globals.gpHeight);
 
 			// clear buffer and draw layer visible to tv screen
-			globals.bufferCtx.clearRect(0, 0, globals.gameWidth, globals.gameHeight);
+			globals.bufferCtx.clearRect(camera.origin.x, camera.origin.y, globals.gameWidth, globals.gameHeight);
 
 			for (var i = 0; i < 3; i++) {
 				if (camera.intersects(this.levels[i])) {
@@ -180,11 +180,6 @@ Scene.prototype.draw = function() {
 	// resets camera pos
 	globals.bufferCtx.restore();
 	globals.bufferCtx.clearRect(0, 0, globals.gameWidth, globals.gameHeight);
-
-	if (this.timer) {
-		globals.gpCtx.fillStyle = "white";
-		globals.gpCtx.fillText(this.timer.score, 50, 50);
-	}
 
 	for (var m in this.menus) {
 		this.menus[m].draw();

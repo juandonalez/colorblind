@@ -256,7 +256,7 @@ var sceneData = sceneData || {};
 
 		stage1: {
 
-			numLevels: 4,
+			numLevels: 8,
 			numAllModes: 4,
 			tilesetSize: 52,
 			numTop: 4,
