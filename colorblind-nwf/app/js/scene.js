@@ -8,15 +8,17 @@ function Scene(name) {
 	this.numLevels = data.numLevels;
 	this.numAllModes = data.numAllModes;
 
-	this.hasPlayer = data.hasPlayer;
-
-	if (data.startPos) {
-		this.startPos = data.startPos;
-	}
+	this.speed = 0;
 
 	if (data.startSpeed) {
 		this.startSpeed = data.startSpeed;
 		this.maxSpeed = data.maxSpeed;
+	}
+
+	this.hasPlayer = data.hasPlayer;
+
+	if (data.startPos) {
+		this.startPos = data.startPos;
 	}
 
 	if (data.background) {
@@ -63,6 +65,12 @@ Scene.prototype.update = function() {
 		this.levels[2] = this.pool[this.indexes[2]];
 		this.levels[2].activate(this.levels[1].origin.x + this.levels[1].width);
 	}
+
+	if (this.speed > this.maxSpeed) {
+		this.speed = this.maxSpeed;
+	}
+
+	camera.translate(Math.round(this.speed * globals.delta), 0);
 
 	if (this.scrollers) {
 		for (var i = 0; i < this.scrollers.length; i++) {

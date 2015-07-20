@@ -265,8 +265,8 @@ var sceneData = sceneData || {};
 			hasPlayer: true,
 			startPos: new Point(200, 200),
 			hasTimer: true,
-			startSpeed: 1,
-			maxSpeed: 2
+			startSpeed: 50,
+			maxSpeed: 100
 
 		},
 
