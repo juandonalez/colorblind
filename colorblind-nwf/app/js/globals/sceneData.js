@@ -4,9 +4,10 @@ var sceneData = sceneData || {};
 
 	sceneData = {
 
-		totalNumImages: 332,
+		totalNumImages: 334,
 
 		imageNames: [
+			"stage1-bg",
 			"splashScreen",
 			"/menus/coop",
 			"/menus/duplicate",
@@ -34,7 +35,7 @@ var sceneData = sceneData || {};
 
 			numLevels: 4,
 			numAllModes: 4,
-			tilesetSize: 52,
+			tilesetSize: 53,
 			numTop: 4,
 			numMiddle: 4,
 			numBottom: 0,
@@ -256,17 +257,26 @@ var sceneData = sceneData || {};
 
 		stage1: {
 
+			background: "stage1-bg",
 			numLevels: 8,
 			numAllModes: 4,
-			tilesetSize: 52,
-			numTop: 4,
+			tilesetSize: 53,
+			numTop: 1,
 			numMiddle: 4,
 			numBottom: 4,
 			hasPlayer: true,
 			startPos: new Point(200, 200),
 			hasTimer: true,
-			startSpeed: 50,
-			maxSpeed: 100
+			startSpeed: 100,
+			maxSpeed: 200,
+
+			scrollers: [
+				{
+					name: "top",
+					y: 0,
+					speed: 0.5
+				}
+			]
 
 		},
 
@@ -274,7 +284,7 @@ var sceneData = sceneData || {};
 
 			numLevels: 4,
 			numAllModes: 4,
-			tilesetSize: 52,
+			tilesetSize: 53,
 			numTop: 4,
 			numMiddle: 4,
 			numBottom: 4,
@@ -290,7 +300,7 @@ var sceneData = sceneData || {};
 
 			numLevels: 4,
 			numAllModes: 4,
-			tilesetSize: 52,
+			tilesetSize: 53,
 			numTop: 4,
 			numMiddle: 4,
 			numBottom: 4,

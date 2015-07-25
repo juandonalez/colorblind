@@ -61,10 +61,10 @@ var fileManager = fileManager || {};
 		}
 
 		if (numBottom !== 0) {
-			fileManager.bottomBgs[scene] = new Array(numTop);
+			fileManager.bottomBgs[scene] = new Array(numBottom);
 			var bottomBgs = fileManager.bottomBgs[scene];
 
-			for (var i = 0; i < numTop; i++) {
+			for (var i = 0; i < numBottom; i++) {
 				bottomBgs[i] = new Image();
 				bottomBgs[i].onload = fileLoaded;
 				bottomBgs[i].src = "images/" + scene + "/backgrounds/bottom/" + i + ".png";
@@ -198,7 +198,7 @@ var fileManager = fileManager || {};
 			fileManager.tilesets[scene] = new Array(tilesetSize);
 			var tileset = fileManager.tilesets[scene];
 
-			for (var i = 1; i < tilesetSize + 1; i++) {
+			for (var i = 0; i < tilesetSize; i++) {
 				tileset[i] = new Image();
 				tileset[i].onload = fileLoaded;
 				tileset[i].src = "images/" + scene + "/tilesets/" + i + ".png";

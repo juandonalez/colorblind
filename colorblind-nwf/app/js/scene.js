@@ -28,7 +28,7 @@ function Scene(name) {
 	if (data.scrollers) {
 		this.scrollers = new Array(data.scrollers.length);
 		for (var i = 0; i < data.scrollers.length; i++) {
-			this.scrollers[i] = new Scroller(this.name, data.scrollers[i]);
+			this.scrollers[i] = new Scroller(this, data.scrollers[i]);
 		}
 	}
 
@@ -267,6 +267,8 @@ Scene.prototype.start = function() {
 	if (this.timer) {
 		this.timer.reset();
 	}
+
+	this.speed = this.startSpeed;
 
 	if (this.levels) {
 		this.levels[0] = this.pool[0];

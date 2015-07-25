@@ -2,23 +2,26 @@ function Scroller(scene, d) {
 
 	this.x = 0;
 	this.y = d.y;
+	this.scene = scene;
 	this.speed = d.speed;
 
 	if (d.name === "top") {
-		this.pool = fileManager.topBgs[scene];
+		this.pool = fileManager.topBgs[scene.name];
 	}
 	else if (d.name === "mid") {
-		this.pool = fileManager.middleBgs[scene];
+		this.pool = fileManager.middleBgs[scene.name];
 	}
 	else {
-		this.pool = fileManager.bottomBgs[scene];
+		this.pool = fileManager.bottomBgs[scene.name];
 	}
 
 	this.indexes = new Array(3);
+	this.bgs = new Array(3);
 
 	for (var i = 0; i < 3; i++) {
 		var rand = Math.floor(Math.random()*this.pool.length);
 		this.indexes[i] = rand;
+		this.bgs[i] = this.pool[this.indexes[i]];
 	}
 
 	d = null;
@@ -27,17 +30,19 @@ function Scroller(scene, d) {
 
 Scroller.prototype.update = function() {
 
-	/*this.x = Math.floor(this.x - (this.speed * globals.delta));
+	this.x += Math.round((this.speed * this.scene.speed) * globals.delta);
 
-	var first = this.pool[this.indexes[0]];
+	var first = this.bgs[0];
 
-	if (this.x + first.width < 0) {
+	if (this.x + first.width < camera.origin.x) {
 		this.x += first.width;
-		var rand = Math.floor(Math.random()*this.pool.length);
 		this.indexes[0] = this.indexes[1];
 		this.indexes[1] = this.indexes[2];
-		this.indexes[2] = rand;
-	}*/
+		this.indexes[2] = Math.floor(Math.random()*this.pool.length);
+		this.bgs[0] = this.pool[this.indexes[0]];
+		this.bgs[1] = this.pool[this.indexes[1]];
+		this.bgs[2] = this.pool[this.indexes[2]];
+	}
 
 }
 
@@ -46,9 +51,9 @@ Scroller.prototype.draw = function() {
 	var ctx = globals.bufferCtx;
 	ctx.globalAlpha = 1;
 
-	var first = this.pool[this.indexes[0]];
-	var second = this.pool[this.indexes[1]];
-	var third = this.pool[this.indexes[2]];
+	var first = this.bgs[0];
+	var second = this.bgs[1];
+	var third = this.bgs[2];
 
 	// *****figure out camera pos stuff ***
 	ctx.drawImage(first, this.x, this.y);
