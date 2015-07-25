@@ -1,6 +1,7 @@
 function Player(no) {
 
 	this.state = "idle";
+	this.origin = new Point(0, 0);
 	this.center = new Point(-500, -500);
 	this.alpha = 1;
 
@@ -27,7 +28,7 @@ function Player(no) {
 
 	this.width = this.image.width;
 	this.height = this.image.height;
-	this.origin = this.calculateOrigin();
+	this.calculateOrigin();
 
 }
 
@@ -122,7 +123,7 @@ Player.prototype.setImage = function(i) {
 	this.image = i;
 	this.width = i.width;
 	this.height = i.height;
-	this.origin = this.calculateOrigin();
+	this.calculateOrigin();
 
 }
 

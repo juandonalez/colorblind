@@ -10,13 +10,15 @@ Entity.prototype.activate = function() {
 
 Entity.prototype.calculateCenter = function() {
 
-	return new Point(Math.round(this.origin.x + (this.width/2)), Math.round(this.origin.y + (this.height/2)));
+	this.center.x = Math.round(this.origin.x + (this.width/2));
+	this.center.y = Math.round(this.origin.y + (this.height/2));
 
 }
 
 Entity.prototype.calculateOrigin = function() {
 
-	return new Point(Math.round(this.center.x - (this.width/2)), Math.round(this.center.y - (this.height/2)));
+	this.origin.x = Math.round(this.center.x - (this.width/2))
+	this.origin.y = Math.round(this.center.y - (this.height/2));
 
 }
 
@@ -49,7 +51,7 @@ Entity.prototype.resize = function(s) {
 
 	this.width = Math.round(this.width*s);
 	this.height = Math.round(this.height*s);
-	this.origin = this.calculateOrigin();
+	this.calculateOrigin();
 
 }
 
@@ -63,7 +65,7 @@ Entity.prototype.setCenter = function(x, y) {
 
 	this.center.x = x;
 	this.center.y = y;
-	this.origin = this.calculateOrigin();
+	this.calculateOrigin();
 
 }
 
@@ -71,7 +73,7 @@ Entity.prototype.setOrigin = function(x, y) {
 
 	this.origin.x = x;
 	this.origin.y = y;
-	this.center = this.calculateCenter();
+	this.calculateCenter();
 
 }
 
@@ -79,6 +81,6 @@ Entity.prototype.translate = function(x, y) {
 
 	this.center.x += x;
 	this.center.y += y;
-	this.origin = this.calculateOrigin();
+	this.calculateOrigin();
 
 }

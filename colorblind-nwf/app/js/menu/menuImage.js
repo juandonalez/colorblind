@@ -5,6 +5,7 @@ function MenuImage(d, overlay, menu) {
 	this.menu = menu;
 	this.components = [];
 
+	this.origin = new Point(0, 0);
 	this.center = d.center;
 	this.image = fileManager.images[d.image];
 	this.width = this.image.width;
@@ -34,7 +35,7 @@ function MenuImage(d, overlay, menu) {
 		this.menuText = new MenuText(text);
 	}
 
-	this.origin = this.calculateOrigin();
+	this.calculateOrigin();
 
 	this.scaler = new Scaler(this);
 
@@ -64,7 +65,7 @@ MenuImage.prototype.translate = function(x, y) {
 
 	this.center.x += x;
 	this.center.y += y;
-	this.origin = this.calculateOrigin();
+	this.calculateOrigin();
 
 	if (this.menuText) {
 		this.menuText.translate(x, y);

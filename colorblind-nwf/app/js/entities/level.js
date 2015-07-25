@@ -3,6 +3,7 @@ function Level(d) {
 	this.width = d.width * globals.tileSize;
 	this.height = globals.gameHeight;
 	this.origin = new Point(0, 0);
+	this.center = new Point(0, 0);
 
 	// the level covers the whole screen
 	// top is where the tiles first appear
@@ -31,7 +32,7 @@ function Level(d) {
 		// check class of entity and push new object to this.entities
 	}*/
 
-	this.center = this.calculateCenter();
+	this.calculateCenter();
 
 	col = null;
 	colliders = null;

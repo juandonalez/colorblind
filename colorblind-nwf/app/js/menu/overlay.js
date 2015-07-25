@@ -26,7 +26,8 @@ function Overlay(menu, d) {
 		this.alpha = this.inactiveAlpha;
 	}
 
-	this.origin = this.calculateOrigin();
+	this.origin = new Point(0, 0);
+	this.calculateOrigin();
 
 	this.menuItems = {};
 
@@ -107,7 +108,7 @@ Overlay.prototype.resize = function(scale) {
 
 	this.width *= scale;
 	this.height *= scale;
-	this.origin = this.calculateOrigin();
+	this.calculateOrigin();
 
 	for (var m in this.menuItems) {
 		this.menuItems[m].resize(scale);
@@ -133,7 +134,7 @@ Overlay.prototype.translate = function(x, y) {
 
 	this.center.x += x;
 	this.center.y += y;
-	this.origin = this.calculateOrigin();
+	this.calculateOrigin();
 
 	for (var m in this.menuItems) {
 		this.menuItems[m].translate(x, y);

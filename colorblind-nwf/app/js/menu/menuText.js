@@ -3,8 +3,10 @@ function MenuText(d, menu) {
 	this.name = d.name;
 	this.menu = menu;
 
+	this.origin = new Point(0, 0);
 	this.center = d.center;
 	this.text = d.text;
+	this.width = 0;
 	this.height = d.fontSize;
 	this.defaultHeight = d.fontSize;
 	this.lineWidth = d.lineWidth;
@@ -29,8 +31,8 @@ function MenuText(d, menu) {
 		}
 	}
 
-	this.width = this.calculateWidth();
-	this.origin = this.calculateOrigin();
+	this.calculateWidth();
+	this.calculateOrigin();
 
 	this.scaler = new Scaler(this);
 	this.components = new Array(1);
@@ -71,7 +73,7 @@ MenuText.prototype.calculateWidth = function() {
 
 	ctx.font = this.height + "px " + globals.font;
 	ctx.lineWidth = this.lineWidth + "px";
-	return Math.round(ctx.measureText(this.text).width);
+	this.width = Math.round(ctx.measureText(this.text).width);
 
 }
 
@@ -79,8 +81,8 @@ MenuText.prototype.resize = function(scale) {
 
 	this.height = Math.round(this.height*scale);
 	this.lineWidth *= scale;
-	this.width = this.calculateWidth();
-	this.origin = this.calculateOrigin();
+	this.calculateWidth();
+	this.calculateOrigin();
 
 }
 

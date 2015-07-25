@@ -5,9 +5,10 @@ function Platform(ent, x, y, width, height) {
 	this.friction = 200;
 
 	this.origin = new Point(x, y);
+	this.center = new Point(0, 0);
 	this.width = width;
 	this.height = height;
-	this.center = this.calculateCenter();
+	this.calculateCenter();
 
 }
 
