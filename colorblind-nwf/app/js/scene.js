@@ -268,7 +268,9 @@ Scene.prototype.start = function() {
 		this.timer.reset();
 	}
 
-	this.speed = this.startSpeed;
+	if (this.startSpeed) {
+		this.speed = this.startSpeed;
+	}
 
 	if (this.levels) {
 		this.levels[0] = this.pool[0];

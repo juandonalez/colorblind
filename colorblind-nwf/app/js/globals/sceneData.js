@@ -41,19 +41,19 @@ var sceneData = sceneData || {};
 			numBottom: 0,
 			hasPlayer: false,
 			hasTimer: false,
-			startSpeed: 0,
-			maxSpeed: 0,
+			startSpeed: 100,
+			maxSpeed: 100,
 
 			scrollers: [
 				{
 					name: "top",
 					y: 0,
-					speed: 100
+					speed: 0.5
 				},
 				{
 					name: "mid",
 					y: 360,
-					speed: 200
+					speed: 0.75
 				}
 			],
 
