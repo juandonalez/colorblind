@@ -267,24 +267,24 @@ var sceneData = sceneData || {};
 			hasPlayer: true,
 			startPos: new Point(200, 200),
 			hasTimer: true,
-			startSpeed: 100,
+			startSpeed: 120,
 			maxSpeed: 200,
 
 			scrollers: [
 				{
 					name: "top",
 					y: 0,
-					speed: 0.5
+					speed: 70
 				},
 				{
 					name: "middle",
 					y: 530,
-					speed: 0.9
+					speed: 60
 				},
 				{
 					name: "bottom",
 					y: 560,
-					speed: 0.9
+					speed: 20
 				}
 			]
 

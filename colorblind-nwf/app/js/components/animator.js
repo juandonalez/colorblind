@@ -55,7 +55,7 @@ Animator.prototype.update = function() {
 
 		}
 
-		this.accum -= this.frameTime;
+		this.accum = 0;
 
 	}
 

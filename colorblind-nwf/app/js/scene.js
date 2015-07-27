@@ -9,6 +9,7 @@ function Scene(name) {
 	this.numAllModes = data.numAllModes;
 
 	this.speed = 0;
+	this.accum = 0;
 
 	if (data.startSpeed) {
 		this.startSpeed = data.startSpeed;
@@ -55,6 +56,12 @@ function Scene(name) {
 
 Scene.prototype.update = function() {
 
+	this.accum += globals.delta;
+	if (this.accum >= this.speed) {
+		camera.translate(1, 0);
+		this.accum = 0;
+	}
+
 	if (!camera.intersects(this.levels[0])) {
 		this.levels[0].deactivate();
 		this.indexes[0] = this.indexes[1];
@@ -65,12 +72,6 @@ Scene.prototype.update = function() {
 		this.levels[2] = this.pool[this.indexes[2]];
 		this.levels[2].activate(this.levels[1].origin.x + this.levels[1].width);
 	}
-
-	if (this.speed > this.maxSpeed) {
-		this.speed = this.maxSpeed;
-	}
-
-	camera.translate(Math.round(this.speed * globals.delta), 0);
 
 	if (this.scrollers) {
 		for (var i = 0; i < this.scrollers.length; i++) {
@@ -269,7 +270,8 @@ Scene.prototype.start = function() {
 	}
 
 	if (this.startSpeed) {
-		this.speed = this.startSpeed;
+		this.speed = 1/this.startSpeed;
+		this.accum = 0;
 	}
 
 	if (this.levels) {

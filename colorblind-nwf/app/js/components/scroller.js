@@ -3,7 +3,9 @@ function Scroller(scene, d) {
 	this.x = 0;
 	this.y = d.y;
 	this.scene = scene;
-	this.speed = d.speed;
+	this.startSpeed = d.speed;
+	this.speed = 1/d.speed;
+	this.accum = 0;
 
 	if (d.name === "top") {
 		this.pool = fileManager.topBgs[scene.name];
@@ -30,7 +32,11 @@ function Scroller(scene, d) {
 
 Scroller.prototype.update = function() {
 
-	this.x += Math.round((this.speed * this.scene.speed) * globals.delta);
+	this.accum += globals.delta;
+	if (this.accum >= this.speed) {
+		this.x++;
+		this.accum = 0;
+	}
 
 	var first = this.bgs[0];
 
