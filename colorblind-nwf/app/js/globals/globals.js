@@ -86,7 +86,7 @@ var globals = globals || {};
 	globals.buffer.width = globals.gameWidth;
 	globals.buffer.height = globals.gameHeight;
 
-	globals.debugMode = false;
+	globals.debugMode = true;
 
 	globals.debug = {
 		backgrounds: false,

@@ -4,7 +4,7 @@ var sceneData = sceneData || {};
 
 	sceneData = {
 
-		totalNumImages: 334,
+		totalNumImages: 328,
 
 		imageNames: [
 			"stage1-bg",
@@ -51,7 +51,7 @@ var sceneData = sceneData || {};
 					speed: 0.5
 				},
 				{
-					name: "mid",
+					name: "middle",
 					y: 360,
 					speed: 0.75
 				}
@@ -262,8 +262,8 @@ var sceneData = sceneData || {};
 			numAllModes: 4,
 			tilesetSize: 53,
 			numTop: 1,
-			numMiddle: 4,
-			numBottom: 4,
+			numMiddle: 1,
+			numBottom: 1,
 			hasPlayer: true,
 			startPos: new Point(200, 200),
 			hasTimer: true,
@@ -275,6 +275,16 @@ var sceneData = sceneData || {};
 					name: "top",
 					y: 0,
 					speed: 0.5
+				},
+				{
+					name: "middle",
+					y: 530,
+					speed: 0.9
+				},
+				{
+					name: "bottom",
+					y: 560,
+					speed: 0.9
 				}
 			]
 

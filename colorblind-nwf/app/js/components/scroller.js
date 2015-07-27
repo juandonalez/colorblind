@@ -8,7 +8,7 @@ function Scroller(scene, d) {
 	if (d.name === "top") {
 		this.pool = fileManager.topBgs[scene.name];
 	}
-	else if (d.name === "mid") {
+	else if (d.name === "middle") {
 		this.pool = fileManager.middleBgs[scene.name];
 	}
 	else {
