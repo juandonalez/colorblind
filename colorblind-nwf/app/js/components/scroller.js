@@ -4,7 +4,7 @@ function Scroller(scene, d) {
 	this.y = d.y;
 	this.scene = scene;
 	this.startSpeed = d.speed;
-	this.speed = 1/d.speed;
+	this.speed = 1/this.startSpeed;
 	this.accum = 0;
 
 	if (d.name === "top") {
@@ -65,5 +65,13 @@ Scroller.prototype.draw = function() {
 	ctx.drawImage(first, this.x, this.y);
 	ctx.drawImage(second, this.x + first.width, this.y);
 	ctx.drawImage(third, this.x + first.width + second.width, this.y);
+
+}
+
+Scroller.prototype.activate = function() {
+
+	this.x = 0;
+	this.speed = 1/this.startSpeed;
+	this.accum = 0;
 
 }

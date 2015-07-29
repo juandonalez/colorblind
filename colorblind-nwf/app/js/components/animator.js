@@ -60,3 +60,14 @@ Animator.prototype.update = function() {
 	}
 
 }
+
+Animator.prototype.activate = function() {
+
+	this.accum = 0;
+	this.index = 0;
+
+	if (this.ent.state) {
+		this.currState = this.ent.state;
+	}
+
+}

@@ -251,7 +251,7 @@ Scene.prototype.getNewIndex = function() {
 
 }
 
-Scene.prototype.start = function() {
+Scene.prototype.activate = function() {
 
 	globals.gpBackgroundCtx.clearRect(0, 0, globals.gpWidth, globals.gpHeight);
 	globals.tvBackgroundCtx.clearRect(0, 0, globals.tvWidth, globals.tvHeight);
@@ -262,16 +262,22 @@ Scene.prototype.start = function() {
 	}
 
 	if (this.hasPlayer) {
-		globals.player1.setCenter(this.startPos.x, this.startPos.y);
+		globals.player1.activate(this.startPos.x, this.startPos.y);
 	}
 
 	if (this.timer) {
-		this.timer.reset();
+		this.timer.activate();
 	}
 
 	if (this.startSpeed) {
 		this.speed = 1/this.startSpeed;
 		this.accum = 0;
+	}
+
+	if (this.scrollers) {
+		for (var i = 0; i < this.scrollers.length; i++) {
+			this.scrollers[i].activate();
+		}
 	}
 
 	if (this.levels) {

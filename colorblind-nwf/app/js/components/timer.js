@@ -19,7 +19,7 @@ Timer.prototype.update = function() {
 
 }
 
-Timer.prototype.reset = function() {
+Timer.prototype.activate = function() {
 
 	this.score = 0;
 	this.accum = 0;

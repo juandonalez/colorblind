@@ -69,6 +69,17 @@ Player.prototype.draw = function() {
 	}
 
 }
+
+Player.prototype.activate = function(x, y) {
+
+	this.setCenter(x, y);
+	this.vel.x = 0;
+	this.vel.y = 0;
+	this.state = "idle";
+	this.isGrounded = false;
+
+}
+
 Player.prototype.accelLeft = function() {
 
 	if (this.isGrounded) {
@@ -136,8 +147,6 @@ Player.prototype.jump = function() {
 	}
 
 }
-
-Player.prototype.activate = Entity.prototype.activate;
 
 Player.prototype.calculateCenter = Entity.prototype.calculateCenter;
 

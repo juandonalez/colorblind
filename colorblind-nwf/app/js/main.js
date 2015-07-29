@@ -75,12 +75,12 @@ var main = main || {};
 
 		if (globals.debugMode) {
 			globals.currScene = globals.scenes[globals.debug.startScene];
-			globals.currScene.start();
+			globals.currScene.activate();
 			running = true;
 		}
 		else {
 			globals.currScene = globals.scenes["splashScreen"];
-			globals.currScene.start();
+			globals.currScene.activate();
 			setTimeout(function() {main.changeScene("mainMenu");}, 2000);
 		}
 
@@ -96,7 +96,7 @@ var main = main || {};
 		camera.fadeOut();
 		setTimeout(function() {
 			globals.currScene = globals.scenes[scene];
-			globals.currScene.start();
+			globals.currScene.activate();
 			running = true;
 			camera.fadeIn();
 		}, 2000);
