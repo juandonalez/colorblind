@@ -78,4 +78,28 @@
  <tile id="25">
   <image width="20" height="20" source="basic-tileset/26.png"/>
  </tile>
+ <tile id="26">
+  <image width="20" height="20" source="basic-tileset/27.png"/>
+ </tile>
+ <tile id="27">
+  <image width="20" height="20" source="basic-tileset/28.png"/>
+ </tile>
+ <tile id="28">
+  <image width="20" height="20" source="basic-tileset/29.png"/>
+ </tile>
+ <tile id="29">
+  <image width="20" height="20" source="basic-tileset/30.png"/>
+ </tile>
+ <tile id="30">
+  <image width="20" height="20" source="basic-tileset/31.png"/>
+ </tile>
+ <tile id="31">
+  <image width="20" height="20" source="basic-tileset/32.png"/>
+ </tile>
+ <tile id="32">
+  <image width="20" height="20" source="basic-tileset/33.png"/>
+ </tile>
+ <tile id="33">
+  <image width="20" height="20" source="basic-tileset/34.png"/>
+ </tile>
 </tileset>

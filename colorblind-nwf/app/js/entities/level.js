@@ -48,6 +48,7 @@ Level.prototype.draw = function(layerNum) {
 	var tileset = fileManager.tilesets[globals.currScene.name];
 	var tileSize = globals.tileSize;
 	var tile = 0;
+	var tileOffset = 0;
 	var layer;
 
 	if (layerNum === 1) {
@@ -57,6 +58,7 @@ Level.prototype.draw = function(layerNum) {
 		else {
 			layer = this.layer1;
 		}
+		tileOffset = 34;
 	}
 	else if (layerNum === 2) {
 		if (this.swap) {
@@ -65,18 +67,17 @@ Level.prototype.draw = function(layerNum) {
 		else {
 			layer = this.layer2;
 		}
+		tileOffset = 47;
 	}
 	else {
 		layer = this.layer0;
 	}
 
-	var color = 0;
-
+	// offset of 34 brings us to red tiles, 47 to green tiles
 	for (var i = this.top; i < this.height; i += tileSize) {
 		for (var j = this.origin.x; j < this.origin.x + this.width; j += tileSize) {
 			if (layer[tile] !== 0 && layer[tile] !== null) {
-				color = 13*layerNum;
-				var img = tileset[layer[tile] + color];
+				var img = tileset[layer[tile] + tileOffset];
 				ctx.drawImage(img, j, i, tileSize, tileSize);
 			}
 			tile++;
