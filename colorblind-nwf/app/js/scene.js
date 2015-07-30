@@ -18,6 +18,11 @@ function Scene(name) {
 
 	this.hasPlayer = data.hasPlayer;
 
+	if (this.hasPlayer) {
+		this.leftDestoyer = new Destroyer(camera.origin.x, camera.origin.y, 10, camera.height, true);
+		this.bottomDestoyer = new Destroyer(camera.origin.x, camera.origin.y + camera.height + 140, camera.width, 10, false);
+	}
+
 	if (data.startPos) {
 		this.startPos = data.startPos;
 	}
@@ -85,8 +90,13 @@ Scene.prototype.update = function() {
 
 	if (this.hasPlayer) {
 		globals.player1.update();
+		this.leftDestoyer.update();
+		this.bottomDestoyer.update();
+		if (globals.player1.intersects(this.leftDestoyer) || globals.player1.intersects(this.bottomDestoyer)) {
+			console.log("Kill");
+		}
 		if (globals.numPlayers === 2) {
-			globals.player2.draw();
+			globals.player2.update();
 		}
 	}
 
@@ -128,6 +138,8 @@ Scene.prototype.draw = function() {
 				globals.player2.draw();
 			}
 		}
+
+		this.leftDestoyer.draw();
 
 		globals.gpCtx.drawImage(globals.buffer, 0, 0, camera.gpWidth, camera.gpHeight, 
 			0, 0, globals.gpWidth, globals.gpHeight);
@@ -178,6 +190,8 @@ Scene.prototype.draw = function() {
 					this.levels[i].draw(2);
 				}
 			}
+
+			this.leftDestoyer.draw();
 
 			globals.tvCtx.drawImage(globals.buffer, 0, 0, camera.tvWidth, camera.tvHeight, 
 				0, 0, globals.tvWidth, globals.tvHeight);
