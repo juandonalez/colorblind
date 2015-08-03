@@ -7,25 +7,9 @@ function Scene(name) {
 
 	this.numLevels = data.numLevels;
 	this.numAllModes = data.numAllModes;
-
+	this.hasPlayer = data.hasPlayer;
 	this.speed = 0;
 	this.accum = 0;
-
-	if (data.startSpeed) {
-		this.startSpeed = data.startSpeed;
-		this.maxSpeed = data.maxSpeed;
-	}
-
-	this.hasPlayer = data.hasPlayer;
-
-	if (this.hasPlayer) {
-		this.leftDestoyer = new Destroyer(camera.origin.x, camera.origin.y, 10, camera.height, true);
-		this.bottomDestoyer = new Destroyer(camera.origin.x, camera.origin.y + camera.height + 140, camera.width, 10, false);
-	}
-
-	if (data.startPos) {
-		this.startPos = data.startPos;
-	}
 
 	if (data.background) {
 		this.background = fileManager.images[data.background];
@@ -38,8 +22,19 @@ function Scene(name) {
 		}
 	}
 
-	if (data.hasTimer) {
-		this.timer = new Timer(this);
+	if (data.startPos) {
+		this.startPos = data.startPos;
+	}
+
+	if (data.startSpeed) {
+		this.startSpeed = data.startSpeed;
+		this.maxSpeed = data.maxSpeed;
+	}
+
+	if (this.numLevels > 0) {
+		this.pool = fileManager.levels[this.name];
+		this.indexes = [0, 0, 0];
+		this.levels = [this.pool[0], this.pool[0], this.pool[0]];
 	}
 
 	if (data.menus) {
@@ -49,10 +44,39 @@ function Scene(name) {
 		}
 	}
 
-	if (this.numLevels > 0) {
-		this.pool = fileManager.levels[this.name];
-		this.indexes = [0, 0, 0];
-		this.levels = [this.pool[0], this.pool[0], this.pool[0]];
+	// get number of entities and create entity array
+	var numEntities = 0;
+
+	if (this.hasPlayer) {
+		numEntities += 2;
+	}
+
+	if (numEntities > 0) {
+		this.entities = new Array(numEntities);
+	}
+
+	if (this.hasPlayer) {
+		this.entities[numEntities - 1] = new Destroyer(camera.origin.x, camera.origin.y, 10, camera.height);
+		numEntities--;
+		this.entities[numEntities - 1] = new Destroyer(camera.origin.x, camera.origin.y + camera.height + 140, camera.width, 10);
+		numEntities--;
+	}
+
+	// get number of components and create components array
+	var numComponents = 0;
+
+	if (data.hasTimer) {
+		numComponents++;
+	}
+
+	if (numComponents > 0) {
+		this.components = new Array(numComponents);
+	}
+
+	if (data.hasTimer) {
+		this.timer = new Timer(this);
+		this.components[numComponents - 1] = this.timer;
+		numComponents--;
 	}
 
 	data = null;
@@ -78,9 +102,15 @@ Scene.prototype.update = function() {
 		this.levels[2].activate(this.levels[1].origin.x + this.levels[1].width);
 	}
 
-	if (this.scrollers) {
-		for (var i = 0; i < this.scrollers.length; i++) {
-			this.scrollers[i].update();
+	if (this.entities) {
+		for (var i = 0; i < this.entities.length; i++) {
+			this.entities[i].update();
+		}
+	}
+
+	if (this.components) {
+		for (var i = 0; i < this.components.length; i++) {
+			this.components[i].update();
 		}
 	}
 
@@ -90,18 +120,9 @@ Scene.prototype.update = function() {
 
 	if (this.hasPlayer) {
 		globals.player1.update();
-		this.leftDestoyer.update();
-		this.bottomDestoyer.update();
-		if (globals.player1.intersects(this.leftDestoyer) || globals.player1.intersects(this.bottomDestoyer)) {
-			console.log("Kill");
-		}
 		if (globals.numPlayers === 2) {
 			globals.player2.update();
 		}
-	}
-
-	if (this.timer) {
-		this.timer.update();
 	}
 
 }
@@ -138,8 +159,6 @@ Scene.prototype.draw = function() {
 				globals.player2.draw();
 			}
 		}
-
-		this.leftDestoyer.draw();
 
 		globals.gpCtx.drawImage(globals.buffer, 0, 0, camera.gpWidth, camera.gpHeight, 
 			0, 0, globals.gpWidth, globals.gpHeight);
@@ -191,8 +210,6 @@ Scene.prototype.draw = function() {
 				}
 			}
 
-			this.leftDestoyer.draw();
-
 			globals.tvCtx.drawImage(globals.buffer, 0, 0, camera.tvWidth, camera.tvHeight, 
 				0, 0, globals.tvWidth, globals.tvHeight);
 
@@ -237,6 +254,17 @@ Scene.prototype.getColliders = function(index, go) {
 
 }
 
+Scene.prototype.getEntities = function(index, go) {
+
+	if (this.levels[index].intersects(go) && this.levels[index].entities) {
+		return this.levels[index].entities;
+	}
+	else {
+		return false;
+	}
+
+}
+
 Scene.prototype.getNewIndex = function() {
 
 	var upper;
@@ -273,25 +301,27 @@ Scene.prototype.activate = function() {
 	if (this.background) {
 		globals.gpBackgroundCtx.drawImage(this.background, 0, 0, globals.gpWidth, globals.gpHeight);
 		globals.tvBackgroundCtx.drawImage(this.background, 0, 0, globals.tvWidth, globals.tvHeight);
+	}	
+
+	if (this.entities) {
+		for (var i = 0; i < this.entities.length; i++) {
+			this.entities[i].activate();
+		}
+	}
+
+	if (this.components) {
+		for (var i = 0; i < this.components.length; i++) {
+			this.components[i].activate();
+		}
 	}
 
 	if (this.hasPlayer) {
 		globals.player1.activate(this.startPos.x, this.startPos.y);
 	}
 
-	if (this.timer) {
-		this.timer.activate();
-	}
-
 	if (this.startSpeed) {
 		this.speed = 1/this.startSpeed;
 		this.accum = 0;
-	}
-
-	if (this.scrollers) {
-		for (var i = 0; i < this.scrollers.length; i++) {
-			this.scrollers[i].activate();
-		}
 	}
 
 	if (this.levels) {

@@ -1,15 +1,10 @@
-function Destroyer(x, y, width, height, hasExploder) {
+function Destroyer(x, y, width, height) {
 
 	this.origin = new Point(x, y);
 	this.center = new Point(0, 0);
 	this.width = width;
 	this.height = height;
 	this.calculateCenter();
-
-	if (hasExploder) {
-		this.exploder = new Exploder(this, 6, ["#000000", "#ffffff"]);
-		this.exploder.start(100);
-	}
 
 }
 
@@ -20,13 +15,29 @@ Destroyer.prototype.update = function() {
 
 }
 
-Destroyer.prototype.draw = function() {
+Destroyer.prototype.draw = function() {}
 
-	if (this.exploder) {
-		this.exploder.draw();
+Destroyer.prototype.onCollision = function(ent) {
+
+	if (ent.destroy) {
+		ent.destroy();
 	}
 
 }
+
+Destroyer.prototype.onHorizontalCollision = function(ent) {
+
+	this.onCollision(ent);
+
+}
+
+Destroyer.prototype.onVerticalCollision = function(ent) {
+
+	this.onCollision(ent);
+
+}
+
+Destroyer.prototype.activate = Entity.prototype.activate;
 
 Destroyer.prototype.calculateCenter = Entity.prototype.calculateCenter;
 

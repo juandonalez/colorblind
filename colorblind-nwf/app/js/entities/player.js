@@ -129,6 +129,12 @@ Player.prototype.applyFriction = function(f) {
 
 }
 
+Player.prototype.destroy = function() {
+
+	console.log("destroyed");
+
+}
+
 Player.prototype.setImage = function(i) {
 
 	this.image = i;
