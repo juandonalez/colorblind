@@ -48,7 +48,7 @@ function Scene(name) {
 	var numEntities = 0;
 
 	if (this.hasPlayer) {
-		numEntities += 2;
+		numEntities += 3;
 	}
 
 	if (numEntities > 0) {
@@ -59,6 +59,8 @@ function Scene(name) {
 		this.entities[numEntities - 1] = new Destroyer(camera.origin.x, camera.origin.y, 10, camera.height);
 		numEntities--;
 		this.entities[numEntities - 1] = new Destroyer(camera.origin.x, camera.origin.y + camera.height + 140, camera.width, 10);
+		numEntities--;
+		this.entities[numEntities - 1] = new Blocker(camera.origin.x + camera.width, camera.origin.y, 10, camera.height);
 		numEntities--;
 	}
 

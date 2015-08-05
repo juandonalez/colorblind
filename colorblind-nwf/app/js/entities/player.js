@@ -1,5 +1,6 @@
 function Player(no) {
 
+	this.type = "Player";
 	this.state = "idle";
 	this.origin = new Point(0, 0);
 	this.center = new Point(-500, -500);

@@ -1,6 +1,6 @@
 function Platform(ent, x, y, width, height) {
 
-	this.tag = 'Platform';
+	this.type = "Platform";
 	this.ent = ent;
 	this.friction = 200;
 
