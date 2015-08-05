@@ -1,5 +1,7 @@
 function Level(d) {
 
+	this.active = false;
+
 	this.width = d.width * globals.tileSize;
 	this.height = globals.gameHeight;
 	this.origin = new Point(0, 0);
@@ -27,20 +29,34 @@ function Level(d) {
 		this.colliders[i] = new Platform(this, col.x, col.y, col.width, col.height);
 	}
 
-	/*for (var i = 0; i < d.entities.length; i++) {
-		var ent = d.entities[i];
-		// check class of entity and push new object to this.entities
-	}*/
+	var entities = d.layers[4].objects;
+	this.entities = new Array(entities.length);
+
+	var ent;
+	for (var i = 0; i < entities.length; i++) {
+		ent = entities[i];	
+		//this.entities[i] = new Platform(this, col.x, col.y, col.width, col.height);
+	}
 
 	this.calculateCenter();
 
 	col = null;
 	colliders = null;
+	ent = null;
+	entities = null;
 	d = null;
 
 }
 
-Level.prototype.update = function() {}
+Level.prototype.update = function() {
+
+	if (this.active) {
+		for (var i = 0; i < this.entities.length; i++) {
+			this.entities.update();
+		}
+	}
+
+}
 
 Level.prototype.draw = function(layerNum) {
 
@@ -86,7 +102,7 @@ Level.prototype.draw = function(layerNum) {
 
 }
 
-Level.prototype.activate = function(x) {
+Level.prototype.init = function(x) {
 
 	if (x) {
 
@@ -104,13 +120,53 @@ Level.prototype.activate = function(x) {
 
 }
 
+Level.prototype.activate = function() {
+
+	this.active = true;
+
+	if (this.entities) {
+		for (var i = 0; i < this.entities.length; i++) {
+			this.entities[i].activate();
+		}
+	}
+
+}
+
 Level.prototype.deactivate = function() {
+
+	this.active = false;
 
 	for (var i = 0; i < this.colliders.length; i++) {
 		this.colliders[i].translate(this.origin.x * -1, 0);
 	}
 
 	this.setOrigin(0, 0);
+
+	if (this.entities) {
+		for (var i = 0; i < this.entities.length; i++) {
+			this.entities[i].deactivate();
+		}
+	}
+
+}
+
+Level.prototype.pause = function() {
+
+	this.active = false;
+
+	for (var i = 0; i < this.entities.length; i++) {
+		this.entities.pause();
+	}
+
+}
+
+Level.prototype.resume = function() {
+
+	this.active = true;
+
+	for (var i = 0; i < this.entities.length; i++) {
+		this.entities.resume();
+	}
 
 }
 

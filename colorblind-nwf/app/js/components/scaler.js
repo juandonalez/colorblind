@@ -49,14 +49,16 @@ Scaler.prototype.update = function() {
 
 }
 
-Scaler.prototype.start = function(type, target, duration) {
+Scaler.prototype.activate = function(type, target, duration) {
 
-	this.active = true;
-	this.type = type;
-	this.initial = this.ent.height;
-	this.target = target;
-	this.duration = duration;
-	this.difference = this.target - this.initial;
-	this.elapsed = 0;
+	if (type !== null && target !== null && duration !== null) {
+		this.active = true;
+		this.type = type;
+		this.initial = this.ent.height;
+		this.target = target;
+		this.duration = duration;
+		this.difference = this.target - this.initial;
+		this.elapsed = 0;
+	}
 
 }

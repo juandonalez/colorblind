@@ -30,6 +30,10 @@ Entity.prototype.deactivate = function() {
 
 }
 
+Entity.prototype.draw = function() {}
+
+Entity.prototype.init = function() {}
+
 Entity.prototype.intersects = function(ent) {
 
 	return (
@@ -38,6 +42,14 @@ Entity.prototype.intersects = function(ent) {
 		this.origin.y <= ent.origin.y + ent.height &&
 		ent.origin.y <= this.origin.y + this.height
 	);
+
+}
+
+Entity.prototype.pause = function() {
+
+	if (this.active !== null) {
+		this.active = false;
+	}
 
 }
 
@@ -52,6 +64,14 @@ Entity.prototype.resize = function(s) {
 	this.width = Math.round(this.width*s);
 	this.height = Math.round(this.height*s);
 	this.calculateOrigin();
+
+}
+
+Entity.prototype.resume = function() {
+
+	if (this.active !== null) {
+		this.active = true;
+	}
 
 }
 
@@ -84,3 +104,5 @@ Entity.prototype.translate = function(x, y) {
 	this.calculateOrigin();
 
 }
+
+Entity.prototype.update = function() {}

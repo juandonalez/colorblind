@@ -15,8 +15,6 @@ Destroyer.prototype.update = function() {
 
 }
 
-Destroyer.prototype.draw = function() {}
-
 Destroyer.prototype.onCollision = function(ent) {
 
 	if (ent.destroy) {
@@ -43,11 +41,19 @@ Destroyer.prototype.calculateCenter = Entity.prototype.calculateCenter;
 
 Destroyer.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
 
+Destroyer.prototype.deactivate = Entity.prototype.deactivate;
+
+Destroyer.prototype.draw = Entity.prototype.draw;
+
 Destroyer.prototype.intersects = Entity.prototype.intersects;
+
+Destroyer.prototype.pause = Entity.prototype.pause;
 
 Destroyer.prototype.pctToPoint = Entity.prototype.pctToPoint;
 
 Destroyer.prototype.resize = Entity.prototype.resize;
+
+Destroyer.prototype.resume = Entity.prototype.resume;
 
 Destroyer.prototype.setAlpha = Entity.prototype.setAlpha;
 

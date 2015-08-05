@@ -162,9 +162,13 @@ Player.prototype.deactivate = Entity.prototype.deactivate;
 
 Player.prototype.intersects = Entity.prototype.intersects;
 
+Player.prototype.pause = Entity.prototype.pause;
+
 Player.prototype.pctToPoint = Entity.prototype.pctToPoint;
 
 Player.prototype.resize = Entity.prototype.resize;
+
+Player.prototype.resume = Entity.prototype.resume;
 
 Player.prototype.setAlpha = Entity.prototype.setAlpha;
 

@@ -49,14 +49,16 @@ Easer.prototype.update = function() {
 
 }
 
-Easer.prototype.start = function(type, target, duration) {
+Easer.prototype.activate = function(type, target, duration) {
 
-	this.active = true;
-	this.type = type;
-	this.beginPos = this.ent.center.copy();
-	this.target = target;
-	this.duration = duration;
-	this.difference = this.target.subtract(this.beginPos);
-	this.elapsed = 0;
+	if (type !== null && target !== null && duration !== null) {
+		this.active = true;
+		this.type = type;
+		this.beginPos = this.ent.center.copy();
+		this.target = target;
+		this.duration = duration;
+		this.difference = this.target.subtract(this.beginPos);
+		this.elapsed = 0;
+	}
 
 }

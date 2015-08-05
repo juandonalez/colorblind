@@ -50,13 +50,13 @@ var camera = camera || {};
 
 	camera.fadeIn = function() {
 
-		camera.fader.start(0, 1);
+		camera.fader.activate(0, 1);
 
 	}
 
 	camera.fadeOut = function() {
 
-		camera.fader.start(1, 1);
+		camera.fader.activate(1, 1);
 
 	}
 

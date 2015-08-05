@@ -60,15 +60,23 @@ Platform.prototype.onVerticalCollision = function(ent) {
 
 }
 
+Platform.prototype.activate = Entity.prototype.activate;
+
 Platform.prototype.calculateCenter = Entity.prototype.calculateCenter;
 
 Platform.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
 
+Platform.prototype.deactivate = Entity.prototype.deactivate;
+
 Platform.prototype.intersects = Entity.prototype.intersects;
+
+Platform.prototype.pause = Entity.prototype.pause;
 
 Platform.prototype.pctToPoint = Entity.prototype.pctToPoint;
 
 Platform.prototype.resize = Entity.prototype.resize;
+
+Platform.prototype.resume = Entity.prototype.resume;
 
 Platform.prototype.setAlpha = Entity.prototype.setAlpha;
 
@@ -77,3 +85,5 @@ Platform.prototype.setCenter = Entity.prototype.setCenter;
 Platform.prototype.setOrigin = Entity.prototype.setOrigin;
 
 Platform.prototype.translate = Entity.prototype.translate;
+
+Platform.prototype.update = Entity.prototype.update;

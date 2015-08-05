@@ -29,13 +29,15 @@ Fader.prototype.update = function() {
 
 }
 
-Fader.prototype.start = function(target, duration) {
+Fader.prototype.activate = function(target, duration) {
 
-	this.active = true;
-	this.initial = this.ent.alpha;
-	this.target = target;
-	this.duration = duration;
-	this.difference = this.target - this.initial;
-	this.elapsed = 0;
+	if (target !== null && duration !== null) {
+		this.active = true;
+		this.initial = this.ent.alpha;
+		this.target = target;
+		this.duration = duration;
+		this.difference = this.target - this.initial;
+		this.elapsed = 0;
+	}
 
 }
