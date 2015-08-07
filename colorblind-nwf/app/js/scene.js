@@ -56,11 +56,12 @@ function Scene(name) {
 	}
 
 	if (this.hasPlayer) {
-		this.entities[numEntities - 1] = new Destroyer(camera.origin.x, camera.origin.y, 10, camera.height);
+		this.chaser = new Chaser();
+		this.entities[numEntities - 1] = new Destroyer(camera.origin.x, -500, 10, camera.height + 500);
 		numEntities--;
 		this.entities[numEntities - 1] = new Destroyer(camera.origin.x, camera.origin.y + camera.height + 140, camera.width, 10);
 		numEntities--;
-		this.entities[numEntities - 1] = new Blocker(camera.origin.x + camera.width, camera.origin.y, 10, camera.height);
+		this.entities[numEntities - 1] = new Blocker(camera.origin.x + camera.width, -500, 10, camera.height + 500);
 		numEntities--;
 	}
 
@@ -125,6 +126,10 @@ Scene.prototype.update = function() {
 		for (var i = 0; i < this.scrollers.length; i++) {
 			this.scrollers[i].update();
 		}
+	}
+
+	if (this.chaser) {
+		this.chaser.update();
 	}
 
 	if (this.entities) {
@@ -246,6 +251,10 @@ Scene.prototype.draw = function() {
 	globals.bufferCtx.restore();
 	globals.bufferCtx.clearRect(0, 0, globals.gameWidth, globals.gameHeight);
 
+	if (this.chaser) {
+		this.chaser.draw();
+	}
+
 	for (var m in this.menus) {
 		this.menus[m].draw();
 	}
@@ -342,6 +351,10 @@ Scene.prototype.activate = function() {
 
 	if (this.hasPlayer) {
 		globals.player1.activate(this.startPos.x, this.startPos.y);
+	}
+
+	if (this.chaser) {
+		this.chaser.activate();
 	}
 
 	if (this.startSpeed) {

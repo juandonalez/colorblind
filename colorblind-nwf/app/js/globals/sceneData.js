@@ -4,9 +4,10 @@ var sceneData = sceneData || {};
 
 	sceneData = {
 
-		totalNumImages: 336,
+		totalNumImages: 337,
 
 		imageNames: [
+			"chaser",
 			"stage1-bg",
 			"splashScreen",
 			"/menus/coop",
