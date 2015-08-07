@@ -1,7 +1,7 @@
 function Scene(name) {
 
 	this.name = name;
-	this.gravity = 60;
+	this.gravity = 1;
 
 	var data = sceneData[this.name];
 

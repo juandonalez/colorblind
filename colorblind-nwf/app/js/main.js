@@ -4,6 +4,7 @@ var main = main || {};
 
 	"use strict";
 
+	var delta;
 	var then;
 	var now;
 	var frames = 0;
@@ -14,16 +15,12 @@ var main = main || {};
 	function update() {
 
 		now = Date.now();
-		globals.delta = (now - then)/1000;
+		delta = (now - then)/1000;
 		then = now;
-
-		if (globals.delta > 0.15) {
-			globals.delta = 0.15;
-		}
 
 		if (globals.debugMode && globals.debug.fpsCounter) {
 			frames++;
-			frameTimer += globals.delta;
+			frameTimer += delta;
 
 			if (frameTimer >= 1) {
 				console.log(frames);

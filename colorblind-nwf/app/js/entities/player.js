@@ -7,9 +7,9 @@ function Player(no) {
 	this.alpha = 1;
 
 	this.vel = new Point(0, 0);
-	this.maxVel = 600;
-	this.airVel = 80;
-	this.maxJump = -1200;
+	this.maxVel = 10;
+	this.airVel = 1;
+	this.maxJump = -20;
 	this.isGrounded = false;
 
 	this.components = new Array(3);

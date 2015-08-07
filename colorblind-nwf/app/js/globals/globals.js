@@ -22,7 +22,7 @@ var globals = globals || {};
 
 	globals.font = "Soviet";
 
-	globals.delta = 0;
+	globals.delta = 0.017;
 
 	globals.scenes = {};
 	globals.currScene;

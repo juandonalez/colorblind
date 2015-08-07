@@ -2,7 +2,7 @@ function Platform(ent, x, y, width, height) {
 
 	this.type = "Platform";
 	this.ent = ent;
-	this.friction = 200;
+	this.friction = 3;
 
 	this.origin = new Point(x, y);
 	this.center = new Point(0, 0);

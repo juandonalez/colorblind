@@ -7,7 +7,7 @@ function RigidBody(ent) {
 RigidBody.prototype.update = function() {
 
 	// check for horizontal collisions first
-	this.ent.translate(Math.round(this.ent.vel.x * globals.delta), 0);
+	this.ent.translate(this.ent.vel.x, 0);
 
 	var colliders;
 
@@ -49,7 +49,7 @@ RigidBody.prototype.update = function() {
 
 	// add gravity and check for any vertical collisions
 	this.ent.vel.y += globals.currScene.gravity;
-	this.ent.translate(0, Math.round(this.ent.vel.y * globals.delta));
+	this.ent.translate(0, this.ent.vel.y);
 
 	for (var i = 0; i < 3; i++) {
 
