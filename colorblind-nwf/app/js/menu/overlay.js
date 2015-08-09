@@ -90,17 +90,17 @@ Overlay.prototype.draw = function() {
 
 Overlay.prototype.activate = function () {
 
-	this.easer.start("easeOutBack", this.activePos, 1);
-	this.fader.start(this.activeAlpha, 1);
-	this.scaler.start("easeOutBack", this.activeHeight, 1);
+	this.easer.activate("easeOutBack", this.activePos, 1);
+	this.fader.activate(this.activeAlpha, 1);
+	this.scaler.activate("easeOutBack", this.activeHeight, 1);
 
 }
 
 Overlay.prototype.deactivate = function () {
 
-	this.easer.start("easeInBack", this.inactivePos, 1);
-	this.fader.start(this.inactiveAlpha, 1);
-	this.scaler.start("easeInBack", this.inactiveHeight, 1);
+	this.easer.activate("easeInBack", this.inactivePos, 1);
+	this.fader.activate(this.inactiveAlpha, 1);
+	this.scaler.activate("easeInBack", this.inactiveHeight, 1);
 
 }
 
