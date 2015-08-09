@@ -9,7 +9,9 @@ var inputManager = inputManager || {};
 	inputManager.right1 = false;
 	inputManager.down1 = false;
 	inputManager.confirm1 = false;
+	inputManager.canConfirm1 = true;
 	inputManager.cancel1 = false;
+	inputManager.canCancel1 = true;
 
 	window.addEventListener("keydown", keyDown, false);
 	window.addEventListener("keyup", keyUp, false);
@@ -48,11 +50,23 @@ var inputManager = inputManager || {};
 		}
 
 		if (code === 13) {
-			inputManager.confirm1 = true;
+			if (inputManager.canConfirm1) {
+				inputManager.confirm1 = true;
+				inputManager.canConfirm1 = false;
+			}
+			else {
+				inputManager.confirm1 = false;
+			}
 		}
 
 		if (code === 27) {
-			inputManager.cancel1 = true;
+			if (inputManager.canCancel1) {
+				inputManager.cancel1 = true;
+				inputManager.canCancel1 = false;
+			}
+			else {
+				inputManager.cancel1 = false;
+			}
 		}
 
 	}
@@ -82,10 +96,12 @@ var inputManager = inputManager || {};
 
 		if (code === 13) {
 			inputManager.confirm1 = false;
+			inputManager.canConfirm1 = true;
 		}
 
 		if (code === 27) {
 			inputManager.cancel1 = false;
+			inputManager.canCancel1 = true;
 		}
 
 	}
