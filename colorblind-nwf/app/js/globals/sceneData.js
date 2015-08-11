@@ -9,6 +9,7 @@ var sceneData = sceneData || {};
 		imageNames: [
 			"chaser",
 			"stage1-bg",
+			"stage2-bg",
 			"splashScreen",
 			"/menus/coop",
 			"/menus/duplicate",
@@ -293,17 +294,36 @@ var sceneData = sceneData || {};
 
 		stage2: {
 
+			background: "stage2-bg",
 			numLevels: 4,
 			numAllModes: 4,
-			tilesetSize: 53,
-			numTop: 4,
-			numMiddle: 4,
-			numBottom: 4,
+			tilesetSize: 61,
+			numTop: 1,
+			numMiddle: 1,
+			numBottom: 1,
 			hasPlayer: true,
 			startPos: new Point(200, 200),
 			hasTimer: true,
-			startSpeed: 1,
-			maxSpeed: 2
+			startSpeed: 120,
+			maxSpeed: 200,
+
+			scrollers: [
+				{
+					name: "top",
+					y: 0,
+					speed: 70
+				},
+				{
+					name: "middle",
+					y: 530,
+					speed: 60
+				},
+				{
+					name: "bottom",
+					y: 560,
+					speed: 20
+				}
+			]
 
 		},
 
