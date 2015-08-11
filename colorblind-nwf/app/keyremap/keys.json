@@ -1,29 +1,29 @@
 {
-    "remote0":
-    {
-        "UP"               : "Up",
-        "LEFT"             : "Left",
-        "DOWN"             : "Down",
-        "RIGHT"            : "Right", 
-        "PLUS"             : "Enter",
-        "MINUS"            : "Esc",
-        "A"                : "Z",
-        "B"                : "X"
-    },
-
-    "gp":
-    {
-        "UP"               : "Up",
-        "LEFT"             : "Left",
-        "DOWN"             : "Down",
-        "RIGHT"            : "Right", 
-        "PLUS"             : "Enter",
-        "MINUS"            : "Esc",
-        "A"                : "Z",
-        "B"                : "X",
-        "X"                : "A",
-        "Y"                : "S",
-        "L"                : "C",
-        "R"                : "V"
-    }
+  "remote0": {
+    "UP": "A",
+    "LEFT": "S",
+    "DOWN": "D",
+    "RIGHT": "W",
+    "PLUS": "Backspace",
+    "1": "Shift",
+    "2": "F1"
+  },
+  "gp": {
+    "UP": "Up",
+    "LEFT": "Left",
+    "DOWN": "Down",
+    "RIGHT": "Right",
+    "PLUS": "Enter",
+    "A": "Spacebar",
+    "B": "Esc"
+  },
+  "pro0": {
+    "A": "Shift",
+    "B": "F1",
+    "UP": "W",
+    "DOWN": "S",
+    "LEFT": "A",
+    "RIGHT": "D",
+    "PLUS": "Backspace"
+  }
 }
