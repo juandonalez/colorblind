@@ -94,7 +94,7 @@ Level.prototype.draw = function(layerNum) {
 		for (var j = this.origin.x; j < this.origin.x + this.width; j += tileSize) {
 			if (layer[tile] !== 0 && layer[tile] !== null) {
 				var img = tileset[layer[tile] + tileOffset];
-				ctx.drawImage(img, j, i, tileSize, tileSize);
+				ctx.drawImage(img, j, i);
 			}
 			tile++;
 		}

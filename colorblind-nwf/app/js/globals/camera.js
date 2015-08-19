@@ -2,9 +2,9 @@ var camera = camera || {};
 
 (function() {
 
-	camera.origin = new Point(20, 20);
-	camera.width = 1280;
-	camera.height = 720;
+	camera.origin = new Point(globals.tileSize, globals.tileSize);
+	camera.width = globals.gameWidth - (2*globals.tileSize);
+	camera.height = globals.gameHeight - (2*globals.tileSize);
 	camera.center = new Point(camera.width/2, camera.height/2);
 	camera.center = camera.center.add(camera.origin);
 	camera.alpha = 1;

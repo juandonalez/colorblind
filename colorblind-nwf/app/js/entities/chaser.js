@@ -1,8 +1,8 @@
-function Chaser(x) {
+function Chaser() {
 
 	this.image = fileManager.images["chaser"];
 	this.dir = 1;
-	this.offset = -58;
+	this.offset = -75;
 	this.speed = 1/30;
 	this.accum = 0;
 
@@ -13,10 +13,10 @@ Chaser.prototype.update = function() {
 	this.accum += globals.delta;
 
 	if (this.accum >= this.speed) {
-		if (this.offset === -50) {
+		if (this.offset === -75) {
 			this.dir = -1;
 		}
-		else if (this.offset === -58) {
+		else if (this.offset === -90) {
 			this.dir = 1;
 		}
 

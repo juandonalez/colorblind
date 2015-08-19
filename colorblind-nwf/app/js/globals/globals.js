@@ -8,17 +8,17 @@ var globals = globals || {};
 	globals.numPlayers = 1;
 	globals.mode = "duplicate";
 
-	globals.gameWidth = 1320;
-	globals.gameHeight = 760;
+	globals.tileSize = 30;
+	globals.numTilesHori = 66;
+	globals.numTilesVert = 38;
+
+	globals.gameWidth = globals.tileSize * globals.numTilesHori;
+	globals.gameHeight = globals.tileSize * globals.numTilesVert;
 
 	globals.playerWidth = 80;
 	globals.playerHeight = 140;
 	globals.playerStates = ["idle"];
 	globals.player1;
-
-	globals.tileSize = 20;
-	globals.numTilesHori = 66;
-	globals.numTilesVert = 38;
 
 	globals.font = "Soviet";
 
@@ -86,7 +86,7 @@ var globals = globals || {};
 	globals.buffer.width = globals.gameWidth;
 	globals.buffer.height = globals.gameHeight;
 
-	globals.debugMode = true;
+	globals.debugMode = false;
 
 	globals.debug = {
 		backgrounds: false,
