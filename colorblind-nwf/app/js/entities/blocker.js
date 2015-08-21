@@ -10,7 +10,7 @@ function Blocker(x, y, width, height) {
 
 Blocker.prototype.update = function() {
 
-	this.origin.x = camera.origin.x +  camera.width;
+	this.origin.x = camera.origin.x + camera.width;
 	this.calculateCenter();
 
 }
@@ -25,8 +25,6 @@ Blocker.prototype.onHorizontalCollision = function(ent) {
 		else if (ent.vel.x < 0) {
 			ent.setOrigin(this.origin.x + this.width + 1, ent.origin.y);
 		}
-
-		ent.vel.x = 0;
 
 	}
 
