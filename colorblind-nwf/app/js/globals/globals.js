@@ -93,7 +93,7 @@ var globals = globals || {};
 		fpsCounter: false,
 		hitboxes: true,
 		startScene: "stage1",
-		levelTest: false
+		levelTest: true
 	};
 
 })();
