@@ -25,8 +25,7 @@ function Level(d) {
 	for (var i = 0; i < colliders.length; i++) {
 		col = colliders[i];
 		// collider y pos is relative to level top left corner
-		col.y += this.top;	
-		this.colliders[i] = new Platform(this, col.x, col.y, col.width, col.height);
+		this.colliders[i] = new Platform(this, col.x, col.y + this.top, col.width, col.height);
 	}
 
 	var entities = d.layers[4].objects;
