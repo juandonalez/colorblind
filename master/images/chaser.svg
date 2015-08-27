@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="110"
+   height="720"
+   viewBox="0 0 110 720"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="chaser.svg"
+   inkscape:export-filename="C:\Users\John\Desktop\chaser.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="-483.50996"
+     inkscape:cy="315.48246"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="706"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     units="px" />
+  <defs
+     id="defs4" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1"
+     transform="translate(0,-332.36216)"
+     style="display:inline">
+    <path
+       style="opacity:0.75;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:2"
+       d="m 50,301.36208 -50,36 50,36 -50,35.99999 50,36 -50,35.99999 50,35.99999 -50,35.99999 50,36 -50,36 50,35.99999 -50,35.99999 50,36 -50,35.99999 50,36 -50,36 50,35.99999 -50,35.99999 50,36 -50,36.00001 50,36.0002 -50,36 50,36 10,0 50,-36 -50,-36 50,-36.0002 -50,-36.00001 50,-36 -50,-35.99999 50,-35.99999 -50,-36 50,-36 -50,-35.99999 50,-36 -50,-35.99999 50,-35.99999 -50,-36 50,-36 -50,-35.99999 50,-35.99999 -50,-35.99999 50,-36 -50,-35.99999 50,-36 -50,-36 -10,0 z"
+       id="path4146-6-2-5-7-1"
+       inkscape:connector-curvature="0" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer 2"
+     style="display:inline">
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#f8fff1;fill-opacity:1;stroke:none;stroke-width:2"
+       d="M 50,-36.000003 0,-1.016e-5 50,35.99999 l -50,36 50,36 -50,36 50,35.99999 -50,36 50,35.99999 -50,36 50,36 -50,35.99999 50,36 -50,35.99999 50,36 -50,36 50,35.99999 -50,36 50,35.99999 -50,36.00004 50,36.00004 -50,36 L 50,756 l 10,0 50,-35.99999 -50,-36 50,-36.00004 -50,-36.00004 50,-35.99999 -50,-36 50,-35.99999 -50,-36 50,-36 -50,-35.99999 50,-36 -50,-35.99999 50,-36 -50,-36 50,-35.99999 -50,-36 50,-35.99999 -50,-36 50,-36 -50,-36 L 110,-1.016e-5 60,-36.000003 l -10,0 z"
+       id="path4146-6-2-5-7-1-4" />
+  </g>
+</svg>
