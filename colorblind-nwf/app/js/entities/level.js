@@ -73,7 +73,7 @@ Level.prototype.draw = function(layerNum) {
 		else {
 			layer = this.layer1;
 		}
-		tileOffset = 34;
+		tileOffset = 30;
 	}
 	else if (layerNum === 2) {
 		if (this.swap) {
@@ -82,13 +82,13 @@ Level.prototype.draw = function(layerNum) {
 		else {
 			layer = this.layer2;
 		}
-		tileOffset = 47;
+		tileOffset = 43;
 	}
 	else {
 		layer = this.layer0;
 	}
 
-	// offset of 34 brings us to red tiles, 47 to green tiles
+	// offset of 30 brings us to red tiles, 43 to green tiles
 	for (var i = this.top; i < this.height; i += tileSize) {
 		for (var j = this.origin.x; j < this.origin.x + this.width; j += tileSize) {
 			if (layer[tile] !== 0 && layer[tile] !== null) {

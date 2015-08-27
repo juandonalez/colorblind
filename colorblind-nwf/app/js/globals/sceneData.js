@@ -4,7 +4,7 @@ var sceneData = sceneData || {};
 
 	sceneData = {
 
-		totalNumImages: 337,
+		totalNumImages: 333,
 
 		imageNames: [
 			"chaser",
@@ -262,7 +262,7 @@ var sceneData = sceneData || {};
 			background: "stage1-bg",
 			numLevels: 8,
 			numAllModes: 4,
-			tilesetSize: 61,
+			tilesetSize: 57,
 			numTop: 1,
 			numMiddle: 1,
 			numBottom: 1,

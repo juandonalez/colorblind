@@ -8,7 +8,7 @@ var globals = globals || {};
 	globals.numPlayers = 1;
 	globals.mode = "duplicate";
 
-	globals.tileSize = 30;
+	globals.tileSize = 20;
 	globals.numTilesHori = 66;
 	globals.numTilesVert = 38;
 

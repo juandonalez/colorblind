@@ -201,7 +201,7 @@ var fileManager = fileManager || {};
 			for (var i = 0; i < tilesetSize; i++) {
 				tileset[i] = new Image();
 				tileset[i].onload = fileLoaded;
-				tileset[i].src = "images/" + scene + "/tilesets/" + i + ".png";
+				tileset[i].src = "images/" + scene + "/tileset/" + i + ".png";
 			}
 		}
 

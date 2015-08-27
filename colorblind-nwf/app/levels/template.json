@@ -40,7 +40,7 @@
          "name":"colliders",
          "objects":[
                 {
-                 "height":90,
+                 "height":60,
                  "name":"",
                  "properties":
                     {
@@ -49,9 +49,9 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":1980,
+                 "width":1320,
                  "x":0,
-                 "y":1050
+                 "y":700
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -78,7 +78,7 @@
 
     },
  "renderorder":"left-up",
- "tileheight":30,
+ "tileheight":20,
  "tilesets":[
         {
          "firstgid":1,
@@ -89,7 +89,7 @@
 
             },
          "spacing":0,
-         "tileheight":30,
+         "tileheight":20,
          "tiles":
             {
              "0":
@@ -130,15 +130,15 @@
                 },
              "17":
                 {
-                 "image":"tileset\/18.png"
+                 "image":"tileset\/22.png"
                 },
              "18":
                 {
-                 "image":"tileset\/19.png"
+                 "image":"tileset\/23.png"
                 },
              "19":
                 {
-                 "image":"tileset\/20.png"
+                 "image":"tileset\/24.png"
                 },
              "2":
                 {
@@ -146,63 +146,47 @@
                 },
              "20":
                 {
-                 "image":"tileset\/21.png"
+                 "image":"tileset\/25.png"
                 },
              "21":
                 {
-                 "image":"tileset\/22.png"
+                 "image":"tileset\/26.png"
                 },
              "22":
                 {
-                 "image":"tileset\/23.png"
+                 "image":"tileset\/27.png"
                 },
              "23":
                 {
-                 "image":"tileset\/24.png"
+                 "image":"tileset\/28.png"
                 },
              "24":
                 {
-                 "image":"tileset\/25.png"
+                 "image":"tileset\/29.png"
                 },
              "25":
                 {
-                 "image":"tileset\/26.png"
+                 "image":"tileset\/30.png"
                 },
              "26":
                 {
-                 "image":"tileset\/27.png"
+                 "image":"tileset\/31.png"
                 },
              "27":
                 {
-                 "image":"tileset\/28.png"
+                 "image":"tileset\/32.png"
                 },
              "28":
                 {
-                 "image":"tileset\/29.png"
+                 "image":"tileset\/33.png"
                 },
              "29":
                 {
-                 "image":"tileset\/30.png"
+                 "image":"tileset\/34.png"
                 },
              "3":
                 {
                  "image":"tileset\/4.png"
-                },
-             "30":
-                {
-                 "image":"tileset\/31.png"
-                },
-             "31":
-                {
-                 "image":"tileset\/32.png"
-                },
-             "32":
-                {
-                 "image":"tileset\/33.png"
-                },
-             "33":
-                {
-                 "image":"tileset\/34.png"
                 },
              "4":
                 {
@@ -229,9 +213,9 @@
                  "image":"tileset\/10.png"
                 }
             },
-         "tilewidth":30
+         "tilewidth":20
         }],
- "tilewidth":30,
+ "tilewidth":20,
  "version":1,
  "width":66
 }
