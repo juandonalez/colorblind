@@ -310,13 +310,13 @@ var sceneData = sceneData || {};
 			scrollers: [
 				{
 					name: "top",
-					y: 0,
-					speed: 70
+					y: 260,
+					speed: 40
 				},
 				{
 					name: "middle",
-					y: 530,
-					speed: 60
+					y: 260,
+					speed: 30
 				},
 				{
 					name: "bottom",

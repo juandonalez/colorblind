@@ -63,9 +63,9 @@ var main = main || {};
 		globals.scenes = {
 			splashScreen: new Scene("splashScreen"),
 			mainMenu: new Scene("mainMenu"),
-			stage1: new Scene("stage1")//,
-			//stage2: new Scene("stage2"),
-			//stage3: new Scene("stage3")
+			stage1: new Scene("stage1"),
+			stage2: new Scene("stage2"),
+			stage3: new Scene("stage3")
 		};
 
 		globals.player1 = new Player(1);
