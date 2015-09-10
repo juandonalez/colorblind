@@ -8,9 +8,9 @@ var globals = globals || {};
 	globals.numPlayers = 1;
 	globals.mode = "duplicate";
 
-	globals.tileSize = 20;
-	globals.numTilesHori = 66;
-	globals.numTilesVert = 38;
+	globals.tileSize = 40;
+	globals.numTilesHori = 34;
+	globals.numTilesVert = 20;
 
 	globals.gameWidth = globals.tileSize * globals.numTilesHori;
 	globals.gameHeight = globals.tileSize * globals.numTilesVert;
@@ -91,7 +91,7 @@ var globals = globals || {};
 	globals.debug = {
 		backgrounds: false,
 		fpsCounter: false,
-		hitboxes: true,
+		hitboxes: false,
 		startScene: "stage1",
 		levelTest: true
 	};

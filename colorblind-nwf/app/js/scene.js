@@ -252,7 +252,7 @@ Scene.prototype.draw = function() {
 	globals.bufferCtx.clearRect(0, 0, globals.gameWidth, globals.gameHeight);
 
 	if (this.chaser) {
-		this.chaser.draw();
+		//this.chaser.draw();
 	}
 
 	for (var m in this.menus) {
