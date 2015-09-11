@@ -4,7 +4,7 @@ var sceneData = sceneData || {};
 
 	sceneData = {
 
-		totalNumImages: 349,
+		totalNumImages: 364,
 
 		imageNames: [
 			"chaser",
@@ -279,7 +279,7 @@ var sceneData = sceneData || {};
 			background: "stage2-bg",
 			numLevels: 4,
 			numAllModes: 4,
-			tilesetSize: 61,
+			tilesetSize: 79,
 			numTop: 1,
 			numMiddle: 1,
 			numBottom: 1,
@@ -287,25 +287,7 @@ var sceneData = sceneData || {};
 			startPos: new Point(200, 200),
 			hasTimer: true,
 			startSpeed: 120,
-			maxSpeed: 200,
-
-			scrollers: [
-				{
-					name: "top",
-					y: 260,
-					speed: 40
-				},
-				{
-					name: "middle",
-					y: 260,
-					speed: 30
-				},
-				{
-					name: "bottom",
-					y: 560,
-					speed: 20
-				}
-			]
+			maxSpeed: 200
 
 		},
 
