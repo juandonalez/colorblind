@@ -92,7 +92,7 @@ var globals = globals || {};
 		backgrounds: false,
 		fpsCounter: false,
 		hitboxes: false,
-		startScene: "stage3",
+		startScene: "stage2",
 		levelTest: true
 	};
 
