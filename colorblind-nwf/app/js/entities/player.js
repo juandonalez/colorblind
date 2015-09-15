@@ -27,8 +27,8 @@ function Player(no) {
 		this.components[2] = new RigidBody(this);
 	}
 
-	this.width = this.image.width;
-	this.height = this.image.height;
+	this.width = globals.playerWidth;
+	this.height = globals.playerHeight;
 	this.calculateOrigin();
 
 }
@@ -62,7 +62,7 @@ Player.prototype.update = function() {
 Player.prototype.draw = function() {
 
 	globals.bufferCtx.globalAlpha = this.alpha;
-	globals.bufferCtx.drawImage(this.image, this.origin.x, this.origin.y, this.image.width, this.image.height);
+	globals.bufferCtx.drawImage(this.image, this.center.x - (this.image.width/2), this.center.y - (this.image.height/2));
 
 	if (globals.debugMode && globals.debug.hitboxes) {
 		globals.bufferCtx.strokeStyle = "blue";
@@ -139,9 +139,6 @@ Player.prototype.destroy = function() {
 Player.prototype.setImage = function(i) {
 
 	this.image = i;
-	this.width = i.width;
-	this.height = i.height;
-	this.calculateOrigin();
 
 }
 

@@ -16,7 +16,7 @@ var globals = globals || {};
 	globals.gameHeight = globals.tileSize * globals.numTilesVert;
 
 	globals.playerWidth = 80;
-	globals.playerHeight = 140;
+	globals.playerHeight = 118;
 	globals.playerStates = ["idle"];
 	globals.player1;
 

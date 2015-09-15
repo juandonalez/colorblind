@@ -153,7 +153,7 @@ var fileManager = fileManager || {};
 	function loadPlayer1() {
 
 		var state = "idle";
-		var frames = 24;
+		var frames = 1;
 		fileManager.player1[state] = new Array(frames);
 
 		for (var i = 0; i < frames; i++) {
@@ -165,7 +165,7 @@ var fileManager = fileManager || {};
 		}
 
 		state = "running";
-		frames = 24;
+		frames = 4;
 		fileManager.player1[state] = new Array(frames);
 
 		for (var i = 0; i < frames; i++) {
@@ -177,7 +177,7 @@ var fileManager = fileManager || {};
 		}
 
 		state = "jumping";
-		frames = 24;
+		frames = 1;
 		fileManager.player1[state] = new Array(frames);
 
 		for (var i = 0; i < frames; i++) {
