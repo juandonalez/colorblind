@@ -18,7 +18,10 @@ var globals = globals || {};
 	globals.playerWidth = 80;
 	globals.playerHeight = 118;
 	globals.playerStates = ["idle"];
+
+	globals.player0;
 	globals.player1;
+	globals.player2;
 
 	globals.font = "Soviet";
 

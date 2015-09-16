@@ -4,7 +4,7 @@ var sceneData = sceneData || {};
 
 	sceneData = {
 
-		totalNumImages: 306,
+		totalNumImages: 318,
 
 		imageNames: [
 			"chaser",

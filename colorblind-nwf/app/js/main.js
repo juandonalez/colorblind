@@ -68,7 +68,9 @@ var main = main || {};
 			stage3: new Scene("stage3")
 		};
 
+		globals.player0 = new Player(0);
 		globals.player1 = new Player(1);
+		globals.player2 = new Player(2);
 
 		if (globals.debugMode) {
 			globals.currScene = globals.scenes[globals.debug.startScene];

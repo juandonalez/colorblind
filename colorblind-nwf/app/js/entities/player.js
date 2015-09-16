@@ -1,4 +1,4 @@
-function Player(no) {
+function Player(n) {
 
 	this.type = "Player";
 	this.state = "idle";
@@ -14,18 +14,10 @@ function Player(no) {
 
 	this.components = new Array(3);
 
-	if (no === 1) {
-		this.image = fileManager.player1["jumping"][0];
-		this.components[0] = new Player1Input(this);
-		this.components[1] = new Animator(this, fileManager.player1, 24);
-		this.components[2] = new RigidBody(this);
-	}
-	else {
-		this.image = fileManager.player2["idle"][0];
-		this.components[0] = new Player1Input(this);
-		this.components[1] = new Animator(this, fileManager.player2, 24);
-		this.components[2] = new RigidBody(this);
-	}
+	this.image = fileManager.players[n]["jumping"][0];
+	this.components[0] = new Player1Input(this);
+	this.components[1] = new Animator(this, fileManager.players[n], 24);
+	this.components[2] = new RigidBody(this);
 
 	this.width = globals.playerWidth;
 	this.height = globals.playerHeight;

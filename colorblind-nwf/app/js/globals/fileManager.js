@@ -10,7 +10,7 @@ var fileManager = fileManager || {};
 	fileManager.middleBgs = {};
 	fileManager.bottomBgs = {};
 	fileManager.images = {};
-	fileManager.player1 = {};
+	fileManager.players = [{}, {}, {}];
 
 	/* 
 		gets called each time an image is loaded, and dispatches an event to say when loading is done
@@ -150,41 +150,47 @@ var fileManager = fileManager || {};
 
 	}
 
-	function loadPlayer1() {
+	function loadPlayers() {
 
-		var state = "idle";
-		var frames = 1;
-		fileManager.player1[state] = new Array(frames);
+		for (var p = 0; p < 3; p++) {
 
-		for (var i = 0; i < frames; i++) {
+			var player = fileManager.players[p];
 
-			fileManager.player1[state][i] = new Image();
-			fileManager.player1[state][i].onload = fileLoaded;
-			fileManager.player1[state][i].src = "images/players/1/" + state + "/" + i + ".png";
+			var state = "idle";
+			var frames = 1;
+			player[state] = new Array(frames);
 
-		}
+			for (var i = 0; i < frames; i++) {
 
-		state = "running";
-		frames = 4;
-		fileManager.player1[state] = new Array(frames);
+				player[state][i] = new Image();
+				player[state][i].onload = fileLoaded;
+				player[state][i].src = "images/players/" + p + "/" + state + "/" + i + ".png";
 
-		for (var i = 0; i < frames; i++) {
+			}
 
-			fileManager.player1[state][i] = new Image();
-			fileManager.player1[state][i].onload = fileLoaded;
-			fileManager.player1[state][i].src = "images/players/1/" + state + "/" + i + ".png";
+			state = "running";
+			frames = 4;
+			player[state] = new Array(frames);
 
-		}
+			for (var i = 0; i < frames; i++) {
 
-		state = "jumping";
-		frames = 1;
-		fileManager.player1[state] = new Array(frames);
+				player[state][i] = new Image();
+				player[state][i].onload = fileLoaded;
+				player[state][i].src = "images/players/" + p + "/" + state + "/" + i + ".png";
 
-		for (var i = 0; i < frames; i++) {
+			}
 
-			fileManager.player1[state][i] = new Image();
-			fileManager.player1[state][i].onload = fileLoaded;
-			fileManager.player1[state][i].src = "images/players/1/" + state + "/" + i + ".png";
+			state = "jumping";
+			frames = 1;
+			player[state] = new Array(frames);
+
+			for (var i = 0; i < frames; i++) {
+
+				player[state][i] = new Image();
+				player[state][i].onload = fileLoaded;
+				player[state][i].src = "images/players/" + p + "/" + state + "/" + i + ".png";
+
+			}
 
 		}
 
@@ -224,7 +230,7 @@ var fileManager = fileManager || {};
 
 		}
 
-		loadPlayer1();
+		loadPlayers();
 
 	}
 

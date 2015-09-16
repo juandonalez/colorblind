@@ -149,8 +149,11 @@ Scene.prototype.update = function() {
 	}
 
 	if (this.hasPlayer) {
-		globals.player1.update();
-		if (globals.numPlayers === 2) {
+		if (globals.numPlayers === 1) {
+			globals.player0.update();
+		}
+		else {
+			globals.player1.update();
 			globals.player2.update();
 		}
 	}
@@ -184,8 +187,11 @@ Scene.prototype.draw = function() {
 		}
 
 		if (this.hasPlayer) {
-			globals.player1.draw();
-			if (globals.numPlayers === 2) {
+			if (globals.numPlayers === 1) {
+					globals.player0.draw();
+			}
+			else {
+				globals.player1.draw();
 				globals.player2.draw();
 			}
 		}
@@ -208,8 +214,11 @@ Scene.prototype.draw = function() {
 			}
 
 			if (this.hasPlayer) {
-				globals.player1.draw();
-				if (globals.numPlayers === 2) {
+				if (globals.numPlayers === 1) {
+					globals.player0.draw();
+				}
+				else {
+					globals.player1.draw();
 					globals.player2.draw();
 				}
 			}
@@ -350,7 +359,13 @@ Scene.prototype.activate = function() {
 	}
 
 	if (this.hasPlayer) {
-		globals.player1.activate(this.startPos.x, this.startPos.y);
+		if (globals.numPlayers === 1) {
+			globals.player0.activate(this.startPos.x, this.startPos.y);
+		}
+		else {
+			globals.player1.activate(this.startPos.x, this.startPos.y);
+			globals.player2.activate(this.startPos.x, this.startPos.y);
+		}		
 	}
 
 	if (this.chaser) {
