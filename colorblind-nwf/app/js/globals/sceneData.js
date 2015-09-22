@@ -29,8 +29,37 @@ var sceneData = sceneData || {};
 			numTop: 0,
 			numMiddle: 0,
 			numBottom: 0,
-			hasPlayer: false,
-			hasTimer: false
+
+			menus: [
+				{
+					name: "main",
+					active: true,
+					overlays: [
+						{
+							activePos: new Point(50, 50),
+							inactivePos: new Point(50, 50),
+							height: 100,
+							width: 100,
+							inactiveScale: 1,
+							activeAlpha: 1,
+							inactiveAlpha: 1,
+							color: "blue",
+							menuItems: [
+								{
+									name: "title",
+									center: new Point(50, 50),
+									text: "Color Blind",
+									fontSize: 120,
+									lineWidth: 10,
+									strokeStyle: "#000000",
+									fillStyle: "yellow",
+									selectable: false
+								}
+							]
+						}
+					]
+				}
+			]
 
 		},
 

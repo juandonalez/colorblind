@@ -346,7 +346,7 @@ Scene.prototype.activate = function() {
 	if (this.background) {
 		globals.gpBackgroundCtx.drawImage(this.background, 0, 0, globals.gpWidth, globals.gpHeight);
 		globals.tvBackgroundCtx.drawImage(this.background, 0, 0, globals.tvWidth, globals.tvHeight);
-	}	
+	}
 
 	if (this.entities) {
 		for (var i = 0; i < this.entities.length; i++) {

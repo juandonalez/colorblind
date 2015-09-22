@@ -61,7 +61,7 @@ var main = main || {};
 		window.removeEventListener('loaded', startGame, false);
 
 		globals.scenes = {
-			splashScreen: new Scene("splashScreen"),
+			splashScreen: new SplashScreen("splashScreen"),
 			mainMenu: new Scene("mainMenu"),
 			stage1: new Scene("stage1"),
 			stage2: new Scene("stage2"),

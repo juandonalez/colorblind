@@ -89,13 +89,13 @@ var globals = globals || {};
 	globals.buffer.width = globals.gameWidth;
 	globals.buffer.height = globals.gameHeight;
 
-	globals.debugMode = true;
+	globals.debugMode = false;
 
 	globals.debug = {
 		backgrounds: false,
-		fpsCounter: true,
+		fpsCounter: false,
 		hitboxes: false,
-		startScene: "mainMenu",
+		startScene: "splashScreen",
 		levelTest: false
 	};
 
