@@ -5,6 +5,7 @@ function Scroller(scene, d) {
 	this.scene = scene;
 	this.startSpeed = d.speed;
 	this.speed = 1/this.startSpeed;
+	this.random = d.random;
 	this.accum = 0;
 
 	if (d.name === "top") {
@@ -21,8 +22,15 @@ function Scroller(scene, d) {
 	this.bgs = new Array(3);
 
 	for (var i = 0; i < 3; i++) {
-		var rand = Math.floor(Math.random()*this.pool.length);
-		this.indexes[i] = rand;
+
+		if (this.random) {
+			var rand = Math.floor(Math.random()*this.pool.length);
+			this.indexes[i] = rand;
+		}
+		else {
+			this.indexes[i] = i;
+		}
+
 		this.bgs[i] = this.pool[this.indexes[i]];
 	}
 
@@ -44,7 +52,19 @@ Scroller.prototype.update = function() {
 		this.x += first.width;
 		this.indexes[0] = this.indexes[1];
 		this.indexes[1] = this.indexes[2];
-		this.indexes[2] = Math.floor(Math.random()*this.pool.length);
+
+		if (this.random) {
+			this.indexes[2] = Math.floor(Math.random()*this.pool.length);
+		}
+		else {
+			if ((this.indexes[1] + 1) === this.pool.length) {
+				this.indexes[2] = 0;
+			}
+			else {
+				this.indexes[2] = this.indexes[1] + 1;
+			}
+		}
+
 		this.bgs[0] = this.pool[this.indexes[0]];
 		this.bgs[1] = this.pool[this.indexes[1]];
 		this.bgs[2] = this.pool[this.indexes[2]];

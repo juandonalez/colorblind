@@ -51,7 +51,8 @@ var sceneData = sceneData || {};
 				{
 					name: "top",
 					y: 40,
-					speed: 1
+					speed: 1,
+					random: false
 				}
 			],
 
