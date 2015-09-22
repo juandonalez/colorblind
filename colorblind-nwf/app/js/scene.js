@@ -94,32 +94,34 @@ Scene.prototype.update = function() {
 		this.accum = 0;
 	}
 
-	if (camera.intersects(this.levels[2])) {
-		if (!this.levels[2].active) {
-			this.levels[2].activate();
+	if (this.levels) {
+		if (camera.intersects(this.levels[2])) {
+			if (!this.levels[2].active) {
+				this.levels[2].activate();
+			}
 		}
-	}
 
-	if (camera.intersects(this.levels[1])) {
-		if (!this.levels[1].active) {
-			this.levels[1].activate();
+		if (camera.intersects(this.levels[1])) {
+			if (!this.levels[1].active) {
+				this.levels[1].activate();
+			}
 		}
-	}
 
-	if (camera.intersects(this.levels[0])) {
-		if (!this.levels[0].active) {
-			this.levels[0].activate();
+		if (camera.intersects(this.levels[0])) {
+			if (!this.levels[0].active) {
+				this.levels[0].activate();
+			}
 		}
-	}
-	else {
-		this.levels[0].deactivate();
-		this.indexes[0] = this.indexes[1];
-		this.indexes[1] = this.indexes[2];
-		this.indexes[2] = this.getNewIndex();
-		this.levels[0] = this.pool[this.indexes[0]];
-		this.levels[1] = this.pool[this.indexes[1]];
-		this.levels[2] = this.pool[this.indexes[2]];
-		this.levels[2].init(this.levels[1].origin.x + this.levels[1].width);
+		else {
+			this.levels[0].deactivate();
+			this.indexes[0] = this.indexes[1];
+			this.indexes[1] = this.indexes[2];
+			this.indexes[2] = this.getNewIndex();
+			this.levels[0] = this.pool[this.indexes[0]];
+			this.levels[1] = this.pool[this.indexes[1]];
+			this.levels[2] = this.pool[this.indexes[2]];
+			this.levels[2].init(this.levels[1].origin.x + this.levels[1].width);
+		}
 	}
 
 	if (this.scrollers) {

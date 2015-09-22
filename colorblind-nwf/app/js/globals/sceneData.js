@@ -4,7 +4,7 @@ var sceneData = sceneData || {};
 
 	sceneData = {
 
-		totalNumImages: 318,
+		totalNumImages: 260,
 
 		imageNames: [
 			"chaser",
@@ -36,11 +36,11 @@ var sceneData = sceneData || {};
 
 		mainMenu: {
 
-			numLevels: 4,
-			numAllModes: 4,
-			tilesetSize: 53,
-			numTop: 4,
-			numMiddle: 4,
+			numLevels: 0,
+			numAllModes: 0,
+			tilesetSize: 0,
+			numTop: 3,
+			numMiddle: 0,
 			numBottom: 0,
 			hasPlayer: false,
 			hasTimer: false,
@@ -50,13 +50,8 @@ var sceneData = sceneData || {};
 			scrollers: [
 				{
 					name: "top",
-					y: 0,
-					speed: 0.5
-				},
-				{
-					name: "middle",
-					y: 360,
-					speed: 0.75
+					y: 40,
+					speed: 1
 				}
 			],
 
@@ -65,17 +60,6 @@ var sceneData = sceneData || {};
 					name: "main",
 					active: true,
 					overlays: [
-						{
-							activePos: new Point(50, 50),
-							inactivePos: new Point(50, 50),
-							height: 100,
-							width: 100,
-							inactiveScale: 1,
-							activeAlpha: 0.5,
-							inactiveAlpha: 0.5,
-							color: "#999999",
-							menuItems: false
-						},
 						{
 							activePos: new Point(50, 20),
 							inactivePos: new Point(50, -25),
