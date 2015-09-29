@@ -61,19 +61,21 @@ Level.prototype.draw = function(layerNum, color) {
 
 	var ctx = globals.bufferCtx;
 	var tileset = fileManager.tilesets[globals.currScene.name];
+	var tilesetSize = globals.currScene.tilesetSize;
+	var numColored = globals.currScene.numColored;
 	var tileSize = globals.tileSize;
 	var tile = 0;
 	var tileOffset = 0;
 	var layer;
 
 	if (color === 0) {
-		tileOffset = 33;
+		tileOffset = tilesetSize - 1 - (numColored*3);
 	}
 	else if (color === 1) {
-		tileOffset = 48;
+		tileOffset = tilesetSize - 1 - (numColored*2);
 	}
 	else {
-		tileOffset = 63;
+		tileOffset = tilesetSize - 1 - numColored;
 	}
 
 	if (layerNum === 1) {

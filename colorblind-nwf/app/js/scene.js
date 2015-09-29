@@ -7,6 +7,8 @@ function Scene(name) {
 
 	this.numLevels = data.numLevels;
 	this.numAllModes = data.numAllModes;
+	this.tilesetSize = data.tilesetSize;
+	this.numColored = data.numColored;
 	this.hasPlayer = data.hasPlayer;
 	this.speed = 0;
 	this.accum = 0;
