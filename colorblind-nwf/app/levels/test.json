@@ -91,7 +91,49 @@
          "draworder":"topdown",
          "height":20,
          "name":"entities",
-         "objects":[],
+         "objects":[
+                {
+                 "height":40,
+                 "name":"spike",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"0",
+                 "visible":true,
+                 "width":40,
+                 "x":1080,
+                 "y":480
+                }, 
+                {
+                 "height":40,
+                 "name":"spike",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"2",
+                 "visible":true,
+                 "width":40,
+                 "x":800,
+                 "y":640
+                }, 
+                {
+                 "height":40,
+                 "name":"spike",
+                 "properties":
+                    {
+
+                    },
+                 "rotation":0,
+                 "type":"1",
+                 "visible":true,
+                 "width":40,
+                 "x":360,
+                 "y":640
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,

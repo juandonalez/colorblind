@@ -11,9 +11,7 @@ function Level(d) {
 	// top is where the tiles first appear
 	this.top = this.height - (d.height * globals.tileSize);
 
-	this.layer0 = d.layers[0].data;
-	this.layer1 = d.layers[1].data;
-	this.layer2 = d.layers[2].data;
+	this.layers = [d.layers[0].data, d.layers[1].data, d.layers[2].data];
 
 	// swap the red and green layers when drawing
 	this.swap = false;
@@ -33,8 +31,10 @@ function Level(d) {
 
 	var ent;
 	for (var i = 0; i < entities.length; i++) {
-		ent = entities[i];	
-		//this.entities[i] = new Platform(this, col.x, col.y, col.width, col.height);
+		ent = entities[i];
+		if (ent.name === "spike") {
+			this.entities[i] = new Spike(ent.x, this.top + ent.y, ent.type);
+		}
 	}
 
 	this.calculateCenter();
@@ -66,7 +66,6 @@ Level.prototype.draw = function(layerNum, color) {
 	var tileSize = globals.tileSize;
 	var tile = 0;
 	var tileOffset = 0;
-	var layer;
 
 	if (color === 0) {
 		tileOffset = tilesetSize - 1 - (numColored*3);
@@ -80,26 +79,20 @@ Level.prototype.draw = function(layerNum, color) {
 
 	if (layerNum === 1) {
 		if (this.swap) {
-			layer = this.layer2;
-		}
-		else {
-			layer = this.layer1;
+			layerNum = 2;
 		}
 	}
 	else if (layerNum === 2) {
 		if (this.swap) {
-			layer = this.layer1;
-		}
-		else {
-			layer = this.layer2;
+			layerNum = 1;
 		}
 	}
 	else {
-		layer = this.layer0;
 		tileOffset = 0;
 	}
 
-	// offset of 30 brings us to red tiles, 43 to green tiles
+	var layer = this.layers[layerNum];
+
 	for (var i = this.top; i < this.height; i += tileSize) {
 		for (var j = this.origin.x; j < this.origin.x + this.width; j += tileSize) {
 			if (layer[tile] !== 0 && layer[tile] !== null) {
@@ -108,6 +101,10 @@ Level.prototype.draw = function(layerNum, color) {
 			}
 			tile++;
 		}
+	}
+
+	for (var i = 0; i < this.entities.length; i++) {
+		this.entities[i].draw(layerNum);
 	}
 
 }
@@ -119,6 +116,11 @@ Level.prototype.init = function(x) {
 		// when a new level is added to the end, move its colliders
 		for (var i = 0; i < this.colliders.length; i++) {
 			this.colliders[i].translate(x, 0);
+		}
+
+		// when a new level is added to the end, move its entities
+		for (var i = 0; i < this.colliders.length; i++) {
+			this.entities[i].translate(x, 0);
 		}
 
 		this.setOrigin(x, 0);
