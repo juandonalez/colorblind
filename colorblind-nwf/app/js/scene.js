@@ -151,7 +151,7 @@ Scene.prototype.update = function() {
 	}
 
 	if (this.hasPlayer) {
-		if (globals.numPlayers === 1) {
+		if (globals.mode === "duplicate" || globals.mode === "split") {
 			globals.player0.update();
 		}
 		else {
@@ -176,26 +176,21 @@ Scene.prototype.draw = function() {
 		}
 	}
 
-	if (globals.mode === "duplicate" || globals.mode === "versus") {
+	// in duplicate mode simply draw everything to both screens
+	if (globals.mode === "duplicate") {
 
 		if (this.levels) {
 			for (var i = 0; i < 3; i++) {
 				if (camera.intersects(this.levels[i])) {
-					this.levels[i].draw(0);
-					this.levels[i].draw(1);
-					this.levels[i].draw(2);
+					this.levels[i].draw(0, 0);
+					this.levels[i].draw(1, 0);
+					this.levels[i].draw(2, 0);
 				}
 			}
 		}
 
 		if (this.hasPlayer) {
-			if (globals.numPlayers === 1) {
-					globals.player0.draw();
-			}
-			else {
-				globals.player1.draw();
-				globals.player2.draw();
-			}
+			globals.player0.draw();
 		}
 
 		globals.gpCtx.drawImage(globals.buffer, 0, 0, camera.gpWidth, camera.gpHeight, 
@@ -204,25 +199,21 @@ Scene.prototype.draw = function() {
 			0, 0, globals.tvWidth, globals.tvHeight);
 
 	}
-	else {
+	// in split mode the layers are split across 2 screens but are the same color
+	else if (globals.mode === "split") {
 
 		if (this.levels) {
 
 			// draw layer that is visible to both players
 			for (var i = 0; i < 3; i++) {
 				if (camera.intersects(this.levels[i])) {
-					this.levels[i].draw(0);
+					this.levels[i].draw(0, 0);
 				}
 			}
 
+			// draw player
 			if (this.hasPlayer) {
-				if (globals.numPlayers === 1) {
-					globals.player0.draw();
-				}
-				else {
-					globals.player1.draw();
-					globals.player2.draw();
-				}
+				globals.player0.draw();
 			}
 
 			globals.gpCtx.drawImage(globals.buffer, 0, 0, camera.gpWidth, camera.gpHeight, 
@@ -235,7 +226,7 @@ Scene.prototype.draw = function() {
 
 			for (var i = 0; i < 3; i++) {
 				if (camera.intersects(this.levels[i])) {
-					this.levels[i].draw(1);
+					this.levels[i].draw(1, 0);
 				}
 			}
 
@@ -247,7 +238,115 @@ Scene.prototype.draw = function() {
 
 			for (var i = 0; i < 3; i++) {
 				if (camera.intersects(this.levels[i])) {
-					this.levels[i].draw(2);
+					this.levels[i].draw(2, 0);
+				}
+			}
+
+			globals.tvCtx.drawImage(globals.buffer, 0, 0, camera.tvWidth, camera.tvHeight, 
+				0, 0, globals.tvWidth, globals.tvHeight);
+
+		}
+
+	}
+	// in coop mode the layers are split across 2 screens and are different colors
+	// 2 players are visible on both screens
+	else if (globals.mode === "coop") {
+
+		if (this.levels) {
+
+			// draw layer that is visible to both players
+			for (var i = 0; i < 3; i++) {
+				if (camera.intersects(this.levels[i])) {
+					this.levels[i].draw(0, 0);
+				}
+			}
+
+			// draw players
+			if (this.hasPlayer) {
+				globals.player1.draw();
+				globals.player2.draw();
+			}
+
+			globals.gpCtx.drawImage(globals.buffer, 0, 0, camera.gpWidth, camera.gpHeight, 
+				0, 0, globals.gpWidth, globals.gpHeight);
+			globals.tvCtx.drawImage(globals.buffer, 0, 0, camera.tvWidth, camera.tvHeight, 
+				0, 0, globals.tvWidth, globals.tvHeight);
+
+			// clear buffer and draw layer visible to gamepad screen
+			globals.bufferCtx.clearRect(camera.origin.x, camera.origin.y, globals.gameWidth, globals.gameHeight);
+
+			for (var i = 0; i < 3; i++) {
+				if (camera.intersects(this.levels[i])) {
+					this.levels[i].draw(1, 1);
+				}
+			}
+
+			globals.gpCtx.drawImage(globals.buffer, 0, 0, camera.gpWidth, camera.gpHeight, 
+				0, 0, globals.gpWidth, globals.gpHeight);
+
+			// clear buffer and draw layer visible to tv screen
+			globals.bufferCtx.clearRect(camera.origin.x, camera.origin.y, globals.gameWidth, globals.gameHeight);
+
+			for (var i = 0; i < 3; i++) {
+				if (camera.intersects(this.levels[i])) {
+					this.levels[i].draw(2, 2);
+				}
+			}
+
+			globals.tvCtx.drawImage(globals.buffer, 0, 0, camera.tvWidth, camera.tvHeight, 
+				0, 0, globals.tvWidth, globals.tvHeight);
+
+		}
+
+	}
+	// in versus mode all layers are visible to both screens, but are different colors
+	// each player is only visible on their respective screen
+	else if (globals.mode === "versus") {
+
+		if (this.levels) {
+
+			// draw layer that is visible to both players
+			for (var i = 0; i < 3; i++) {
+				if (camera.intersects(this.levels[i])) {
+					this.levels[i].draw(0, 0);
+				}
+			}
+
+			globals.gpCtx.drawImage(globals.buffer, 0, 0, camera.gpWidth, camera.gpHeight, 
+				0, 0, globals.gpWidth, globals.gpHeight);
+			globals.tvCtx.drawImage(globals.buffer, 0, 0, camera.tvWidth, camera.tvHeight, 
+				0, 0, globals.tvWidth, globals.tvHeight);
+
+			// clear buffer and draw layers to gamepad screen
+			globals.bufferCtx.clearRect(camera.origin.x, camera.origin.y, globals.gameWidth, globals.gameHeight);
+
+			// draw player 1
+			if (this.hasPlayer) {
+				globals.player1.draw();
+			}
+
+			for (var i = 0; i < 3; i++) {
+				if (camera.intersects(this.levels[i])) {
+					this.levels[i].draw(1, 1);
+					this.levels[i].draw(2, 1);
+				}
+			}
+
+			globals.gpCtx.drawImage(globals.buffer, 0, 0, camera.gpWidth, camera.gpHeight, 
+				0, 0, globals.gpWidth, globals.gpHeight);
+
+			// clear buffer and draw layers to tv screen
+			globals.bufferCtx.clearRect(camera.origin.x, camera.origin.y, globals.gameWidth, globals.gameHeight);
+
+			// draw player 2
+			if (this.hasPlayer) {
+				globals.player2.draw();
+			}
+
+			for (var i = 0; i < 3; i++) {
+				if (camera.intersects(this.levels[i])) {
+					this.levels[i].draw(1, 2);
+					this.levels[i].draw(2, 2);
 				}
 			}
 
@@ -361,13 +460,17 @@ Scene.prototype.activate = function() {
 	}
 
 	if (this.hasPlayer) {
-		if (globals.numPlayers === 1) {
+		if (globals.mode === "duplicate" || globals.mode === "split") {
 			globals.player0.activate(this.startPos.x, this.startPos.y);
+		}
+		else if (globals.mode === "versus") {
+			globals.player1.activate(this.startPos.x, this.startPos.y);
+			globals.player2.activate(this.startPos.x, this.startPos.y);
 		}
 		else {
 			globals.player1.activate(this.startPos.x, this.startPos.y);
-			globals.player2.activate(this.startPos.x, this.startPos.y);
-		}		
+			globals.player2.activate(this.startPos.x + 150, this.startPos.y);
+		}
 	}
 
 	if (this.chaser) {
