@@ -50,8 +50,14 @@ function Level(d) {
 Level.prototype.update = function() {
 
 	if (this.active) {
+		// if an entity comes into view it is activated
 		for (var i = 0; i < this.entities.length; i++) {
-			this.entities.update();
+			if (!this.entities[i].active) {
+				if (camera.intersects(this.entities[i])) {
+					this.entities[i].activate();
+				}
+			}
+			this.entities[i].update();
 		}
 	}
 
@@ -109,55 +115,26 @@ Level.prototype.draw = function(layerNum, color) {
 
 }
 
-Level.prototype.init = function(x) {
+Level.prototype.activate = function(x) {
 
-	if (x) {
-
-		// when a new level is added to the end, move its colliders
-		for (var i = 0; i < this.colliders.length; i++) {
-			this.colliders[i].translate(x, 0);
-		}
-
-		// when a new level is added to the end, move its entities
-		for (var i = 0; i < this.colliders.length; i++) {
-			this.entities[i].translate(x, 0);
-		}
-
-		this.setOrigin(x, 0);
-
-	}
+	this.active = true;
 
 	// randomly assign color to each layer
 	this.swap = Math.floor(Math.random() * 2) === 0;
 
 }
 
-Level.prototype.activate = function() {
-
-	this.active = true;
-
-	if (this.entities) {
-		for (var i = 0; i < this.entities.length; i++) {
-			this.entities[i].activate();
-		}
-	}
-
-}
-
 Level.prototype.deactivate = function() {
 
 	this.active = false;
-
-	for (var i = 0; i < this.colliders.length; i++) {
-		this.colliders[i].translate(this.origin.x * -1, 0);
-	}
-
 	this.setOrigin(0, 0);
 
-	if (this.entities) {
-		for (var i = 0; i < this.entities.length; i++) {
-			this.entities[i].deactivate();
-		}
+	for (var i = 0; i < this.colliders.length; i++) {
+		this.colliders[i].deactivate();
+	}
+
+	for (var i = 0; i < this.entities.length; i++) {
+		this.entities[i].deactivate();
 	}
 
 }
@@ -167,7 +144,7 @@ Level.prototype.pause = function() {
 	this.active = false;
 
 	for (var i = 0; i < this.entities.length; i++) {
-		this.entities.pause();
+		this.entities[i].pause();
 	}
 
 }
@@ -177,7 +154,23 @@ Level.prototype.resume = function() {
 	this.active = true;
 
 	for (var i = 0; i < this.entities.length; i++) {
-		this.entities.resume();
+		this.entities[i].resume();
+	}
+
+}
+
+Level.prototype.translate = function(x, y) {
+
+	this.origin.x += x;
+	this.origin.y += y;
+	this.calculateCenter();
+
+	for (var i = 0; i < this.colliders.length; i++) {
+		this.colliders[i].translate(x, y);
+	}
+
+	for (var i = 0; i < this.entities.length; i++) {
+		this.entities[i].translate(x, y);
 	}
 
 }
@@ -197,5 +190,3 @@ Level.prototype.setAlpha = Entity.prototype.setAlpha;
 Level.prototype.setCenter = Entity.prototype.setCenter;
 
 Level.prototype.setOrigin = Entity.prototype.setOrigin;
-
-Level.prototype.translate = Entity.prototype.translate;

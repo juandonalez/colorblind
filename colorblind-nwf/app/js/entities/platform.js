@@ -3,6 +3,7 @@ function Platform(ent, x, y, width, height) {
 	this.type = "Platform";
 	this.ent = ent;
 	this.friction = 3;
+	this.startPos = new Point(x, y);
 
 	this.origin = new Point(x, y);
 	this.center = new Point(0, 0);
@@ -60,13 +61,19 @@ Platform.prototype.onVerticalCollision = function(ent) {
 
 }
 
+Platform.prototype.deactivate = function() {
+
+	this.origin.x = this.startPos.x;
+	this.origin.y = this.startPos.y;
+	this.calculateCenter();
+
+}
+
 Platform.prototype.activate = Entity.prototype.activate;
 
 Platform.prototype.calculateCenter = Entity.prototype.calculateCenter;
 
 Platform.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
-
-Platform.prototype.deactivate = Entity.prototype.deactivate;
 
 Platform.prototype.intersects = Entity.prototype.intersects;
 

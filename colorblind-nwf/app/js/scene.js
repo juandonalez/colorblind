@@ -97,24 +97,12 @@ Scene.prototype.update = function() {
 	}
 
 	if (this.levels) {
-		if (camera.intersects(this.levels[2])) {
-			if (!this.levels[2].active) {
-				this.levels[2].activate();
-			}
-		}
 
-		if (camera.intersects(this.levels[1])) {
-			if (!this.levels[1].active) {
-				this.levels[1].activate();
-			}
-		}
+		this.levels[0].update();
+		this.levels[1].update();
+		this.levels[2].update();
 
-		if (camera.intersects(this.levels[0])) {
-			if (!this.levels[0].active) {
-				this.levels[0].activate();
-			}
-		}
-		else {
+		if (!camera.intersects(this.levels[0])) {
 			this.levels[0].deactivate();
 			this.indexes[0] = this.indexes[1];
 			this.indexes[1] = this.indexes[2];
@@ -122,8 +110,11 @@ Scene.prototype.update = function() {
 			this.levels[0] = this.pool[this.indexes[0]];
 			this.levels[1] = this.pool[this.indexes[1]];
 			this.levels[2] = this.pool[this.indexes[2]];
-			this.levels[2].init(this.levels[1].origin.x + this.levels[1].width);
+			// add new level to end
+			this.levels[2].activate();
+			this.levels[2].translate(this.levels[1].origin.x + this.levels[1].width, 0);
 		}
+
 	}
 
 	if (this.scrollers) {
@@ -490,9 +481,21 @@ Scene.prototype.activate = function() {
 		this.levels[1] = this.pool[this.indexes[1]];
 		this.indexes[2] = this.getNewIndex();
 		this.levels[2] = this.pool[this.indexes[2]];
-		this.levels[0].init(0);
-		this.levels[1].init(this.levels[0].width);
-		this.levels[2].init(this.levels[1].origin.x + this.levels[1].width);
+		this.levels[0].activate();
+		this.levels[1].activate();
+		this.levels[1].translate(this.levels[0].width, 0);
+		this.levels[2].activate();
+		this.levels[2].translate(this.levels[1].origin.x + this.levels[1].width, 0);
+	}
+
+}
+
+Scene.prototype.deactivate = function() {
+
+	if (this.levels) {
+		this.levels[0].deactivate();
+		this.levels[1].deactivate();
+		this.levels[2].deactivate();
 	}
 
 }
