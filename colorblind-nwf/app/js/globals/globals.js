@@ -95,8 +95,8 @@ var globals = globals || {};
 		backgrounds: false,
 		fpsCounter: false,
 		hitboxes: false,
-		startScene: "stage2",
-		mode: "duplicate",
+		startScene: "stage1",
+		mode: "coop",
 		levelTest: true
 	};
 
