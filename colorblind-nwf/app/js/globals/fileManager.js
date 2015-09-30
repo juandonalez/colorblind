@@ -2,84 +2,91 @@ var fileManager = fileManager || {};
 
 (function() {
 
-	var sceneNames = ["splashScreen", "mainMenu", "stage1", "stage2", "stage3"];
-
 	fileManager.levels = {};
-	fileManager.tilesets = {};
-	fileManager.topBgs = {};
-	fileManager.middleBgs = {};
-	fileManager.bottomBgs = {};
 	fileManager.images = {};
-	fileManager.players = [{}, {}, {}];
+	var totalNumImages = 285;
 
-	/* 
-		gets called each time an image is loaded, and dispatches an event to say when loading is done
-	*/
+	var folders = [
+		["backgrounds/mainMenu/", 3],
+		["players/0/idle/l/", 1],
+		["players/0/idle/r/", 1],
+		["players/0/jumping/l/", 1],
+		["players/0/jumping/r/", 1],
+		["players/0/running/l/", 4],
+		["players/0/running/r/", 4],
+		["players/1/idle/l/", 1],
+		["players/1/idle/r/", 1],
+		["players/1/jumping/l/", 1],
+		["players/1/jumping/r/", 1],
+		["players/1/running/l/", 4],
+		["players/1/running/r/", 4],
+		["players/2/idle/l/", 1],
+		["players/2/idle/r/", 1],
+		["players/2/jumping/l/", 1],
+		["players/2/jumping/r/", 1],
+		["players/2/running/l/", 4],
+		["players/2/running/r/", 4],
+		["tilesets/stage1/0/", 31],
+		["tilesets/stage1/1/", 16],
+		["tilesets/stage1/2/", 16],
+		["tilesets/stage1/3/", 16],
+		["tilesets/stage2/0/", 34],
+		["tilesets/stage2/1/", 16],
+		["tilesets/stage2/2/", 16],
+		["tilesets/stage2/3/", 16],
+		["tilesets/stage3/0/", 33],
+		["tilesets/stage3/1/", 14],
+		["tilesets/stage3/2/", 14],
+		["tilesets/stage3/3/", 14]
+	];
 
-	var loadCounter = sceneData.totalNumImages;
+	var imageURLs = [
+		"backgrounds/stage1",
+		"backgrounds/stage2",
+		"backgrounds/stage3",
+		"menus/coop",
+		"menus/duplicate",
+		"menus/split",
+		"menus/stage1",
+		"menus/stage2",
+		"menus/stage3",
+		"menus/versus"
+	];
 
-	function fileLoaded() {
+	fileManager.loadFiles = function() {
 
-		loadCounter--;
+		loadLevels("stage1");
+		loadLevels("stage2");
+		loadLevels("stage3");
 
-		if (loadCounter <= 0) {
+		var baseURL;
+		var numImages;
+
+		for (var i = 0; i < folders.length; i++) {
+			baseURL = folders[i][0];
+			numImages = folders[i][1];
+			fileManager.images[baseURL] = new Array(numImages);
+			for (var j = 0; j < numImages; j++) {
+				fileManager.images[baseURL][j] = new Image();
+				fileManager.images[baseURL][j].onload = imageLoaded;
+				fileManager.images[baseURL][j].src = "images/" + baseURL + j + ".png";
+			}
+		}
+
+		for (var i = 0; i < imageURLs.length; i++) {
+			fileManager.images[imageURLs[i]] = new Image();
+			fileManager.images[imageURLs[i]].onload = imageLoaded;
+			fileManager.images[imageURLs[i]].src = "images/" + imageURLs[i] + ".png";
+		}
+
+	}
+
+	function imageLoaded() {
+
+		totalNumImages--;
+
+		if (totalNumImages <= 0) {
 			window.dispatchEvent(new Event("loaded"));
-		}
-
-	}
-
-	/* 
-		functions for loading files of different types
-	*/
-
-	function loadBackgrounds(scene) {
-
-		var numTop = sceneData[scene].numTop;
-		var numMiddle = sceneData[scene].numMiddle;
-		var numBottom = sceneData[scene].numBottom;
-
-		if (numTop !== 0) {
-			fileManager.topBgs[scene] = new Array(numTop);
-			var topBgs = fileManager.topBgs[scene];
-
-			for (var i = 0; i < numTop; i++) {
-				topBgs[i] = new Image();
-				topBgs[i].onload = fileLoaded;
-				topBgs[i].src = "images/" + scene + "/backgrounds/top/" + i + ".png";
-			}
-		}
-
-		if (numMiddle !== 0) {
-			fileManager.middleBgs[scene] = new Array(numMiddle);
-			var middleBgs = fileManager.middleBgs[scene];
-
-			for (var i = 0; i < numMiddle; i++) {
-				middleBgs[i] = new Image();
-				middleBgs[i].onload = fileLoaded;
-				middleBgs[i].src = "images/" + scene + "/backgrounds/middle/" + i + ".png";
-			}
-		}
-
-		if (numBottom !== 0) {
-			fileManager.bottomBgs[scene] = new Array(numBottom);
-			var bottomBgs = fileManager.bottomBgs[scene];
-
-			for (var i = 0; i < numBottom; i++) {
-				bottomBgs[i] = new Image();
-				bottomBgs[i].onload = fileLoaded;
-				bottomBgs[i].src = "images/" + scene + "/backgrounds/bottom/" + i + ".png";
-			}
-		}
-
-	}
-
-	function loadImages() {
-
-		for (var i = 0; i < sceneData.imageNames.length; i++) {
-			var name = sceneData.imageNames[i];
-			fileManager.images[name] = new Image();
-			fileManager.images[name].onload = fileLoaded;
-			fileManager.images[name].src = "images/" + name + ".png";
 		}
 
 	}
@@ -147,90 +154,6 @@ var fileManager = fileManager || {};
 			levelData = null;
 
 		}
-
-	}
-
-	function loadPlayers() {
-
-		for (var p = 0; p < 3; p++) {
-
-			var player = fileManager.players[p];
-
-			var state = "idle";
-			var frames = 1;
-			player[state] = new Array(frames);
-
-			for (var i = 0; i < frames; i++) {
-
-				player[state][i] = new Image();
-				player[state][i].onload = fileLoaded;
-				player[state][i].src = "images/players/" + p + "/" + state + "/" + i + ".png";
-
-			}
-
-			state = "running";
-			frames = 4;
-			player[state] = new Array(frames);
-
-			for (var i = 0; i < frames; i++) {
-
-				player[state][i] = new Image();
-				player[state][i].onload = fileLoaded;
-				player[state][i].src = "images/players/" + p + "/" + state + "/" + i + ".png";
-
-			}
-
-			state = "jumping";
-			frames = 1;
-			player[state] = new Array(frames);
-
-			for (var i = 0; i < frames; i++) {
-
-				player[state][i] = new Image();
-				player[state][i].onload = fileLoaded;
-				player[state][i].src = "images/players/" + p + "/" + state + "/" + i + ".png";
-
-			}
-
-		}
-
-	}
-
-	function loadTileset(scene) {
-
-		var tilesetSize = sceneData[scene].tilesetSize;
-
-		if (tilesetSize !== 0) {
-			fileManager.tilesets[scene] = new Array(tilesetSize);
-			var tileset = fileManager.tilesets[scene];
-
-			for (var i = 0; i < tilesetSize; i++) {
-				tileset[i] = new Image();
-				tileset[i].onload = fileLoaded;
-				tileset[i].src = "images/" + scene + "/tileset/" + i + ".png";
-			}
-		}
-
-	}
-
-	/* 
-		function that starts all the loading
-	*/
-
-	fileManager.loadFiles = function() {
-
-		loadImages();
-
-		for (var i = 0; i < sceneNames.length; i++) {
-
-			var name = sceneNames[i];
-			loadLevels(name);
-			loadTileset(name);
-			loadBackgrounds(name);
-
-		}
-
-		loadPlayers();
 
 	}
 

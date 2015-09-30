@@ -1,4 +1,4 @@
-function Scroller(scene, d) {
+function Scroller(scene, d, index) {
 
 	this.x = 0;
 	this.y = d.y;
@@ -8,15 +8,7 @@ function Scroller(scene, d) {
 	this.random = d.random;
 	this.accum = 0;
 
-	if (d.name === "top") {
-		this.pool = fileManager.topBgs[scene.name];
-	}
-	else if (d.name === "middle") {
-		this.pool = fileManager.middleBgs[scene.name];
-	}
-	else {
-		this.pool = fileManager.bottomBgs[scene.name];
-	}
+	this.pool = fileManager.images["backgrounds/" + scene.name + "/"];
 
 	this.indexes = new Array(3);
 	this.bgs = new Array(3);

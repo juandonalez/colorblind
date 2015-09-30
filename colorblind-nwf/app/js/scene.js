@@ -7,20 +7,27 @@ function Scene(name) {
 
 	this.numLevels = data.numLevels;
 	this.numAllModes = data.numAllModes;
-	this.tilesetSize = data.tilesetSize;
-	this.numColored = data.numColored;
+
 	this.hasPlayer = data.hasPlayer;
 	this.speed = 0;
 	this.accum = 0;
 
+	if (data.hasTileset) {
+		this.tileset = new Array(4);
+		this.tileset[0] = fileManager.images["tilesets/" + this.name + "/0/"];
+		this.tileset[1] = fileManager.images["tilesets/" + this.name + "/1/"];
+		this.tileset[2] = fileManager.images["tilesets/" + this.name + "/2/"];
+		this.tileset[3] = fileManager.images["tilesets/" + this.name + "/3/"];
+	}
+
 	if (data.background) {
-		this.background = fileManager.images[data.background];
+		this.background = fileManager.images["backgrounds/" + data.background];
 	}
 
 	if (data.scrollers) {
 		this.scrollers = new Array(data.scrollers.length);
 		for (var i = 0; i < data.scrollers.length; i++) {
-			this.scrollers[i] = new Scroller(this, data.scrollers[i]);
+			this.scrollers[i] = new Scroller(this, data.scrollers[i], i);
 		}
 	}
 
@@ -58,7 +65,7 @@ function Scene(name) {
 	}
 
 	if (this.hasPlayer) {
-		this.chaser = new Chaser();
+		//this.chaser = new Chaser();
 		this.entities[numEntities - 1] = new Destroyer(camera.origin.x, -500, 10, camera.height + 500);
 		numEntities--;
 		this.entities[numEntities - 1] = new Destroyer(camera.origin.x, camera.origin.y + camera.height + 140, camera.width, 10);
@@ -176,8 +183,8 @@ Scene.prototype.draw = function() {
 			for (var i = 0; i < 3; i++) {
 				if (camera.intersects(this.levels[i])) {
 					this.levels[i].draw(0, 0);
-					this.levels[i].draw(1, 0);
-					this.levels[i].draw(2, 0);
+					this.levels[i].draw(1, 1);
+					this.levels[i].draw(2, 1);
 				}
 			}
 		}
@@ -219,7 +226,7 @@ Scene.prototype.draw = function() {
 
 			for (var i = 0; i < 3; i++) {
 				if (camera.intersects(this.levels[i])) {
-					this.levels[i].draw(1, 0);
+					this.levels[i].draw(1, 1);
 				}
 			}
 
@@ -231,7 +238,7 @@ Scene.prototype.draw = function() {
 
 			for (var i = 0; i < 3; i++) {
 				if (camera.intersects(this.levels[i])) {
-					this.levels[i].draw(2, 0);
+					this.levels[i].draw(2, 1);
 				}
 			}
 
@@ -270,7 +277,7 @@ Scene.prototype.draw = function() {
 
 			for (var i = 0; i < 3; i++) {
 				if (camera.intersects(this.levels[i])) {
-					this.levels[i].draw(1, 1);
+					this.levels[i].draw(1, 2);
 				}
 			}
 
@@ -282,7 +289,7 @@ Scene.prototype.draw = function() {
 
 			for (var i = 0; i < 3; i++) {
 				if (camera.intersects(this.levels[i])) {
-					this.levels[i].draw(2, 2);
+					this.levels[i].draw(2, 3);
 				}
 			}
 
@@ -320,8 +327,8 @@ Scene.prototype.draw = function() {
 
 			for (var i = 0; i < 3; i++) {
 				if (camera.intersects(this.levels[i])) {
-					this.levels[i].draw(1, 1);
-					this.levels[i].draw(2, 1);
+					this.levels[i].draw(1, 2);
+					this.levels[i].draw(2, 2);
 				}
 			}
 
@@ -338,8 +345,8 @@ Scene.prototype.draw = function() {
 
 			for (var i = 0; i < 3; i++) {
 				if (camera.intersects(this.levels[i])) {
-					this.levels[i].draw(1, 2);
-					this.levels[i].draw(2, 2);
+					this.levels[i].draw(1, 3);
+					this.levels[i].draw(2, 3);
 				}
 			}
 

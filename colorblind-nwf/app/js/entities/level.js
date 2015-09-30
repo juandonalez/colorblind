@@ -66,22 +66,9 @@ Level.prototype.update = function() {
 Level.prototype.draw = function(layerNum, color) {
 
 	var ctx = globals.bufferCtx;
-	var tileset = fileManager.tilesets[globals.currScene.name];
-	var tilesetSize = globals.currScene.tilesetSize;
-	var numColored = globals.currScene.numColored;
+	var tileset = globals.currScene.tileset[color];
 	var tileSize = globals.tileSize;
-	var tile = 0;
-	var tileOffset = 0;
-
-	if (color === 0) {
-		tileOffset = tilesetSize - 1 - (numColored*3);
-	}
-	else if (color === 1) {
-		tileOffset = tilesetSize - 1 - (numColored*2);
-	}
-	else {
-		tileOffset = tilesetSize - 1 - numColored;
-	}
+	var tileNum = 0;
 
 	if (layerNum === 1) {
 		if (this.swap) {
@@ -93,24 +80,21 @@ Level.prototype.draw = function(layerNum, color) {
 			layerNum = 1;
 		}
 	}
-	else {
-		tileOffset = 0;
-	}
 
 	var layer = this.layers[layerNum];
 
 	for (var i = this.top; i < this.height; i += tileSize) {
 		for (var j = this.origin.x; j < this.origin.x + this.width; j += tileSize) {
-			if (layer[tile] !== 0 && layer[tile] !== null) {
-				var img = tileset[layer[tile] + tileOffset];
+			if (layer[tileNum] !== 0 && layer[tileNum] !== null) {
+				var img = tileset[layer[tileNum]];
 				ctx.drawImage(img, j, i);
 			}
-			tile++;
+			tileNum++;
 		}
 	}
 
 	for (var i = 0; i < this.entities.length; i++) {
-		this.entities[i].draw(layerNum);
+		this.entities[i].draw(layerNum, color);
 	}
 
 }

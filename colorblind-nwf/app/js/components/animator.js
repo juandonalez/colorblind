@@ -1,8 +1,8 @@
-function Animator(ent, images, fps) {
+function Animator(ent, baseURL, fps) {
 
 	this.ent = ent;
 
-	this.images = images;
+	this.baseURL = baseURL;
 	this.fps = fps;
 	this.frameTime = 1/fps;
 	this.accum = 0;
@@ -10,6 +10,10 @@ function Animator(ent, images, fps) {
 
 	if (this.ent.state) {
 		this.currState = this.ent.state;
+	}
+
+	if (this.ent.dir) {
+		this.currDir = this.ent.dir;
 	}
 
 }
@@ -21,40 +25,33 @@ Animator.prototype.update = function() {
 
 	if (this.accum >= this.frameTime) {
 
-		this.index++;
+		var url = this.baseURL;
 
-		// if entity has states, checks to see if it has changed since last update
 		if (this.ent.state) {
-
 			if (this.ent.state !== this.currState) {
 				this.currState = this.ent.state;
-				// use set image function here so hitbox is recalulated
-				this.ent.setImage(this.images[this.currState][0]);
 				this.index = 0;
 			}
-			else {
-
-				// loop back to first frame if we've reached final one
-				if (this.index === this.images[this.currState].length) {
-					this.index = 0;
-				}
-
-				this.ent.image = this.images[this.currState][this.index];
-
-			}
-
+			url = url + this.currState + "/";
 		}
-		else {
 
-			// loop back to first frame if we've reached final one
-			if (this.index === this.images.length) {
+		if (this.ent.dir) {
+			if (this.ent.dir !== this.currDir) {
+				this.currDir = this.ent.dir;
 				this.index = 0;
 			}
-
-			this.ent.image = this.images[this.index];
-
+			url = url + this.currDir + "/";
 		}
 
+		var frames = fileManager.images[url];
+
+		if (this.index >= frames.length) {
+			this.index = 0;
+		}
+
+		this.ent.setImage(frames[this.index]);
+
+		this.index++;
 		this.accum = 0;
 
 	}
@@ -68,6 +65,10 @@ Animator.prototype.activate = function() {
 
 	if (this.ent.state) {
 		this.currState = this.ent.state;
+	}
+
+	if (this.ent.dir) {
+		this.currDir = this.ent.dir;
 	}
 
 }

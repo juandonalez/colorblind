@@ -4,32 +4,11 @@ var sceneData = sceneData || {};
 
 	sceneData = {
 
-		totalNumImages: 260,
-
-		imageNames: [
-			"chaser",
-			"stage1-bg",
-			"stage2-bg",
-			"stage3-bg",
-			"splashScreen",
-			"/menus/coop",
-			"/menus/duplicate",
-			"/menus/split",
-			"/menus/stage1",
-			"/menus/stage2",
-			"/menus/stage3",
-			"/menus/versus"
-		],
-
 		splashScreen: {
 
 			numLevels: 0,
 			numAllModes: 0,
-			tilesetSize: 0,
-			numColored: 0,
-			numTop: 0,
-			numMiddle: 0,
-			numBottom: 0,
+			hasTileset: false,
 
 			menus: [
 				{
@@ -68,11 +47,7 @@ var sceneData = sceneData || {};
 
 			numLevels: 0,
 			numAllModes: 0,
-			tilesetSize: 0,
-			numColored: 0,
-			numTop: 3,
-			numMiddle: 0,
-			numBottom: 0,
+			hasTileset: false,
 			hasPlayer: false,
 			hasTimer: false,
 			startSpeed: 100,
@@ -80,7 +55,6 @@ var sceneData = sceneData || {};
 
 			scrollers: [
 				{
-					name: "top",
 					y: 40,
 					speed: 1,
 					random: false
@@ -234,7 +208,7 @@ var sceneData = sceneData || {};
 								{
 									name: "duplicate",
 									center: new Point(30, 25),
-									image: "/menus/duplicate",
+									image: "menus/duplicate",
 									selectable: true,
 									selected: true,
 									links: ["split", false, "split", false],
@@ -252,7 +226,7 @@ var sceneData = sceneData || {};
 								{
 									name: "split",
 									center: new Point(70, 25),
-									image: "/menus/split",
+									image: "menus/split",
 									selectable: true,
 									selected: false,
 									links: ["duplicate", false, "duplicate", false],
@@ -276,14 +250,10 @@ var sceneData = sceneData || {};
 
 		stage1: {
 
-			background: "stage1-bg",
+			background: "stage1",
 			numLevels: 8,
 			numAllModes: 4,
-			tilesetSize: 76,
-			numColored: 15,
-			numTop: 0,
-			numMiddle: 0,
-			numBottom: 0,
+			hasTileset: true,
 			hasPlayer: true,
 			startPos: new Point(200, 200),
 			hasTimer: true,
@@ -294,14 +264,10 @@ var sceneData = sceneData || {};
 
 		stage2: {
 
-			background: "stage2-bg",
+			background: "stage2",
 			numLevels: 4,
 			numAllModes: 4,
-			tilesetSize: 79,
-			numColored: 15,
-			numTop: 0,
-			numMiddle: 0,
-			numBottom: 0,
+			hasTileset: true,
 			hasPlayer: true,
 			startPos: new Point(200, 200),
 			hasTimer: true,
@@ -312,14 +278,10 @@ var sceneData = sceneData || {};
 
 		stage3: {
 
-			background: "stage3-bg",
+			background: "stage3",
 			numLevels: 4,
 			numAllModes: 4,
-			tilesetSize: 72,
-			numColored: 13,
-			numTop: 0,
-			numMiddle: 0,
-			numBottom: 0,
+			hasTileset: true,
 			hasPlayer: true,
 			startPos: new Point(200, 200),
 			hasTimer: true,

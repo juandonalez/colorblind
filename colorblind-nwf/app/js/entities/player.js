@@ -2,6 +2,7 @@ function Player(n) {
 
 	this.type = "Player";
 	this.state = "idle";
+	this.dir = "r";
 	this.origin = new Point(0, 0);
 	this.center = new Point(-500, -500);
 	this.alpha = 1;
@@ -14,9 +15,10 @@ function Player(n) {
 
 	this.components = new Array(3);
 
-	this.image = fileManager.players[n]["jumping"][0];
+	this.image = fileManager.images["players/" + n + "/idle/r/"][0];
+
 	this.components[0] = new Player1Input(this);
-	this.components[1] = new Animator(this, fileManager.players[n], 24);
+	this.components[1] = new Animator(this, "players/" + n + "/", 24);
 	this.components[2] = new RigidBody(this);
 
 	this.width = globals.playerWidth;
