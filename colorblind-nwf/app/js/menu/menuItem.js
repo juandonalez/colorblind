@@ -31,6 +31,9 @@ MenuItem.prototype.update = function() {
 		else if (inputManager.confirm1) {
 			this.confirm();
 		}
+		else if (inputManager.cancel1) {
+			this.cancel();
+		}
 
 	}
 
@@ -42,36 +45,51 @@ MenuItem.prototype.update = function() {
 
 MenuItem.prototype.cancel = function() {
 
-	switch (this.menu.name) {
+	switch (this.name) {
 		case "quit":
 			console.log(this.name);
 			break;
 		case "onePlayer":
-			globals.currScene.changeMenu("");
+			console.log(this.name);
 			break;
 		case "twoPlayers":
 			console.log(this.name);
 			break;
 		case "duplicate":
-			console.log(this.name);
+			globals.currScene.changeMenu(this.menu.name, "main");
 			break;
 		case "split":
-			console.log(this.name);
+			globals.currScene.changeMenu(this.menu.name, "main");
 			break;
 		case "coop":
-			console.log(this.name);
+			globals.currScene.changeMenu(this.menu.name, "main");
 			break;
 		case "versus":
-			console.log(this.name);
+			globals.currScene.changeMenu(this.menu.name, "main");
 			break;
 		case "stage1":
-			console.log(this.name);
+			if (globals.mode === "duplicate" || globals.mode === "split") {
+				globals.currScene.changeMenu(this.menu.name, "onePlayerModes");
+			}
+			else {
+				globals.currScene.changeMenu(this.menu.name, "twoPlayerModes");
+			}
 			break;
 		case "stage2":
-			console.log(this.name);
+			if (globals.mode === "duplicate" || globals.mode === "split") {
+				globals.currScene.changeMenu(this.menu.name, "onePlayerModes");
+			}
+			else {
+				globals.currScene.changeMenu(this.menu.name, "twoPlayerModes");
+			}
 			break;
 		case "stage3":
-			console.log(this.name);
+			if (globals.mode === "duplicate" || globals.mode === "split") {
+				globals.currScene.changeMenu(this.menu.name, "onePlayerModes");
+			}
+			else {
+				globals.currScene.changeMenu(this.menu.name, "twoPlayerModes");
+			}
 			break;
 		case "leaderboards":
 			console.log(this.name);
@@ -79,7 +97,7 @@ MenuItem.prototype.cancel = function() {
 	}
 
 	inputManager.active = false;
-	setTimeout(function() {inputManager.active = true;}, 100);
+	setTimeout(function() {inputManager.active = true;}, 200);
 
 }
 
@@ -126,7 +144,7 @@ MenuItem.prototype.confirm = function() {
 	}
 
 	inputManager.active = false;
-	setTimeout(function() {inputManager.active = true;}, 100);
+	setTimeout(function() {inputManager.active = true;}, 200);
 
 }
 

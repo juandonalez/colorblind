@@ -86,6 +86,8 @@ MenuText.prototype.resize = function(scale) {
 
 }
 
+MenuText.prototype.cancel = MenuItem.prototype.cancel;
+
 MenuText.prototype.confirm = MenuItem.prototype.confirm;
 
 MenuText.prototype.deselect = MenuItem.prototype.deselect;
