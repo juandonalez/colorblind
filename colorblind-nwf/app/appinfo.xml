@@ -6,60 +6,60 @@
     <Application_Information>
       <Partition_Information>
         <Title_Name_Long_Name-1>
-          <Japanese_1st_Line></Japanese_1st_Line>
-          <Japanese_2nd_Line></Japanese_2nd_Line>
-          <English_1st_Line></English_1st_Line>
-          <English_2nd_Line></English_2nd_Line>
-          <French_1st_Line></French_1st_Line>
-          <French_2nd_Line></French_2nd_Line>
-          <German_1st_Line></German_1st_Line>
-          <German_2nd_Line></German_2nd_Line>
-          <Italian_1st_Line></Italian_1st_Line>
-          <Italian_2nd_Line></Italian_2nd_Line>
-          <Spanish_1st_Line></Spanish_1st_Line>
-          <Spanish_2nd_Line></Spanish_2nd_Line>
+          <Japanese_1st_Line/>
+          <Japanese_2nd_Line/>
+          <English_1st_Line/>
+          <English_2nd_Line/>
+          <French_1st_Line/>
+          <French_2nd_Line/>
+          <German_1st_Line/>
+          <German_2nd_Line/>
+          <Italian_1st_Line/>
+          <Italian_2nd_Line/>
+          <Spanish_1st_Line/>
+          <Spanish_2nd_Line/>
         </Title_Name_Long_Name-1>
         <Title_Name_Long_Name-2>
-          <Simplified_Chinese_1st_Line></Simplified_Chinese_1st_Line>
-          <Simplified_Chinese_2nd_Line></Simplified_Chinese_2nd_Line>
-          <Korean_1st_Line></Korean_1st_Line>
-          <Korean_2nd_Line></Korean_2nd_Line>
-          <Dutch_1st_Line></Dutch_1st_Line>
-          <Dutch_2nd_Line></Dutch_2nd_Line>
-          <Portuguese_1st_Line></Portuguese_1st_Line>
-          <Portuguese_2nd_Line></Portuguese_2nd_Line>
-          <Russian_1st_Line></Russian_1st_Line>
-          <Russian_2nd_Line></Russian_2nd_Line>
-          <Traditional_Chinese_1st_Line></Traditional_Chinese_1st_Line>
-          <Traditional_Chinese_2nd_Line></Traditional_Chinese_2nd_Line>
+          <Simplified_Chinese_1st_Line/>
+          <Simplified_Chinese_2nd_Line/>
+          <Korean_1st_Line/>
+          <Korean_2nd_Line/>
+          <Dutch_1st_Line/>
+          <Dutch_2nd_Line/>
+          <Portuguese_1st_Line/>
+          <Portuguese_2nd_Line/>
+          <Russian_1st_Line/>
+          <Russian_2nd_Line/>
+          <Traditional_Chinese_1st_Line/>
+          <Traditional_Chinese_2nd_Line/>
         </Title_Name_Long_Name-2>
         <Title_Name_Short_Name>
-          <Japanese></Japanese>
-          <English></English>
-          <French></French>
-          <German></German>
-          <Italian></Italian>
-          <Spanish></Spanish>
-          <Simplified_Chinese></Simplified_Chinese>
-          <Korean></Korean>
-          <Dutch></Dutch>
-          <Portuguese></Portuguese>
-          <Russian></Russian>
-          <Traditional_Chinese></Traditional_Chinese>
+          <Japanese/>
+          <English/>
+          <French/>
+          <German/>
+          <Italian/>
+          <Spanish/>
+          <Simplified_Chinese/>
+          <Korean/>
+          <Dutch/>
+          <Portuguese/>
+          <Russian/>
+          <Traditional_Chinese/>
         </Title_Name_Short_Name>
         <Title_Name_Publisher>
-          <Japanese></Japanese>
-          <English></English>
-          <French></French>
-          <German></German>
-          <Italian></Italian>
-          <Spanish></Spanish>
-          <Simplified_Chinese></Simplified_Chinese>
-          <Korean></Korean>
-          <Dutch></Dutch>
-          <Portuguese></Portuguese>
-          <Russian></Russian>
-          <Traditional_Chinese></Traditional_Chinese>
+          <Japanese/>
+          <English/>
+          <French/>
+          <German/>
+          <Italian/>
+          <Spanish/>
+          <Simplified_Chinese/>
+          <Korean/>
+          <Dutch/>
+          <Portuguese/>
+          <Russian/>
+          <Traditional_Chinese/>
         </Title_Name_Publisher>
         <Boot-related_Information>
           <Network_Connection_Usage>not_supported</Network_Connection_Usage>

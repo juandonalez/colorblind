@@ -97,13 +97,13 @@ function Scene(name) {
 
 Scene.prototype.update = function() {
 
-	if (this.speed !== 0) {
-		this.accum += globals.delta;
-		if (this.accum >= this.speed) {
-			camera.translate(1, 0);
-			this.accum = 0;
-		}
-	}
+	//if (this.speed !== 0) {
+		//this.accum += globals.delta;
+		//if (this.accum >= this.speed) {
+			camera.translate(4, 0);
+			//this.accum = 0;
+		//}
+	//}
 
 	if (this.levels) {
 

@@ -412,14 +412,14 @@ var sceneData = sceneData || {};
 		stage1: {
 
 			background: "stage1",
-			numLevels: 8,
-			numAllModes: 4,
+			numLevels: 9,
+			numAllModes: 9,
 			hasTileset: true,
 			hasPlayer: true,
 			startPos: new Point(200, 200),
 			hasTimer: true,
-			startSpeed: 120,
-			maxSpeed: 200
+			startSpeed: 10000,
+			maxSpeed: 10000
 
 		},
 

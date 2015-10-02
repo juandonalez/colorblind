@@ -97,7 +97,7 @@ var globals = globals || {};
 		hitboxes: false,
 		startScene: "mainMenu",
 		mode: "duplicate",
-		levelTest: true
+		levelTest: false
 	};
 
 	if (globals.debugMode) {
