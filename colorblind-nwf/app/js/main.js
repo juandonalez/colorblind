@@ -93,6 +93,7 @@ var main = main || {};
 
 		running = false;
 		camera.fadeOut();
+		globals.currScene.deactivate();
 		setTimeout(function() {
 			globals.currScene = globals.scenes[scene];
 			globals.currScene.activate();

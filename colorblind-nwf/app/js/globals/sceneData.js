@@ -416,7 +416,7 @@ var sceneData = sceneData || {};
 			numAllModes: 9,
 			hasTileset: true,
 			hasPlayer: true,
-			startPos: new Point(200, 200),
+			startPos: new Point(500, 200),
 			hasTimer: true,
 			startSpeed: 10000,
 			maxSpeed: 10000

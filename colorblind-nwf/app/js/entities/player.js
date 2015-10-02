@@ -132,7 +132,7 @@ Player.prototype.applyFriction = function(f) {
 
 Player.prototype.destroy = function() {
 
-	console.log("destroyed");
+	main.changeScene("mainMenu");
 
 }
 

@@ -501,6 +501,10 @@ Scene.prototype.activate = function() {
 		this.chaser.activate();
 	}
 
+	if (this.scroller) {
+		this.scroller.activate();
+	}
+
 	this.speed = 0;
 	this.accum = 0;
 
