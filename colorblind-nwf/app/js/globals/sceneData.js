@@ -131,7 +131,7 @@ var sceneData = sceneData || {};
 					name: "onePlayerModes",
 					active: false,
 					overlays: [
-						{
+						/*{
 							activePos: new Point(20, 7.5),
 							inactivePos: new Point(20, 7.5),
 							height: 15,
@@ -141,7 +141,7 @@ var sceneData = sceneData || {};
 							inactiveAlpha: 0.1,
 							color: "blue",
 							menuItems: []
-						},
+						},*/
 						{
 							activePos: new Point(50, 15),
 							inactivePos: new Point(50, 115),
@@ -218,7 +218,7 @@ var sceneData = sceneData || {};
 					name: "twoPlayerModes",
 					active: false,
 					overlays: [
-						{
+						/*{
 							activePos: new Point(20, 7.5),
 							inactivePos: new Point(20, 7.5),
 							height: 15,
@@ -228,7 +228,7 @@ var sceneData = sceneData || {};
 							inactiveAlpha: 0.1,
 							color: "blue",
 							menuItems: []
-						},
+						},*/
 						{
 							activePos: new Point(50, 15),
 							inactivePos: new Point(50, 115),
@@ -305,7 +305,7 @@ var sceneData = sceneData || {};
 					name: "stages",
 					active: false,
 					overlays: [
-						{
+						/*{
 							activePos: new Point(20, 7.5),
 							inactivePos: new Point(20, 7.5),
 							height: 15,
@@ -315,7 +315,7 @@ var sceneData = sceneData || {};
 							inactiveAlpha: 0.1,
 							color: "blue",
 							menuItems: []
-						},
+						},*/
 						{
 							activePos: new Point(50, 15),
 							inactivePos: new Point(50, 115),
@@ -358,7 +358,7 @@ var sceneData = sceneData || {};
 									menuText: {
 										name: "coopText",
 										center: new Point(50, 75),
-										text: "Some enemies and obstacles are only visible to the other player.",
+										text: "Easy",
 										fontSize: 40,
 										lineWidth: 4,
 										strokeStyle: "#000000",
@@ -376,7 +376,7 @@ var sceneData = sceneData || {};
 									menuText: {
 										name: "versusText",
 										center: new Point(50, 75),
-										text: "Play the same level at the same time against the other player.",
+										text: "Medium",
 										fontSize: 40,
 										lineWidth: 4,
 										strokeStyle: "#000000",
@@ -394,7 +394,7 @@ var sceneData = sceneData || {};
 									menuText: {
 										name: "versusText",
 										center: new Point(50, 75),
-										text: "Play the same level at the same time against the other player.",
+										text: "Hard",
 										fontSize: 40,
 										lineWidth: 4,
 										strokeStyle: "#000000",
