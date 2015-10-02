@@ -17,7 +17,13 @@ function Player(n) {
 
 	this.image = fileManager.images["players/" + n + "/idle/r/"][0];
 
-	this.components[0] = new Player1Input(this);
+	if (n === 2) {
+		this.components[0] = new Player2Input(this);
+	}
+	else {
+		this.components[0] = new Player1Input(this);
+	}
+
 	this.components[1] = new Animator(this, "players/" + n + "/", 24);
 	this.components[2] = new RigidBody(this);
 

@@ -97,10 +97,12 @@ function Scene(name) {
 
 Scene.prototype.update = function() {
 
-	this.accum += globals.delta;
-	if (this.accum >= this.speed) {
-		camera.translate(1, 0);
-		this.accum = 0;
+	if (this.speed !== 0) {
+		this.accum += globals.delta;
+		if (this.accum >= this.speed) {
+			camera.translate(1, 0);
+			this.accum = 0;
+		}
 	}
 
 	if (this.levels) {
@@ -495,10 +497,8 @@ Scene.prototype.activate = function() {
 		this.chaser.activate();
 	}
 
-	if (this.startSpeed) {
-		this.speed = 1/this.startSpeed;
-		this.accum = 0;
-	}
+	this.speed = 0;
+	this.accum = 0;
 
 	if (this.levels) {
 		this.levels[0] = this.pool[0];
@@ -511,6 +511,23 @@ Scene.prototype.activate = function() {
 		this.levels[1].translate(this.levels[0].width, 0);
 		this.levels[2].activate();
 		this.levels[2].translate(this.levels[1].origin.x + this.levels[1].width, 0);
+	}
+
+	camera.setOrigin(globals.tileSize, globals.tileSize);
+
+	if (this.hasPlayer) {
+		setTimeout(function() {globals.currScene.start();}, 2000);
+	}
+	else {
+		this.start();
+	}
+
+}
+
+Scene.prototype.start = function() {
+
+	if (this.startSpeed) {
+		this.speed = 1/this.startSpeed;
 	}
 
 }
