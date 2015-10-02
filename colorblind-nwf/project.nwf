@@ -7,7 +7,7 @@
     <nwf:folder_save>save/</nwf:folder_save>
     <nwf:version>1.8.2</nwf:version>
     <nwf:allow-wildcard-domains>1</nwf:allow-wildcard-domains>
-    <nwf:configuration-type>2</nwf:configuration-type>
+    <nwf:configuration-type>0</nwf:configuration-type>
     <nwf:manual-entry-aocuniqueid>0</nwf:manual-entry-aocuniqueid>
     <nwf:aoc-titles-for-debugging/>
     <nwf:enable-http-for-all-mime-types>0</nwf:enable-http-for-all-mime-types>

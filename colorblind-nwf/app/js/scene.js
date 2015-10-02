@@ -162,6 +162,10 @@ Scene.prototype.update = function() {
 		}
 	}
 
+	if (this.hasPlayer && inputManager.pause1) {
+		main.changeScene("mainMenu");
+	}
+
 }
 
 Scene.prototype.draw = function() {

@@ -92,6 +92,9 @@ var inputManager = inputManager || {};
 				inputManager.cancel1 = false;
 			}
 		}
+		if (button === "pause1") {
+			inputManager.pause1 = true;
+		}
 
 		// player 2
 		if (button === "left2") {
@@ -154,6 +157,10 @@ var inputManager = inputManager || {};
 		if (button === "cancel1") {
 			inputManager.cancel1 = false;
 			inputManager.canCancel1 = true;
+		}
+
+		if (button === "pause1") {
+			inputManager.pause1 = false;
 		}
 
 		// player 2
@@ -271,6 +278,9 @@ var inputManager = inputManager || {};
 		}
 		if (code === 27) {
 			inputManager.onRelease("cancel1");
+		}
+		if (code === 13) {
+			inputManager.onRelease("pause1");
 		}
 		if (code === 65) {
 			inputManager.onRelease("left2");
