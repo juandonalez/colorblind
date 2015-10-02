@@ -93,28 +93,32 @@ MenuItem.prototype.confirm = function() {
 			globals.currScene.changeMenu(this.menu.name, "onePlayerModes");
 			break;
 		case "twoPlayers":
-			console.log(this.name);
+			globals.currScene.changeMenu(this.menu.name, "twoPlayerModes");
 			break;
 		case "duplicate":
-			console.log(this.name);
+			globals.mode = "duplicate";
+			globals.currScene.changeMenu(this.menu.name, "stages");
 			break;
 		case "split":
-			console.log(this.name);
+			globals.mode = "split";
+			globals.currScene.changeMenu(this.menu.name, "stages");
 			break;
 		case "coop":
-			console.log(this.name);
+			globals.mode = "coop";
+			globals.currScene.changeMenu(this.menu.name, "stages");
 			break;
 		case "versus":
-			console.log(this.name);
+			globals.mode = "versus";
+			globals.currScene.changeMenu(this.menu.name, "stages");
 			break;
 		case "stage1":
-			console.log(this.name);
+			main.changeScene("stage1");
 			break;
 		case "stage2":
-			console.log(this.name);
+			main.changeScene("stage2");
 			break;
 		case "stage3":
-			console.log(this.name);
+			main.changeScene("stage3");
 			break;
 		case "leaderboards":
 			console.log(this.name);

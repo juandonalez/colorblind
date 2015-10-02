@@ -59,6 +59,7 @@ Menu.prototype.deactivate = function() {
 		this.overlays[i].deactivate();
 	}
 
-	setTimeout(function() {this.active = false;}, 1000);
+	var menu = this;
+	setTimeout(function() {menu.active = false;}, 1000);
 
 }

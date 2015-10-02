@@ -246,6 +246,12 @@ Scene.prototype.draw = function() {
 				0, 0, globals.tvWidth, globals.tvHeight);
 
 		}
+		else {
+			globals.gpCtx.drawImage(globals.buffer, 0, 0, camera.gpWidth, camera.gpHeight, 
+			0, 0, globals.gpWidth, globals.gpHeight);
+			globals.tvCtx.drawImage(globals.buffer, 0, 0, camera.tvWidth, camera.tvHeight, 
+			0, 0, globals.tvWidth, globals.tvHeight);
+		}
 
 	}
 	// in coop mode the layers are split across 2 screens and are different colors
@@ -296,6 +302,12 @@ Scene.prototype.draw = function() {
 			globals.tvCtx.drawImage(globals.buffer, 0, 0, camera.tvWidth, camera.tvHeight, 
 				0, 0, globals.tvWidth, globals.tvHeight);
 
+		}
+		else {
+			globals.gpCtx.drawImage(globals.buffer, 0, 0, camera.gpWidth, camera.gpHeight, 
+			0, 0, globals.gpWidth, globals.gpHeight);
+			globals.tvCtx.drawImage(globals.buffer, 0, 0, camera.tvWidth, camera.tvHeight, 
+			0, 0, globals.tvWidth, globals.tvHeight);
 		}
 
 	}
@@ -353,6 +365,12 @@ Scene.prototype.draw = function() {
 			globals.tvCtx.drawImage(globals.buffer, 0, 0, camera.tvWidth, camera.tvHeight, 
 				0, 0, globals.tvWidth, globals.tvHeight);
 
+		}
+		else {
+			globals.gpCtx.drawImage(globals.buffer, 0, 0, camera.gpWidth, camera.gpHeight, 
+			0, 0, globals.gpWidth, globals.gpHeight);
+			globals.tvCtx.drawImage(globals.buffer, 0, 0, camera.tvWidth, camera.tvHeight, 
+			0, 0, globals.tvWidth, globals.tvHeight);
 		}
 
 	}

@@ -8,38 +8,7 @@ var sceneData = sceneData || {};
 
 			numLevels: 0,
 			numAllModes: 0,
-			hasTileset: false,
-
-			menus: [
-				{
-					name: "main",
-					active: true,
-					overlays: [
-						{
-							activePos: new Point(50, 50),
-							inactivePos: new Point(50, 50),
-							height: 100,
-							width: 100,
-							inactiveScale: 1,
-							activeAlpha: 1,
-							inactiveAlpha: 1,
-							color: "blue",
-							menuItems: [
-								{
-									name: "title",
-									center: new Point(50, 50),
-									text: "Color Blind",
-									fontSize: 120,
-									lineWidth: 10,
-									strokeStyle: "#000000",
-									fillStyle: "yellow",
-									selectable: false
-								}
-							]
-						}
-					]
-				}
-			]
+			hasTileset: false
 
 		},
 
@@ -184,7 +153,7 @@ var sceneData = sceneData || {};
 							color: false,
 							menuItems: [
 								{
-									name: "selectMode",
+									name: "selectMode1",
 									center: new Point(50, 50),
 									text: "Select Mode",
 									fontSize: 60,
@@ -215,7 +184,7 @@ var sceneData = sceneData || {};
 									menuText: {
 										name: "duplicateText",
 										center: new Point(50, 75),
-										text: "duplicate",
+										text: "Everything is visible on both screens.",
 										fontSize: 40,
 										lineWidth: 4,
 										strokeStyle: "#000000",
@@ -233,7 +202,199 @@ var sceneData = sceneData || {};
 									menuText: {
 										name: "splitText",
 										center: new Point(50, 75),
-										text: "split",
+										text: "Some obstacles and enemies will only be visible on one screen.",
+										fontSize: 40,
+										lineWidth: 4,
+										strokeStyle: "#000000",
+										fillStyle: "#ffffff",
+										selectable: false
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					name: "twoPlayerModes",
+					active: false,
+					overlays: [
+						{
+							activePos: new Point(20, 7.5),
+							inactivePos: new Point(20, 7.5),
+							height: 15,
+							width: 15,
+							inactiveScale: 0.5,
+							activeAlpha: 1,
+							inactiveAlpha: 0.1,
+							color: "blue",
+							menuItems: []
+						},
+						{
+							activePos: new Point(50, 15),
+							inactivePos: new Point(50, 115),
+							height: 30,
+							width: 75,
+							inactiveScale: 1,
+							activeAlpha: 1,
+							inactiveAlpha: 1,
+							color: false,
+							menuItems: [
+								{
+									name: "selectMode2",
+									center: new Point(50, 50),
+									text: "Select Mode",
+									fontSize: 60,
+									lineWidth: 6,
+									strokeStyle: "#000000",
+									fillStyle: "yellow",
+									selectable: false
+								}
+							]
+						},
+						{
+							activePos: new Point(50, 65),
+							inactivePos: new Point(50, 135),
+							height: 70,
+							width: 75,
+							inactiveScale: 1,
+							activeAlpha: 1,
+							inactiveAlpha: 1,
+							color: false,
+							menuItems: [
+								{
+									name: "coop",
+									center: new Point(30, 25),
+									image: "menus/coop",
+									selectable: true,
+									selected: true,
+									links: ["versus", false, "versus", false],
+									menuText: {
+										name: "coopText",
+										center: new Point(50, 75),
+										text: "Some enemies and obstacles are only visible to the other player.",
+										fontSize: 40,
+										lineWidth: 4,
+										strokeStyle: "#000000",
+										fillStyle: "#ffffff",
+										selectable: false
+									}
+								},
+								{
+									name: "versus",
+									center: new Point(70, 25),
+									image: "menus/versus",
+									selectable: true,
+									selected: false,
+									links: ["coop", false, "coop", false],
+									menuText: {
+										name: "versusText",
+										center: new Point(50, 75),
+										text: "Play the same level at the same time against the other player.",
+										fontSize: 40,
+										lineWidth: 4,
+										strokeStyle: "#000000",
+										fillStyle: "#ffffff",
+										selectable: false
+									}
+								}
+							]
+						}
+					]
+				},
+				{
+					name: "stages",
+					active: false,
+					overlays: [
+						{
+							activePos: new Point(20, 7.5),
+							inactivePos: new Point(20, 7.5),
+							height: 15,
+							width: 15,
+							inactiveScale: 0.5,
+							activeAlpha: 1,
+							inactiveAlpha: 0.1,
+							color: "blue",
+							menuItems: []
+						},
+						{
+							activePos: new Point(50, 15),
+							inactivePos: new Point(50, 115),
+							height: 30,
+							width: 75,
+							inactiveScale: 1,
+							activeAlpha: 1,
+							inactiveAlpha: 1,
+							color: false,
+							menuItems: [
+								{
+									name: "selectStage",
+									center: new Point(50, 50),
+									text: "Select Stage",
+									fontSize: 60,
+									lineWidth: 6,
+									strokeStyle: "#000000",
+									fillStyle: "yellow",
+									selectable: false
+								}
+							]
+						},
+						{
+							activePos: new Point(50, 65),
+							inactivePos: new Point(50, 135),
+							height: 70,
+							width: 75,
+							inactiveScale: 1,
+							activeAlpha: 1,
+							inactiveAlpha: 1,
+							color: false,
+							menuItems: [
+								{
+									name: "stage1",
+									center: new Point(17, 25),
+									image: "menus/stage1",
+									selectable: true,
+									selected: true,
+									links: ["stage3", false, "stage2", false],
+									menuText: {
+										name: "coopText",
+										center: new Point(50, 75),
+										text: "Some enemies and obstacles are only visible to the other player.",
+										fontSize: 40,
+										lineWidth: 4,
+										strokeStyle: "#000000",
+										fillStyle: "#ffffff",
+										selectable: false
+									}
+								},
+								{
+									name: "stage2",
+									center: new Point(50, 25),
+									image: "menus/stage2",
+									selectable: true,
+									selected: false,
+									links: ["stage1", false, "stage3", false],
+									menuText: {
+										name: "versusText",
+										center: new Point(50, 75),
+										text: "Play the same level at the same time against the other player.",
+										fontSize: 40,
+										lineWidth: 4,
+										strokeStyle: "#000000",
+										fillStyle: "#ffffff",
+										selectable: false
+									}
+								},
+								{
+									name: "stage3",
+									center: new Point(83, 25),
+									image: "menus/stage3",
+									selectable: true,
+									selected: false,
+									links: ["stage2", false, "stage1", false],
+									menuText: {
+										name: "versusText",
+										center: new Point(50, 75),
+										text: "Play the same level at the same time against the other player.",
 										fontSize: 40,
 										lineWidth: 4,
 										strokeStyle: "#000000",
