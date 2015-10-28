@@ -78,16 +78,4 @@
  <tile id="25">
   <image width="40" height="40" source="../images/tilesets/stage1/0/26.png"/>
  </tile>
- <tile id="26">
-  <image width="40" height="40" source="../images/tilesets/stage1/0/27.png"/>
- </tile>
- <tile id="27">
-  <image width="40" height="40" source="../images/tilesets/stage1/0/28.png"/>
- </tile>
- <tile id="28">
-  <image width="40" height="40" source="../images/tilesets/stage1/0/29.png"/>
- </tile>
- <tile id="29">
-  <image width="40" height="40" source="../images/tilesets/stage1/0/30.png"/>
- </tile>
 </tileset>
