@@ -61,11 +61,10 @@ var main = main || {};
 		window.removeEventListener('loaded', startGame, false);
 
 		globals.scenes = {
-			splashScreen: new SplashScreen("splashScreen"),
+			splashScreen: new Scene("splashScreen"),
 			mainMenu: new Scene("mainMenu"),
 			stage1: new Scene("stage1"),
-			stage2: new Scene("stage2"),
-			stage3: new Scene("stage3")
+			stage2: new Scene("stage2")
 		};
 
 		globals.player0 = new Player(0);

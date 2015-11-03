@@ -6,19 +6,13 @@ var sceneData = sceneData || {};
 
 		splashScreen: {
 
-			numLevels: 0,
-			numAllModes: 0,
-			hasTileset: false
+			isStage: false
 
 		},
 
 		mainMenu: {
 
-			numLevels: 0,
-			numAllModes: 0,
-			hasTileset: false,
-			hasPlayer: false,
-			hasTimer: false,
+			isStage: false,
 			startSpeed: 100,
 			maxSpeed: 100,
 
@@ -354,7 +348,7 @@ var sceneData = sceneData || {};
 									image: "menus/stage1",
 									selectable: true,
 									selected: true,
-									links: ["stage3", false, "stage2", false],
+									links: ["stage2", false, "stage2", false],
 									menuText: {
 										name: "coopText",
 										center: new Point(50, 75),
@@ -372,29 +366,11 @@ var sceneData = sceneData || {};
 									image: "menus/stage2",
 									selectable: true,
 									selected: false,
-									links: ["stage1", false, "stage3", false],
+									links: ["stage1", false, "stage1", false],
 									menuText: {
 										name: "versusText",
 										center: new Point(50, 75),
 										text: "Medium",
-										fontSize: 40,
-										lineWidth: 4,
-										strokeStyle: "#000000",
-										fillStyle: "#ffffff",
-										selectable: false
-									}
-								},
-								{
-									name: "stage3",
-									center: new Point(83, 25),
-									image: "menus/stage3",
-									selectable: true,
-									selected: false,
-									links: ["stage2", false, "stage1", false],
-									menuText: {
-										name: "versusText",
-										center: new Point(50, 75),
-										text: "Hard",
 										fontSize: 40,
 										lineWidth: 4,
 										strokeStyle: "#000000",
@@ -414,10 +390,8 @@ var sceneData = sceneData || {};
 			background: "stage1",
 			numLevels: 9,
 			numAllModes: 9,
-			hasTileset: true,
-			hasPlayer: true,
+			isStage: true,
 			startPos: new Point(500, 200),
-			hasTimer: true,
 			startSpeed: 10000,
 			maxSpeed: 10000
 
@@ -428,26 +402,10 @@ var sceneData = sceneData || {};
 			background: "stage2",
 			numLevels: 4,
 			numAllModes: 4,
-			hasTileset: true,
-			hasPlayer: true,
-			startPos: new Point(200, 200),
-			hasTimer: true,
-			startSpeed: 120,
-			maxSpeed: 200
-
-		},
-
-		stage3: {
-
-			background: "stage3",
-			numLevels: 4,
-			numAllModes: 4,
-			hasTileset: true,
-			hasPlayer: true,
-			startPos: new Point(200, 200),
-			hasTimer: true,
-			startSpeed: 120,
-			maxSpeed: 120
+			isStage: true,
+			startPos: new Point(500, 200),
+			startSpeed: 10000,
+			maxSpeed: 10000
 
 		}
 

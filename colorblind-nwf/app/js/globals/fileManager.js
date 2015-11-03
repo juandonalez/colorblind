@@ -4,10 +4,12 @@ var fileManager = fileManager || {};
 
 	fileManager.levels = {};
 	fileManager.images = {};
-	var totalNumImages = 293;
+	var totalNumImages = 252;
 
 	var folders = [
 		["backgrounds/mainMenu/", 3],
+		["misc/wave/l/", 18],
+		["misc/wave/r/", 18],
 		["players/0/idle/l/", 1],
 		["players/0/idle/r/", 1],
 		["players/0/jumping/l/", 1],
@@ -33,23 +35,17 @@ var fileManager = fileManager || {};
 		["tilesets/stage2/0/", 34],
 		["tilesets/stage2/1/", 16],
 		["tilesets/stage2/2/", 16],
-		["tilesets/stage2/3/", 16],
-		["tilesets/stage3/0/", 33],
-		["tilesets/stage3/1/", 14],
-		["tilesets/stage3/2/", 14],
-		["tilesets/stage3/3/", 14]
+		["tilesets/stage2/3/", 16]
 	];
 
 	var imageURLs = [
 		"backgrounds/stage1",
 		"backgrounds/stage2",
-		"backgrounds/stage3",
 		"menus/coop",
 		"menus/duplicate",
 		"menus/split",
 		"menus/stage1",
 		"menus/stage2",
-		"menus/stage3",
 		"menus/versus"
 	];
 
@@ -57,7 +53,6 @@ var fileManager = fileManager || {};
 
 		loadLevels("stage1");
 		loadLevels("stage2");
-		loadLevels("stage3");
 
 		var baseURL;
 		var numImages;

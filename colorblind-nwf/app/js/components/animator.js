@@ -49,7 +49,7 @@ Animator.prototype.update = function() {
 			this.index = 0;
 		}
 
-		this.ent.setImage(frames[this.index]);
+		this.ent.image = frames[this.index];
 
 		this.index++;
 		this.accum = 0;

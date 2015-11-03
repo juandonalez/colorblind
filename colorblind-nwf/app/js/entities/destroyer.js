@@ -1,4 +1,4 @@
-function Destroyer(x, y, width, height) {
+function Destroyer(x, y, width, height, animationURL, drawX, drawY) {
 
 	this.origin = new Point(x, y);
 	this.center = new Point(0, 0);
@@ -6,12 +6,28 @@ function Destroyer(x, y, width, height) {
 	this.height = height;
 	this.calculateCenter();
 
+	if (animationURL) {
+		this.drawOrigin = new Point(drawX, drawY);
+		this.image = fileManager.images[animationURL][0];
+		this.animator = new Animator(this, animationURL, 24);
+	}
+
 }
 
 Destroyer.prototype.update = function() {
 
-	this.origin.x = camera.origin.x;
-	this.calculateCenter();
+	if (this.animator) {
+		this.animator.update();
+	}
+
+}
+
+Destroyer.prototype.draw = function() {
+
+	if (this.animator) {
+		globals.bufferCtx.globalAlpha = 1;
+		globals.bufferCtx.drawImage(this.image, this.drawOrigin.x, this.drawOrigin.y);
+	}
 
 }
 
@@ -42,8 +58,6 @@ Destroyer.prototype.calculateCenter = Entity.prototype.calculateCenter;
 Destroyer.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
 
 Destroyer.prototype.deactivate = Entity.prototype.deactivate;
-
-Destroyer.prototype.draw = Entity.prototype.draw;
 
 Destroyer.prototype.intersects = Entity.prototype.intersects;
 

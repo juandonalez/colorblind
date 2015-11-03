@@ -5,20 +5,10 @@ function Scene(name) {
 
 	var data = sceneData[this.name];
 
-	this.numLevels = data.numLevels;
-	this.numAllModes = data.numAllModes;
-
-	this.hasPlayer = data.hasPlayer;
 	this.speed = 0;
 	this.accum = 0;
 
-	if (data.hasTileset) {
-		this.tileset = new Array(4);
-		this.tileset[0] = fileManager.images["tilesets/" + this.name + "/0/"];
-		this.tileset[1] = fileManager.images["tilesets/" + this.name + "/1/"];
-		this.tileset[2] = fileManager.images["tilesets/" + this.name + "/2/"];
-		this.tileset[3] = fileManager.images["tilesets/" + this.name + "/3/"];
-	}
+	this.isStage = data.isStage;
 
 	if (data.background) {
 		this.background = fileManager.images["backgrounds/" + data.background];
@@ -31,21 +21,6 @@ function Scene(name) {
 		}
 	}
 
-	if (data.startPos) {
-		this.startPos = data.startPos;
-	}
-
-	if (data.startSpeed) {
-		this.startSpeed = data.startSpeed;
-		this.maxSpeed = data.maxSpeed;
-	}
-
-	if (this.numLevels > 0) {
-		this.pool = fileManager.levels[this.name];
-		this.indexes = [0, 0, 0];
-		this.levels = [this.pool[0], this.pool[0], this.pool[0]];
-	}
-
 	if (data.menus) {
 		this.menus = {};
 		for (var i = 0; i < data.menus.length; i++) {
@@ -53,42 +28,29 @@ function Scene(name) {
 		}
 	}
 
-	// get number of entities and create entity array
-	var numEntities = 0;
+	if (this.isStage) {
 
-	if (this.hasPlayer) {
-		numEntities += 3;
-	}
+		this.startSpeed = data.startSpeed;
+		this.maxSpeed = data.maxSpeed;
+		this.startPos = data.startPos;
+		this.numLevels = data.numLevels;
+		this.numAllModes = data.numAllModes;
+		this.tileset = new Array(4);
+		this.tileset[0] = fileManager.images["tilesets/" + this.name + "/0/"];
+		this.tileset[1] = fileManager.images["tilesets/" + this.name + "/1/"];
+		this.tileset[2] = fileManager.images["tilesets/" + this.name + "/2/"];
+		this.tileset[3] = fileManager.images["tilesets/" + this.name + "/3/"];
+		this.pool = fileManager.levels[this.name];
+		this.indexes = [0, 0, 0];
+		this.levels = [this.pool[0], this.pool[0], this.pool[0]];
 
-	if (numEntities > 0) {
-		this.entities = new Array(numEntities);
-	}
-
-	if (this.hasPlayer) {
-		//this.chaser = new Chaser();
-		this.entities[numEntities - 1] = new Destroyer(camera.origin.x, -500, 10, camera.height + 500);
-		numEntities--;
-		this.entities[numEntities - 1] = new Destroyer(camera.origin.x, camera.origin.y + camera.height + 140, camera.width, 10);
-		numEntities--;
-		this.entities[numEntities - 1] = new Blocker(camera.origin.x + camera.width, -500, 10, camera.height + 500);
-		numEntities--;
-	}
-
-	// get number of components and create components array
-	var numComponents = 0;
-
-	if (data.hasTimer) {
-		numComponents++;
-	}
-
-	if (numComponents > 0) {
-		this.components = new Array(numComponents);
-	}
-
-	if (data.hasTimer) {
 		this.timer = new Timer(this);
-		this.components[numComponents - 1] = this.timer;
-		numComponents--;
+
+		this.entities = new Array(3);
+		this.entities[0] = new Destroyer(20, -500, 160, 2000, "misc/wave/l/", -40, -40);
+		this.entities[1] = new Destroyer(1180, -500, 160, 2000, "misc/wave/r/", 1100, -40);
+		this.entities[2] = new Destroyer(camera.origin.x, camera.origin.y + camera.height + 140, camera.width, 10, false, false, false);
+
 	}
 
 	data = null;
@@ -101,6 +63,11 @@ Scene.prototype.update = function() {
 		//this.accum += globals.delta;
 		//if (this.accum >= this.speed) {
 			camera.translate(4, 0);
+			if (this.isStage) {
+				for (var i = 0; i < this.entities.length; i++) {
+					this.entities[i].translate(4, 0);
+				}
+			}
 			//this.accum = 0;
 		//}
 	//}
@@ -132,27 +99,8 @@ Scene.prototype.update = function() {
 		}
 	}
 
-	if (this.chaser) {
-		this.chaser.update();
-	}
+	if (this.isStage) {
 
-	if (this.entities) {
-		for (var i = 0; i < this.entities.length; i++) {
-			this.entities[i].update();
-		}
-	}
-
-	if (this.components) {
-		for (var i = 0; i < this.components.length; i++) {
-			this.components[i].update();
-		}
-	}
-
-	for (var m in this.menus) {
-		this.menus[m].update();
-	}
-
-	if (this.hasPlayer) {
 		if (globals.mode === "duplicate" || globals.mode === "split") {
 			globals.player0.update();
 		}
@@ -160,10 +108,15 @@ Scene.prototype.update = function() {
 			globals.player1.update();
 			globals.player2.update();
 		}
+
+		for (var i = 0; i < this.entities.length; i++) {
+			this.entities[i].update();
+		}
+
 	}
 
-	if (this.hasPlayer && inputManager.pause1) {
-		main.changeScene("mainMenu");
+	for (var m in this.menus) {
+		this.menus[m].update();
 	}
 
 }
@@ -193,9 +146,7 @@ Scene.prototype.draw = function() {
 					this.levels[i].draw(2, 1);
 				}
 			}
-		}
 
-		if (this.hasPlayer) {
 			globals.player0.draw();
 		}
 
@@ -218,9 +169,7 @@ Scene.prototype.draw = function() {
 			}
 
 			// draw player
-			if (this.hasPlayer) {
-				globals.player0.draw();
-			}
+			globals.player0.draw();
 
 			globals.gpCtx.drawImage(globals.buffer, 0, 0, camera.gpWidth, camera.gpHeight, 
 				0, 0, globals.gpWidth, globals.gpHeight);
@@ -274,10 +223,8 @@ Scene.prototype.draw = function() {
 			}
 
 			// draw players
-			if (this.hasPlayer) {
-				globals.player1.draw();
-				globals.player2.draw();
-			}
+			globals.player1.draw();
+			globals.player2.draw();
 
 			globals.gpCtx.drawImage(globals.buffer, 0, 0, camera.gpWidth, camera.gpHeight, 
 				0, 0, globals.gpWidth, globals.gpHeight);
@@ -339,9 +286,7 @@ Scene.prototype.draw = function() {
 			globals.bufferCtx.clearRect(camera.origin.x, camera.origin.y, globals.gameWidth, globals.gameHeight);
 
 			// draw player 1
-			if (this.hasPlayer) {
-				globals.player1.draw();
-			}
+			globals.player1.draw();
 
 			for (var i = 0; i < 3; i++) {
 				if (camera.intersects(this.levels[i])) {
@@ -357,9 +302,7 @@ Scene.prototype.draw = function() {
 			globals.bufferCtx.clearRect(camera.origin.x, camera.origin.y, globals.gameWidth, globals.gameHeight);
 
 			// draw player 2
-			if (this.hasPlayer) {
-				globals.player2.draw();
-			}
+			globals.player2.draw();
 
 			for (var i = 0; i < 3; i++) {
 				if (camera.intersects(this.levels[i])) {
@@ -385,8 +328,10 @@ Scene.prototype.draw = function() {
 	globals.bufferCtx.restore();
 	globals.bufferCtx.clearRect(0, 0, globals.gameWidth, globals.gameHeight);
 
-	if (this.chaser) {
-		//this.chaser.draw();
+	if (this.entities) {
+		for (var i = 0; i < this.entities.length; i++) {
+			this.entities[i].draw();
+		}
 	}
 
 	for (var m in this.menus) {
@@ -466,24 +411,37 @@ Scene.prototype.activate = function() {
 	globals.gpBackgroundCtx.clearRect(0, 0, globals.gpWidth, globals.gpHeight);
 	globals.tvBackgroundCtx.clearRect(0, 0, globals.tvWidth, globals.tvHeight);
 
+	this.speed = 0;
+	this.accum = 0;
+
 	if (this.background) {
 		globals.gpBackgroundCtx.drawImage(this.background, 0, 0, globals.gpWidth, globals.gpHeight);
 		globals.tvBackgroundCtx.drawImage(this.background, 0, 0, globals.tvWidth, globals.tvHeight);
 	}
 
-	if (this.entities) {
+	if (this.scroller) {
+		this.scroller.activate();
+	}
+
+	camera.setOrigin(globals.tileSize, globals.tileSize);
+
+	if (this.isStage) {
+
+		this.levels[0] = this.pool[0];
+		this.indexes[1] = this.getNewIndex();
+		this.levels[1] = this.pool[this.indexes[1]];
+		this.indexes[2] = this.getNewIndex();
+		this.levels[2] = this.pool[this.indexes[2]];
+		this.levels[0].activate();
+		this.levels[1].activate();
+		this.levels[1].translate(this.levels[0].width, 0);
+		this.levels[2].activate();
+		this.levels[2].translate(this.levels[1].origin.x + this.levels[1].width, 0);
+
 		for (var i = 0; i < this.entities.length; i++) {
 			this.entities[i].activate();
 		}
-	}
 
-	if (this.components) {
-		for (var i = 0; i < this.components.length; i++) {
-			this.components[i].activate();
-		}
-	}
-
-	if (this.hasPlayer) {
 		if (globals.mode === "duplicate" || globals.mode === "split") {
 			globals.player0.activate(this.startPos.x, this.startPos.y);
 		}
@@ -495,36 +453,9 @@ Scene.prototype.activate = function() {
 			globals.player1.activate(this.startPos.x, this.startPos.y);
 			globals.player2.activate(this.startPos.x + 150, this.startPos.y);
 		}
-	}
 
-	if (this.chaser) {
-		this.chaser.activate();
-	}
-
-	if (this.scroller) {
-		this.scroller.activate();
-	}
-
-	this.speed = 0;
-	this.accum = 0;
-
-	if (this.levels) {
-		this.levels[0] = this.pool[0];
-		this.indexes[1] = this.getNewIndex();
-		this.levels[1] = this.pool[this.indexes[1]];
-		this.indexes[2] = this.getNewIndex();
-		this.levels[2] = this.pool[this.indexes[2]];
-		this.levels[0].activate();
-		this.levels[1].activate();
-		this.levels[1].translate(this.levels[0].width, 0);
-		this.levels[2].activate();
-		this.levels[2].translate(this.levels[1].origin.x + this.levels[1].width, 0);
-	}
-
-	camera.setOrigin(globals.tileSize, globals.tileSize);
-
-	if (this.hasPlayer) {
 		setTimeout(function() {globals.currScene.start();}, 2000);
+
 	}
 	else {
 		this.start();
