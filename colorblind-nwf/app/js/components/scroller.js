@@ -10,10 +10,10 @@ function Scroller(scene, d, index) {
 
 	this.pool = fileManager.images["backgrounds/" + scene.name + "/"];
 
-	this.indexes = new Array(3);
-	this.bgs = new Array(3);
+	this.indexes = new Array(2);
+	this.bgs = new Array(2);
 
-	for (var i = 0; i < 3; i++) {
+	for (var i = 0; i < 2; i++) {
 
 		if (this.random) {
 			var rand = Math.floor(Math.random()*this.pool.length);
@@ -43,23 +43,21 @@ Scroller.prototype.update = function() {
 	if (this.x + first.width < camera.origin.x) {
 		this.x += first.width;
 		this.indexes[0] = this.indexes[1];
-		this.indexes[1] = this.indexes[2];
 
 		if (this.random) {
-			this.indexes[2] = Math.floor(Math.random()*this.pool.length);
+			this.indexes[1] = Math.floor(Math.random()*this.pool.length);
 		}
 		else {
-			if ((this.indexes[1] + 1) === this.pool.length) {
-				this.indexes[2] = 0;
+			if ((this.indexes[0] + 1) === this.pool.length) {
+				this.indexes[1] = 0;
 			}
 			else {
-				this.indexes[2] = this.indexes[1] + 1;
+				this.indexes[1] = this.indexes[0] + 1;
 			}
 		}
 
 		this.bgs[0] = this.pool[this.indexes[0]];
 		this.bgs[1] = this.pool[this.indexes[1]];
-		this.bgs[2] = this.pool[this.indexes[2]];
 	}
 
 }
@@ -71,12 +69,10 @@ Scroller.prototype.draw = function() {
 
 	var first = this.bgs[0];
 	var second = this.bgs[1];
-	var third = this.bgs[2];
 
 	// *****figure out camera pos stuff ***
 	ctx.drawImage(first, this.x, this.y);
 	ctx.drawImage(second, this.x + first.width, this.y);
-	ctx.drawImage(third, this.x + first.width + second.width, this.y);
 
 }
 
@@ -85,5 +81,18 @@ Scroller.prototype.activate = function() {
 	this.x = 0;
 	this.speed = 1/this.startSpeed;
 	this.accum = 0;
+
+	for (var i = 0; i < 2; i++) {
+
+		if (this.random) {
+			var rand = Math.floor(Math.random()*this.pool.length);
+			this.indexes[i] = rand;
+		}
+		else {
+			this.indexes[i] = i;
+		}
+
+		this.bgs[i] = this.pool[this.indexes[i]];
+	}
 
 }

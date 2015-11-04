@@ -393,7 +393,15 @@ var sceneData = sceneData || {};
 			isStage: true,
 			startPos: new Point(500, 200),
 			startSpeed: 10000,
-			maxSpeed: 10000
+			maxSpeed: 10000,
+
+			scrollers: [
+				{
+					y: 270,
+					speed: 500,
+					random: true
+				}
+			],
 
 		},
 

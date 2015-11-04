@@ -4,10 +4,11 @@ var fileManager = fileManager || {};
 
 	fileManager.levels = {};
 	fileManager.images = {};
-	var totalNumImages = 252;
+	var totalNumImages = 253;
 
 	var folders = [
-		["backgrounds/mainMenu/", 3],
+		["backgrounds/mainMenu/", 2],
+		["backgrounds/stage1/", 2],
 		["misc/wave/l/", 18],
 		["misc/wave/r/", 18],
 		["players/0/idle/l/", 1],
