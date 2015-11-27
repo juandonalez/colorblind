@@ -46,10 +46,10 @@ function Scene(name) {
 
 		this.timer = new Timer(this);
 
-		this.entities = new Array(3);
+		/*this.entities = new Array(3);
 		this.entities[0] = new Destroyer(20, -500, 160, 2000, "misc/wave/l/", -40, -40);
 		this.entities[1] = new Destroyer(1180, -500, 160, 2000, "misc/wave/r/", 1100, -40);
-		this.entities[2] = new Destroyer(camera.origin.x, camera.origin.y + camera.height + 140, camera.width, 10, false, false, false);
+		this.entities[2] = new Destroyer(camera.origin.x, camera.origin.y + camera.height + 140, camera.width, 10, false, false, false);*/
 
 	}
 
@@ -62,10 +62,12 @@ Scene.prototype.update = function() {
 	//if (this.speed !== 0) {
 		//this.accum += globals.delta;
 		//if (this.accum >= this.speed) {
-			camera.translate(4, 0);
+			//camera.translate(4, 0);
 			if (this.isStage) {
-				for (var i = 0; i < this.entities.length; i++) {
-					this.entities[i].translate(4, 0);
+				if (this.entities) {
+					for (var i = 0; i < this.entities.length; i++) {
+						this.entities[i].translate(4, 0);
+					}
 				}
 			}
 			//this.accum = 0;
@@ -109,8 +111,10 @@ Scene.prototype.update = function() {
 			globals.player2.update();
 		}
 
-		for (var i = 0; i < this.entities.length; i++) {
-			this.entities[i].update();
+		if (this.entities) {
+			for (var i = 0; i < this.entities.length; i++) {
+				this.entities[i].update();
+			}
 		}
 
 	}
@@ -438,8 +442,10 @@ Scene.prototype.activate = function() {
 		this.levels[2].activate();
 		this.levels[2].translate(this.levels[1].origin.x + this.levels[1].width, 0);
 
-		for (var i = 0; i < this.entities.length; i++) {
-			this.entities[i].activate();
+		if (this.entities) {
+			for (var i = 0; i < this.entities.length; i++) {
+				this.entities[i].activate();
+			}
 		}
 
 		if (globals.mode === "duplicate" || globals.mode === "split") {

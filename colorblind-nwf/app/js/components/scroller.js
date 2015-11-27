@@ -4,11 +4,11 @@ function Scroller(scene, d, index) {
 	this.y = d.y;
 	this.scene = scene;
 	this.startSpeed = d.speed;
-	this.speed = 1/this.startSpeed;
+	this.speed = this.startSpeed;
 	this.random = d.random;
 	this.accum = 0;
 
-	this.pool = fileManager.images["backgrounds/" + scene.name + "/"];
+	this.pool = fileManager.images["backgrounds/" + scene.name + "/" + index + "/"];
 
 	this.indexes = new Array(2);
 	this.bgs = new Array(2);
@@ -32,11 +32,12 @@ function Scroller(scene, d, index) {
 
 Scroller.prototype.update = function() {
 
-	this.accum += globals.delta;
+	/*this.accum += globals.delta;
 	if (this.accum >= this.speed) {
 		this.x++;
 		this.accum = 0;
-	}
+	}*/
+	this.x += this.speed;
 
 	var first = this.bgs[0];
 

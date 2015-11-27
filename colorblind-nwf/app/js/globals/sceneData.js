@@ -397,11 +397,16 @@ var sceneData = sceneData || {};
 
 			scrollers: [
 				{
-					y: 270,
-					speed: 500,
+					y: 300,
+					speed: 1,
+					random: true
+				},
+				{
+					y: 200,
+					speed: 2,
 					random: true
 				}
-			],
+			]
 
 		},
 

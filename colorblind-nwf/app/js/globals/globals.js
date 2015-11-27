@@ -8,7 +8,7 @@ var globals = globals || {};
 	globals.numPlayers = 1;
 	globals.mode = "duplicate";
 
-	globals.tileSize = 40;
+	globals.tileSize = 60;
 	globals.numTilesHori = 34;
 	globals.numTilesVert = 20;
 
@@ -93,7 +93,7 @@ var globals = globals || {};
 
 	globals.debug = {
 		backgrounds: false,
-		fpsCounter: false,
+		fpsCounter: true,
 		hitboxes: false,
 		startScene: "stage1",
 		mode: "duplicate",
