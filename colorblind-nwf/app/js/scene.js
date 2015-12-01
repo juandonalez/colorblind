@@ -46,10 +46,11 @@ function Scene(name) {
 
 		this.timer = new Timer(this);
 
-		/*this.entities = new Array(3);
-		this.entities[0] = new Destroyer(20, -500, 160, 2000, "misc/wave/l/", -40, -40);
-		this.entities[1] = new Destroyer(1180, -500, 160, 2000, "misc/wave/r/", 1100, -40);
-		this.entities[2] = new Destroyer(camera.origin.x, camera.origin.y + camera.height + 140, camera.width, 10, false, false, false);*/
+		this.destroyers = [
+			new Destroyer(60, -500, 240, 1700, "misc/sides/l/", 0, 0),
+			new Destroyer(1740, -500, 240, 1700, "misc/sides/r/", 1650, 0),
+			new Destroyer(0, 1140, 2040, 240, false, false, false)
+		];
 
 	}
 
@@ -101,6 +102,12 @@ Scene.prototype.update = function() {
 		}
 	}
 
+	if (this.destroyers) {
+		for (var i = 0; i < this.destroyers.length; i++) {
+			this.destroyers[i].update();
+		}
+	}
+
 	if (this.isStage) {
 
 		if (globals.mode === "duplicate" || globals.mode === "split") {
@@ -109,12 +116,6 @@ Scene.prototype.update = function() {
 		else {
 			globals.player1.update();
 			globals.player2.update();
-		}
-
-		if (this.entities) {
-			for (var i = 0; i < this.entities.length; i++) {
-				this.entities[i].update();
-			}
 		}
 
 	}
@@ -332,9 +333,9 @@ Scene.prototype.draw = function() {
 	globals.bufferCtx.restore();
 	globals.bufferCtx.clearRect(0, 0, globals.gameWidth, globals.gameHeight);
 
-	if (this.entities) {
-		for (var i = 0; i < this.entities.length; i++) {
-			this.entities[i].draw();
+	if (this.destroyers) {
+		for (var i = 0; i < this.destroyers.length; i++) {
+			this.destroyers[i].draw();
 		}
 	}
 

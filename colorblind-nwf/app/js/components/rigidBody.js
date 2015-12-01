@@ -36,8 +36,8 @@ RigidBody.prototype.update = function() {
 		}
 
 		// check collision with any entity owned by the scene (eg destroyers)
-		if (globals.currScene.entities) {
-			colliders = globals.currScene.entities;
+		if (globals.currScene.destroyers) {
+			colliders = globals.currScene.destroyers;
 			for (var j = 0; j < colliders.length; j++) {
 				if (this.ent.intersects(colliders[j]) && colliders[j].onHorizontalCollision) {
 					colliders[j].onHorizontalCollision(this.ent);
