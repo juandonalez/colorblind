@@ -4,30 +4,15 @@ var main = main || {};
 
 	"use strict";
 
-	var delta;
-	var then;
-	var now;
+	var prevTick, prevFrame, now, elapsed;
+	var interval = Math.round(1000/globals.fps);
+
 	var frames = 0;
-	var frameTimer = 0;
+	var fpsTimer = 0;
 
 	var running = false;
 
 	function update() {
-
-		now = Date.now();
-		delta = (now - then)/1000;
-		then = now;
-
-		if (globals.debugMode && globals.debug.fpsCounter) {
-			frames++;
-			frameTimer += delta;
-
-			if (frameTimer >= 1) {
-				console.log(frames);
-				frames = 0;
-				frameTimer = 0;
-			}
-		}
 
 		if (running) {
 			globals.currScene.update();
@@ -50,8 +35,39 @@ var main = main || {};
 
 	function gameLoop() {
 
-		update();
-		draw();
+		// get the time since last tick.
+		// if it is over the fps lock then update and draw
+		now = Date.now();
+		elapsed = (now - prevTick);
+
+		if (elapsed >= interval) {
+
+			prevTick = now - (elapsed % interval);
+			globals.delta = elapsed/1000;
+			frames++;
+
+			if (globals.delta > 0.5) {
+				globals.delta = 0.5;
+			}
+
+			update();
+			draw();
+
+		}
+
+		// get time since last frame.
+		// if it is over 1 second then output the number of frames
+		fpsTimer += (now - prevFrame);
+		prevFrame = now;
+
+		if (fpsTimer >= 1000) {
+			if (globals.debugMode && globals.debug.fpsCounter) {
+				console.log(frames);
+			}
+			frames = 0;
+			fpsTimer = 0;
+		}
+
 		window.requestAnimationFrame(gameLoop);
 
 	}
@@ -82,7 +98,8 @@ var main = main || {};
 			setTimeout(function() {main.changeScene("mainMenu");}, 2000);
 		}
 
-		then = Date.now();
+		prevTick = Date.now();
+		prevFrame = Date.now();
 		gameLoop();
 		camera.fadeIn();
 

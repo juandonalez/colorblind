@@ -5,6 +5,9 @@ var globals = globals || {};
 	globals.isWiiU = window.nwf && nwf.system && nwf.system.isWiiU();
 	window.requestAnimationFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame;
 
+	globals.fps = 30;
+	globals.delta = 0;
+
 	globals.numPlayers = 1;
 	globals.mode = "duplicate";
 
@@ -24,8 +27,6 @@ var globals = globals || {};
 	globals.player2;
 
 	globals.font = "Soviet";
-
-	globals.delta = 0.017;
 
 	globals.scenes = {};
 	globals.currScene;
