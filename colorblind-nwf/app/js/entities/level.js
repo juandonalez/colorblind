@@ -1,11 +1,17 @@
+Level.prototype = new GameObject();
+Level.prototype.constructor = Level;
+
 function Level(d) {
 
 	this.active = false;
 
+	this.x = 0;
+	this.y = 0;
 	this.width = d.width * globals.tileSize;
 	this.height = globals.gameHeight;
-	this.origin = new Point(0, 0);
 	this.center = new Point(0, 0);
+	this.max = new Point(0, 0);
+	this.updateBounds();
 
 	// the level covers the whole screen
 	// top is where the tiles first appear
@@ -23,7 +29,7 @@ function Level(d) {
 	for (var i = 0; i < colliders.length; i++) {
 		col = colliders[i];
 		// collider y pos is relative to level top left corner
-		this.colliders[i] = new Platform(this, col.x, col.y + this.top, col.width, col.height);
+		this.colliders[i] = new Platform(col.x, col.y + this.top, col.width, col.height);
 	}
 
 	var entities = d.layers[4].objects;
@@ -33,11 +39,9 @@ function Level(d) {
 	for (var i = 0; i < entities.length; i++) {
 		ent = entities[i];
 		if (ent.name === "spike") {
-			this.entities[i] = new Spike(ent.x, this.top + ent.y, ent.type);
+			//this.entities[i] = new Spike(ent.x, this.top + ent.y, ent.type);
 		}
 	}
-
-	this.calculateCenter();
 
 	col = null;
 	colliders = null;
@@ -84,7 +88,7 @@ Level.prototype.draw = function(layerNum, color) {
 	var layer = this.layers[layerNum];
 
 	for (var i = this.top; i < this.height; i += tileSize) {
-		for (var j = this.origin.x; j < this.origin.x + this.width; j += tileSize) {
+		for (var j = this.x; j < this.x + this.width; j += tileSize) {
 			if (layer[tileNum] !== 0 && layer[tileNum] !== null) {
 				var img = tileset[layer[tileNum]];
 				ctx.drawImage(img, j, i);
@@ -111,7 +115,9 @@ Level.prototype.activate = function(x) {
 Level.prototype.deactivate = function() {
 
 	this.active = false;
-	this.setOrigin(0, 0);
+	this.x = 0;
+	this.y = 0;
+	this.updateBounds();
 
 	for (var i = 0; i < this.colliders.length; i++) {
 		this.colliders[i].deactivate();
@@ -145,9 +151,9 @@ Level.prototype.resume = function() {
 
 Level.prototype.translate = function(x, y) {
 
-	this.origin.x += x;
-	this.origin.y += y;
-	this.calculateCenter();
+	this.x += x;
+	this.y += y;
+	this.updateBounds();
 
 	for (var i = 0; i < this.colliders.length; i++) {
 		this.colliders[i].translate(x, y);
@@ -158,19 +164,3 @@ Level.prototype.translate = function(x, y) {
 	}
 
 }
-
-Level.prototype.calculateCenter = Entity.prototype.calculateCenter;
-
-Level.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
-
-Level.prototype.intersects = Entity.prototype.intersects;
-
-Level.prototype.pctToPoint = Entity.prototype.pctToPoint;
-
-Level.prototype.resize = Entity.prototype.resize;
-
-Level.prototype.setAlpha = Entity.prototype.setAlpha;
-
-Level.prototype.setCenter = Entity.prototype.setCenter;
-
-Level.prototype.setOrigin = Entity.prototype.setOrigin;

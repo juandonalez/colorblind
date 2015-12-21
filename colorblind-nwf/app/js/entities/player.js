@@ -1,10 +1,19 @@
+Player.prototype = new GameObject();
+Player.prototype.constructor = Player;
+
 function Player(n) {
 
-	this.type = "Player";
+	this.x = 200;
+	this.y = 200;
+	this.width = globals.playerWidth;
+	this.height = globals.playerHeight;
+	this.center = new Point(0, 0);
+	this.max = new Point(0, 0);
+	this.updateBounds();
+
 	this.state = "idle";
 	this.dir = "r";
-	this.origin = new Point(0, 0);
-	this.center = new Point(-500, -500);
+
 	this.alpha = 1;
 
 	this.vel = new Point(0, 0);
@@ -26,10 +35,6 @@ function Player(n) {
 
 	this.components[1] = new Animator(this, "players/" + n + "/", 24);
 	this.components[2] = new RigidBody(this);
-
-	this.width = globals.playerWidth;
-	this.height = globals.playerHeight;
-	this.calculateOrigin();
 
 }
 
@@ -62,18 +67,18 @@ Player.prototype.update = function() {
 Player.prototype.draw = function() {
 
 	globals.bufferCtx.globalAlpha = this.alpha;
-	globals.bufferCtx.drawImage(this.image, this.center.x - (this.image.width/2), this.center.y - (this.image.height/2));
+	globals.bufferCtx.drawImage(this.image, this.x, this.y);
 
 	if (globals.debugMode && globals.debug.hitboxes) {
 		globals.bufferCtx.strokeStyle = "blue";
-		globals.bufferCtx.strokeRect(this.origin.x, this.origin.y, this.width, this.height);
+		//globals.bufferCtx.strokeRect(this.origin.x, this.origin.y, this.width, this.height);
 	}
 
 }
 
 Player.prototype.activate = function(x, y) {
 
-	this.setCenter(x, y);
+	this.setPosition(x, y);
 	this.vel.x = 0;
 	this.vel.y = 0;
 	this.state = "idle";
@@ -151,27 +156,3 @@ Player.prototype.jump = function() {
 	}
 
 }
-
-Player.prototype.calculateCenter = Entity.prototype.calculateCenter;
-
-Player.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
-
-Player.prototype.deactivate = Entity.prototype.deactivate;
-
-Player.prototype.intersects = Entity.prototype.intersects;
-
-Player.prototype.pause = Entity.prototype.pause;
-
-Player.prototype.pctToPoint = Entity.prototype.pctToPoint;
-
-Player.prototype.resize = Entity.prototype.resize;
-
-Player.prototype.resume = Entity.prototype.resume;
-
-Player.prototype.setAlpha = Entity.prototype.setAlpha;
-
-Player.prototype.setCenter = Entity.prototype.setCenter;
-
-Player.prototype.setOrigin = Entity.prototype.setOrigin;
-
-Player.prototype.translate = Entity.prototype.translate;

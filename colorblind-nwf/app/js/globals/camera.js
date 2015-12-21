@@ -1,120 +1,105 @@
-var camera = camera || {};
+Camera.prototype = new GameObject();
+Camera.constructor = Camera;
 
-(function() {
+var camera = new Camera();
 
-	camera.origin = new Point(globals.tileSize, globals.tileSize);
-	camera.width = globals.gameWidth - (2*globals.tileSize);
-	camera.height = globals.gameHeight - (2*globals.tileSize);
-	camera.center = new Point(camera.width/2, camera.height/2);
-	camera.center = camera.center.add(camera.origin);
-	camera.alpha = 1;
+function Camera() {
 
-	camera.isShaking = false;
-	camera.shakeTime = 0;
+	this.x = globals.tileSize;
+	this.y = globals.tileSize;
+	this.width = globals.gameWidth - (2*globals.tileSize);
+	this.height = globals.gameHeight - (2*globals.tileSize);
+	this.center = new Point(0, 0);
+	this.max = new Point(0, 0);
+	this.updateBounds();
+	this.alpha = 1;
 
-	camera.gpWidth = camera.width;
-	camera.gpHeight = camera.height;
+	this.isShaking = false;
+	this.shakeTime = 0;
+
+	this.gpWidth = this.width;
+	this.gpHeight = this.height;
 
 	if (globals.isWide) {
-		camera.tvWidth = camera.width;
-		camera.tvHeight = camera.height;
+		this.tvWidth = this.width;
+		this.tvHeight = this.height;
 	}
 	else {
-		camera.tvHeight = camera.height;
-		camera.tvWidth = (camera.tvHeight/3) * 4;
+		this.tvHeight = this.height;
+		this.tvWidth = (this.tvHeight/3) * 4;
 	}
 
-	camera.fader = new Fader(camera);
+	this.fader = new Fader(this);
 
-	camera.update = function() {
+}
 
-		camera.fader.update();
+Camera.prototype.update = function() {
 
-		if (camera.isShaking) {
-			camera.shake();
-		}
+	this.fader.update();
 
+	if (this.isShaking) {
+		this.shake();
 	}
 
-	camera.draw = function() {
+}
 
-		if (camera.alpha !== 0) {
-			globals.bufferCtx.globalAlpha = camera.alpha;
-			globals.bufferCtx.fillStyle = "black";
-			globals.bufferCtx.fillRect(0, 0, globals.gameWidth, globals.gameHeight);
-			globals.gpCtx.drawImage(globals.buffer, 0, 0, globals.gpWidth, globals.gpHeight);
-			globals.tvCtx.drawImage(globals.buffer, 0, 0, globals.tvWidth, globals.tvHeight);
-		}
+Camera.prototype.draw = function() {
 
+	if (this.alpha !== 0) {
+		globals.bufferCtx.globalAlpha = this.alpha;
+		globals.bufferCtx.fillStyle = "black";
+		globals.bufferCtx.fillRect(0, 0, globals.gameWidth, globals.gameHeight);
+		globals.gpCtx.drawImage(globals.buffer, 0, 0, globals.gpWidth, globals.gpHeight);
+		globals.tvCtx.drawImage(globals.buffer, 0, 0, globals.tvWidth, globals.tvHeight);
 	}
 
-	camera.fadeIn = function() {
+}
 
-		camera.fader.activate(0, 1);
+Camera.prototype.fadeIn = function() {
 
+	this.fader.activate(0, 1);
+
+}
+
+Camera.prototype.fadeOut = function() {
+
+	this.fader.activate(1, 1);
+
+}
+
+Camera.prototype.pctToHeight = function(h) {
+
+	return Math.round((this.height/100) * h);
+
+}
+
+Camera.prototype.pctToPoint = function(p) {
+
+	return new Point(Math.round((this.width/100) * p.x), Math.round((this.height/100) * p.y));
+
+}
+
+Camera.prototype.pctToWidth = function(w) {
+
+	return Math.round((this.width/100) * w);
+
+}
+
+Camera.prototype.shake = function() {
+
+	if (!this.isShaking) {
+		this.isShaking = true;
+		this.shakeTime = 0;
 	}
 
-	camera.fadeOut = function() {
+	this.shakeTime += globals.delta;
 
-		camera.fader.activate(1, 1);
-
+	if (this.shakeTime >= 0.5) {
+		this.isShaking = false;
+		this.y = 20;
+	}
+	else {
+		this.y = 20 + (Math.floor(Math.random() * 40) - 20);
 	}
 
-	camera.pctToHeight = function(h) {
-
-		return Math.round((camera.height/100) * h);
-
-	}
-
-	camera.pctToPoint = function(p) {
-
-		return new Point(Math.round((this.width/100) * p.x), Math.round((this.height/100) * p.y));
-
-	}
-
-	camera.pctToWidth = function(w) {
-
-		return Math.round((camera.width/100) * w);
-
-	}
-
-	camera.shake = function() {
-
-		if (!camera.isShaking) {
-			camera.isShaking = true;
-			camera.shakeTime = 0;
-		}
-
-		camera.shakeTime += globals.delta;
-
-		if (camera.shakeTime >= 0.5) {
-			camera.isShaking = false;
-			camera.origin.y = 20;
-		}
-		else {
-			camera.origin.y = 20 + (Math.floor(Math.random() * 40) - 20);
-		}
-
-	}
-
-	camera.activate = Entity.prototype.activate;
-
-	camera.calculateCenter = Entity.prototype.calculateCenter;
-
-	camera.calculateOrigin = Entity.prototype.calculateOrigin;
-
-	camera.deactivate = Entity.prototype.deactivate;
-
-	camera.intersects = Entity.prototype.intersects;
-
-	camera.resize = Entity.prototype.resize;
-
-	camera.setAlpha = Entity.prototype.setAlpha;
-
-	camera.setCenter = Entity.prototype.setCenter;
-
-	camera.setOrigin = Entity.prototype.setOrigin;
-
-	camera.translate = Entity.prototype.translate;
-
-})();
+}

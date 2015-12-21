@@ -1,10 +1,18 @@
+Destroyer.prototype = new GameObject();
+Destroyer.prototype.constructor = Destroyer;
+
 function Destroyer(x, y, width, height, animationURL, drawX, drawY) {
 
-	this.origin = new Point(x, y);
-	this.center = new Point(0, 0);
+	this.startX = x;
+	this.startY = y;
+
+	this.x = x;
+	this.y = y;
 	this.width = width;
 	this.height = height;
-	this.calculateCenter();
+	this.center = new Point(0, 0);
+	this.max = new Point(0, 0);
+	this.updateBounds();
 
 	if (animationURL) {
 		this.drawOrigin = new Point(drawX, drawY);
@@ -50,29 +58,3 @@ Destroyer.prototype.onVerticalCollision = function(ent) {
 	this.onCollision(ent);
 
 }
-
-Destroyer.prototype.activate = Entity.prototype.activate;
-
-Destroyer.prototype.calculateCenter = Entity.prototype.calculateCenter;
-
-Destroyer.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
-
-Destroyer.prototype.deactivate = Entity.prototype.deactivate;
-
-Destroyer.prototype.intersects = Entity.prototype.intersects;
-
-Destroyer.prototype.pause = Entity.prototype.pause;
-
-Destroyer.prototype.pctToPoint = Entity.prototype.pctToPoint;
-
-Destroyer.prototype.resize = Entity.prototype.resize;
-
-Destroyer.prototype.resume = Entity.prototype.resume;
-
-Destroyer.prototype.setAlpha = Entity.prototype.setAlpha;
-
-Destroyer.prototype.setCenter = Entity.prototype.setCenter;
-
-Destroyer.prototype.setOrigin = Entity.prototype.setOrigin;
-
-Destroyer.prototype.translate = Entity.prototype.translate;

@@ -41,7 +41,7 @@ Scroller.prototype.update = function() {
 
 	var first = this.bgs[0];
 
-	if (this.x + first.width < camera.origin.x) {
+	if (this.x + first.width < camera.x) {
 		this.x += first.width;
 		this.indexes[0] = this.indexes[1];
 

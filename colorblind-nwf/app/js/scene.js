@@ -24,7 +24,7 @@ function Scene(name) {
 	if (data.menus) {
 		this.menus = {};
 		for (var i = 0; i < data.menus.length; i++) {
-			this.menus[data.menus[i].name] = new Menu(data.menus[i]);
+			//this.menus[data.menus[i].name] = new Menu(data.menus[i]);
 		}
 	}
 
@@ -91,7 +91,7 @@ Scene.prototype.update = function() {
 			this.levels[2] = this.pool[this.indexes[2]];
 			// add new level to end
 			this.levels[2].activate();
-			this.levels[2].translate(this.levels[1].origin.x + this.levels[1].width, 0);
+			this.levels[2].translate(this.levels[1].x + this.levels[1].width, 0);
 		}
 
 	}
@@ -121,7 +121,7 @@ Scene.prototype.update = function() {
 	}
 
 	for (var m in this.menus) {
-		this.menus[m].update();
+		//this.menus[m].update();
 	}
 
 }
@@ -131,7 +131,7 @@ Scene.prototype.draw = function() {
 	// default canvas position is saved so it be reverted back to later
 	// context is translated to reflect camera pos
 	globals.bufferCtx.save();
-	globals.bufferCtx.translate(camera.origin.x * -1, camera.origin.y * -1);
+	globals.bufferCtx.translate(camera.x * -1, camera.y * -1);
 	globals.bufferCtx.globalAlpha = 1;
 
 	if (this.scrollers) {
@@ -428,7 +428,7 @@ Scene.prototype.activate = function() {
 		this.scroller.activate();
 	}
 
-	camera.setOrigin(globals.tileSize, globals.tileSize);
+	camera.setPosition(globals.tileSize, globals.tileSize);
 
 	if (this.isStage) {
 
@@ -441,7 +441,7 @@ Scene.prototype.activate = function() {
 		this.levels[1].activate();
 		this.levels[1].translate(this.levels[0].width, 0);
 		this.levels[2].activate();
-		this.levels[2].translate(this.levels[1].origin.x + this.levels[1].width, 0);
+		this.levels[2].translate(this.levels[1].x + this.levels[1].width, 0);
 
 		if (this.entities) {
 			for (var i = 0; i < this.entities.length; i++) {
