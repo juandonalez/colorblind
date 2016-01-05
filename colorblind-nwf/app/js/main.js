@@ -40,7 +40,7 @@ var main = main || {};
 		now = Date.now();
 		elapsed = (now - prevTick);
 
-		if (elapsed >= interval) {
+		//if (elapsed >= interval) {
 
 			prevTick = now - (elapsed % interval);
 			globals.delta = elapsed/1000;
@@ -53,7 +53,7 @@ var main = main || {};
 			update();
 			draw();
 
-		}
+		//}
 
 		// get time since last frame.
 		// if it is over 1 second then output the number of frames

@@ -18,7 +18,7 @@ var sceneData = sceneData || {};
 
 			scrollers: [
 				{
-					y: 40,
+					y: 0,
 					speed: 1,
 					random: false
 				}
@@ -397,12 +397,12 @@ var sceneData = sceneData || {};
 
 			scrollers: [
 				{
-					y: 300,
+					y: 0.3,
 					speed: 1,
 					random: true
 				},
 				{
-					y: 200,
+					y: 0.4,
 					speed: 2,
 					random: true
 				}

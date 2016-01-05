@@ -1,7 +1,7 @@
 function Scroller(scene, d, index) {
 
 	this.x = 0;
-	this.y = d.y;
+	this.y = Math.round(globals.gameHeight * d.y);
 	this.scene = scene;
 	this.startSpeed = d.speed;
 	this.speed = this.startSpeed;

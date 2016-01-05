@@ -11,12 +11,17 @@ var globals = globals || {};
 	globals.numPlayers = 1;
 	globals.mode = "duplicate";
 
-	globals.tileSize = 60;
+	globals.tileSize = 40;
 	globals.numTilesHori = 34;
 	globals.numTilesVert = 20;
 
 	globals.gameWidth = globals.tileSize * globals.numTilesHori;
 	globals.gameHeight = globals.tileSize * globals.numTilesVert;
+	globals.screenWidth = globals.gameWidth - (2*globals.tileSize);
+	globals.screenHeight = globals.gameHeight - (2*globals.tileSize);
+	globals.viewWidth = globals.screenHeight * (4/3);
+	globals.viewHeight = globals.screenHeight;
+	globals.sideWidth = (globals.screenWidth - globals.viewWidth)/2;
 
 	globals.playerWidth = 80;
 	globals.playerHeight = 118;
@@ -94,8 +99,8 @@ var globals = globals || {};
 
 	globals.debug = {
 		backgrounds: false,
-		fpsCounter: false,
-		hitboxes: false,
+		fpsCounter: true,
+		hitboxes: true,
 		startScene: "stage1",
 		mode: "duplicate",
 		levelTest: true

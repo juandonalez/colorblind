@@ -71,7 +71,7 @@ Player.prototype.draw = function() {
 
 	if (globals.debugMode && globals.debug.hitboxes) {
 		globals.bufferCtx.strokeStyle = "blue";
-		//globals.bufferCtx.strokeRect(this.origin.x, this.origin.y, this.width, this.height);
+		globals.bufferCtx.strokeRect(this.x, this.y, this.width, this.height);
 	}
 
 }

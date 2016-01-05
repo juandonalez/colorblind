@@ -47,8 +47,9 @@ function Scene(name) {
 		this.timer = new Timer(this);
 
 		this.destroyers = [
-			new Destroyer(60, -500, 240, 1700, "misc/sides/l/", 0, 0),
-			new Destroyer(1740, -500, 240, 1700, "misc/sides/r/", 1650, 0),
+			new Destroyer(globals.tileSize, -500, globals.sideWidth, globals.gameHeight + 500, "misc/sides/l/", 0, 0),
+			new Destroyer(globals.tileSize + globals.sideWidth + globals.viewWidth, -500, globals.sideWidth, globals.gameHeight + 500,
+				"misc/sides/r/", globals.screenWidth - globals.sideWidth - (globals.tileSize/2), 0),
 			new Destroyer(0, 1140, 2040, 240, false, false, false)
 		];
 
