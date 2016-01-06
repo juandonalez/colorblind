@@ -43,7 +43,8 @@ var main = main || {};
 		//if (elapsed >= interval) {
 
 			prevTick = now - (elapsed % interval);
-			globals.delta = elapsed/1000;
+			//globals.delta = elapsed/1000;
+			globals.delta = 1;
 			frames++;
 
 			if (globals.delta > 0.5) {

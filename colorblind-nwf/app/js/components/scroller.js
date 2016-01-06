@@ -3,10 +3,9 @@ function Scroller(scene, d, index) {
 	this.x = 0;
 	this.y = Math.round(globals.gameHeight * d.y);
 	this.scene = scene;
-	this.startSpeed = d.speed;
-	this.speed = this.startSpeed;
+	this.speed = d.speed;
 	this.random = d.random;
-	this.accum = 0;
+	this.vel = new Point(0, 0);
 
 	this.pool = fileManager.images["backgrounds/" + scene.name + "/" + index + "/"];
 
@@ -32,12 +31,8 @@ function Scroller(scene, d, index) {
 
 Scroller.prototype.update = function() {
 
-	/*this.accum += globals.delta;
-	if (this.accum >= this.speed) {
-		this.x++;
-		this.accum = 0;
-	}*/
-	this.x += this.speed;
+	this.vel.x = camera.vel.x * this.speed;
+	this.x += this.vel.x * globals.delta;
 
 	var first = this.bgs[0];
 

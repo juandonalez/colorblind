@@ -48,9 +48,9 @@ function Scene(name) {
 
 		this.destroyers = [
 			new Destroyer(globals.tileSize, -500, globals.sideWidth, globals.gameHeight + 500, "misc/sides/l/", 0, 0),
-			new Destroyer(globals.tileSize + globals.sideWidth + globals.viewWidth, -500, globals.sideWidth, globals.gameHeight + 500,
-				"misc/sides/r/", globals.screenWidth - globals.sideWidth - (globals.tileSize/2), 0),
-			new Destroyer(0, 1140, 2040, 240, false, false, false)
+			//new Destroyer(globals.tileSize + globals.sideWidth + globals.viewWidth, -500, globals.sideWidth, globals.gameHeight + 500,
+			//	"misc/sides/r/", globals.screenWidth - globals.sideWidth - (globals.tileSize/2), 0),
+			//new Destroyer(0, 1140, 2040, 240, false, false, false)
 		];
 
 	}
@@ -61,20 +61,7 @@ function Scene(name) {
 
 Scene.prototype.update = function() {
 
-	//if (this.speed !== 0) {
-		//this.accum += globals.delta;
-		//if (this.accum >= this.speed) {
-			//camera.translate(4, 0);
-			if (this.isStage) {
-				if (this.entities) {
-					for (var i = 0; i < this.entities.length; i++) {
-						this.entities[i].translate(4, 0);
-					}
-				}
-			}
-			//this.accum = 0;
-		//}
-	//}
+	camera.vel.x = 0;
 
 	if (this.levels) {
 

@@ -12,6 +12,8 @@ function Camera() {
 	this.center = new Point(0, 0);
 	this.max = new Point(0, 0);
 	this.updateBounds();
+
+	this.vel = new Point(0, 0);
 	this.alpha = 1;
 
 	this.isShaking = false;
@@ -34,6 +36,8 @@ function Camera() {
 }
 
 Camera.prototype.update = function() {
+
+	this.x += this.vel.x * globals.delta;
 
 	this.fader.update();
 

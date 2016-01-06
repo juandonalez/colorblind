@@ -100,7 +100,7 @@ var globals = globals || {};
 	globals.debug = {
 		backgrounds: false,
 		fpsCounter: true,
-		hitboxes: true,
+		hitboxes: false,
 		startScene: "stage1",
 		mode: "duplicate",
 		levelTest: true
