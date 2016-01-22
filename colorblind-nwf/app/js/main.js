@@ -18,7 +18,7 @@ var main = main || {};
 			globals.currScene.update();
 		}
 
-		camera.update();
+		cameraManager.update();
 
 	}
 
@@ -29,7 +29,7 @@ var main = main || {};
 		globals.bufferCtx.clearRect(0, 0, globals.gameWidth, globals.gameHeight);
 
 		globals.currScene.draw();
-		camera.draw();
+		//camera.draw();
 
 	}
 
@@ -80,8 +80,8 @@ var main = main || {};
 		globals.scenes = {
 			splashScreen: new Scene("splashScreen"),
 			mainMenu: new Scene("mainMenu"),
-			stage1: new Scene("stage1"),
-			stage2: new Scene("stage2")
+			stage1: new Stage("stage1"),
+			stage2: new Stage("stage2")
 		};
 
 		globals.player0 = new Player(0);
@@ -102,20 +102,20 @@ var main = main || {};
 		prevTick = Date.now();
 		prevFrame = Date.now();
 		gameLoop();
-		camera.fadeIn();
+		//camera.fadeIn();
 
 	}
 
 	main.changeScene = function(scene) {
 
 		running = false;
-		camera.fadeOut();
+		//camera.fadeOut();
 		globals.currScene.deactivate();
 		setTimeout(function() {
 			globals.currScene = globals.scenes[scene];
 			globals.currScene.activate();
 			running = true;
-			camera.fadeIn();
+			//camera.fadeIn();
 		}, 2000);
 
 	}

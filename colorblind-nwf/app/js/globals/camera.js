@@ -1,14 +1,14 @@
 Camera.prototype = new GameObject();
 Camera.constructor = Camera;
 
-var camera = new Camera();
+function Camera(x, y) {
 
-function Camera() {
-
-	this.x = globals.tileSize;
-	this.y = globals.tileSize;
-	this.width = globals.gameWidth - (2*globals.tileSize);
-	this.height = globals.gameHeight - (2*globals.tileSize);
+	this.x = x;
+	this.y = y;
+	this.roundX = this.x;
+	this.roundY = this.y;
+	this.width = globals.screenWidth;
+	this.height = globals.screenHeight;
 	this.center = new Point(0, 0);
 	this.max = new Point(0, 0);
 	this.updateBounds();
@@ -22,15 +22,6 @@ function Camera() {
 	this.gpWidth = this.width;
 	this.gpHeight = this.height;
 
-	if (globals.isWide) {
-		this.tvWidth = this.width;
-		this.tvHeight = this.height;
-	}
-	else {
-		this.tvHeight = this.height;
-		this.tvWidth = (this.tvHeight/3) * 4;
-	}
-
 	this.fader = new Fader(this);
 
 }
@@ -38,6 +29,11 @@ function Camera() {
 Camera.prototype.update = function() {
 
 	this.x += this.vel.x * globals.delta;
+
+	this.roundX = Math.round(this.x);
+	this.roundY = Math.round(this.y);
+
+	this.updateBounds();
 
 	this.fader.update();
 

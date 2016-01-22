@@ -1,8 +1,13 @@
-function Scroller(scene, d, index) {
+BackgroundScroller.prototype = new GameObject();
+BackgroundScroller.constructor = BackgroundScroller;
+
+function BackgroundScroller(scene, d, index, camera, ctx) {
 
 	this.x = 0;
-	this.y = Math.round(globals.gameHeight * d.y);
+	this.y = Math.round(globals.screenHeight * d.y);
 	this.scene = scene;
+	this.camera = camera;
+	this.ctx = ctx;
 	this.speed = d.speed;
 	this.random = d.random;
 	this.vel = new Point(0, 0);
@@ -29,14 +34,11 @@ function Scroller(scene, d, index) {
 
 }
 
-Scroller.prototype.update = function() {
-
-	this.vel.x = camera.vel.x * this.speed;
-	this.x += this.vel.x * globals.delta;
+BackgroundScroller.prototype.update = function() {
 
 	var first = this.bgs[0];
 
-	if (this.x + first.width < camera.x) {
+	if (this.x + first.width < this.camera.x) {
 		this.x += first.width;
 		this.indexes[0] = this.indexes[1];
 
@@ -58,21 +60,22 @@ Scroller.prototype.update = function() {
 
 }
 
-Scroller.prototype.draw = function() {
+BackgroundScroller.prototype.draw = function() {
 
-	var ctx = globals.bufferCtx;
-	ctx.globalAlpha = 1;
+	this.ctx.globalAlpha = 1;
+	this.ctx.translate(this.camera.roundX * -1, this.camera.roundY * -1);
 
 	var first = this.bgs[0];
 	var second = this.bgs[1];
 
 	// *****figure out camera pos stuff ***
-	ctx.drawImage(first, this.x, this.y);
-	ctx.drawImage(second, this.x + first.width, this.y);
+	this.ctx.drawImage(first, this.x, this.y);
+	this.ctx.drawImage(second, this.x + first.width, this.y);
 
+	this.ctx.translate(this.camera.roundX, this.camera.roundY);
 }
 
-Scroller.prototype.activate = function() {
+BackgroundScroller.prototype.activate = function() {
 
 	this.x = 0;
 	this.speed = 1/this.startSpeed;

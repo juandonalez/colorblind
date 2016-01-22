@@ -22,30 +22,58 @@ canvas.hide {
 	display: none;
 }
 
-#gpBackground {
+#gpBackground0{
 	position: absolute;
 	left: 0px;
 	top: 0px;
 	z-index: 1;
+}
+
+#gpBackground1 {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 2;
+}
+
+#gpBackground2 {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 3;
 }
 
 #gpCanvas {
 	position: absolute;
 	left: 0px;
 	top: 0px;
-	z-index: 2;
+	z-index: 4;
 }
 
-#tvBackground {
+#tvBackground0{
 	position: absolute;
 	left: 0px;
 	top: 0px;
 	z-index: 1;
 }
 
-#tvCanvas {
+#tvBackground1 {
 	position: absolute;
 	left: 0px;
 	top: 0px;
 	z-index: 2;
+}
+
+#tvBackground2 {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 3;
+}
+
+#tvCanvas {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 4;
 }

@@ -36,64 +36,103 @@ var globals = globals || {};
 	globals.scenes = {};
 	globals.currScene;
 
-	globals.isWide = true;
-
 	if (globals.isWiiU) {
 		var displayManager = nwf.display.DisplayManager.getInstance();
-
 		globals.gpDisplay = displayManager.getGamePadDisplay();
+
 		globals.gpHeight = globals.gpDisplay.height;
 		globals.gpWidth = globals.gpDisplay.width;
+
 		globals.gpCanvas = globals.gpDisplay.window.document.getElementById('gpCanvas');
-		globals.gpCanvas.height = globals.gpHeight;
-		globals.gpCanvas.width = globals.gpWidth;
-		globals.gpCtx = globals.gpCanvas.getContext('2d');
-		globals.gpBackground = globals.gpDisplay.window.document.getElementById('gpBackground');
+		globals.gpBackground0 = globals.gpDisplay.window.document.getElementById('gpBackground0');
+		globals.gpBackground1 = globals.gpDisplay.window.document.getElementById('gpBackground1');
+		globals.gpBackground2 = globals.gpDisplay.window.document.getElementById('gpBackground2');
 
 		globals.tvDisplay = displayManager.getTVDisplay();
+
 		globals.tvHeight = globals.tvDisplay.height;
 		globals.tvWidth = globals.tvDisplay.width;
 
-		if (globals.tvHeight === 480) {
-			globals.isWide = false;
-		}
-
 		globals.tvCanvas = globals.tvDisplay.window.document.getElementById('tvCanvas');
-		globals.tvCanvas.height = globals.tvHeight;
-		globals.tvCanvas.width = globals.tvWidth;
-		globals.tvCtx = globals.tvCanvas.getContext('2d');
-
-		globals.tvBackground = globals.tvDisplay.window.document.getElementById('tvBackground');
-		globals.tvBackgroundCtx = globals.tvBackground.getContext("2d");
-		globals.tvBackground.width = globals.tvWidth;
-		globals.tvBackground.height = globals.tvHeight;
+		globals.tvBackground0 = globals.tvDisplay.window.document.getElementById('tvBackground0');
+		globals.tvBackground1 = globals.tvDisplay.window.document.getElementById('tvBackground1');
+		globals.tvBackground2 = globals.tvDisplay.window.document.getElementById('tvBackground2');
 	}
 	else {
 		globals.gpHeight = 480;
 		globals.gpWidth = 854;
+
 		globals.gpCanvas = window.document.getElementById('gpCanvas');
-		globals.gpCanvas.width = globals.gpWidth;
-		globals.gpCanvas.height = globals.gpHeight;
-		globals.gpCtx = globals.gpCanvas.getContext('2d');
-		globals.gpBackground = window.document.getElementById('gpBackground');
+		globals.gpBackground0 = window.document.getElementById('gpBackground0');
+		globals.gpBackground1 = window.document.getElementById('gpBackground1');
+		globals.gpBackground2 = window.document.getElementById('gpBackground2');
+
+		globals.tvHeight = 1080;
+		globals.tvWidth = 1920;
 
 		globals.tvCanvas = document.createElement("canvas");
-		globals.tvCtx = globals.tvCanvas.getContext("2d");
-		globals.tvBackground = document.createElement("canvas");
-		globals.tvBackgroundCtx = globals.tvBackground.getContext("2d");
+		globals.tvBackground0 = document.createElement("canvas");
+		globals.tvBackground1 = document.createElement("canvas");
+		globals.tvBackground2 = document.createElement("canvas");
 	}
 
-	// canvas for background that only gets redrawn when scene changes
-	globals.gpBackgroundCtx = globals.gpBackground.getContext("2d");
-	globals.gpBackground.width = globals.gpWidth;
-	globals.gpBackground.height = globals.gpHeight;
+	// gamepad contexts
+	globals.gpCtx = globals.gpCanvas.getContext('2d');
+	globals.gpCanvas.height = globals.gpHeight;
+	globals.gpCanvas.width = globals.gpWidth;
 
-	// buffer canvas for drawing everything to first
-	// is 20x20 bigger than camera view to allow for screen shake
+	globals.gpBackground0Ctx = globals.gpBackground0.getContext("2d");
+	globals.gpBackground0.width = globals.gpWidth;
+	globals.gpBackground0.height = globals.gpHeight;
+
+	globals.gpBackground1Ctx = globals.gpBackground1.getContext("2d");
+	globals.gpBackground1.width = globals.gpWidth;
+	globals.gpBackground1.height = globals.gpHeight;
+
+	globals.gpBackground2Ctx = globals.gpBackground2.getContext("2d");
+	globals.gpBackground2.width = globals.gpWidth;
+	globals.gpBackground2.height = globals.gpHeight;
+
+	// tv contexts
+	globals.tvCtx = globals.tvCanvas.getContext('2d');
+	globals.tvCanvas.height = globals.tvHeight;
+	globals.tvCanvas.width = globals.tvWidth;
+
+	globals.tvBackground0Ctx = globals.tvBackground0.getContext("2d");
+	globals.tvBackground0.width = globals.tvWidth;
+	globals.tvBackground0.height = globals.tvHeight;
+
+	globals.tvBackground1Ctx = globals.tvBackground1.getContext("2d");
+	globals.tvBackground1.width = globals.tvWidth;
+	globals.tvBackground1.height = globals.tvHeight;
+
+	globals.tvBackground2Ctx = globals.tvBackground2.getContext("2d");
+	globals.tvBackground2.width = globals.tvWidth;
+	globals.tvBackground2.height = globals.tvHeight;
+
+	// buffers for backgrounds
+	globals.background1Buffer = document.createElement("canvas");
+	globals.background1BufferCtx = globals.background1Buffer.getContext("2d");
+	globals.background1Buffer.width = globals.screenWidth;
+	globals.background1Buffer.height = globals.screenHeight;
+
+	globals.background2Buffer = document.createElement("canvas");
+	globals.background2BufferCtx = globals.background2Buffer.getContext("2d");
+	globals.background2Buffer.width = globals.screenWidth;
+	globals.background2Buffer.height = globals.screenHeight;
+
 	globals.buffer = document.createElement("canvas");
 	globals.bufferCtx = globals.buffer.getContext("2d");
-	globals.buffer.width = globals.gameWidth;
-	globals.buffer.height = globals.gameHeight;
+	globals.buffer.width = globals.screenWidth;
+	globals.buffer.height = globals.screenHeight;
+
+	// if tv is 4:3, then shift tv contexts to the left
+	if (globals.tvHeight === 480) {
+		globals.tvCtx.translate(globals.tileSize*-4, 0);
+		globals.tvBackground0Ctx.translate(globals.tileSize*-4, 0);
+		globals.tvBackground1Ctx.translate(globals.tileSize*-4, 0);
+		globals.tvBackground2Ctx.translate(globals.tileSize*-4, 0);
+	}
 
 	globals.debugMode = true;
 

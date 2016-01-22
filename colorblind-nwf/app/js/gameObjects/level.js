@@ -85,6 +85,12 @@ Level.prototype.draw = function(layerNum, color) {
 		}
 	}
 
+	if (globals.isWiiU && (layerNum === 1)) {
+		tileset = globals.currScene.tileset[0];
+		ctx.save();
+		ctx.setImageColor(1, 0, 0);
+	}
+
 	var layer = this.layers[layerNum];
 
 	for (var i = this.top; i < this.height; i += tileSize) {
@@ -99,6 +105,10 @@ Level.prototype.draw = function(layerNum, color) {
 
 	for (var i = 0; i < this.entities.length; i++) {
 		this.entities[i].draw(layerNum, color);
+	}
+
+	if (globals.isWiiU && (layerNum === 1)) {
+		ctx.restore();
 	}
 
 }

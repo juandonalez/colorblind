@@ -4,25 +4,12 @@ var sceneData = sceneData || {};
 
 	sceneData = {
 
-		splashScreen: {
-
-			isStage: false
-
-		},
+		splashScreen: {},
 
 		mainMenu: {
 
-			isStage: false,
 			startSpeed: 100,
 			maxSpeed: 100,
-
-			scrollers: [
-				{
-					y: 0,
-					speed: 1,
-					random: false
-				}
-			],
 
 			menus: [
 				{
@@ -390,7 +377,6 @@ var sceneData = sceneData || {};
 			background: "stage1",
 			numLevels: 9,
 			numAllModes: 9,
-			isStage: true,
 			startPos: new Point(500, 200),
 			startSpeed: 10000,
 			maxSpeed: 10000,
@@ -415,7 +401,6 @@ var sceneData = sceneData || {};
 			background: "stage2",
 			numLevels: 4,
 			numAllModes: 4,
-			isStage: true,
 			startPos: new Point(500, 200),
 			startSpeed: 10000,
 			maxSpeed: 10000
