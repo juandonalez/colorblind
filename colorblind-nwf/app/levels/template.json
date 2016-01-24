@@ -93,91 +93,91 @@
             {
              "0":
                 {
-                 "image":"..\/images\/tilesets\/stage1\/0\/1.png"
+                 "image":"..\/images\/tilesets\/stage1\/1.png"
                 },
              "1":
                 {
-                 "image":"..\/images\/tilesets\/stage1\/0\/2.png"
+                 "image":"..\/images\/tilesets\/stage1\/2.png"
                 },
              "10":
                 {
-                 "image":"..\/images\/tilesets\/stage1\/0\/11.png"
+                 "image":"..\/images\/tilesets\/stage1\/11.png"
                 },
              "11":
                 {
-                 "image":"..\/images\/tilesets\/stage1\/0\/12.png"
+                 "image":"..\/images\/tilesets\/stage1\/12.png"
                 },
              "12":
                 {
-                 "image":"..\/images\/tilesets\/stage1\/0\/13.png"
+                 "image":"..\/images\/tilesets\/stage1\/13.png"
                 },
              "13":
                 {
-                 "image":"..\/images\/tilesets\/stage1\/0\/14.png"
+                 "image":"..\/images\/tilesets\/stage1\/14.png"
                 },
              "14":
                 {
-                 "image":"..\/images\/tilesets\/stage1\/0\/15.png"
+                 "image":"..\/images\/tilesets\/stage1\/15.png"
                 },
              "15":
                 {
-                 "image":"..\/images\/tilesets\/stage1\/0\/16.png"
+                 "image":"..\/images\/tilesets\/stage1\/16.png"
                 },
              "16":
                 {
-                 "image":"..\/images\/tilesets\/stage1\/0\/17.png"
+                 "image":"..\/images\/tilesets\/stage1\/17.png"
                 },
              "17":
                 {
-                 "image":"..\/images\/tilesets\/stage1\/0\/18.png"
+                 "image":"..\/images\/tilesets\/stage1\/18.png"
                 },
              "18":
                 {
-                 "image":"..\/images\/tilesets\/stage1\/0\/19.png"
+                 "image":"..\/images\/tilesets\/stage1\/19.png"
                 },
              "19":
                 {
-                 "image":"..\/images\/tilesets\/stage1\/0\/20.png"
+                 "image":"..\/images\/tilesets\/stage1\/20.png"
                 },
              "2":
                 {
-                 "image":"..\/images\/tilesets\/stage1\/0\/3.png"
+                 "image":"..\/images\/tilesets\/stage1\/3.png"
                 },
              "20":
                 {
-                 "image":"..\/images\/tilesets\/stage1\/0\/21.png"
+                 "image":"..\/images\/tilesets\/stage1\/21.png"
                 },
              "21":
                 {
-                 "image":"..\/images\/tilesets\/stage1\/0\/22.png"
+                 "image":"..\/images\/tilesets\/stage1\/22.png"
                 },
              "3":
                 {
-                 "image":"..\/images\/tilesets\/stage1\/0\/4.png"
+                 "image":"..\/images\/tilesets\/stage1\/4.png"
                 },
              "4":
                 {
-                 "image":"..\/images\/tilesets\/stage1\/0\/5.png"
+                 "image":"..\/images\/tilesets\/stage1\/5.png"
                 },
              "5":
                 {
-                 "image":"..\/images\/tilesets\/stage1\/0\/6.png"
+                 "image":"..\/images\/tilesets\/stage1\/6.png"
                 },
              "6":
                 {
-                 "image":"..\/images\/tilesets\/stage1\/0\/7.png"
+                 "image":"..\/images\/tilesets\/stage1\/7.png"
                 },
              "7":
                 {
-                 "image":"..\/images\/tilesets\/stage1\/0\/8.png"
+                 "image":"..\/images\/tilesets\/stage1\/8.png"
                 },
              "8":
                 {
-                 "image":"..\/images\/tilesets\/stage1\/0\/9.png"
+                 "image":"..\/images\/tilesets\/stage1\/9.png"
                 },
              "9":
                 {
-                 "image":"..\/images\/tilesets\/stage1\/0\/10.png"
+                 "image":"..\/images\/tilesets\/stage1\/10.png"
                 }
             },
          "tilewidth":40

@@ -4,7 +4,7 @@ var fileManager = fileManager || {};
 
 	fileManager.levels = {};
 	fileManager.images = {};
-	var totalNumImages = 217;
+	var totalNumImages = 109;
 
 	var folders = [
 		["backgrounds/mainMenu/0/", 2],
@@ -30,14 +30,8 @@ var fileManager = fileManager || {};
 		["players/2/jumping/r/", 1],
 		["players/2/running/l/", 4],
 		["players/2/running/r/", 4],
-		["tilesets/stage1/0/", 23],
-		["tilesets/stage1/1/", 20],
-		["tilesets/stage1/2/", 20],
-		["tilesets/stage1/3/", 20],
-		["tilesets/stage2/0/", 34],
-		["tilesets/stage2/1/", 16],
-		["tilesets/stage2/2/", 16],
-		["tilesets/stage2/3/", 16]
+		["tilesets/stage1/", 23],
+		["tilesets/stage2/", 34]
 	];
 
 	var imageURLs = [

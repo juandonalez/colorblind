@@ -32,11 +32,7 @@ function Stage(name) {
 	this.startPos = data.startPos;
 	this.numLevels = data.numLevels;
 	this.numAllModes = data.numAllModes;
-	this.tileset = new Array(4);
-	this.tileset[0] = fileManager.images["tilesets/" + this.name + "/0/"];
-	this.tileset[1] = fileManager.images["tilesets/" + this.name + "/1/"];
-	this.tileset[2] = fileManager.images["tilesets/" + this.name + "/2/"];
-	this.tileset[3] = fileManager.images["tilesets/" + this.name + "/3/"];
+	this.tileset = fileManager.images["tilesets/" + this.name + "/"];
 	this.pool = fileManager.levels[this.name];
 	this.indexes = [0, 0, 0];
 	this.levels = [this.pool[0], this.pool[0], this.pool[0]];

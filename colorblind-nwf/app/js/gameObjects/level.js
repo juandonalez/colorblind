@@ -70,7 +70,7 @@ Level.prototype.update = function() {
 Level.prototype.draw = function(layerNum, color) {
 
 	var ctx = globals.bufferCtx;
-	var tileset = globals.currScene.tileset[color];
+	var tileset = globals.currScene.tileset;
 	var tileSize = globals.tileSize;
 	var tileNum = 0;
 
@@ -85,10 +85,15 @@ Level.prototype.draw = function(layerNum, color) {
 		}
 	}
 
-	if (globals.isWiiU && (layerNum === 1)) {
-		tileset = globals.currScene.tileset[0];
-		ctx.save();
-		ctx.setImageColor(1, 0, 0);
+	if (globals.isWiiU) {
+		if (layerNum === 1) {
+			ctx.save();
+			ctx.setImageColor(0.5, 0, 0);
+		}
+		else if (layerNum === 2) {
+			ctx.save();
+			ctx.setImageColor(0, 0.5, 0);
+		}
 	}
 
 	var layer = this.layers[layerNum];
@@ -107,9 +112,7 @@ Level.prototype.draw = function(layerNum, color) {
 		this.entities[i].draw(layerNum, color);
 	}
 
-	if (globals.isWiiU && (layerNum === 1)) {
-		ctx.restore();
-	}
+	ctx.restore();
 
 }
 
