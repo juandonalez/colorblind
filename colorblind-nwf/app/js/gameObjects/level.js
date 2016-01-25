@@ -3,6 +3,8 @@ Level.prototype.constructor = Level;
 
 function Level(d) {
 
+	this.camera = cameraManager.foreground;
+
 	this.active = false;
 
 	this.x = 0;
@@ -17,34 +19,27 @@ function Level(d) {
 	// top is where the tiles first appear
 	this.top = this.height - (d.height * globals.tileSize);
 
-	this.layers = [d.layers[0].data, d.layers[1].data, d.layers[2].data];
+	this.tileLayers = [d.layers[0].data, d.layers[1].data, d.layers[2].data];
+	this.entityLayers = [[], [], []];
 
-	// swap the red and green layers when drawing
-	this.swap = false;
-
-	var colliders = d.layers[3].objects;
-	this.colliders = new Array(colliders.length);
-
-	var col;
-	for (var i = 0; i < colliders.length; i++) {
-		col = colliders[i];
-		// collider y pos is relative to level top left corner
-		this.colliders[i] = new Platform(col.x, col.y + this.top, col.width, col.height);
-	}
-
-	var entities = d.layers[4].objects;
+	var entities = d.layers[3].objects;
 	this.entities = new Array(entities.length);
 
 	var ent;
 	for (var i = 0; i < entities.length; i++) {
 		ent = entities[i];
-		if (ent.name === "spike") {
-			//this.entities[i] = new Spike(ent.x, this.top + ent.y, ent.type);
+
+		if (ent.name === "platform") {
+			// entity y pos is relative to level top left corner
+			this.entities[i] = new Platform(ent.x, ent.y + this.top, ent.width, ent.height);
 		}
+
+		this.entityLayers[ent.type].push(this.entities[i]);
 	}
 
-	col = null;
-	colliders = null;
+	// swap the red and green layers when drawing
+	this.swap = false;
+
 	ent = null;
 	entities = null;
 	d = null;
@@ -57,7 +52,7 @@ Level.prototype.update = function() {
 		// if an entity comes into view it is activated
 		for (var i = 0; i < this.entities.length; i++) {
 			if (!this.entities[i].active) {
-				if (camera.intersects(this.entities[i])) {
+				if (this.camera.intersects(this.entities[i])) {
 					this.entities[i].activate();
 				}
 			}
@@ -96,7 +91,7 @@ Level.prototype.draw = function(layerNum, color) {
 		}
 	}
 
-	var layer = this.layers[layerNum];
+	var layer = this.tileLayers[layerNum];
 
 	for (var i = this.top; i < this.height; i += tileSize) {
 		for (var j = this.x; j < this.x + this.width; j += tileSize) {
@@ -108,8 +103,10 @@ Level.prototype.draw = function(layerNum, color) {
 		}
 	}
 
-	for (var i = 0; i < this.entities.length; i++) {
-		this.entities[i].draw(layerNum, color);
+	layer = this.entityLayers[layerNum];
+
+	for (var i = 0; i < layer.length; i++) {
+		layer[i].draw();
 	}
 
 	ctx.restore();
@@ -131,10 +128,6 @@ Level.prototype.deactivate = function() {
 	this.x = 0;
 	this.y = 0;
 	this.updateBounds();
-
-	for (var i = 0; i < this.colliders.length; i++) {
-		this.colliders[i].deactivate();
-	}
 
 	for (var i = 0; i < this.entities.length; i++) {
 		this.entities[i].deactivate();
@@ -167,10 +160,6 @@ Level.prototype.translate = function(x, y) {
 	this.x += x;
 	this.y += y;
 	this.updateBounds();
-
-	for (var i = 0; i < this.colliders.length; i++) {
-		this.colliders[i].translate(x, y);
-	}
 
 	for (var i = 0; i < this.entities.length; i++) {
 		this.entities[i].translate(x, y);

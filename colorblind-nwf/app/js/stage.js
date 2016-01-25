@@ -53,9 +53,12 @@ function Stage(name) {
 Stage.prototype.update = function() {
 
 	cameraManager.setSpeed(3);
+
 	this.background1.update();
 	this.background2.update();
-	//this.levels.update();
+	this.levels[0].update();
+	this.levels[1].update();
+	this.levels[2].update();
 
 	if (globals.mode === "duplicate" || globals.mode === "split") {
 		globals.player0.update();
