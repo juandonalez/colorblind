@@ -35,14 +35,6 @@ Animator.prototype.update = function() {
 			url = url + this.currState + "/";
 		}
 
-		if (this.ent.dir) {
-			if (this.ent.dir !== this.currDir) {
-				this.currDir = this.ent.dir;
-				this.index = 0;
-			}
-			url = url + this.currDir + "/";
-		}
-
 		var frames = fileManager.images[url];
 
 		if (this.index >= frames.length) {

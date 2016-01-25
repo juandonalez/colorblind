@@ -24,7 +24,7 @@ function Player(n) {
 
 	this.components = new Array(3);
 
-	this.image = fileManager.images["players/" + n + "/idle/r/"][0];
+	this.image = fileManager.images["players/" + n + "/idle/"][0];
 
 	if (n === 2) {
 		this.components[0] = new Player2Input(this);
@@ -66,12 +66,22 @@ Player.prototype.update = function() {
 
 Player.prototype.draw = function() {
 
-	globals.bufferCtx.globalAlpha = this.alpha;
-	globals.bufferCtx.drawImage(this.image, this.x, this.y);
+	var ctx = globals.bufferCtx;
+
+	if (this.dir === "l") {
+		ctx.translate(this.x + this.width, this.y);
+		ctx.scale(-1, 1);
+		ctx.drawImage(this.image, 0, 0);
+		ctx.scale(-1, 1);
+		ctx.translate((this.x + this.width) * -1, this.y * -1);
+	}
+	else {
+		ctx.drawImage(this.image, this.x, this.y);
+	}
 
 	if (globals.debugMode && globals.debug.hitboxes) {
-		globals.bufferCtx.strokeStyle = "blue";
-		globals.bufferCtx.strokeRect(this.x, this.y, this.width, this.height);
+		ctx.strokeStyle = "blue";
+		ctx.strokeRect(this.x, this.y, this.width, this.height);
 	}
 
 }

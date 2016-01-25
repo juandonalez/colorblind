@@ -4,7 +4,7 @@ var fileManager = fileManager || {};
 
 	fileManager.levels = {};
 	fileManager.images = {};
-	var totalNumImages = 109;
+	var totalNumImages = 91;
 
 	var folders = [
 		["backgrounds/mainMenu/0/", 2],
@@ -12,24 +12,15 @@ var fileManager = fileManager || {};
 		["backgrounds/stage1/1/", 2],
 		["misc/sides/l/", 1],
 		["misc/sides/r/", 1],
-		["players/0/idle/l/", 1],
-		["players/0/idle/r/", 1],
-		["players/0/jumping/l/", 1],
-		["players/0/jumping/r/", 1],
-		["players/0/running/l/", 4],
-		["players/0/running/r/", 4],
-		["players/1/idle/l/", 1],
-		["players/1/idle/r/", 1],
-		["players/1/jumping/l/", 1],
-		["players/1/jumping/r/", 1],
-		["players/1/running/l/", 4],
-		["players/1/running/r/", 4],
-		["players/2/idle/l/", 1],
-		["players/2/idle/r/", 1],
-		["players/2/jumping/l/", 1],
-		["players/2/jumping/r/", 1],
-		["players/2/running/l/", 4],
-		["players/2/running/r/", 4],
+		["players/0/idle/", 1],
+		["players/0/jumping/", 1],
+		["players/0/running/", 4],
+		["players/1/idle/", 1],
+		["players/1/jumping/", 1],
+		["players/1/running/", 4],
+		["players/2/idle/", 1],
+		["players/2/jumping/", 1],
+		["players/2/running/", 4],
 		["tilesets/stage1/", 23],
 		["tilesets/stage2/", 34]
 	];
