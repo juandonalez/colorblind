@@ -57,7 +57,7 @@ Platform.prototype.onVerticalCollision = function(ent) {
 
 }
 
-Platform.prototype.deactivate = function() {
+Platform.prototype.reset = function() {
 
 	this.x = this.startX;
 	this.y = this.startY;

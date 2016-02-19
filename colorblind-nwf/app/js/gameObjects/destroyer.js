@@ -58,3 +58,11 @@ Destroyer.prototype.onVerticalCollision = function(ent) {
 	this.onCollision(ent);
 
 }
+
+Destroyer.prototype.reset = function() {
+
+	this.x = this.startX;
+	this.y = this.startY;
+	this.updateBounds();
+
+}

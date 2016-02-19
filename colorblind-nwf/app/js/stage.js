@@ -30,6 +30,7 @@ function Stage(name) {
 	this.startSpeed = data.startSpeed;
 	this.maxSpeed = data.maxSpeed;
 	this.startPos = data.startPos;
+
 	this.numLevels = data.numLevels;
 	this.numAllModes = data.numAllModes;
 	this.tileset = fileManager.images["tilesets/" + this.name + "/"];
@@ -342,24 +343,6 @@ Stage.prototype.draw = function() {
 */
 }
 
-Stage.prototype.changeMenu = function(curr, next) {
-
-	this.menus[curr].deactivate();
-	this.menus[next].activate();
-
-}
-
-Stage.prototype.getColliders = function(index, go) {
-
-	if (this.levels[index].intersects(go)) {
-		return this.levels[index].colliders;
-	}
-	else {
-		return false;
-	}
-
-}
-
 Stage.prototype.getEntities = function(index, go) {
 
 	if (this.levels[index].intersects(go) && this.levels[index].entities) {
@@ -401,22 +384,10 @@ Stage.prototype.getNewIndex = function() {
 
 Stage.prototype.activate = function() {
 
-	globals.gpBackground0Ctx.clearRect(0, 0, globals.gpWidth, globals.gpHeight);
-	globals.tvBackground0Ctx.clearRect(0, 0, globals.tvWidth, globals.tvHeight);
-
-	this.speed = 0;
-	this.accum = 0;
-
 	if (this.background) {
 		globals.gpBackground0Ctx.drawImage(this.background, 0, 0, globals.gpWidth, globals.gpHeight);
 		globals.tvBackground0Ctx.drawImage(this.background, 0, 0, globals.tvWidth, globals.tvHeight);
 	}
-
-	if (this.scroller) {
-		this.scroller.activate();
-	}
-
-	//camera.setPosition(globals.tileSize, globals.tileSize);
 
 	this.levels[0] = this.pool[0];
 	this.indexes[1] = this.getNewIndex();
@@ -428,12 +399,6 @@ Stage.prototype.activate = function() {
 	this.levels[1].translate(this.levels[0].width, 0);
 	this.levels[2].activate();
 	this.levels[2].translate(this.levels[1].x + this.levels[1].width, 0);
-
-	if (this.entities) {
-		for (var i = 0; i < this.entities.length; i++) {
-			this.entities[i].activate();
-		}
-	}
 
 	if (globals.mode === "duplicate" || globals.mode === "split") {
 		globals.player0.activate(this.startPos.x, this.startPos.y);
@@ -451,6 +416,23 @@ Stage.prototype.activate = function() {
 
 }
 
+Stage.prototype.reset = function() {
+
+	globals.gpBackground0Ctx.clearRect(0, 0, globals.gpWidth, globals.gpHeight);
+	globals.tvBackground0Ctx.clearRect(0, 0, globals.tvWidth, globals.tvHeight);
+	globals.gpBackground1Ctx.clearRect(0, 0, globals.gpWidth, globals.gpHeight);
+	globals.tvBackground1Ctx.clearRect(0, 0, globals.tvWidth, globals.tvHeight);
+	globals.gpBackground2Ctx.clearRect(0, 0, globals.gpWidth, globals.gpHeight);
+	globals.tvBackground2Ctx.clearRect(0, 0, globals.tvWidth, globals.tvHeight);
+
+	if (this.levels) {
+		this.levels[0].reset();
+		this.levels[1].reset();
+		this.levels[2].reset();
+	}
+
+}
+
 Stage.prototype.start = function() {
 
 	if (this.startSpeed) {
@@ -461,10 +443,6 @@ Stage.prototype.start = function() {
 
 Stage.prototype.deactivate = function() {
 
-	if (this.levels) {
-		this.levels[0].deactivate();
-		this.levels[1].deactivate();
-		this.levels[2].deactivate();
-	}
+	this.reset();
 
 }

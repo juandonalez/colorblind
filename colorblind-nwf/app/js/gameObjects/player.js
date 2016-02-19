@@ -67,6 +67,7 @@ Player.prototype.update = function() {
 Player.prototype.draw = function() {
 
 	var ctx = globals.bufferCtx;
+	ctx.globalAlpha = 1;
 
 	if (this.dir === "l") {
 		ctx.translate(this.x + this.width, this.y);

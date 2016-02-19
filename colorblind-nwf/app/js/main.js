@@ -29,7 +29,7 @@ var main = main || {};
 		globals.bufferCtx.clearRect(0, 0, globals.gameWidth, globals.gameHeight);
 
 		globals.currScene.draw();
-		//camera.draw();
+		cameraManager.draw();
 
 	}
 
@@ -78,7 +78,7 @@ var main = main || {};
 		window.removeEventListener('loaded', startGame, false);
 
 		globals.scenes = {
-			splashScreen: new Scene("splashScreen"),
+			//splashScreen: new Scene("splashScreen"),
 			mainMenu: new Scene("mainMenu"),
 			stage1: new Stage("stage1"),
 			stage2: new Stage("stage2")
@@ -94,29 +94,36 @@ var main = main || {};
 			running = true;
 		}
 		else {
-			globals.currScene = globals.scenes["splashScreen"];
+			//globals.currScene = globals.scenes["splashScreen"];
+			globals.currScene = globals.scenes["mainMenu"];
 			globals.currScene.activate();
-			setTimeout(function() {main.changeScene("mainMenu");}, 2000);
+			//setTimeout(function() {main.changeScene("mainMenu");}, 2000);
 		}
 
 		prevTick = Date.now();
 		prevFrame = Date.now();
 		gameLoop();
-		//camera.fadeIn();
+		cameraManager.fadeIn();
 
 	}
 
 	main.changeScene = function(scene) {
 
 		running = false;
-		//camera.fadeOut();
-		globals.currScene.deactivate();
+
+		cameraManager.fadeOut();
+
 		setTimeout(function() {
+			cameraManager.reset();
+			globals.currScene.deactivate();
 			globals.currScene = globals.scenes[scene];
 			globals.currScene.activate();
+		}, Timeouts.CAMERA_FADE);
+
+		setTimeout(function() {
+			cameraManager.fadeIn();
 			running = true;
-			//camera.fadeIn();
-		}, 2000);
+		}, Timeouts.SCENE_CHANGE);
 
 	}
 

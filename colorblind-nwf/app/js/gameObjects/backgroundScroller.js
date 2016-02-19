@@ -8,9 +8,7 @@ function BackgroundScroller(scene, d, index, camera, ctx) {
 	this.scene = scene;
 	this.camera = camera;
 	this.ctx = ctx;
-	this.speed = d.speed;
 	this.random = d.random;
-	this.vel = new Point(0, 0);
 
 	this.pool = fileManager.images["backgrounds/" + scene.name + "/" + index + "/"];
 
@@ -63,7 +61,7 @@ BackgroundScroller.prototype.update = function() {
 BackgroundScroller.prototype.draw = function() {
 
 	this.ctx.globalAlpha = 1;
-	this.ctx.translate(this.camera.roundX * -1, this.camera.roundY * -1);
+	this.ctx.translate(this.camera.x * -1, this.camera.y * -1);
 
 	var first = this.bgs[0];
 	var second = this.bgs[1];
@@ -72,14 +70,12 @@ BackgroundScroller.prototype.draw = function() {
 	this.ctx.drawImage(first, this.x, this.y);
 	this.ctx.drawImage(second, this.x + first.width, this.y);
 
-	this.ctx.translate(this.camera.roundX, this.camera.roundY);
+	this.ctx.translate(this.camera.x, this.camera.y);
 }
 
-BackgroundScroller.prototype.activate = function() {
+BackgroundScroller.prototype.reset = function() {
 
 	this.x = 0;
-	this.speed = 1/this.startSpeed;
-	this.accum = 0;
 
 	for (var i = 0; i < 2; i++) {
 

@@ -31,14 +31,6 @@ GameObject.prototype.intersects = function(ent) {
 
 }
 
-GameObject.prototype.pause = function() {
-
-	if (this.active !== null) {
-		this.active = false;
-	}
-
-}
-
 GameObject.prototype.reset = function() {}
 
 GameObject.prototype.resize = function(s) {
@@ -46,14 +38,6 @@ GameObject.prototype.resize = function(s) {
 	this.width = Math.round(this.width*s);
 	this.height = Math.round(this.height*s);
 	this.updateBounds();
-
-}
-
-GameObject.prototype.resume = function() {
-
-	if (this.active !== null) {
-		this.active = true;
-	}
 
 }
 

@@ -33,11 +33,31 @@ var cameraManager = cameraManager || {};
 
 	}
 
+	cameraManager.fadeIn = function() {
+
+		cameraManager.foreground.fadeIn();
+
+	}
+
+	cameraManager.fadeOut = function() {
+
+		cameraManager.foreground.fadeOut();
+
+	}
+
 	cameraManager.increaseSpeed = function() {
 
 		cameraManager.background1.vel.x += cameraManager.speedIncrement/4;
 		cameraManager.background2.vel.x += cameraManager.speedIncrement/2;
 		cameraManager.foreground.vel.x += cameraManager.speedIncrement;
+
+	}
+
+	cameraManager.reset = function() {
+
+		for (var i = 0; i < cameraManager.cameras.length; i++) {
+			cameraManager.cameras[i].reset();
+		}
 
 	}
 

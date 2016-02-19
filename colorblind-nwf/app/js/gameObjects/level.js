@@ -65,6 +65,7 @@ Level.prototype.update = function() {
 Level.prototype.draw = function(layerNum, color) {
 
 	var ctx = globals.bufferCtx;
+	ctx.globalAlpha = 1;
 	var tileset = globals.currScene.tileset;
 	var tileSize = globals.tileSize;
 	var tileNum = 0;

@@ -3,10 +3,13 @@ Camera.constructor = Camera;
 
 function Camera(x, y) {
 
+	this.startX = x;
+	this.startY = y;
+
 	this.x = x;
 	this.y = y;
-	this.roundX = this.x;
-	this.roundY = this.y;
+	this.roundX = x;
+	this.roundY = y;
 	this.width = globals.screenWidth;
 	this.height = globals.screenHeight;
 	this.center = new Point(0, 0);
@@ -18,9 +21,6 @@ function Camera(x, y) {
 
 	this.isShaking = false;
 	this.shakeTime = 0;
-
-	this.gpWidth = this.width;
-	this.gpHeight = this.height;
 
 	this.fader = new Fader(this);
 
@@ -57,13 +57,13 @@ Camera.prototype.draw = function() {
 
 Camera.prototype.fadeIn = function() {
 
-	this.fader.activate(0, 1);
+	this.fader.activate(0, 5);
 
 }
 
 Camera.prototype.fadeOut = function() {
 
-	this.fader.activate(1, 1);
+	this.fader.activate(1, 5);
 
 }
 
@@ -82,6 +82,16 @@ Camera.prototype.pctToPoint = function(p) {
 Camera.prototype.pctToWidth = function(w) {
 
 	return Math.round((this.width/100) * w);
+
+}
+
+Camera.prototype.reset = function() {
+
+	this.x = this.startX;
+	this.y = this.startY;
+	this.roundX = this.x;
+	this.roundY = this.y;
+	this.updateBounds();
 
 }
 
