@@ -3,8 +3,8 @@ Player.prototype.constructor = Player;
 
 function Player(n) {
 
-	this.x = 200;
-	this.y = 200;
+	this.x = globals.playerStartX;
+	this.y = globals.playerStartY;
 	this.width = globals.playerWidth;
 	this.height = globals.playerHeight;
 	this.center = new Point(0, 0);
@@ -87,16 +87,6 @@ Player.prototype.draw = function() {
 
 }
 
-Player.prototype.activate = function(x, y) {
-
-	this.setPosition(x, y);
-	this.vel.x = 0;
-	this.vel.y = 0;
-	this.state = "idle";
-	this.isGrounded = false;
-
-}
-
 Player.prototype.accelLeft = function() {
 
 	if (this.isGrounded) {
@@ -149,6 +139,22 @@ Player.prototype.applyFriction = function(f) {
 Player.prototype.destroy = function() {
 
 	main.changeScene("mainMenu");
+
+}
+
+Player.prototype.reset = function() {
+
+	this.x = globals.playerStartX;
+	this.y = globals.playerStartY;
+	this.vel.x = 0;
+	this.vel.y = 0;
+	this.state = "idle";
+	this.dir = "r";
+	this.isGrounded = false;
+
+	for (var i = 0; i < this.components.length; i++) {
+		this.components[i].reset();
+	}
 
 }
 

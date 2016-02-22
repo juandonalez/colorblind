@@ -38,14 +38,12 @@ function Stage(name) {
 	this.indexes = [0, 0, 0];
 	this.levels = [this.pool[0], this.pool[0], this.pool[0]];
 
-	this.timer = new Timer(this);
-
-	this.destroyers = [
+	/*this.destroyers = [
 		new Destroyer(globals.tileSize, -500, globals.sideWidth, globals.gameHeight + 500, "misc/sides/l/", 0, 0),
 		new Destroyer(globals.tileSize + globals.sideWidth + globals.viewWidth, -500, globals.sideWidth, globals.gameHeight + 500,
 			"misc/sides/r/", globals.screenWidth - globals.sideWidth - (globals.tileSize/2), 0),
 		new Destroyer(0, 1140, 2040, 240, false, false, false)
-	];
+	];*/
 
 	data = null;
 
@@ -343,10 +341,10 @@ Stage.prototype.draw = function() {
 */
 }
 
-Stage.prototype.getEntities = function(index, go) {
+Stage.prototype.getGameObjects = function(index, go) {
 
-	if (this.levels[index].intersects(go) && this.levels[index].entities) {
-		return this.levels[index].entities;
+	if (this.levels[index].intersects(go) && this.levels[index].gameObjects) {
+		return this.levels[index].gameObjects;
 	}
 	else {
 		return false;
@@ -400,18 +398,6 @@ Stage.prototype.activate = function() {
 	this.levels[2].activate();
 	this.levels[2].translate(this.levels[1].x + this.levels[1].width, 0);
 
-	if (globals.mode === "duplicate" || globals.mode === "split") {
-		globals.player0.activate(this.startPos.x, this.startPos.y);
-	}
-	else if (globals.mode === "versus") {
-		globals.player1.activate(this.startPos.x, this.startPos.y);
-		globals.player2.activate(this.startPos.x, this.startPos.y);
-	}
-	else {
-		globals.player1.activate(this.startPos.x, this.startPos.y);
-		globals.player2.activate(this.startPos.x + 150, this.startPos.y);
-	}
-
 	setTimeout(function() {globals.currScene.start();}, 2000);
 
 }
@@ -424,6 +410,10 @@ Stage.prototype.reset = function() {
 	globals.tvBackground1Ctx.clearRect(0, 0, globals.tvWidth, globals.tvHeight);
 	globals.gpBackground2Ctx.clearRect(0, 0, globals.gpWidth, globals.gpHeight);
 	globals.tvBackground2Ctx.clearRect(0, 0, globals.tvWidth, globals.tvHeight);
+
+	globals.player0.reset();
+	globals.player1.reset();
+	globals.player2.reset();
 
 	if (this.levels) {
 		this.levels[0].reset();

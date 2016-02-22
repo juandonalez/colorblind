@@ -1,6 +1,9 @@
-function Player1Input(ent) {
+Player1Input.prototype = new Component();
+Player1Input.prototype.constructor = Player1Input;
 
-	this.ent = ent;
+function Player1Input(go) {
+
+	this.go = go;
 
 }
 
@@ -8,20 +11,20 @@ Player1Input.prototype.update = function() {
 
 	if (inputManager.right1) {
 		if (!inputManager.left1) {
-			this.ent.dir = "r";
-			this.ent.accelRight();
+			this.go.dir = "r";
+			this.go.accelRight();
 		}
 	}
 
 	if (inputManager.left1) {
 		if (!inputManager.right1) {
-			this.ent.dir = "l";
-			this.ent.accelLeft();
+			this.go.dir = "l";
+			this.go.accelLeft();
 		}
 	}
 
 	if (inputManager.confirm1) {
-		this.ent.jump();
+		this.go.jump();
 	}
 
 }

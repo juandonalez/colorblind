@@ -1,27 +1,30 @@
-function Player2Input(ent) {
+Player2Input.prototype = new Component();
+Player2Input.prototype.constructor = Player2Input;
 
-	this.ent = ent;
+function Player2Input(go) {
+
+	this.go = go;
 
 }
 
 Player2Input.prototype.update = function() {
 
-	if (inputManager.right2) {
-		if (!inputManager.left2) {
-			this.ent.dir = "r";
-			this.ent.accelRight();
+	if (inputManager.right1) {
+		if (!inputManager.left1) {
+			this.go.dir = "r";
+			this.go.accelRight();
 		}
 	}
 
-	if (inputManager.left2) {
-		if (!inputManager.right2) {
-			this.ent.dir = "l";
-			this.ent.accelLeft();
+	if (inputManager.left1) {
+		if (!inputManager.right1) {
+			this.go.dir = "l";
+			this.go.accelLeft();
 		}
 	}
 
-	if (inputManager.confirm2) {
-		this.ent.jump();
+	if (inputManager.confirm1) {
+		this.go.jump();
 	}
 
 }

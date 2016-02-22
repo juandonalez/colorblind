@@ -57,13 +57,13 @@ Camera.prototype.draw = function() {
 
 Camera.prototype.fadeIn = function() {
 
-	this.fader.activate(0, 5);
+	this.fader.start(0, 5);
 
 }
 
 Camera.prototype.fadeOut = function() {
 
-	this.fader.activate(1, 5);
+	this.fader.start(1, 5);
 
 }
 

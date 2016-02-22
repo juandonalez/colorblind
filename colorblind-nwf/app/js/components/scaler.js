@@ -1,7 +1,10 @@
-function Scaler(ent) {
+Scaler.prototype = new Component();
+Scaler.prototype.constructor = Scaler;
 
-	this.ent = ent;
-	this.active = false;
+function Scaler(go) {
+
+	this.go = go;
+	this.running = false;
 
 	this.type;
 	this.initial;
@@ -14,13 +17,13 @@ function Scaler(ent) {
 
 Scaler.prototype.update = function() {
 
-	if (this.active) {
+	if (this.running) {
 
 		this.elapsed += globals.delta;
 
 		if (this.elapsed >= this.duration) {
 			this.elapsed = this.duration;
-			this.active = false;
+			this.running = false;
 		}
 
 		// the whole easing function is "difference(c) * func + b" but we'll get func first
@@ -41,20 +44,26 @@ Scaler.prototype.update = function() {
 
 		var transform = this.difference*func + b;
 		// divide transform by height to get a proportion that can then be used
-		// on any entities attached to this one
-		transform /= this.ent.height;
-		this.ent.resize(transform);
+		// on any goities attached to this one
+		transform /= this.go.height;
+		this.go.resize(transform);
 
 	}
 
 }
 
-Scaler.prototype.activate = function(type, target, duration) {
+Scaler.prototype.reset = function() {
+
+	this.running = false;
+
+}
+
+Scaler.prototype.start = function(type, target, duration) {
 
 	if (type !== null && target !== null && duration !== null) {
-		this.active = true;
+		this.running = true;
 		this.type = type;
-		this.initial = this.ent.height;
+		this.initial = this.go.height;
 		this.target = target;
 		this.duration = duration;
 		this.difference = this.target - this.initial;

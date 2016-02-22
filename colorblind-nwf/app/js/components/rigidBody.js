@@ -1,68 +1,51 @@
-function RigidBody(ent) {
+RigidBody.prototype = new Component();
+RigidBody.prototype.constructor = RigidBody;
 
-	this.ent = ent;
+function RigidBody(go) {
+
+	this.go = go;
 
 }
 
 RigidBody.prototype.update = function() {
 
 	// check for horizontal collisions first
-	this.ent.translate(this.ent.vel.x, 0);
+	this.go.translate(this.go.vel.x, 0);
 
-	var entities;
+	var gameObjects;
 
 	for (var i = 0; i < 3; i++) {
 
-		// get the entities for each of the 3 levels
-		entities = globals.currScene.getEntities(i, this.ent);
+		// get the gameObjects for each of the 3 levels
+		gameObjects = globals.currScene.getGameObjects(i, this.go);
 
-		if (entities) {
-			for (var j = 0; j < entities.length; j++) {
-				if (this.ent.intersects(entities[j]) && entities[j].onHorizontalCollision) {
-					entities[j].onHorizontalCollision(this.ent);
+		if (gameObjects) {
+			for (var j = 0; j < gameObjects.length; j++) {
+				if (this.go.intersects(gameObjects[j]) && gameObjects[j].onHorizontalCollision) {
+					gameObjects[j].onHorizontalCollision(this.go);
 				}
 			}
 		}
 
-	}
-
-	// check collision with any entity owned by the scene (eg destroyers)
-	if (globals.currScene.destroyers) {
-		entities = globals.currScene.destroyers;
-		for (var j = 0; j < entities.length; j++) {
-			if (this.ent.intersects(entities[j]) && entities[j].onHorizontalCollision) {
-				entities[j].onHorizontalCollision(this.ent);
-			}
-		}
 	}
 
 	// add gravity and check for any vertical collisions
-	this.ent.vel.y += globals.currScene.gravity;
-	this.ent.translate(0, this.ent.vel.y);
+	this.go.vel.y += globals.currScene.gravity;
+	this.go.translate(0, this.go.vel.y);
 
 	for (var i = 0; i < 3; i++) {
 
-		// get the entities for each of the 3 levels
-		entities = globals.currScene.getEntities(i, this.ent);
+		// get the gameObjects for each of the 3 levels
+		gameObjects = globals.currScene.getGameObjects(i, this.go);
 
-		if (entities) {
-			for (var j = 0; j < entities.length; j++) {
-				if (this.ent.intersects(entities[j]) && entities[j].onVerticalCollision) {
-					entities[j].onVerticalCollision(this.ent);
+		if (gameObjects) {
+			for (var j = 0; j < gameObjects.length; j++) {
+				if (this.go.intersects(gameObjects[j]) && gameObjects[j].onVerticalCollision) {
+					gameObjects[j].onVerticalCollision(this.go);
 				}
 			}
 		}
 
-	}
-
-	// check collision with any entity owned by the scene (eg destroyers)
-	if (globals.currScene.destroyers) {
-		entities = globals.currScene.destroyers;
-		for (var j = 0; j < entities.length; j++) {
-			if (this.ent.intersects(entities[j]) && entities[j].onVerticalCollision) {
-				entities[j].onVerticalCollision(this.ent);
-			}
-		}
 	}
 
 }

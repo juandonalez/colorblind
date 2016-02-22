@@ -1,6 +1,9 @@
-function Animator(ent, baseURL, fps) {
+Animator.prototype = new Component();
+Animator.prototype.constructor = Animator;
 
-	this.ent = ent;
+function Animator(go, baseURL, fps) {
+
+	this.go = go;
 
 	this.baseURL = baseURL;
 	this.fps = fps;
@@ -8,12 +11,12 @@ function Animator(ent, baseURL, fps) {
 	this.accum = 0;
 	this.index = 0;
 
-	if (this.ent.state) {
-		this.currState = this.ent.state;
+	if (this.go.state) {
+		this.currState = this.go.state;
 	}
 
-	if (this.ent.dir) {
-		this.currDir = this.ent.dir;
+	if (this.go.dir) {
+		this.currDir = this.go.dir;
 	}
 
 }
@@ -27,9 +30,9 @@ Animator.prototype.update = function() {
 
 		var url = this.baseURL;
 
-		if (this.ent.state) {
-			if (this.ent.state !== this.currState) {
-				this.currState = this.ent.state;
+		if (this.go.state) {
+			if (this.go.state !== this.currState) {
+				this.currState = this.go.state;
 				this.index = 0;
 			}
 			url = url + this.currState + "/";
@@ -41,7 +44,7 @@ Animator.prototype.update = function() {
 			this.index = 0;
 		}
 
-		this.ent.image = frames[this.index];
+		this.go.image = frames[this.index];
 
 		this.index++;
 		this.accum = 0;
@@ -50,17 +53,17 @@ Animator.prototype.update = function() {
 
 }
 
-Animator.prototype.activate = function() {
+Animator.prototype.reset = function() {
 
 	this.accum = 0;
 	this.index = 0;
 
-	if (this.ent.state) {
-		this.currState = this.ent.state;
+	if (this.go.state) {
+		this.currState = this.go.state;
 	}
 
-	if (this.ent.dir) {
-		this.currDir = this.ent.dir;
+	if (this.go.dir) {
+		this.currDir = this.go.dir;
 	}
 
 }

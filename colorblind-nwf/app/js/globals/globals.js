@@ -23,6 +23,8 @@ var globals = globals || {};
 	globals.viewHeight = globals.screenHeight;
 	globals.sideWidth = (globals.screenWidth - globals.viewWidth)/2;
 
+	globals.playerStartX = 200;
+	globals.playerStartY = 200;
 	globals.playerWidth = 80;
 	globals.playerHeight = 118;
 	globals.playerStates = ["idle"];

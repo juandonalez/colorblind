@@ -1,7 +1,10 @@
-function Fader(ent) {
+Fader.prototype = new Component();
+Fader.prototype.constructor = Fader;
 
-	this.ent = ent;
-	this.active = false;
+function Fader(go) {
+
+	this.go = go;
+	this.running = false;
 
 	this.initial;
 	this.target;
@@ -13,27 +16,27 @@ function Fader(ent) {
 
 Fader.prototype.update = function() {
 
-	if (this.active) {
+	if (this.running) {
 
 		this.elapsed += globals.delta;
 
 		if (this.elapsed >= this.duration) {
 			this.elapsed = this.duration;
-			this.active = false;
+			this.running = false;
 		}
 
 		var transform = this.difference*(this.elapsed/this.duration) + this.initial;
-		this.ent.setAlpha(transform);
+		this.go.setAlpha(transform);
 
 	}
 
 }
 
-Fader.prototype.activate = function(target, duration) {
+Fader.prototype.start = function(target, duration) {
 
 	if (target !== null && duration !== null) {
-		this.active = true;
-		this.initial = this.ent.alpha;
+		this.running = true;
+		this.initial = this.go.alpha;
 		this.target = target;
 		this.duration = duration;
 		this.difference = this.target - this.initial;

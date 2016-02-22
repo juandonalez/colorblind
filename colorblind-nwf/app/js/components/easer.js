@@ -1,7 +1,10 @@
-function Easer(ent) {
+Easer.prototype = new Component();
+Easer.prototype.constructor = Easer;
 
-	this.ent = ent;
-	this.active = false;
+function Easer(go) {
+
+	this.go = go;
+	this.running = false;
 	
 	this.type;
 	this.beginPos;
@@ -14,13 +17,13 @@ function Easer(ent) {
 
 Easer.prototype.update = function() {
 
-	if (this.active) {
+	if (this.running) {
 
 		this.elapsed += globals.delta;
 
 		if (this.elapsed >= this.duration) {
 			this.elapsed = this.duration;
-			this.active = false;
+			this.running = false;
 		}
 
 		// the whole easing function is "difference(c) * func + b" but we'll get func first
@@ -39,22 +42,28 @@ Easer.prototype.update = function() {
 		var transform = this.difference.multiplyByNum(func);
 		transform = transform.add(b);
 
-		// get the difference between the new pos the current pos.
-		// we could just set the entity to the new pos, but by getting
-		// the difference we can then apply the same tranform to other entities
-		transform = transform.subtract(this.ent.center);
-		this.ent.translate(Math.round(transform.x), Math.round(transform.y));
+		// get the difference between the new pos the currgo pos.
+		// we could just set the game object to the new pos, but by getting
+		// the difference we can then apply the same tranform to other goities
+		transform = transform.subtract(this.go.center);
+		this.go.translate(Math.round(transform.x), Math.round(transform.y));
 
 	}
 
 }
 
-Easer.prototype.activate = function(type, target, duration) {
+Easer.prototype.reset = function() {
+
+	this.running = false;
+
+}
+
+Easer.prototype.start = function(type, target, duration) {
 
 	if (type !== null && target !== null && duration !== null) {
-		this.active = true;
+		this.running = true;
 		this.type = type;
-		this.beginPos = this.ent.center.copy();
+		this.beginPos = this.go.center.copy();
 		this.target = target;
 		this.duration = duration;
 		this.difference = this.target.subtract(this.beginPos);
