@@ -24,8 +24,6 @@ function Player(n) {
 
 	this.components = new Array(3);
 
-	this.image = fileManager.images["players/" + n + "/idle/"][0];
-
 	if (n === 2) {
 		this.components[0] = new Player2Input(this);
 	}
@@ -33,8 +31,10 @@ function Player(n) {
 		this.components[0] = new Player1Input(this);
 	}
 
-	this.components[1] = new Animator(this, "players/" + n + "/", 24);
+	this.components[1] = new Sprite(this, -15, -2, "players/" + n + "/");
 	this.components[2] = new RigidBody(this);
+
+	this.sprite = this.components[1];
 
 }
 
@@ -66,21 +66,11 @@ Player.prototype.update = function() {
 
 Player.prototype.draw = function() {
 
-	var ctx = globals.bufferCtx;
-	ctx.globalAlpha = 1;
-
-	if (this.dir === "l") {
-		ctx.translate(this.x + this.width, this.y);
-		ctx.scale(-1, 1);
-		ctx.drawImage(this.image, 0, 0);
-		ctx.scale(-1, 1);
-		ctx.translate((this.x + this.width) * -1, this.y * -1);
-	}
-	else {
-		ctx.drawImage(this.image, this.x, this.y);
-	}
+	this.sprite.draw();
 
 	if (globals.debugMode && globals.debug.hitboxes) {
+		var ctx = globals.bufferCtx;
+		ctx.globalAlpha = 1;
 		ctx.strokeStyle = "blue";
 		ctx.strokeRect(this.x, this.y, this.width, this.height);
 	}
