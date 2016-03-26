@@ -24,7 +24,7 @@ Platform.prototype.onHorizontalCollision = function(ent) {
 		ent.setPosition(this.x - ent.width - 1, ent.y);
 	}
 	else if (ent.vel.x < 0) {
-		ent.setPosition(this.max.x + ent.width + 1, ent.y);
+		ent.setPosition(this.max.x + 1, ent.y);
 	}
 
 	ent.vel.x = 0;
