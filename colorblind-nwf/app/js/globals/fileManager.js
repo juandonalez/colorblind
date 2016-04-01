@@ -4,7 +4,7 @@ var fileManager = fileManager || {};
 
 	fileManager.levels = {};
 	fileManager.images = {};
-	var totalNumImages = 91;
+	var totalNumImages = 84;
 
 	var folders = [
 		["backgrounds/mainMenu/0/", 2],
@@ -21,7 +21,7 @@ var fileManager = fileManager || {};
 		["players/2/idle/", 1],
 		["players/2/jumping/", 1],
 		["players/2/running/", 4],
-		["tilesets/stage1/", 23],
+		["tilesets/stage1/", 16],
 		["tilesets/stage2/", 34]
 	];
 
