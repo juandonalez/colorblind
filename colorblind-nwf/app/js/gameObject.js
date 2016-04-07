@@ -31,6 +31,10 @@ GameObject.prototype.intersects = function(ent) {
 
 }
 
+GameObject.prototype.onHorizontalCollision = function() {}
+
+GameObject.prototype.onVerticalCollision = function() {}
+
 GameObject.prototype.reset = function() {}
 
 GameObject.prototype.resize = function(s) {

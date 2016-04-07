@@ -29,9 +29,14 @@ function Level(d) {
 	for (var i = 0; i < gameObjects.length; i++) {
 		go = gameObjects[i];
 
+		// gameObject y pos is relative to level top left corner
+
 		if (go.name === "platform") {
-			// gameObject y pos is relative to level top left corner
 			this.gameObjects[i] = new Platform(go.x, go.y + this.top, go.width, go.height);
+		}
+
+		if (go.name === "oneWayPlatform") {
+			this.gameObjects[i] = new OneWayPlatform(go.x, go.y + this.top, go.width, go.height);
 		}
 
 		this.gameObjectLayers[go.type].push(this.gameObjects[i]);
