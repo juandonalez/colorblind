@@ -3,6 +3,9 @@ Level.prototype.constructor = Level;
 
 function Level(d) {
 
+	this.name = "level";
+	this.id = utilities.getNewID();
+
 	this.camera = cameraManager.foreground;
 
 	this.active = false;
@@ -31,12 +34,20 @@ function Level(d) {
 
 		// gameObject y pos is relative to level top left corner
 
-		if (go.name === "platform") {
-			this.gameObjects[i] = new Platform(go.x, go.y + this.top, go.width, go.height);
+		if (go.name === "movingPlatform") {
+			this.gameObjects[i] = new MovingPlatform(go.x, go.y + this.top, parseInt(go.properties.velX), parseInt(go.properties.velY));
 		}
 
 		if (go.name === "oneWayPlatform") {
 			this.gameObjects[i] = new OneWayPlatform(go.x, go.y + this.top, go.width, go.height);
+		}
+
+		if (go.name === "platform") {
+			this.gameObjects[i] = new Platform(go.x, go.y + this.top, go.width, go.height);
+		}
+
+		if (go.name === "waypoint") {
+			this.gameObjects[i] = new Waypoint(go.x, go.y + this.top, go.width, go.height);
 		}
 
 		this.gameObjectLayers[go.type].push(this.gameObjects[i]);

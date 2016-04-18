@@ -3,6 +3,9 @@ Player.prototype.constructor = Player;
 
 function Player(n) {
 
+	this.name = "player";
+	this.id = utilities.getNewID();
+
 	this.x = globals.playerStartX;
 	this.y = globals.playerStartY;
 	this.width = globals.playerWidth;
@@ -32,7 +35,7 @@ function Player(n) {
 	}
 
 	this.components[1] = new Sprite(this, -15, -2, "players/" + n + "/");
-	this.components[2] = new RigidBody(this);
+	this.components[2] = new RigidBody(this, true);
 
 	this.sprite = this.components[1];
 

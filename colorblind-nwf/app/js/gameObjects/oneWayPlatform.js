@@ -3,6 +3,9 @@ OneWayPlatform.prototype.constructor = OneWayPlatform;
 
 function OneWayPlatform(x, y, width, height) {
 
+	this.name = "oneWayPlatform";
+	this.id = utilities.getNewID();
+
 	this.startX = x;
 	this.startY = y;
 
@@ -23,7 +26,7 @@ OneWayPlatform.prototype.onVerticalCollision = function(ent) {
 	// if velocity is greater than 0 then entity is moving down
 	// less than 0 it is moving up
 
-	if (ent.vel.y > 0 && ent.max.y > this.y) {
+	if (ent.vel.y > 0 && ent.max.y <= this.max.y) {
 
 		if (ent.applyFriction) {
 			ent.applyFriction(this.friction);

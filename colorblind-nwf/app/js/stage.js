@@ -51,6 +51,10 @@ function Stage(name) {
 
 Stage.prototype.update = function() {
 
+	if (!this.camera.intersects(this.levels[0])) {
+		this.getNewLevel();
+	}
+
 	cameraManager.setSpeed(3);
 
 	this.background1.update();
@@ -377,6 +381,21 @@ Stage.prototype.getNewIndex = function() {
 	}
 
 	return rand;
+
+}
+
+Stage.prototype.getNewLevel = function() {
+
+	this.indexes[0] = this.indexes[1];
+	this.indexes[1] = this.indexes[2];
+	this.indexes[2] = this.getNewIndex();
+	this.levels[0].deactivate();
+	this.levels[0].reset();
+	this.levels[0] = this.pool[this.indexes[0]];
+	this.levels[1] = this.pool[this.indexes[1]];
+	this.levels[2] = this.pool[this.indexes[2]];
+	this.levels[2].activate();
+	this.levels[2].translate(this.levels[1].x + this.levels[1].width, 0);
 
 }
 

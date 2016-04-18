@@ -3,6 +3,9 @@ Platform.prototype.constructor = Platform;
 
 function Platform(x, y, width, height) {
 
+	this.name = "platform";
+	this.id = utilities.getNewID();
+
 	this.startX = x;
 	this.startY = y;
 

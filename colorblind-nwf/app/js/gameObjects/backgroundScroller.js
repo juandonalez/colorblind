@@ -3,6 +3,9 @@ BackgroundScroller.constructor = BackgroundScroller;
 
 function BackgroundScroller(scene, d, index, camera, ctx) {
 
+	this.name = "backgroundScroller";
+	this.id = utilities.getNewID();
+
 	this.x = 0;
 	this.y = Math.round(globals.screenHeight * d.y);
 	this.scene = scene;

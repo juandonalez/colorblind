@@ -3,6 +3,9 @@ Camera.constructor = Camera;
 
 function Camera(x, y) {
 
+	this.name = "camera";
+	this.id = utilities.getNewID();
+
 	this.startX = x;
 	this.startY = y;
 
