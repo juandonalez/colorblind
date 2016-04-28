@@ -1,6 +1,11 @@
+Overlay.prototype = new GameObject();
+Overlay.constructor = Overlay;
+
 function Overlay(menu, d) {
 
 	this.menu = menu;
+
+	var camera = cameraManager.foreground;
 
 	this.activePos = camera.pctToPoint(d.activePos);
 	this.inactivePos = camera.pctToPoint(d.inactivePos);
@@ -10,24 +15,30 @@ function Overlay(menu, d) {
 	this.activeAlpha = d.activeAlpha;
 	this.inactiveAlpha = d.inactiveAlpha;
 
+	this.x = 0;
+	this.y = 0;
+	this.center = new Point(0, 0);
+	this.max = new Point(0, 0);
+
 	if (d.color) {
 		this.color = d.color;
 	}
 
 	if (this.menu.active) {
-		this.center = this.activePos.copy();
+		this.center.x = this.activePos.x;
+		this.center.y = this.activePos.y;
 		this.height = this.activeHeight;
 		this.alpha = this.activeAlpha;
 	}
 	else {
-		this.center = this.inactivePos.copy();
+		this.center.x = this.inactivePos.x;
+		this.center.y = this.inactivePos.y;
 		this.height = this.inactiveHeight;
 		this.width *= d.inactiveScale;
 		this.alpha = this.inactiveAlpha;
 	}
 
-	this.origin = new Point(0, 0);
-	this.calculateOrigin();
+	this.updateBounds();
 
 	this.menuItems = {};
 
@@ -79,7 +90,7 @@ Overlay.prototype.draw = function() {
 	if (this.color) {
 		globals.bufferCtx.globalAlpha = this.alpha;
 		globals.bufferCtx.fillStyle = this.color;
-		globals.bufferCtx.fillRect(this.origin.x, this.origin.y, this.width, this.height);
+		globals.bufferCtx.fillRect(this.x, this.y, this.width, this.height);
 	}
 
 	for (var m in this.menuItems) {
@@ -90,28 +101,28 @@ Overlay.prototype.draw = function() {
 
 Overlay.prototype.activate = function () {
 
-	this.easer.activate("easeOutBack", this.activePos, 1);
-	this.fader.activate(this.activeAlpha, 1);
-	this.scaler.activate("easeOutBack", this.activeHeight, 1);
+	this.easer.start("easeOutBack", this.activePos, 1);
+	this.fader.start(this.activeAlpha, 1);
+	this.scaler.start("easeOutBack", this.activeHeight, 1);
 
 }
 
 Overlay.prototype.deactivate = function () {
 
-	this.easer.activate("easeInBack", this.inactivePos, 1);
-	this.fader.activate(this.inactiveAlpha, 1);
-	this.scaler.activate("easeInBack", this.inactiveHeight, 1);
+	this.easer.start("easeInBack", this.inactivePos, 1);
+	this.fader.start(this.inactiveAlpha, 1);
+	this.scaler.start("easeInBack", this.inactiveHeight, 1);
 
 }
 
-Overlay.prototype.resize = function(scale) {
+Overlay.prototype.resize = function(s) {
 
-	this.width *= scale;
-	this.height *= scale;
-	this.calculateOrigin();
+	this.width = Math.round(this.width*s);
+	this.height = Math.round(this.height*s);
+	this.updateBounds();
 
 	for (var m in this.menuItems) {
-		this.menuItems[m].resize(scale);
+		this.menuItems[m].resize(s);
 	}
 
 }
@@ -124,7 +135,7 @@ Overlay.prototype.setAlpha = function(a) {
 
 	for (var m in this.menuItems) {
 		if (this.menuItems[m].alpha) {
-			this.menuItems[m].alpha = a;
+			this.menuItems[m].setAlpha(a);
 		}
 	}
 
@@ -134,7 +145,7 @@ Overlay.prototype.translate = function(x, y) {
 
 	this.center.x += x;
 	this.center.y += y;
-	this.calculateOrigin();
+	this.updateBounds();
 
 	for (var m in this.menuItems) {
 		this.menuItems[m].translate(x, y);
@@ -142,14 +153,11 @@ Overlay.prototype.translate = function(x, y) {
 
 }
 
-Overlay.prototype.calculateCenter = Entity.prototype.calculateCenter;
+Overlay.prototype.updateBounds = function() {
 
-Overlay.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
+	this.x = this.center.x - (this.width/2);
+	this.y = this.center.y - (this.height/2);
+	this.max.x = this.x + this.width;
+	this.max.y = this.y + this.height;
 
-Overlay.prototype.intersects = Entity.prototype.intersects;
-
-Overlay.prototype.pctToPoint = Entity.prototype.pctToPoint;
-
-Overlay.prototype.setCenter = Entity.prototype.setCenter;
-
-Overlay.prototype.setOrigin = Entity.prototype.setOrigin;
+}

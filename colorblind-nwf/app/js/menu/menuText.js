@@ -1,13 +1,28 @@
+MenuText.prototype = new GameObject();
+MenuText.constructor = MenuText;
+MenuText.prototype.update = MenuItem.prototype.update;
+MenuText.prototype.cancel = MenuItem.prototype.cancel;
+MenuText.prototype.confirm = MenuItem.prototype.confirm;
+MenuText.prototype.deselect = MenuItem.prototype.deselect;
+MenuText.prototype.select = MenuItem.prototype.select;
+
 function MenuText(d, menu) {
 
 	this.name = d.name;
 	this.menu = menu;
-
-	this.origin = new Point(0, 0);
-	this.center = d.center;
+	
 	this.text = d.text;
+
 	this.width = 0;
 	this.height = d.fontSize;
+
+	this.x = 0;
+	this.y = 0;
+	this.center = new Point(0, 0);
+	this.center.x = d.center.x;
+	this.center.y = d.center.y;
+	this.max = new Point(0, 0);
+
 	this.defaultHeight = d.fontSize;
 	this.lineWidth = d.lineWidth;
 	this.defaultLineWidth = d.lineWidth;
@@ -31,8 +46,8 @@ function MenuText(d, menu) {
 		}
 	}
 
-	this.calculateWidth();
-	this.calculateOrigin();
+	this.updateWidth();
+	this.updateBounds();
 
 	this.scaler = new Scaler(this);
 	this.components = new Array(1);
@@ -41,8 +56,6 @@ function MenuText(d, menu) {
 	d = null;
 
 }
-
-MenuText.prototype.update = MenuItem.prototype.update;
 
 MenuText.prototype.draw = function() {
 
@@ -62,12 +75,29 @@ MenuText.prototype.draw = function() {
 	ctx.textAlign = "start";
 	ctx.font = this.height + "px " + globals.font;
 	ctx.lineWidth = this.lineWidth;
-	ctx.strokeText(this.text, this.origin.x, this.origin.y);
-	ctx.fillText(this.text, this.origin.x, this.origin.y);
+	ctx.strokeText(this.text, this.x, this.y);
+	ctx.fillText(this.text, this.x, this.y);
 
 }
 
-MenuText.prototype.calculateWidth = function() {
+MenuText.prototype.resize = function(scale) {
+
+	this.height = Math.round(this.height*scale);
+	this.lineWidth *= scale;
+	this.updateWidth();
+	this.updateBounds();
+
+}
+
+MenuText.prototype.translate = function(x, y) {
+
+	this.center.x += x;
+	this.center.y += y;
+	this.updateBounds();
+
+}
+
+MenuText.prototype.updateWidth = function() {
 
 	var ctx = globals.bufferCtx;
 
@@ -77,39 +107,11 @@ MenuText.prototype.calculateWidth = function() {
 
 }
 
-MenuText.prototype.resize = function(scale) {
+MenuText.prototype.updateBounds = function() {
 
-	this.height = Math.round(this.height*scale);
-	this.lineWidth *= scale;
-	this.calculateWidth();
-	this.calculateOrigin();
+	this.x = this.center.x - (this.width/2);
+	this.y = this.center.y - (this.height/2);
+	this.max.x = this.x + this.width;
+	this.max.y = this.y + this.height;
 
 }
-
-MenuText.prototype.cancel = MenuItem.prototype.cancel;
-
-MenuText.prototype.confirm = MenuItem.prototype.confirm;
-
-MenuText.prototype.deselect = MenuItem.prototype.deselect;
-
-MenuText.prototype.select = MenuItem.prototype.select;
-
-MenuText.prototype.activate = Entity.prototype.activate;
-
-MenuText.prototype.calculateCenter = Entity.prototype.calculateCenter;
-
-MenuText.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
-
-MenuText.prototype.deactivate = Entity.prototype.deactivate;
-
-MenuText.prototype.intersects = Entity.prototype.intersects;
-
-MenuText.prototype.pctToPoint = Entity.prototype.pctToPoint;
-
-MenuText.prototype.setAlpha = Entity.prototype.setAlpha;
-
-MenuText.prototype.setCenter = Entity.prototype.setCenter;
-
-MenuText.prototype.setOrigin = Entity.prototype.setOrigin;
-
-MenuText.prototype.translate = Entity.prototype.translate;

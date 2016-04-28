@@ -1,3 +1,11 @@
+MenuImage.prototype = new GameObject();
+MenuImage.constructor = MenuImage;
+MenuImage.prototype.update = MenuItem.prototype.update;
+MenuImage.prototype.cancel = MenuItem.prototype.cancel;
+MenuImage.prototype.confirm = MenuItem.prototype.confirm;
+MenuImage.prototype.deselect = MenuItem.prototype.deselect;
+MenuImage.prototype.select = MenuItem.prototype.select;
+
 function MenuImage(d, overlay, menu) {
 
 	this.name = d.name;
@@ -5,8 +13,13 @@ function MenuImage(d, overlay, menu) {
 	this.menu = menu;
 	this.components = [];
 
-	this.origin = new Point(0, 0);
-	this.center = d.center;
+	this.x = 0;
+	this.y = 0;
+	this.center = new Point(0, 0);
+	this.center.x = d.center.x;
+	this.center.y = d.center.y;
+	this.max = new Point(0, 0);
+
 	this.image = fileManager.images[d.image];
 	this.width = this.image.width;
 	this.defaultHeight = this.image.height;
@@ -35,7 +48,7 @@ function MenuImage(d, overlay, menu) {
 		this.menuText = new MenuText(text);
 	}
 
-	this.calculateOrigin();
+	this.updateBounds();
 
 	this.scaler = new Scaler(this);
 
@@ -46,13 +59,11 @@ function MenuImage(d, overlay, menu) {
 
 }
 
-MenuImage.prototype.update = MenuItem.prototype.update;
-
 MenuImage.prototype.draw = function() {
 
 	if (this.image) {
 		globals.bufferCtx.globalAlpha = this.alpha;
-		globals.bufferCtx.drawImage(this.image, this.origin.x, this.origin.y, this.width, this.height);
+		globals.bufferCtx.drawImage(this.image, this.x, this.y, this.width, this.height);
 	}
 
 	if (this.selected && this.menuText) {
@@ -65,7 +76,7 @@ MenuImage.prototype.translate = function(x, y) {
 
 	this.center.x += x;
 	this.center.y += y;
-	this.calculateOrigin();
+	this.updateBounds();
 
 	if (this.menuText) {
 		this.menuText.translate(x, y);
@@ -73,30 +84,11 @@ MenuImage.prototype.translate = function(x, y) {
 
 }
 
-MenuImage.prototype.cancel = MenuItem.prototype.cancel;
+MenuImage.prototype.updateBounds = function() {
 
-MenuImage.prototype.confirm = MenuItem.prototype.confirm;
+	this.x = this.center.x - (this.width/2);
+	this.y = this.center.y - (this.height/2);
+	this.max.x = this.x + this.width;
+	this.max.y = this.y + this.height;
 
-MenuImage.prototype.deselect = MenuItem.prototype.deselect;
-
-MenuImage.prototype.select = MenuItem.prototype.select;
-
-MenuImage.prototype.activate = Entity.prototype.activate;
-
-MenuImage.prototype.calculateCenter = Entity.prototype.calculateCenter;
-
-MenuImage.prototype.calculateOrigin = Entity.prototype.calculateOrigin;
-
-MenuImage.prototype.deactivate = Entity.prototype.deactivate;
-
-MenuImage.prototype.intersects = Entity.prototype.intersects;
-
-MenuImage.prototype.pctToPoint = Entity.prototype.pctToPoint;
-
-MenuImage.prototype.resize = Entity.prototype.resize;
-
-MenuImage.prototype.setAlpha = Entity.prototype.setAlpha;
-
-MenuImage.prototype.setCenter = Entity.prototype.setCenter;
-
-MenuImage.prototype.setOrigin = Entity.prototype.setOrigin;
+}

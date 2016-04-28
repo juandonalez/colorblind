@@ -43,8 +43,8 @@ var main = main || {};
 		//if (elapsed >= interval) {
 
 			prevTick = now - (elapsed % interval);
-			//globals.delta = elapsed/1000;
-			globals.delta = 1;
+			globals.delta = elapsed/1000;
+			//globals.delta = 1;
 			frames++;
 
 			if (globals.delta > 0.5) {
@@ -79,7 +79,7 @@ var main = main || {};
 
 		globals.scenes = {
 			//splashScreen: new Scene("splashScreen"),
-			mainMenu: new Scene("mainMenu"),
+			mainMenu: new MenuScene("mainMenu"),
 			stage1: new Stage("stage1"),
 			stage2: new Stage("stage2")
 		};

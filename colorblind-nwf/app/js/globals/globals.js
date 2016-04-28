@@ -142,7 +142,7 @@ var globals = globals || {};
 		backgrounds: false,
 		fpsCounter: false,
 		hitboxes: true,
-		startScene: "stage1",
+		startScene: "mainMenu",
 		mode: "duplicate",
 		levelTest: true
 	};

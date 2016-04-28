@@ -35,12 +35,32 @@ GameObject.prototype.onHorizontalCollision = function() {}
 
 GameObject.prototype.onVerticalCollision = function() {}
 
+GameObject.prototype.pctToHeight = function(h) {
+
+	return Math.round((this.height/100) * h);
+
+}
+
+GameObject.prototype.pctToPoint = function(p) {
+
+	return new Point(this.x + Math.round((this.width/100) * p.x), this.y + Math.round((this.height/100) * p.y));
+
+}
+
+GameObject.prototype.pctToWidth = function(w) {
+
+	return Math.round((this.width/100) * w);
+
+}
+
 GameObject.prototype.reset = function() {}
 
 GameObject.prototype.resize = function(s) {
 
 	this.width = Math.round(this.width*s);
 	this.height = Math.round(this.height*s);
+	this.x = this.center.x - (this.width/2);
+	this.y = this.center.y - (this.height/2);
 	this.updateBounds();
 
 }

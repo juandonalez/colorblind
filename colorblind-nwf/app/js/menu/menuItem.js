@@ -1,3 +1,6 @@
+MenuItem.prototype = new GameObject();
+MenuItem.constructor = MenuItem;
+
 function MenuItem() {}
 
 MenuItem.prototype.update = function() {
@@ -151,14 +154,14 @@ MenuItem.prototype.confirm = function() {
 MenuItem.prototype.deselect = function() {
 
 	this.selected = false;
-	this.scaler.activate("easeInBack", this.defaultHeight, 0.25);
+	this.scaler.start("easeInBack", this.defaultHeight, 0.25);
 
 }
 
 MenuItem.prototype.select = function() {
 
 	this.selected = true;
-	this.scaler.activate("easeInBack", this.selectHeight, 0.25);
+	this.scaler.start("easeInBack", this.selectHeight, 0.25);
 
 	inputManager.active = false;
 	setTimeout(function() {inputManager.active = true;}, 150);

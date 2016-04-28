@@ -70,24 +70,6 @@ Camera.prototype.fadeOut = function() {
 
 }
 
-Camera.prototype.pctToHeight = function(h) {
-
-	return Math.round((this.height/100) * h);
-
-}
-
-Camera.prototype.pctToPoint = function(p) {
-
-	return new Point(Math.round((this.width/100) * p.x), Math.round((this.height/100) * p.y));
-
-}
-
-Camera.prototype.pctToWidth = function(w) {
-
-	return Math.round((this.width/100) * w);
-
-}
-
 Camera.prototype.reset = function() {
 
 	this.x = this.startX;
