@@ -7,11 +7,11 @@ function Easer(go) {
 	this.running = false;
 	
 	this.type;
-	this.beginPos;
-	this.target;
 	this.duration;
 	this.elapsed;
-	this.difference;
+	this.beginPos = new Point(0, 0);
+	this.target = new Point(0, 0);
+	this.difference = new Point(0, 0);
 
 }
 
@@ -39,14 +39,16 @@ Easer.prototype.update = function() {
 			var func = (t/=d)*t*((s+1)*t - s);
 		}
 
-		var transform = this.difference.multiplyByNum(func);
-		transform = transform.add(b);
+		var transformX = (this.difference.x*func) + b.x;
+		var transformY = this.difference.y*func + b.y;
 
-		// get the difference between the new pos the currgo pos.
+		// get the difference between the new pos the curr go pos.
 		// we could just set the game object to the new pos, but by getting
-		// the difference we can then apply the same tranform to other goities
-		transform = transform.subtract(this.go.center);
-		this.go.translate(Math.round(transform.x), Math.round(transform.y));
+		// the difference we can then apply the same tranform to other game objects
+		transformX -= this.go.center.x;
+		transformY -= this.go.center.y;
+
+		this.go.translate(Math.round(transformX), Math.round(transformY));
 
 	}
 
@@ -58,16 +60,19 @@ Easer.prototype.reset = function() {
 
 }
 
-Easer.prototype.start = function(type, target, duration) {
+Easer.prototype.start = function(type, targetX, targetY, duration) {
 
-	if (type !== null && target !== null && duration !== null) {
+	if (type !== null && targetX !== null && targetY !== null && duration !== null) {
 		this.running = true;
 		this.type = type;
-		this.beginPos = this.go.center.copy();
-		this.target = target;
 		this.duration = duration;
-		this.difference = this.target.subtract(this.beginPos);
 		this.elapsed = 0;
+		this.beginPos.x = this.go.center.x;
+		this.beginPos.y = this.go.center.y;
+		this.target.x = targetX;
+		this.target.y = targetY;
+		this.difference.x = this.target.x - this.beginPos.x;
+		this.difference.y = this.target.y - this.beginPos.y;
 	}
 
 }
