@@ -64,11 +64,11 @@ Stage.prototype.update = function() {
 	this.levels[2].update();
 
 	if (globals.mode === "duplicate" || globals.mode === "split") {
-		globals.player0.update();
+		globals.players[0].update();
 	}
 	else {
-		globals.player1.update();
-		globals.player2.update();
+		globals.players[1].update();
+		globals.players[2].update();
 	}
 
 	if (this.destroyers) {
@@ -108,7 +108,7 @@ Stage.prototype.draw = function() {
 			}
 		}
 
-		globals.player0.draw();
+		globals.players[0].draw();
 	}
 
 	globals.gpCtx.drawImage(globals.buffer, 0, 0, globals.screenWidth, globals.screenHeight, 
@@ -430,9 +430,9 @@ Stage.prototype.reset = function() {
 	globals.gpBackground2Ctx.clearRect(0, 0, globals.gpWidth, globals.gpHeight);
 	globals.tvBackground2Ctx.clearRect(0, 0, globals.tvWidth, globals.tvHeight);
 
-	globals.player0.reset();
-	globals.player1.reset();
-	globals.player2.reset();
+	globals.players[0].reset();
+	globals.players[1].reset();
+	globals.players[2].reset();
 
 	if (this.levels) {
 		this.levels[0].reset();

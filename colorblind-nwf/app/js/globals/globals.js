@@ -29,9 +29,7 @@ var globals = globals || {};
 	globals.playerHeight = 118;
 	globals.playerStates = ["idle"];
 
-	globals.player0;
-	globals.player1;
-	globals.player2;
+	globals.players = new Array(3);
 
 	globals.font = "Soviet";
 
@@ -142,7 +140,7 @@ var globals = globals || {};
 		backgrounds: false,
 		fpsCounter: false,
 		hitboxes: true,
-		startScene: "mainMenu",
+		startScene: "stage1",
 		mode: "duplicate",
 		levelTest: true
 	};

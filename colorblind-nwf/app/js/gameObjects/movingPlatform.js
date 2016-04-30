@@ -19,9 +19,14 @@ function MovingPlatform(x, y, velX, velY) {
 	this.max = new Point(0, 0);
 	this.updateBounds();
 
+	this.prevPos = new Point(0, 0);
+	this.prevMax = new Point(0, 0);
+
 	this.active = false;
 	this.vel = new Point(velX, velY);
 	this.friction = 3;
+
+	this.container = new Bounds(this, this.x, this.y, this.width, this.height);
 
 	this.components = new Array(1);
 	this.components[0] = new RigidBody(this, false);
@@ -31,8 +36,24 @@ function MovingPlatform(x, y, velX, velY) {
 MovingPlatform.prototype.update = function() {
 
 	if (this.active) {
+
+		this.prevPos.x = this.x;
+		this.prevPos.y = this.y;
+		this.prevMax.x = this.max.x;
+		this.prevMax.y = this.max.y;
+		
+
 		for (var i = 0; i < this.components.length; i++) {
 			this.components[i].update();
+		}
+
+		for (var i = 0; i < 3; i++) {
+			if (globals.players[i].max.y === this.prevPos.y - 1) {
+				if (globals.players[i].x >= this.prevPos.x && globals.players[i].x <= this.prevMax.x ||
+					globals.players[i].max.x >= this.prevPos.x && globals.players[i].max.x <= this.prevMax.x) {
+						globals.players[i].translate(this.x - this.prevPos.x, this.y - this.prevPos.y);
+				}
+			}
 		}
 	}
 
@@ -77,5 +98,14 @@ MovingPlatform.prototype.reset = function() {
 	this.updateBounds();
 	this.vel.x = this.startVelX;
 	this.vel.y = this.startVelY;
+
+}
+
+MovingPlatform.prototype.translate = function(x, y) {
+
+	this.x += x;
+	this.y += y;
+	this.updateBounds();
+	this.container.translate(x, y);
 
 }

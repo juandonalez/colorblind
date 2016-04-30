@@ -84,9 +84,9 @@ var main = main || {};
 			stage2: new Stage("stage2")
 		};
 
-		globals.player0 = new Player(0);
-		globals.player1 = new Player(1);
-		globals.player2 = new Player(2);
+		globals.players[0] = new Player(0);
+		globals.players[1] = new Player(1);
+		globals.players[2] = new Player(2);
 
 		if (globals.debugMode) {
 			globals.currScene = globals.scenes[globals.debug.startScene];
