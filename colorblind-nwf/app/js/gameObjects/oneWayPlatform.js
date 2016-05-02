@@ -21,24 +21,24 @@ function OneWayPlatform(x, y, width, height) {
 
 }
 
-OneWayPlatform.prototype.onVerticalCollision = function(ent) {
+OneWayPlatform.prototype.onVerticalCollision = function(go) {
 
-	// if velocity is greater than 0 then entity is moving down
+	// if velocity is greater than 0 then game object is moving down
 	// less than 0 it is moving up
 
-	if (ent.vel.y > 0 && ent.max.y <= this.max.y) {
+	if (go.vel.y > 0 && go.max.y <= this.max.y) {
 
-		if (ent.applyFriction) {
-			ent.applyFriction(this.friction);
+		if (go.applyFriction) {
+			go.applyFriction(this.friction);
 		}
 
-		ent.setPosition(ent.x, this.y - ent.height - 1);
+		go.setPosition(go.x, this.y - go.height - 1);
 
-		if (ent.isGrounded !== null) {
-			ent.isGrounded = true;
+		if (go.isGrounded !== null) {
+			go.isGrounded = true;
 		}
 
-		ent.vel.y = 0;
+		go.vel.y = 0;
 
 	}
 
