@@ -21,42 +21,42 @@ function Platform(x, y, width, height) {
 
 }
 
-Platform.prototype.onHorizontalCollision = function(ent) {
+Platform.prototype.onHorizontalCollision = function(go) {
 
-	if (ent.vel.x > 0) {
-		ent.setPosition(this.x - ent.width - 1, ent.y);
+	if (go.vel.x > 0) {
+		go.setPosition(this.x - go.width - 1, go.y);
 	}
-	else if (ent.vel.x < 0) {
-		ent.setPosition(this.max.x + 1, ent.y);
+	else if (go.vel.x < 0) {
+		go.setPosition(this.max.x + 1, go.y);
 	}
 
-	ent.vel.x = 0;
+	go.vel.x = 0;
 
 }
 
-Platform.prototype.onVerticalCollision = function(ent) {
+Platform.prototype.onVerticalCollision = function(go) {
 
-	// if velocity is greater than 0 then entity is moving down
+	// if velocity is greater than 0 then game object is moving down
 	// less than 0 it is moving up
 
-	if (ent.vel.y > 0) {
+	if (go.vel.y > 0) {
 
-		if (ent.applyFriction) {
-			ent.applyFriction(this.friction);
+		if (go.applyFriction) {
+			go.applyFriction(this.friction);
 		}
 
-		ent.setPosition(ent.x, this.y - ent.height - 1);
+		go.setPosition(go.x, this.y - go.height - 1);
 
-		if (ent.isGrounded !== null) {
-			ent.isGrounded = true;
+		if (go.isGrounded !== null) {
+			go.isGrounded = true;
 		}
 
 	}
-	else if (ent.vel.y < 0) {
-		ent.setPosition(ent.x, this.max.y + 1);
+	else if (go.vel.y < 0) {
+		go.setPosition(go.x, this.max.y + 1);
 	}
 
-	ent.vel.y = 0;
+	go.vel.y = 0;
 
 }
 

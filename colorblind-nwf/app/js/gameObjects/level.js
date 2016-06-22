@@ -18,46 +18,72 @@ function Level(d) {
 	this.max = new Point(0, 0);
 	this.updateBounds();
 
-	// the level covers the whole screen
-	// top is where the tiles first appear
-	this.top = this.height - (d.height * globals.tileSize);
+	// tiles for drawing
+	this.tileSrc = new Array(4);
+	this.tileDest = new Array(4);
 
-	this.tileLayers = [d.layers[0].data, d.layers[1].data, d.layers[2].data];
+	var layer;
+	var count;
+	for (var i = 0; i < 4; i++) {
+		layer = d.layers[i].data;
+		count = 0;
+		for (var j = 0; j < layer.length; j++) {
+			if (layer[j] != 0) {
+				count++;
+			}
+		}
+
+		this.tileSrc[i] = new Float32Array(4*count);
+		this.tileDest[i] = new Float32Array(4*count);
+	}
+
+	var x;
+	var y;
+	for (var i = 0; i < 4; i++) {
+		x = 0;
+		y = 0;
+		layer = d.layers[i].data;
+		count = 0;
+		for (var j = 0; j < layer.length; j++) {
+
+			if (layer[j] != 0) {
+				this.tileSrc[i][count*4 + 0] = (layer[j]-1)*globals.tileSize;
+				this.tileSrc[i][count*4 + 1] = 0;
+				this.tileSrc[i][count*4 + 2] = globals.tileSize;
+				this.tileSrc[i][count*4 + 3] = globals.tileSize;
+
+				this.tileDest[i][count*4 + 0] = x*globals.tileSize;
+				this.tileDest[i][count*4 + 1] = y*globals.tileSize;
+				this.tileDest[i][count*4 + 2] = globals.tileSize;
+				this.tileDest[i][count*4 + 3] = globals.tileSize;
+
+				count++;
+			}
+
+			x++
+			if (x == d.layers[i].width) {
+				x = 0;
+				y++;
+			}
+
+		}
+	}
+
+	// game objects
 	this.gameObjectLayers = [[], [], []];
 
-	var gameObjects = d.layers[3].objects;
-	this.gameObjects = new Array(gameObjects.length);
+	var objectData = d.layers[3].objects;
+	this.gameObjects = new Array(objectData.length);
 
-	var go;
-	for (var i = 0; i < gameObjects.length; i++) {
-		go = gameObjects[i];
-
-		// gameObject y pos is relative to level top left corner
-
-		if (go.name === "movingPlatform") {
-			this.gameObjects[i] = new MovingPlatform(go.x, go.y + this.top, parseInt(go.properties.velX), parseInt(go.properties.velY));
-		}
-
-		if (go.name === "oneWayPlatform") {
-			this.gameObjects[i] = new OneWayPlatform(go.x, go.y + this.top, go.width, go.height);
-		}
-
-		if (go.name === "platform") {
-			this.gameObjects[i] = new Platform(go.x, go.y + this.top, go.width, go.height);
-		}
-
-		if (go.name === "waypoint") {
-			this.gameObjects[i] = new Waypoint(go.x, go.y + this.top, go.width, go.height);
-		}
-
-		this.gameObjectLayers[go.type].push(this.gameObjects[i]);
+	for (var i = 0; i < objectData.length; i++) {
+		this.gameObjects[i] = utilities.createObject(objectData[i]);
+		this.gameObjectLayers[objectData[i].type].push(this.gameObjects[i]);
 	}
 
 	// swap the red and green layers when drawing
 	this.swap = false;
 
-	go = null;
-	gameObjects = null;
+	objectData = null;
 	d = null;
 
 }
@@ -78,7 +104,33 @@ Level.prototype.update = function() {
 
 }
 
-Level.prototype.draw = function(layerNum, color) {
+Level.prototype.draw = function(layerNum) {
+
+	if (layerNum === 1) {
+		if (this.swap) {
+			layerNum = 2;
+		}
+	}
+	else if (layerNum === 2) {
+		if (this.swap) {
+			layerNum = 1;
+		}
+	}
+
+	if (layerNum === 1) {
+		ctx.save();
+		ctx.setImageColor(0.5, 0, 0);
+	}
+	else if (layerNum === 2) {
+		ctx.save();
+		ctx.setImageColor(0, 0.5, 0);
+	}
+
+	if (this.tileSrc[layerNum].length > 0) {
+		ctx.drawImageInstanced((this.tileSrc[layerNum].length/4), image, this.tileSrc[layerNum], this.tileDest[layerNum]);
+	}
+
+	ctx.restore();
 
 	var ctx = globals.bufferCtx;
 	ctx.globalAlpha = 1;

@@ -20,13 +20,13 @@ GameObject.prototype.draw = function() {}
 
 GameObject.prototype.init = function() {}
 
-GameObject.prototype.intersects = function(ent) {
+GameObject.prototype.intersects = function(go) {
 
 	return (
-		this.x <= ent.max.x &&
-		ent.x <= this.max.x &&
-		this.y <= ent.max.y &&
-		ent.y <= this.max.y
+		this.x <= go.max.x &&
+		go.x <= this.max.x &&
+		this.y <= go.max.y &&
+		go.y <= this.max.y
 	);
 
 }

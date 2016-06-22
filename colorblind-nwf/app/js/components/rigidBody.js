@@ -22,8 +22,8 @@ RigidBody.prototype.update = function() {
 
 		if (gameObjects) {
 			for (var j = 0; j < gameObjects.length; j++) {
-				if (this.go.intersects(gameObjects[j])) {
-					if (gameObjects[j].id !== this.go.id) {
+				if (gameObjects[j].id !== this.go.id) {
+					if (gameObjects[j].intersects(this.go)) {
 						gameObjects[j].onHorizontalCollision(this.go);
 					}
 				}
@@ -46,8 +46,8 @@ RigidBody.prototype.update = function() {
 
 		if (gameObjects) {
 			for (var j = 0; j < gameObjects.length; j++) {
-				if (this.go.intersects(gameObjects[j])) {
-					if (gameObjects[j].id !== this.go.id) {
+				if (gameObjects[j].id !== this.go.id) {
+					if (gameObjects[j].intersects(this.go)) {
 						gameObjects[j].onVerticalCollision(this.go);
 					}
 				}
