@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+body {
+	margin: 0;
+	background-color: #000000;
+}
+
+#tvCanvas {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+
+#gpCanvas {
+	position: absolute;
+	left: 0px;
+	top: 1080px;
+	background-color: #ff0000;
+}

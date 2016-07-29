@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:nwf="http://www.nintendo.com/ns/widgets">
+  <!-- Project Settings -->
+  <nwf:project>
+    <nwf:folder_content>app/</nwf:folder_content>
+    <nwf:folder_meta>meta/</nwf:folder_meta>
+    <nwf:folder_save>save/</nwf:folder_save>
+    <nwf:version>1.8.2</nwf:version>
+    <nwf:allow-wildcard-domains>1</nwf:allow-wildcard-domains>
+    <nwf:configuration-type>0</nwf:configuration-type>
+    <nwf:manual-entry-aocuniqueid>0</nwf:manual-entry-aocuniqueid>
+    <nwf:aoc-titles-for-debugging/>
+    <nwf:enable-http-for-all-mime-types>0</nwf:enable-http-for-all-mime-types>
+    <nwf:enable-dev-system-memory>1</nwf:enable-dev-system-memory>
+    <nwf:aoc-configuration-type>1</nwf:aoc-configuration-type>
+  </nwf:project>
+</widget>
